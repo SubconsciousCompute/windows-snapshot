@@ -9,9 +9,12 @@ use serde::{Deserialize, Serialize};
 use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
+/// Represents the state of Windows Processes
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct Processes {
+    /// Sequence of Process based on when they were launched in chronological order
     pub processes: Vec<Win32_Process>,
+    /// When was the record last updated
     pub last_updated: SystemTime,
 }
 
@@ -44,9 +47,12 @@ impl Default for Processes {
     }
 }
 
+/// Represents the state of Windows threads
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct Threads {
+    /// Sequence of Threads based on when they were launched in chronological order
     pub threads: Vec<Win32_Thread>,
+    /// When was the record last updated
     pub last_updated: SystemTime,
 }
 
