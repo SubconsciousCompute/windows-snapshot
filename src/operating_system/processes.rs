@@ -19,18 +19,7 @@ pub struct Processes {
     pub last_updated: SystemTime,
 }
 
-impl Processes {
-    update!(processes);
-}
-
-impl Default for Processes {
-    fn default() -> Self {
-        Processes {
-            processes: Default::default(),
-            last_updated: SystemTime::now(),
-        }
-    }
-}
+update!(Processes, processes);
 
 /// Represents the state of Windows threads
 #[derive(Deserialize, Serialize, Debug, Clone)]
@@ -41,18 +30,7 @@ pub struct Threads {
     pub last_updated: SystemTime,
 }
 
-impl Threads {
-    update!(threads);
-}
-
-impl Default for Threads {
-    fn default() -> Self {
-        Threads {
-            threads: Default::default(),
-            last_updated: SystemTime::now(),
-        }
-    }
-}
+update!(Threads, threads);
 
 /// The `Win32_Process` WMI class represents a process on an operating system.
 ///
