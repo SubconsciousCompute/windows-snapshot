@@ -1,6 +1,6 @@
 //! Stores the main state of Windows machine
 
-use crate::operating_system::{drivers, processes, registry};
+use crate::operating_system::{drivers, processes, registry, services};
 use serde::{Deserialize, Serialize};
 use tokio::join;
 
@@ -17,6 +17,8 @@ pub struct Windows {
     pub drivers: drivers::Drivers,
     /// State of Windows Registry
     pub registry: registry::Registry,
+    /// State of Windows Services
+    pub services: services::Services,
 }
 
 impl Windows {
@@ -26,6 +28,7 @@ impl Windows {
         self.threads.update();
         self.drivers.update();
         self.registry.update();
+        self.services.update();
     }
 
     /// Asynchronously update all the fields
@@ -35,6 +38,7 @@ impl Windows {
             self.processes.async_update(),
             self.drivers.async_update(),
             self.registry.async_update(),
+            self.services.async_update(),
         );
     }
 }

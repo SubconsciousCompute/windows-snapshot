@@ -22,7 +22,7 @@ update!(Registry, registries);
 
 /// The `Win32_Registry` WMI class represents a process on an operating system.
 ///
-/// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-systemdriver>
+/// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-registry>
 #[derive(Default, Deserialize, Serialize, Debug, Clone)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
