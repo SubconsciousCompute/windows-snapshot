@@ -31,3 +31,4 @@
 
 pub mod drivers;
 pub mod processes;
+pub mod registry;
