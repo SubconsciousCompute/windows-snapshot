@@ -5,6 +5,7 @@
 //! | [**Win32\_Process**](Win32_Process)               | Instance class<br/> Represents a sequence of events on a computer system running Windows.<br/>      |
 //! | [**Win32\_Thread**](Win32_Thread)                 | Instance class<br/> Represents a thread of execution.<br/>                                          |
 
+use crate::update;
 use serde::{Deserialize, Serialize};
 use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
@@ -19,23 +20,7 @@ pub struct Processes {
 }
 
 impl Processes {
-    pub fn update(&mut self) {
-        let com_con = unsafe { COMLibrary::assume_initialized() };
-
-        let wmi_con = WMIConnection::new(com_con).unwrap();
-
-        self.last_updated = SystemTime::now();
-        self.processes = wmi_con.query().unwrap();
-    }
-
-    pub async fn async_update(&mut self) {
-        let com_con = unsafe { COMLibrary::assume_initialized() };
-
-        let wmi_con = WMIConnection::new(com_con).unwrap();
-
-        self.last_updated = SystemTime::now();
-        self.processes = wmi_con.async_query().await.unwrap();
-    }
+    update!(processes);
 }
 
 impl Default for Processes {
@@ -57,23 +42,7 @@ pub struct Threads {
 }
 
 impl Threads {
-    pub fn update(&mut self) {
-        let com_con = unsafe { COMLibrary::assume_initialized() };
-
-        let wmi_con = WMIConnection::new(com_con).unwrap();
-
-        self.last_updated = SystemTime::now();
-        self.threads = wmi_con.query().unwrap();
-    }
-
-    pub async fn async_update(&mut self) {
-        let com_con = unsafe { COMLibrary::assume_initialized() };
-
-        let wmi_con = WMIConnection::new(com_con).unwrap();
-
-        self.last_updated = SystemTime::now();
-        self.threads = wmi_con.async_query().await.unwrap();
-    }
+    update!(threads);
 }
 
 impl Default for Threads {
