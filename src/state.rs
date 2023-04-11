@@ -21,6 +21,8 @@ pub struct Windows {
     pub services: services::Services,
     /// State of Windows Desktops
     pub desktops: desktop::Desktops,
+    /// State of Windows Environments
+    pub environment: desktop::Environments,
 }
 
 impl Windows {
@@ -32,6 +34,7 @@ impl Windows {
         self.registry.update();
         self.services.update();
         self.desktops.update();
+        self.environment.update();
     }
 
     /// Asynchronously update all the fields
@@ -43,6 +46,7 @@ impl Windows {
             self.registry.async_update(),
             self.services.async_update(),
             self.desktops.async_update(),
+            self.environment.async_update(),
         );
     }
 }

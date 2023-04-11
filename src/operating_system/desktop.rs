@@ -23,6 +23,17 @@ pub struct Desktops {
 
 update!(Desktops, desktops);
 
+/// Represents the state of Windows Environment
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct Environments {
+    /// Sequence of windows Environment states
+    pub environments: Vec<Win32_Environment>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(Environments, environments);
+
 /// The `Win32_Desktop` WMI class represents the common characteristics of a user's desktop. The
 /// properties of this class can be modified by the user to customize the desktop.
 ///
@@ -95,4 +106,76 @@ pub struct Win32_Desktop {
     WallpaperStretched: Option<bool>,
     /// Wallpaper is tiled or centered.
     WallpaperTiled: Option<bool>,
+}
+
+/// The `Win32_Environment` WMI class represents an environment or system environment setting on a
+/// Windows computer system. Querying this class returns environment variables found in:
+///
+/// `HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Sessionmanager\Environment`
+///
+/// and
+///
+/// `HKEY_USERS\<user>\Environment`
+///
+/// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_Environment {
+    /// A short textual description of the object.
+    Caption: Option<String>,
+    /// A textual description of the object.
+    Description: Option<String>,
+    /// Indicates when the object was installed. Lack of a value does not indicate that the object
+    /// is not installed.
+    InstallDate: Option<WMIDateTime>,
+    /// String that indicates the current status of the object.
+    /// Operational and non-operational status can be defined.
+    /// Operational status can include "OK", "Degraded", and "Pred Fail".
+    /// "Pred Fail" indicates that an element is functioning properly,
+    /// but is predicting a failure (for example, a SMART-enabled hard disk drive).
+    ///
+    /// Non-operational status can include "Error", "Starting", "Stopping", and "Service".
+    /// "Service" can apply during disk mirror-re-silvering,
+    /// reloading a user permissions list, or other administrative work.
+    /// Not all such work is online,
+    /// but the managed element is neither "OK" nor in one of the other states.
+    ///
+    /// Values include the following:
+    ///
+    /// - OK ("OK")
+    /// - Error ("Error")
+    /// - Degraded ("Degraded")
+    /// - Unknown ("Unknown")
+    /// - Pred Fail ("Pred Fail")
+    /// - Starting ("Starting")
+    /// - Stopping ("Stopping")
+    /// - Service ("Service")
+    /// - Stressed ("Stressed")
+    /// - NonRecover ("NonRecover")
+    /// - No Contact ("No Contact")
+    /// - Lost Comm ("Lost Comm")
+    Status: Option<String>,
+    /// Character string that specifies the name of a Windows-based environment variable.
+    /// By specifying the name of a variable that does not yet exist,
+    /// an application creates a new environment variable.
+    ///
+    /// Example: "Path"
+    Name: Option<String>,
+    /// Indicates whether the variable is a system variable.
+    /// A system variable is set by the operating system,
+    /// and is independent from user environment settings.
+    SystemVariable: Option<bool>,
+    /// Name of the owner of the environment setting.
+    /// It is set to <SYSTEM> for settings that are specific to the Windows-based system
+    /// (as opposed to a specific user) and <DEFAULT> for default user settings.
+    ///
+    /// Example: "JSmith"
+    UserName: Option<String>,
+    /// Placeholder variable of a Windows-based environment variable.
+    /// Information like the file system directory can change from computer to computer.
+    /// The operating system substitutes placeholders for these.
+    ///
+    /// Example: "%SystemRoot%"
+    VariableValue: Option<String>,
 }

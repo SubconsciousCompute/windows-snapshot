@@ -13,5 +13,5 @@ async fn main() {
 
     // println!("{k:#?}");
 
-    println!("{:#?}", k.desktops);
+    println!("{:#?}", k.environment);
 }
