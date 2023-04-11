@@ -29,6 +29,7 @@
 //! - [Users](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/operating-system-classes#users)
 //! - [Windows product activation](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/operating-system-classes#windows-product-activation)
 
+pub mod desktop;
 pub mod drivers;
 pub mod processes;
 pub mod registry;

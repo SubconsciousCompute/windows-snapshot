@@ -2,7 +2,7 @@
 //!
 //! | Class                                           | Description                                                                                                                                             |
 //! |-------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-//! | [**`Win32\_Servic`e**](win32-service.md)         | Instance class<br/> Represents a service on a computer system running Windows.<br/>                                                         |
+//! | [**`Win32\_Servic`e**](win32-service)         | Instance class<br/> Represents a service on a computer system running Windows.<br/>                                                         |
 
 use crate::update;
 use serde::{Deserialize, Serialize};

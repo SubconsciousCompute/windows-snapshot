@@ -11,7 +11,7 @@ async fn main() {
     k.async_update().await;
     //k.update(); // for synchronous update
 
-    println!("{k:#?}");
+    // println!("{k:#?}");
 
-    println!("{:#?}", k.services);
+    println!("{:#?}", k.desktops);
 }
