@@ -51,6 +51,17 @@ pub struct Groups {
 
 update!(Groups, groups);
 
+/// Represents the state of Windows data about  logon session or sessions associated with a user logged
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct LogonSessions {
+    /// Sequence of windows logon sessions
+    pub logon_sessions: Vec<Win32_LogonSession>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(LogonSessions, logon_sessions);
+
 /// The `Win32_UserAccount` WMI class contains information about a user account on a computer system
 /// running Windows.
 ///
@@ -310,4 +321,74 @@ pub struct Win32_Group {
     Domain: Option<String>,
     /// Name of the Windows group account on the domain specified by the Domain property of this class.
     Name: Option<String>,
+}
+
+/// The `Win32_LogonSession` WMI class
+/// describes the logon session or sessions associated with a user
+/// logged on to a computer system running Windows.
+///
+/// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-logonsession>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_LogonSession {
+    /// A short textual description of the object.
+    Caption: Option<String>,
+    /// A textual description of the object.
+    Description: Option<String>,
+    /// Indicates when the object was installed. Lack of a value does not indicate that the object
+    /// is not installed.
+    InstallDate: Option<WMIDateTime>,
+    /// Label by which the object is known.
+    /// When subclassed, this property can be overridden to be a key property.
+    Name: Option<String>,
+    /// String that indicates the current status of the object.
+    /// Operational and non-operational status can be defined.
+    /// Operational status can include "OK", "Degraded", and "Pred Fail".
+    /// "Pred Fail" indicates that an element is functioning properly,
+    /// but is predicting a failure (for example, a SMART-enabled hard disk drive).
+    ///
+    /// Non-operational status can include "Error", "Starting", "Stopping", and "Service".
+    /// "Service" can apply during disk mirror-re-silvering,
+    /// reloading a user permissions list, or other administrative work.
+    /// Not all such work is online,
+    /// but the managed element is neither "OK" nor in one of the other states.
+    ///
+    /// Values include the following:
+    ///
+    /// - OK ("OK")
+    /// - Error ("Error")
+    /// - Degraded ("Degraded")
+    /// - Unknown ("Unknown")
+    /// - Pred Fail ("Pred Fail")
+    /// - Starting ("Starting")
+    /// - Stopping ("Stopping")
+    /// - Service ("Service")
+    /// - Stressed ("Stressed")
+    /// - NonRecover ("NonRecover")
+    /// - No Contact ("No Contact")
+    /// - Lost Comm ("Lost Comm")
+    Status: Option<String>,
+    /// Time at which the session started.
+    StartTime: Option<WMIDateTime>,
+    /// Name of the subsystem used to authenticate the logon session.
+    AuthenticationPackage: Option<String>,
+    /// ID assigned to the logon session.
+    LogonId: Option<String>,
+    /// Numeric value that indicates the type of logon session.
+    ///
+    /// - 0: Used only by the System account.
+    /// - Interactive (2): Intended for users who are interactively using the machine, such as a user being logged on by a terminal server, remote shell, or similar process.
+    /// - Network (3): Intended for high-performance servers to authenticate clear text passwords. LogonUser does not cache credentials for this logon type.
+    /// - Batch (4): Intended for batch servers, where processes can be executed on behalf of a user without their direct intervention; or for higher performance servers that process many clear-text authentication attempts at a time, such as mail or web servers. LogonUser does not cache credentials for this logon type.
+    /// - Service (5): Indicates a service-type logon. The account provided must have the service privilege enabled.
+    /// - Proxy (6): Indicates a proxy-type logon.
+    /// - Unlock (7): This logon type is intended for GINA DLLs logging on users who are interactively using the machine. This logon type allows a unique audit record to be generated that shows when the workstation was unlocked.
+    /// - NetworkCleartext (8): Preserves the name and password in the authentication packages, allowing the server to make connections to other network servers while impersonating the client. This allows a server to accept clear text credentials from a client, call LogonUser, verify that the user can access the system across the network, and still communicate with other servers.
+    /// - NewCredentials (9): Allows the caller to clone its current token and specify new credentials for outbound connections. The new logon session has the same local identify, but uses different credentials for other network connections.
+    /// - RemoteInteractive (10): Terminal Services session that is both remote and interactive.
+    /// - CachedInteractive (11): Attempt cached credentials without accessing the network.
+    /// - CachedRemoteInteractive (12): Same as RemoteInteractive. This is used for internal auditing.
+    /// - CachedUnlock (13): Workstation logon.
+    LogonType: Option<u32>,
 }

@@ -37,6 +37,8 @@ pub struct Windows {
     */
     /// State of Windows Groups
     pub groups: users::Groups,
+    /// State of Windows Logon Sessions
+    pub logon_sessions: users::LogonSessions,
 }
 
 impl Windows {
@@ -54,6 +56,7 @@ impl Windows {
         // self.user_desktops.update();
         // self.accounts.update();
         self.groups.update();
+        self.logon_sessions.update();
     }
 
     /// Asynchronously update all the fields
@@ -71,6 +74,7 @@ impl Windows {
             // self.user_desktops.async_update(),
             // self.accounts.async_update(),
             self.groups.async_update(),
+            self.logon_sessions.async_update(),
         );
     }
 }
