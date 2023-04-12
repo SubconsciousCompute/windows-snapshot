@@ -7,6 +7,7 @@
 //! | [**Win32\_TimeZone**](win32-timezone)       | Instance class<br/> Represents the time zone information for a computer system running Windows.<br/>                   |
 //! | [**Win32\_UserDesktop**](win32-userdesktop) | Association class<br/> Relates a user account and the desktop settings that are specific to it.<br/>                   |
 
+use crate::operating_system::users::Win32_UserAccount;
 use crate::update;
 use serde::{Deserialize, Serialize};
 use std::time::SystemTime;
@@ -37,13 +38,24 @@ update!(Environments, environments);
 /// Represents the state of Windows TimeZone
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct TimeZones {
-    /// Sequence of windows Environment states
+    /// Sequence of windows TimeZone states
     pub timezones: Vec<Win32_TimeZone>,
     /// When was the record last updated
     pub last_updated: SystemTime,
 }
 
 update!(TimeZones, timezones);
+
+/// Represents the state of Windows User Desktops
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct UserDesktops {
+    ///  user account and desktop settings that are specific to it
+    pub user_desktops: Vec<Win32_UserDesktop>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(UserDesktops, user_desktops);
 
 /// The `Win32_Desktop` WMI class represents the common characteristics of a user's desktop. The
 /// properties of this class can be modified by the user to customize the desktop.
@@ -348,4 +360,20 @@ pub struct Win32_TimeZone {
     ///
     /// Example: 1997
     StandardYear: Option<u32>,
+}
+
+/// The `Win32_UserDesktop` association WMI class relates a user account and desktop settings that
+/// are specific to it.
+///
+/// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-userdesktop>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_UserDesktop {
+    /// Reference to the instance representing the user account whose desktop can be customized by
+    /// the Settings property of this class.
+    Element: Option<Win32_UserAccount>,
+    /// Reference to the instance representing the desktop settings that serve to customize a
+    /// specific user account desktop.
+    Setting: Option<Win32_Desktop>,
 }

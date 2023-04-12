@@ -21,7 +21,7 @@ use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 /// Represents the state of Windows User Accounts
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct UserAccounts {
-    /// Sequence of windows Environment states
+    /// Sequence of windows User Accounts
     pub useraccounts: Vec<Win32_UserAccount>,
     /// When was the record last updated
     pub last_updated: SystemTime,

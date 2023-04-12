@@ -26,7 +26,9 @@ pub struct Windows {
     /// State of Windows TimeZones
     pub timezones: desktop::TimeZones,
     /// State of Windows User Accounts
-    pub useraccounts: users::UserAccounts,
+    pub user_accounts: users::UserAccounts,
+    /// Relation of user account and desktop settings that are specific to it
+    pub user_desktops: desktop::UserDesktops,
 }
 
 impl Windows {
@@ -40,7 +42,8 @@ impl Windows {
         self.desktops.update();
         self.environment.update();
         self.timezones.update();
-        self.useraccounts.update();
+        self.user_accounts.update();
+        // self.user_desktops.update();
     }
 
     /// Asynchronously update all the fields
@@ -54,7 +57,8 @@ impl Windows {
             self.desktops.async_update(),
             self.environment.async_update(),
             self.timezones.async_update(),
-            self.useraccounts.async_update(),
+            self.user_accounts.async_update(),
+            // self.user_desktops.async_update(),
         );
     }
 }
