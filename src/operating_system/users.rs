@@ -40,6 +40,17 @@ pub struct Accounts {
 
 update!(Accounts, accounts);
 
+/// Represents the state of Windows data about a group account
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct Groups {
+    /// Sequence of windows Group
+    pub groups: Vec<Win32_Group>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(Groups, groups);
+
 /// The `Win32_UserAccount` WMI class contains information about a user account on a computer system
 /// running Windows.
 ///
@@ -221,4 +232,82 @@ pub struct Win32_Account {
     /// - No Contact ("No Contact")
     /// - Lost Comm ("Lost Comm")
     status: Option<String>,
+}
+
+/// The `Win32_Group WMI` class represents data about a group account.
+/// A group account allows access privileges to be changed for a list of users.
+/// Example: Marketing2.
+///
+/// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-group>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_Group {
+    /// A short textual description of the object.
+    Caption: Option<String>,
+    /// A textual description of the object.
+    Description: Option<String>,
+    /// Indicates when the object was installed. Lack of a value does not indicate that the object
+    /// is not installed.
+    InstallDate: Option<WMIDateTime>,
+    /// String that indicates the current status of the object.
+    /// Operational and non-operational status can be defined.
+    /// Operational status can include "OK", "Degraded", and "Pred Fail".
+    /// "Pred Fail" indicates that an element is functioning properly,
+    /// but is predicting a failure (for example, a SMART-enabled hard disk drive).
+    ///
+    /// Non-operational status can include "Error", "Starting", "Stopping", and "Service".
+    /// "Service" can apply during disk mirror-re-silvering,
+    /// reloading a user permissions list, or other administrative work.
+    /// Not all such work is online,
+    /// but the managed element is neither "OK" nor in one of the other states.
+    ///
+    /// Values include the following:
+    ///
+    /// - OK ("OK")
+    /// - Error ("Error")
+    /// - Degraded ("Degraded")
+    /// - Unknown ("Unknown")
+    /// - Pred Fail ("Pred Fail")
+    /// - Starting ("Starting")
+    /// - Stopping ("Stopping")
+    /// - Service ("Service")
+    /// - Stressed ("Stressed")
+    /// - NonRecover ("NonRecover")
+    /// - No Contact ("No Contact")
+    /// - Lost Comm ("Lost Comm")
+    Status: Option<String>,
+    /// If TRUE, the account is defined on the local machine.
+    /// To retrieve only accounts defined on the local machine,
+    /// design a query that includes the condition "LocalAccount=TRUE".
+    LocalAccount: Option<bool>,
+    /// Security identifier (SID) for this account.
+    /// A SID is a string value of variable length used to identify a trustee.
+    /// Each account has a unique SID issued by an authority (such as a Windows domain),
+    /// stored in a security database.
+    /// When a user logs on,
+    /// the system retrieves the user's SID from the database and places it in the user's access token.
+    /// The system uses the SID in the user's access token
+    /// to identify the user in all subsequent interactions with Windows security.
+    /// When a SID has been used as the unique identifier for a user or group,
+    /// it cannot be used again to identify another user or group.
+    SID: Option<String>,
+    /// Enumerated values that specify the type of security identifier (SID).
+    ///
+    /// - SidTypeUser (1)
+    /// - SidTypeGroup (2)
+    /// - SidTypeDomain (3)
+    /// - SidTypeAlias (4)
+    /// - SidTypeWellKnownGroup (5)
+    /// - SidTypeDeletedAccount (6)
+    /// - SidTypeInvalid (7)
+    /// - SidTypeUnknown (8)
+    /// - SidTypeComputer (9)
+    SIDType: Option<u8>,
+    /// Name of the Windows domain to which the group account belongs.
+    ///
+    /// Example: "NA-SALES"
+    Domain: Option<String>,
+    /// Name of the Windows group account on the domain specified by the Domain property of this class.
+    Name: Option<String>,
 }
