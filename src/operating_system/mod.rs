@@ -34,3 +34,4 @@ pub mod drivers;
 pub mod processes;
 pub mod registry;
 pub mod services;
+pub mod users;

@@ -1,6 +1,6 @@
 //! Stores the main state of Windows machine
 
-use crate::operating_system::{desktop, drivers, processes, registry, services};
+use crate::operating_system::{desktop, drivers, processes, registry, services, users};
 use serde::{Deserialize, Serialize};
 use tokio::join;
 
@@ -25,6 +25,8 @@ pub struct Windows {
     pub environment: desktop::Environments,
     /// State of Windows TimeZones
     pub timezones: desktop::TimeZones,
+    /// State of Windows User Accounts
+    pub useraccounts: users::UserAccounts,
 }
 
 impl Windows {
@@ -38,6 +40,7 @@ impl Windows {
         self.desktops.update();
         self.environment.update();
         self.timezones.update();
+        self.useraccounts.update();
     }
 
     /// Asynchronously update all the fields
@@ -51,6 +54,7 @@ impl Windows {
             self.desktops.async_update(),
             self.environment.async_update(),
             self.timezones.async_update(),
+            self.useraccounts.async_update(),
         );
     }
 }
