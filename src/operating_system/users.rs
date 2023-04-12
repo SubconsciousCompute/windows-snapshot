@@ -29,6 +29,17 @@ pub struct UserAccounts {
 
 update!(UserAccounts, user_accounts);
 
+/// Represents the state of Windows user accounts and group accounts
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct Accounts {
+    /// Sequence of windows Accounts
+    pub accounts: Vec<Win32_Account>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(Accounts, accounts);
+
 /// The `Win32_UserAccount` WMI class contains information about a user account on a computer system
 /// running Windows.
 ///
@@ -133,4 +144,81 @@ pub struct Win32_UserAccount {
     /// - No Contact ("No Contact")
     /// - Lost Comm ("Lost Comm")
     Status: Option<String>,
+}
+
+/// The `Win32_Account` abstract WMI class contains information about user accounts and group accounts
+/// known to the computer system running Windows.
+/// User or group names recognized by a Windows domain are descendants (or members) of this class.
+///
+/// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-account>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_Account {
+    /// Short description of the object.
+    caption: Option<String>,
+    /// Description of the object.
+    description: Option<String>,
+    /// Name of the Windows domain to which a group or user belongs.
+    ///
+    /// Example: "NA-SALES"
+    domain: Option<String>,
+    /// Date and time that the object was installed. This property does not require a value to
+    /// indicate that the object is installed.
+    install_date: Option<WMIDateTime>,
+    /// If TRUE, the account is defined on the local machine. To retrieve only accounts defined on
+    /// the local machine, design a query that includes the condition "LocalAccount=TRUE".
+    local_account: Option<bool>,
+    /// Name of the Windows system account on the domain specified by the Domain property of this
+    /// class. This property overrides the Name property inherited from CIM_ManagedSystemElement.
+    name: Option<String>,
+    /// Security identifier (SID) for this account.
+    /// A SID is a string value of variable length used to identify a trustee.
+    /// Each account has a unique SID issued by an authority (such as a Windows domain),
+    /// stored in a security database.
+    /// When a user logs on,
+    /// the system retrieves the user's SID from the database and places it in the user's access token.
+    /// The system uses the SID in the user's access token
+    /// to identify the user in all subsequent interactions with Windows security.
+    /// When a SID has been used as the unique identifier for a user or group,
+    /// it cannot be used again to identify another user or group.
+    sid: Option<String>,
+    /// Enumerated values that specify the type of security identifier (SID).
+    ///
+    /// - SidTypeUser (1)
+    /// - SidTypeGroup (2)
+    /// - SidTypeDomain (3)
+    /// - SidTypeAlias (4)
+    /// - SidTypeWellKnownGroup (5)
+    /// - SidTypeDeletedAccount (6)
+    /// - SidTypeInvalid (7)
+    /// - SidTypeUnknown (8)
+    /// - SidTypeComputer (9)
+    sid_type: Option<u8>,
+    /// Current status of the object.
+    /// Various operational and nonoperational statuses can be defined.
+    /// Operational statuses include: "OK", "Degraded", and "Pred Fail"
+    /// (an element, such as a SMART-enabled hard disk drive,
+    /// may be functioning properly but predicts a failure in the near future).
+    /// Nonoperational statuses include: "Error", "Starting", "Stopping", and "Service".
+    /// The latter, "Service", can apply during mirror-re-silvering of a disk,
+    /// reload of a user permissions list, or other administrative work.
+    /// Not all such work is online,
+    /// yet the managed element is neither "OK" nor in one of the other states.
+    ///
+    /// The values are:
+    ///
+    /// - OK ("OK")
+    /// - Error ("Error")
+    /// - Degraded ("Degraded")
+    /// - Unknown ("Unknown")
+    /// - Pred Fail ("Pred Fail")
+    /// - Starting ("Starting")
+    /// - Stopping ("Stopping")
+    /// - Service ("Service")
+    /// - Stressed ("Stressed")
+    /// - NonRecover ("NonRecover")
+    /// - No Contact ("No Contact")
+    /// - Lost Comm ("Lost Comm")
+    status: Option<String>,
 }
