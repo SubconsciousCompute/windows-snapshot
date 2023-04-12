@@ -13,5 +13,5 @@ async fn main() {
 
     // println!("{k:#?}");
 
-    println!("{:#?}", k.environment);
+    println!("{:#?}", k.timezones);
 }

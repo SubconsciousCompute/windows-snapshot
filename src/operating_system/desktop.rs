@@ -34,6 +34,17 @@ pub struct Environments {
 
 update!(Environments, environments);
 
+/// Represents the state of Windows TimeZone
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct TimeZones {
+    /// Sequence of windows Environment states
+    pub timezones: Vec<Win32_TimeZone>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(TimeZones, timezones);
+
 /// The `Win32_Desktop` WMI class represents the common characteristics of a user's desktop. The
 /// properties of this class can be modified by the user to customize the desktop.
 ///
@@ -178,4 +189,163 @@ pub struct Win32_Environment {
     ///
     /// Example: "%SystemRoot%"
     VariableValue: Option<String>,
+}
+
+/// The `Win32_TimeZone`
+/// WMI class represents the time zone information for a computer system running Windows,
+/// which includes the changes required for transitioning to daylight saving time transition.
+///
+/// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-timezone>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_TimeZone {
+    /// Short textual description of the current object.
+    Caption: Option<String>,
+    /// Textual description of the current object.
+    Description: Option<String>,
+    /// Identifier by which the current object is known.
+    SettingID: Option<String>,
+    /// Current bias for local time translation.
+    /// The bias is the difference between Coordinated Universal Time (UTC) and local time.
+    /// All translations between UTC and local time are based on the following formula:
+    /// UTC = local time - bias.
+    /// This property is required.
+    Bias: Option<i32>,
+    /// Bias value to be used during local time translations that occur during daylight saving time.
+    /// This property is ignored if a value for the DaylightDay property is not supplied.
+    /// The value of this property is added to the Bias property
+    /// to form the bias used during daylight time.
+    /// In most time zones, the value of this property is -60.
+    DaylightBias: Option<i32>,
+    /// DaylightDayOfWeek of the DaylightMonth when the transition from standard time to daylight
+    /// saving time occurs on this operating system.
+    ///
+    /// Example: If the transition day (DaylightDayOfWeek) occurs on a Sunday, then the value "1"
+    /// indicates the first Sunday of the DaylightMonth,
+    /// "2" indicates the second Sunday, and so on.
+    /// The value "5" indicates the last DaylightDayOfWeek in the month.
+    DaylightDay: Option<u32>,
+    /// Day of the week when the transition from standard time to daylight saving time occurs on an
+    /// operating system.
+    ///
+    /// - Sunday (0)
+    /// - Monday (1)
+    /// - Tuesday (2)
+    /// - Wednesday (3)
+    /// - Thursday (4)
+    /// - Friday (5)
+    /// - Saturday (6)
+    ///
+    /// Example: 1
+    DaylightDayOfWeek: Option<u8>,
+    /// Hour of the day when the transition from standard time to daylight saving time occurs on an
+    /// operating system.
+    ///
+    /// Example: 2
+    DaylightHour: Option<u32>,
+    /// Millisecond of the DaylightSecond when the transition from standard time to daylight saving
+    /// time occurs on an operating system.
+    DaylightMillisecond: Option<u32>,
+    /// Minute of the DaylightHour when the transition from standard time to daylight saving time
+    /// occurs on an operating system.
+    ///
+    /// Example: 59
+    DaylightMinute: Option<u32>,
+    /// Month when the transition from standard time to daylight saving time occurs on an
+    /// operating system.
+    ///
+    /// - January (1)
+    /// - February (2)
+    /// - March (3)
+    /// - April (4)
+    /// - May (5)
+    /// - June (6)
+    /// - July (7)
+    /// - August (8)
+    /// - September (9)
+    /// - October (10)
+    /// - November (11)
+    /// - December (12)
+    DaylightMonth: Option<u32>,
+    /// Time zone being represented when daylight saving time is in effect.
+    ///
+    /// Example: "EDT" (Eastern Daylight Time)
+    DaylightName: Option<String>,
+    /// Second of the DaylightMinute when the transition from standard time to daylight saving time
+    /// occurs on an operating system.
+    ///
+    /// Example: 59
+    DaylightSecond: Option<u32>,
+    /// Year when daylight saving time is in effect. This property is not required.
+    ///
+    /// Example: 1997
+    DaylightYear: Option<u32>,
+    /// Bias value to use when daylight saving time is not in effect. This property is ignored if a
+    /// value for StandardDay is not supplied. The value of this property is added to the Bias
+    /// property to form the bias during standard time.
+    ///
+    /// Example: 0
+    StandardBias: Option<u32>,
+    /// StandardDayOfWeek of the StandardMonth when the transition from daylight saving time to
+    /// standard time occurs on an operating system.
+    ///
+    /// If the transition day (StandardDayOfWeek) occurs on a Sunday,
+    /// then the value "1" indicates the first Sunday of the StandardMonth,
+    /// "2" indicates the second Sunday, and so on.
+    /// The value "5" indicates the last StandardDayOfWeek in the month.
+    StandardDay: Option<u32>,
+    /// Day of the week when the transition from daylight saving time to standard time occurs on an
+    /// operating system.
+    ///
+    /// - Sunday (0)
+    /// - Monday (1)
+    /// - Tuesday (2)
+    /// - Wednesday (3)
+    /// - Thursday (4)
+    /// - Friday (5)
+    /// - Saturday (6)
+    StandardDayOfWeek: Option<u8>,
+    /// Hour of the day when the transition from daylight saving time to standard time occurs on an
+    /// operating system.
+    ///
+    /// Example: 11
+    StandardHour: Option<u32>,
+    /// Millisecond of the StandardSecond when the transition from daylight saving time to standard
+    /// time occurs on an operating system.
+    StandardMillisecond: Option<u32>,
+    /// Minute of the StandardDay when the transition from daylight saving time to standard time
+    /// occurs on an operating system.
+    ///
+    /// Example: 59
+    StandardMinute: Option<u32>,
+    /// Month when the transition from daylight saving time to standard time occurs on an
+    /// operating system.
+    ///
+    /// - January (1)
+    /// - February (2)
+    /// - March (3)
+    /// - April (4)
+    /// - May (5)
+    /// - June (6)
+    /// - July (7)
+    /// - August (8)
+    /// - September (9)
+    /// - October (10)
+    /// - November (11)
+    /// - December (12)
+    StandardMonth: Option<u32>,
+    /// Name of the time zone being represented when standard time is in effect.
+    ///
+    /// Example: "EST" (Eastern Standard Time)
+    StandardName: Option<String>,
+    /// Second of the StandardMinute when the transition from daylight saving time to standard time
+    /// occurs on an operating system.
+    ///
+    /// Example: 59
+    StandardSecond: Option<u32>,
+    /// Year when standard time is in effect. This property is not required.
+    ///
+    /// Example: 1997
+    StandardYear: Option<u32>,
 }

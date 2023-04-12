@@ -23,6 +23,8 @@ pub struct Windows {
     pub desktops: desktop::Desktops,
     /// State of Windows Environments
     pub environment: desktop::Environments,
+    /// State of Windows TimeZones
+    pub timezones: desktop::TimeZones,
 }
 
 impl Windows {
@@ -35,6 +37,7 @@ impl Windows {
         self.services.update();
         self.desktops.update();
         self.environment.update();
+        self.timezones.update();
     }
 
     /// Asynchronously update all the fields
@@ -47,6 +50,7 @@ impl Windows {
             self.services.async_update(),
             self.desktops.async_update(),
             self.environment.async_update(),
+            self.timezones.async_update(),
         );
     }
 }
