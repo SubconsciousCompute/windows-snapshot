@@ -22,12 +22,12 @@ use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct UserAccounts {
     /// Sequence of windows User Accounts
-    pub useraccounts: Vec<Win32_UserAccount>,
+    pub user_accounts: Vec<Win32_UserAccount>,
     /// When was the record last updated
     pub last_updated: SystemTime,
 }
 
-update!(UserAccounts, useraccounts);
+update!(UserAccounts, user_accounts);
 
 /// The `Win32_UserAccount` WMI class contains information about a user account on a computer system
 /// running Windows.
