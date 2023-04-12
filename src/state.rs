@@ -27,8 +27,10 @@ pub struct Windows {
     pub timezones: desktop::TimeZones,
     /// State of Windows User Accounts
     pub user_accounts: users::UserAccounts,
+    /* This fails for now as a string is returned on object
     /// Relation of user account and desktop settings that are specific to it
     pub user_desktops: desktop::UserDesktops,
+    */
 }
 
 impl Windows {
