@@ -51,7 +51,7 @@ pub struct Groups {
 
 update!(Groups, groups);
 
-/// Represents the state of Windows data about  logon session or sessions associated with a user logged
+/// Represents the state of Windows data about logon session or sessions associated with a user logged
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct LogonSessions {
     /// Sequence of windows logon sessions
@@ -61,6 +61,17 @@ pub struct LogonSessions {
 }
 
 update!(LogonSessions, logon_sessions);
+
+/// Represents the state of Windows data about network login information
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct NetworkLoginProfiles {
+    /// Sequence of windows network login
+    pub network_login_profiles: Vec<Win32_NetworkLoginProfile>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(NetworkLoginProfiles, network_login_profiles);
 
 /// The `Win32_UserAccount` WMI class contains information about a user account on a computer system
 /// running Windows.
@@ -391,4 +402,208 @@ pub struct Win32_LogonSession {
     /// - CachedRemoteInteractive (12): Same as RemoteInteractive. This is used for internal auditing.
     /// - CachedUnlock (13): Workstation logon.
     LogonType: Option<u32>,
+}
+
+/// The `Win32_NetworkLoginProfile`
+/// WMI class represents the network login information of a specific user on a computer system running Windows.
+/// This includes, but is not limited to password status,
+/// access privileges, disk quotas, and logon directory paths.
+///
+/// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-networkloginprofile>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_NetworkLoginProfile {
+    /// Short textual description of the current object.
+    Caption: Option<String>,
+    /// Textual description of the current object.
+    Description: Option<String>,
+    /// Identifier by which the current object is known.
+    SettingID: Option<String>,
+    /// Account will expire.
+    /// This value is calculated from the number of seconds elapsed since 00:00:00,
+    /// January 1, 1970, and is set in this format: yyyymmddhhmmss.mmmmmm sutc.
+    ///
+    /// Example: 20521201000230.000000 000
+    AccountExpires: Option<WMIDateTime>,
+
+    /// Set of flags that specify the resources a user is authorized to use or modify.
+    ///
+    /// - 1 (0x1): Printer
+    /// - 2 (0x2):  Communication
+    /// - 4 (0x4): Server
+    /// - 8 (0x8): Accounts
+    AuthorizationFlags: Option<u32>,
+    /// Number of times the user enters a bad password when logging on to a computer system running Windows.
+    ///
+    /// Example: 0
+    BadPasswordCount: Option<u32>,
+    /// Code page for the user's language of choice. A code page is the character set used.
+    CodePage: Option<u32>,
+    /// Comment or description for this logon profile.
+    Comment: Option<String>,
+    /// Country/region code for the user's language of choice.
+    CountryCode: Option<u32>,
+    /// The properties available to this network profile.
+    ///
+    /// Properties that can be set include:
+    ///
+    /// - 1 (0x1): Script: A logon script executed. This value must be set for LAN Manager 2.0.
+    /// - 2 (0x2): Account Disabled: The user's account is disabled.
+    /// - 8 (0x8): Home Directory Required: A home directory is required.
+    /// - 16 (0x10): Lockout: The account is currently locked out. For NetUserSetInfo, this value can be cleared to unlock a previously locked account. This value cannot be used to lock a previously unlocked account.
+    /// - 32 (0x20): Password Not Required: No password is required.
+    /// - 64 (0x40): Password Cannot Change: The user cannot change the password.
+    /// - 128 (0x80): Encrypted Test Password Allowed
+    /// - 256 (0x100): Temp Duplicate Account: An account for users whose primary account is in another domain. This account provides user access to this domain, but not to any domain that trusts this domain. The User Manager refers to this account type as a local user account.
+    /// - 512 (0x200): Normal Account: Default account type that represents a typical user.
+    /// - 2048 (0x800): Interdomain Trust Account: A permit to a trust account for a domain that trusts other domains.
+    /// - 4096 (0x1000): Workstation Trust Account: A computer account for a Windows workstation or server that is a member of this domain.
+    /// - 8192 (0x2000): Server Trust Account: A computer account for a backup domain controller that is a member of this domain.
+    /// - 65536 (0x10000): Do Not Expire Password
+    /// - 131072 (0x20000): MNS Logon Account: Majority Node Set (MNS) logon account type that represents an MNS user.
+    /// - 262144 (0x40000): Smartcard Required
+    /// - 524288 (0x80000): Trusted for Delegation
+    /// - 1048576 (0x100000): Not Delegated
+    /// - 2097152 (0x200000): Use DES Key Only
+    /// - 4194304 (0x400000): Do Not Require Preauthorization
+    /// - 8388608 (0x800000): Password Expired: Indicates that the password has expired.
+    ///
+    /// The following properties describe the account type. Only one value can be set:
+    ///
+    /// - UF_NORMAL_ACCOUNT
+    /// - UF_TEMP_DUPLICATE_ACCOUNT
+    /// - UF_WORKSTATION_TRUST_ACCOUNT
+    /// - UF_SERVER_TRUST_ACCOUNT
+    /// - UF_INTERDOMAIN_TRUST_ACCOUNT
+    Flags: Option<u32>,
+    /// Full name of the user belonging to the network login profile.
+    /// This string can be empty if the user chooses not to associate a full name with a user name.
+    FullName: Option<String>,
+    /// Path to the home directory of the user. This string may be empty if the user chooses not to
+    /// specify a home directory.
+    ///
+    /// Example:"\HOMEDIR"
+    HomeDirectory: Option<String>,
+    /// Drive letter assigned to the user's home directory for log on purposes.
+    ///
+    /// Example: "C:"
+    HomeDirectoryDrive: Option<String>,
+    /// User last logged off the system. This value is calculated from the number of seconds elapsed
+    /// since 00:00:00, January 1, 1970. A value of " **************.******+*** " means that the
+    /// last logoff time is unknown. The format of this value is yyyymmddhhmmss.mmmmmm sutc. For
+    /// information about translating this property into your local time, see WMI Tasks: Dates and
+    /// Times.
+    ///
+    /// Example: 19521201000230.000000 000
+    ///
+    /// Note: Should be of type WMIDateTime but causes parsing errors due to starting with zeroes.
+    LastLogoff: Option<String>,
+    /// User last logged on to the system.
+    /// This value is calculated from the number of seconds elapsed since 00:00:00,
+    /// January 1, 1970. The format of this value is yyyymmddhhmmss.mmmmmm sutc.
+    /// For information about translating this property into your local time, see WMI Tasks:
+    /// Dates and Times.
+    ///
+    /// Example: 19521201000230.000000 000
+    LastLogon: Option<WMIDateTime>,
+    /// Times during the week when the user can log on.
+    /// Each bit represents a unit of time specified by the UnitsPerWeek property.
+    /// For instance, if the unit of time is hourly, the first bit (bit 0, word 0) is Sunday,
+    /// 0:00 to 0:59, the second bit (bit 1, word 0) is Sunday, 1:00 to 1:59, and so on.
+    /// If this member is set to NULL, then there is no time restriction.
+    /// The time is set to GMT and must be adjusted for other time zones
+    /// (for example, GMT minus 8 hours for PST).
+    LogonHours: Option<String>,
+    /// Name of the server to which logon requests are sent.
+    /// Server names should be preceded by two backslashes (\\).
+    /// A server name with an asterisk (\\*)
+    /// indicates that the logon request can be handled by any logon server.
+    /// A null string indicates that requests are sent to the domain controller.
+    ///
+    /// Example: "\\MyServer"
+    LogonServer: Option<String>,
+    /// Maximum amount of disk space available to the user.
+    /// If MaximumStorage is set to USER_MAXSTORAGE_UNLIMITED,
+    /// the user is allowed to use all of the available disk space.
+    ///
+    /// Example: 10000000
+    MaximumStorage: Option<u64>,
+    /// User account on a particular domain or computer.
+    /// The number of characters in the name cannot exceed the value of UNLEN.
+    ///
+    /// Example: "somedomain\johndoe"
+    Name: Option<String>,
+    /// Number of successful times the user tried to log on to this account.
+    /// A value of 0xFFFFFFFF indicates that the value is unknown.
+    /// This property is maintained separately on each backup domain controller (BDC) in the domain.
+    /// To get an accurate value, only the largest value from all BDCs should be used.
+    ///
+    /// Example: 4
+    NumberOfLogons: Option<u32>,
+    /// Space set aside for use by applications.
+    /// This string can be null,
+    /// or it can have any number of characters before the terminating null character.
+    /// Microsoft products use this member to store user configuration information.
+    /// Do not modify this information, because this value is specific to an application.
+    Parameters: Option<String>,
+    /// Length of time a password has been in effect.
+    /// This value is measured from the number of seconds elapsed since the password was last changed.
+    ///
+    /// Example: 00001201000230.000000 000
+    ///
+    /// Note: Should be of type WMIDateTime but causes parsing errors due to starting with zeroes.
+    PasswordAge: Option<String>,
+    /// Date and time the password expires.
+    /// The value is set in this format: yyyymmddhhmmss.mmmmmm sutc
+    ///
+    /// Example: 19521201000230.000000 000
+    PasswordExpires: Option<WMIDateTime>,
+    /// Relative identifier (RID) of the Primary Global Group for this user.
+    /// The identifier verifies the primary group to which the user's profile belongs.
+    //////////////////////////////////////////////////////////
+    PrimaryGroupId: Option<u32>,
+    /// Level of privilege assigned to the usri3_name property.
+    ///
+    /// - Guest (0)
+    /// - User (1)
+    /// - Administrator (2)
+    Privileges: Option<u32>,
+    /// Path to the user's profile.
+    /// This value can be a null string, a local absolute path, or a UNC path.
+    /// A user profile contains settings that are customizable for each user such as the desktop colors.
+    ///
+    /// Example: "C:\Windows"
+    Profile: Option<String>,
+    /// Directory path to the user's logon script.
+    /// A logon script automatically executes a set of commands each time a user logs on to a system.
+    ///
+    /// Example: "C:\win\profiles\ThomasSteven"
+    ScriptPath: Option<String>,
+    /// Number of time units the week is divided into.
+    /// It is used with the LogonHours property to limit user access to the computer.
+    ///
+    /// Example: 168 (hours per week)
+    UnitsPerWeek: Option<u32>,
+    /// User-defined comment or description for this profile.
+    UserComment: Option<String>,
+    /// RID of the user. The identifier verifies that the user exists and is unique to this domain.
+    UserId: Option<u32>,
+    /// Type of account to which the user has privileges.
+    ///
+    /// The values are:
+    ///
+    /// - Normal Account ("Normal Account")
+    /// - Duplicate Account ("Duplicate Account")
+    /// - Workstation Trust Account ("Workstation Trust Account")
+    /// - Server Trust Account ("Server Trust Account")
+    /// - Interdomain Trust Account ("Interdomain Trust Account")
+    /// - Unknown ("Unknown")
+    UserType: Option<String>,
+    /// Names of workstations from which the user can log on.
+    /// Up to eight workstations can be specified; the names must be separated by commas (,).
+    /// A null string indicates no restrictions.
+    /// To disable logons from all workstations to this account,
+    /// set the UF_ACCOUNTDISABLE in the Flags property of this class.
+    Workstations: Option<String>,
 }
