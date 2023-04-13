@@ -73,6 +73,17 @@ pub struct NetworkLoginProfiles {
 
 update!(NetworkLoginProfiles, network_login_profiles);
 
+/// Represents the state of Windows system accounts.
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct SystemAccounts {
+    /// Sequence of windows SystemAccounts
+    pub system_accounts: Vec<Win32_SystemAccount>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(SystemAccounts, system_accounts);
+
 /// The `Win32_UserAccount` WMI class contains information about a user account on a computer system
 /// running Windows.
 ///
@@ -605,4 +616,92 @@ pub struct Win32_NetworkLoginProfile {
     /// To disable logons from all workstations to this account,
     /// set the UF_ACCOUNTDISABLE in the Flags property of this class.
     pub Workstations: Option<String>,
+}
+
+/// The `Win32_SystemAccount` WMI class represents a system account.
+/// The system account is used by the operating system and services.
+/// There are many services and processes within Windows that need the capability to logon internally,
+/// for example, during a Windows installation.
+/// The system account was designed for that purpose.
+///
+/// The system account is an internal account that does not show up in User Manager,
+/// cannot be added to any groups, and cannot have user rights assigned to it.
+/// However, the system account does show up on an NTFS file system volume in file manager,
+/// which is located in the Permissions section of the Security menu.
+/// By default, the system account is granted full control to all files on an NTFS file system volume,
+/// which means
+/// that the system account has the same functional privileges as the administrator account.
+///
+/// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-systemaccount>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_SystemAccount {
+    /// A short textual description of the object.
+    pub caption: Option<String>,
+    /// A textual description of the object.
+    pub description: Option<String>,
+    /// Indicates when the object was installed.
+    /// Lack of a value does not indicate that the object is not installed.
+    pub install_date: Option<WMIDateTime>,
+    /// String that indicates the current status of the object.
+    /// Operational and non-operational status can be defined.
+    /// Operational status can include "OK", "Degraded", and "Pred Fail".
+    /// "Pred Fail" indicates that an element is functioning properly,
+    /// but is predicting a failure (for example, a SMART-enabled hard disk drive).
+    ///
+    /// Non-operational status can include "Error", "Starting", "Stopping", and "Service".
+    /// "Service" can apply during disk mirror-re-silvering,
+    /// reloading a user permissions list, or other administrative work.
+    /// Not all such work is online,
+    /// but the managed element is neither "OK" nor in one of the other states.
+    ///
+    /// Values include the following:
+    ///
+    /// - OK ("OK")
+    /// - Error ("Error")
+    /// - Degraded ("Degraded")
+    /// - Unknown ("Unknown")
+    /// - Pred Fail ("Pred Fail")
+    /// - Starting ("Starting")
+    /// - Stopping ("Stopping")
+    /// - Service ("Service")
+    /// - Stressed ("Stressed")
+    /// - NonRecover ("NonRecover")
+    /// - No Contact ("No Contact")
+    /// - Lost Comm ("Lost Comm")
+    pub status: Option<String>,
+    /// If TRUE, the account is defined on the local machine.
+    /// To retrieve only accounts defined on the local machine,
+    /// design a query that includes the condition "LocalAccount=TRUE".
+    pub local_account: Option<bool>,
+    /// Security identifier (SID) for this account.
+    /// A SID is a string value of variable length used to identify a trustee.
+    /// Each account has a unique SID issued by an authority (such as a Windows domain),
+    /// stored in a security database.
+    /// When a user logs on,
+    /// the system retrieves the user's SID from the database and places it in the user's access token.
+    /// The system uses the SID in the user's access token
+    /// to identify the user in all subsequent interactions with Windows security.
+    /// When a SID has been used as the unique identifier for a user or group,
+    /// it cannot be used again to identify another user or group.
+    pub sid: Option<String>,
+    /// Enumerated values that specify the type of security identifier (SID).
+    ///
+    /// - SidTypeUser (1)
+    /// - SidTypeGroup (2)
+    /// - SidTypeDomain (3)
+    /// - SidTypeAlias (4)
+    /// - SidTypeWellKnownGroup (5)
+    /// - SidTypeDeletedAccount (6)
+    /// - SidTypeInvalid (7)
+    /// - SidTypeUnknown (8)
+    /// - SidTypeComputer (9)
+    pub sid_type: Option<u8>,
+    /// Name of the Windows domain to which the system account belongs.
+    ///
+    /// Example: "NA-SALES"
+    pub domain: Option<String>,
+    /// Name of the Windows system account on the domain specified by the Domain property of this class.
+    pub name: Option<String>,
 }

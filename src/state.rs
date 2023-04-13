@@ -41,6 +41,8 @@ pub struct Windows {
     pub logon_sessions: users::LogonSessions,
     /// State of Windows Network Logins
     pub network_login_profiles: users::NetworkLoginProfiles,
+    /// State of Windows System Accounts
+    pub system_accounts: users::SystemAccounts,
 }
 
 impl Windows {
@@ -60,6 +62,7 @@ impl Windows {
         self.groups.update();
         self.logon_sessions.update();
         self.network_login_profiles.update();
+        self.system_accounts.update();
     }
 
     /// Asynchronously update all the fields
@@ -79,6 +82,7 @@ impl Windows {
             self.groups.async_update(),
             self.logon_sessions.async_update(),
             self.network_login_profiles.async_update(),
+            self.system_accounts.async_update(),
         );
     }
 }
