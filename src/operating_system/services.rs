@@ -28,36 +28,36 @@ update!(Services, services);
 #[allow(non_camel_case_types)]
 pub struct Win32_Service {
     /// Indicates whether the service can be paused.
-    AcceptPause: Option<bool>,
+    pub AcceptPause: Option<bool>,
     /// Indicates whether the service can be stopped.
-    AcceptStop: Option<bool>,
+    pub AcceptStop: Option<bool>,
     /// Short description of the service — a one-line string.
-    Caption: Option<String>,
+    pub Caption: Option<String>,
     /// Value that the service increments periodically to report its progress during a long start,
     /// stop, pause, or continue operation. For example, the service increments this value as it
     /// completes each step of its initialization when it is starting up. The user interface program
     /// that invokes the operation on the service uses this value to track the progress of the
     /// service during a lengthy operation. This value is not valid and should be zero when the
     /// service does not have a start, stop, pause, or continue operation pending.
-    CheckPoint: Option<u32>,
+    pub CheckPoint: Option<u32>,
     /// Name of the first concrete class to appear in the inheritance chain used in the creation of
     /// an instance. When used with the other key properties of the class, this property allows all
     /// instances of this class and its subclasses to be uniquely identified.
-    CreationClassName: Option<String>,
+    pub CreationClassName: Option<String>,
     /// If True, the service is started after other auto-start services are started plus a short
     /// delay.
     ///
     /// Windows Server 2012 R2, Windows 8.1, Windows Server 2012, Windows 8, Windows Server 2008 R2,
     /// Windows 7, Windows Server 2008 and Windows Vista: This property is not supported before
     /// Windows Server 2016 and Windows 10.
-    DelayedAutoStart: Option<bool>,
+    pub DelayedAutoStart: Option<bool>,
     /// Description of the object.
-    Description: Option<String>,
+    pub Description: Option<String>,
     /// Indicates whether the service can create or communicate with windows on the desktop, and
     /// thus interact in some way with a user. Interactive services must run under the Local System
     /// account. Most services are not interactive; that is, they do not communicate with the user
     /// in any way.
-    DesktopInteract: Option<bool>,
+    pub DesktopInteract: Option<bool>,
     /// Name of the service as viewed in the Services snap-in. This string has a maximum length of
     /// 256 characters. Note that the display name and the service name (which is stored in the
     /// registry) are not always the same. For example, the DHCP Client service has the service
@@ -67,7 +67,7 @@ pub struct Win32_Service {
     /// Constraint: Accepts the same value as the Name property.
     ///
     /// Example: "Atdisk"
-    DisplayName: Option<String>,
+    pub DisplayName: Option<String>,
     /// Severity of the error if this service fails to start during startup. The value indicates
     /// the action taken by the startup program if failure occurs. All errors are logged by the
     /// computer system.
@@ -77,31 +77,31 @@ pub struct Win32_Service {
     /// - Severe ("Severe"): System is restarted with the last-known-good configuration.
     /// - Critical ("Critical"): System attempts to restart with a good configuration. If the service fails to start a second time, startup fails.
     /// - Unknown ("Unknown"): Severity of the error is unknown.
-    ErrorControl: Option<String>,
+    pub ErrorControl: Option<String>,
     /// Windows error code that defines errors encountered in starting or stopping the service.
     /// This property is set to ERROR_SERVICE_SPECIFIC_ERROR (1066) when the error is unique to the
     /// service represented by this class, and information about the error is available in the
     /// ServiceSpecificExitCode property. The service sets this value to NO_ERROR when running, and
     /// again upon normal termination.
-    ExitCode: Option<u32>,
+    pub ExitCode: Option<u32>,
     /// Date object is installed. This property does not require a value to indicate that the object
     /// is installed.
-    InstallDate: Option<WMIDateTime>,
+    pub InstallDate: Option<WMIDateTime>,
     /// Unique identifier of the service that provides an indication of the functionality that is
     /// managed. This functionality is described in the Description property of the object.
-    Name: Option<String>,
+    pub Name: Option<String>,
     /// Fully qualified path to the service binary file that implements the service.
     ///
     /// Example: "\SystemRoot\System32\drivers\afd.sys"
-    PathName: Option<String>,
+    pub PathName: Option<String>,
     /// Process identifier of the service.
     ///
     /// Example: 324
-    ProcessId: Option<u32>,
+    pub ProcessId: Option<u32>,
     /// Service-specific error code for errors that occur while the service is either starting or
     /// stopping. The exit codes are defined by the service represented by this class. This value
     /// is only set when the ExitCode property value is ERROR_SERVICE_SPECIFIC_ERROR (1066).
-    ServiceSpecificExitCode: Option<u32>,
+    pub ServiceSpecificExitCode: Option<u32>,
     /// Type of service provided to calling processes.
     ///
     /// The values are:
@@ -113,9 +113,9 @@ pub struct Win32_Service {
     /// - Own Process ("Own Process")
     /// - Share Process ("Share Process")
     /// - Interactive Process ("Interactive Process")
-    ServiceType: Option<String>,
+    pub ServiceType: Option<String>,
     /// Indicates whether or not the service is started.
-    Started: Option<bool>,
+    pub Started: Option<bool>,
     /// Start mode of the Windows base service.
     ///
     /// - Boot ("Boot"): Device driver started by the operating system loader (valid only for driver services).
@@ -123,7 +123,7 @@ pub struct Win32_Service {
     /// - Auto ("Auto"): Service to be started automatically by the service control manager during system startup. Auto services are started even if a user does not log on.
     /// - Manual ("Manual"): Service to be started by the Service Control Manager when a process calls the StartService method. These services do not start unless a user logs on and starts them.
     /// - Disabled ("Disabled"): Service that cannot be started until its StartMode is changed to either Auto or Manual.
-    StartMode: Option<String>,
+    pub StartMode: Option<String>,
     /// Account name under which a service runs. Depending on the service type, the account name
     /// may be in the form of "DomainName\Username" or UPN format ("Username@DomainName"). The
     /// service process is logged by using one of these two forms when it runs. If the account
@@ -134,7 +134,7 @@ pub struct Win32_Service {
     /// the service name.
     ///
     /// Example: "DWDOM\Admin"
-    StartName: Option<String>,
+    pub StartName: Option<String>,
     /// Current state of the base service.
     ///
     /// The values are:
@@ -147,7 +147,7 @@ pub struct Win32_Service {
     /// - Pause Pending ("Pause Pending")
     /// - Paused ("Paused")
     /// - Unknown ("Unknown")
-    State: Option<String>,
+    pub State: Option<String>,
     /// Current status of the object. Various operational and nonoperational statuses can be
     /// defined. Operational statuses include: "OK", "Degraded", and "Pred Fail" (an element,
     /// such as a SMART-enabled hard disk drive, may be functioning properly but predicting a
@@ -170,11 +170,11 @@ pub struct Win32_Service {
     /// - NonRecover ("NonRecover")
     /// - No Contact ("No Contact")
     /// - Lost Comm ("Lost Comm")
-    Status: Option<String>,
+    pub Status: Option<String>,
     /// Type name of the system that hosts this service.
-    SystemCreationClassName: Option<String>,
+    pub SystemCreationClassName: Option<String>,
     /// Name of the system that hosts this service.
-    SystemName: Option<String>,
+    pub SystemName: Option<String>,
     /// Unique tag value for this service in the group. A value of 0 (zero) indicates that the
     /// service does not have a tag. A tag can be used to order service startup within a load order
     /// group by specifying a tag order vector in the registry located at:
@@ -183,12 +183,12 @@ pub struct Win32_Service {
     ///
     /// Tags are only evaluated for Kernel Driver and File System Driver start type services that
     /// have Boot or System start modes.
-    TagId: Option<u32>,
+    pub TagId: Option<u32>,
     /// Estimated time required, in milliseconds, for a pending start, stop, pause, or continue
     /// operation. After the specified time has elapsed, the service makes its next call to the
     /// SetServiceStatus method with either an incremented CheckPoint value or a change in
     /// CurrentState. If the amount of time specified by WaitHint passes, and CheckPoint has not
     /// been incremented, or CurrentState has not changed, the service control manager or service
     /// control program assumes that an error has occurred.
-    WaitHint: Option<u32>,
+    pub WaitHint: Option<u32>,
 }

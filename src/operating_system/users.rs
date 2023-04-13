@@ -101,35 +101,35 @@ pub struct Win32_UserAccount {
     ///
     /// - Server trust account (8192): UF_SERVER_TRUST_ACCOUNT: Account for a system backup domain
     /// controller that is a member of this domain.
-    AccountType: Option<u32>,
+    pub AccountType: Option<u32>,
     /// Domain and username of the account.
-    Caption: Option<String>,
+    pub Caption: Option<String>,
     /// Description of the account.
-    Description: Option<String>,
+    pub Description: Option<String>,
     /// Windows user account is disabled.
-    Disabled: Option<bool>,
+    pub Disabled: Option<bool>,
     /// Name of the Windows domain to which a user account belongs, for example: "NA-SALES".
-    Domain: Option<String>,
+    pub Domain: Option<String>,
     /// Full name of a local user, for example: "Dan Wilson".
-    FullName: Option<String>,
+    pub FullName: Option<String>,
     /// Date the object is installed. This property does not need a value to indicate that the
     /// object is installed.
-    InstallDate: Option<WMIDateTime>,
+    pub InstallDate: Option<WMIDateTime>,
     /// If true, the account is defined on the local computer.
-    LocalAccount: Option<bool>,
+    pub LocalAccount: Option<bool>,
     /// If true, the user account is locked out of the Windows operating system.
-    Lockout: Option<bool>,
+    pub Lockout: Option<bool>,
     /// Name of the Windows user account on the domain that the Domain property of this class specifies.
     ///
     /// Example: "danwilson".
-    Name: Option<String>,
+    pub Name: Option<String>,
     /// If true, the password on this user account can be changed.
-    PasswordChangeable: Option<bool>,
+    pub PasswordChangeable: Option<bool>,
     /// If true, the password on this user account expires.
-    PasswordExpires: Option<bool>,
+    pub PasswordExpires: Option<bool>,
     /// If true, a password is required on a Windows user account. If false, this account does not
     /// require a password.
-    PasswordRequired: Option<bool>,
+    pub PasswordRequired: Option<bool>,
     /// Security identifier (SID) for this account.
     /// A SID is a string value of variable length that is used to identify a trustee.
     /// Each account has a unique SID that an authority, such as a Windows domain, issues.
@@ -140,7 +140,7 @@ pub struct Win32_UserAccount {
     /// to identify the user in all subsequent interactions with Windows security.
     /// Each SID is a unique identifier for a user or group,
     /// and a different user or group cannot have the same SID.
-    SID: Option<String>,
+    pub SID: Option<String>,
     /// Enumerated value that specifies the type of SID.
     ///
     /// - SidTypeUser (1)
@@ -152,7 +152,7 @@ pub struct Win32_UserAccount {
     /// - SidTypeInvalid (7)
     /// - SidTypeUnknown (8)
     /// - SidTypeComputer (9)
-    SIDType: Option<u8>,
+    pub SIDType: Option<u8>,
     /// Current status of an object.
     /// Various operational and nonoperational statuses can be defined.
     /// Operational statuses include: "OK", "Degraded", and "Pred Fail",
@@ -176,7 +176,7 @@ pub struct Win32_UserAccount {
     /// - NonRecover ("NonRecover")
     /// - No Contact ("No Contact")
     /// - Lost Comm ("Lost Comm")
-    Status: Option<String>,
+    pub Status: Option<String>,
 }
 
 /// The `Win32_Account` abstract WMI class contains information about user accounts and group accounts
@@ -189,22 +189,22 @@ pub struct Win32_UserAccount {
 #[allow(non_camel_case_types)]
 pub struct Win32_Account {
     /// Short description of the object.
-    caption: Option<String>,
+    pub caption: Option<String>,
     /// Description of the object.
-    description: Option<String>,
+    pub description: Option<String>,
     /// Name of the Windows domain to which a group or user belongs.
     ///
     /// Example: "NA-SALES"
-    domain: Option<String>,
+    pub domain: Option<String>,
     /// Date and time that the object was installed. This property does not require a value to
     /// indicate that the object is installed.
-    install_date: Option<WMIDateTime>,
+    pub install_date: Option<WMIDateTime>,
     /// If TRUE, the account is defined on the local machine. To retrieve only accounts defined on
     /// the local machine, design a query that includes the condition "LocalAccount=TRUE".
-    local_account: Option<bool>,
+    pub local_account: Option<bool>,
     /// Name of the Windows system account on the domain specified by the Domain property of this
     /// class. This property overrides the Name property inherited from CIM_ManagedSystemElement.
-    name: Option<String>,
+    pub name: Option<String>,
     /// Security identifier (SID) for this account.
     /// A SID is a string value of variable length used to identify a trustee.
     /// Each account has a unique SID issued by an authority (such as a Windows domain),
@@ -215,7 +215,7 @@ pub struct Win32_Account {
     /// to identify the user in all subsequent interactions with Windows security.
     /// When a SID has been used as the unique identifier for a user or group,
     /// it cannot be used again to identify another user or group.
-    sid: Option<String>,
+    pub sid: Option<String>,
     /// Enumerated values that specify the type of security identifier (SID).
     ///
     /// - SidTypeUser (1)
@@ -227,7 +227,7 @@ pub struct Win32_Account {
     /// - SidTypeInvalid (7)
     /// - SidTypeUnknown (8)
     /// - SidTypeComputer (9)
-    sid_type: Option<u8>,
+    pub sid_type: Option<u8>,
     /// Current status of the object.
     /// Various operational and nonoperational statuses can be defined.
     /// Operational statuses include: "OK", "Degraded", and "Pred Fail"
@@ -253,7 +253,7 @@ pub struct Win32_Account {
     /// - NonRecover ("NonRecover")
     /// - No Contact ("No Contact")
     /// - Lost Comm ("Lost Comm")
-    status: Option<String>,
+    pub status: Option<String>,
 }
 
 /// The `Win32_Group WMI` class represents data about a group account.
@@ -266,12 +266,12 @@ pub struct Win32_Account {
 #[allow(non_camel_case_types)]
 pub struct Win32_Group {
     /// A short textual description of the object.
-    Caption: Option<String>,
+    pub Caption: Option<String>,
     /// A textual description of the object.
-    Description: Option<String>,
+    pub Description: Option<String>,
     /// Indicates when the object was installed. Lack of a value does not indicate that the object
     /// is not installed.
-    InstallDate: Option<WMIDateTime>,
+    pub InstallDate: Option<WMIDateTime>,
     /// String that indicates the current status of the object.
     /// Operational and non-operational status can be defined.
     /// Operational status can include "OK", "Degraded", and "Pred Fail".
@@ -298,11 +298,11 @@ pub struct Win32_Group {
     /// - NonRecover ("NonRecover")
     /// - No Contact ("No Contact")
     /// - Lost Comm ("Lost Comm")
-    Status: Option<String>,
+    pub Status: Option<String>,
     /// If TRUE, the account is defined on the local machine.
     /// To retrieve only accounts defined on the local machine,
     /// design a query that includes the condition "LocalAccount=TRUE".
-    LocalAccount: Option<bool>,
+    pub LocalAccount: Option<bool>,
     /// Security identifier (SID) for this account.
     /// A SID is a string value of variable length used to identify a trustee.
     /// Each account has a unique SID issued by an authority (such as a Windows domain),
@@ -313,7 +313,7 @@ pub struct Win32_Group {
     /// to identify the user in all subsequent interactions with Windows security.
     /// When a SID has been used as the unique identifier for a user or group,
     /// it cannot be used again to identify another user or group.
-    SID: Option<String>,
+    pub SID: Option<String>,
     /// Enumerated values that specify the type of security identifier (SID).
     ///
     /// - SidTypeUser (1)
@@ -325,13 +325,13 @@ pub struct Win32_Group {
     /// - SidTypeInvalid (7)
     /// - SidTypeUnknown (8)
     /// - SidTypeComputer (9)
-    SIDType: Option<u8>,
+    pub SIDType: Option<u8>,
     /// Name of the Windows domain to which the group account belongs.
     ///
     /// Example: "NA-SALES"
-    Domain: Option<String>,
+    pub Domain: Option<String>,
     /// Name of the Windows group account on the domain specified by the Domain property of this class.
-    Name: Option<String>,
+    pub Name: Option<String>,
 }
 
 /// The `Win32_LogonSession` WMI class
@@ -344,15 +344,15 @@ pub struct Win32_Group {
 #[allow(non_camel_case_types)]
 pub struct Win32_LogonSession {
     /// A short textual description of the object.
-    Caption: Option<String>,
+    pub Caption: Option<String>,
     /// A textual description of the object.
-    Description: Option<String>,
+    pub Description: Option<String>,
     /// Indicates when the object was installed. Lack of a value does not indicate that the object
     /// is not installed.
-    InstallDate: Option<WMIDateTime>,
+    pub InstallDate: Option<WMIDateTime>,
     /// Label by which the object is known.
     /// When subclassed, this property can be overridden to be a key property.
-    Name: Option<String>,
+    pub Name: Option<String>,
     /// String that indicates the current status of the object.
     /// Operational and non-operational status can be defined.
     /// Operational status can include "OK", "Degraded", and "Pred Fail".
@@ -379,13 +379,13 @@ pub struct Win32_LogonSession {
     /// - NonRecover ("NonRecover")
     /// - No Contact ("No Contact")
     /// - Lost Comm ("Lost Comm")
-    Status: Option<String>,
+    pub Status: Option<String>,
     /// Time at which the session started.
-    StartTime: Option<WMIDateTime>,
+    pub StartTime: Option<WMIDateTime>,
     /// Name of the subsystem used to authenticate the logon session.
-    AuthenticationPackage: Option<String>,
+    pub AuthenticationPackage: Option<String>,
     /// ID assigned to the logon session.
-    LogonId: Option<String>,
+    pub LogonId: Option<String>,
     /// Numeric value that indicates the type of logon session.
     ///
     /// - 0: Used only by the System account.
@@ -401,7 +401,7 @@ pub struct Win32_LogonSession {
     /// - CachedInteractive (11): Attempt cached credentials without accessing the network.
     /// - CachedRemoteInteractive (12): Same as RemoteInteractive. This is used for internal auditing.
     /// - CachedUnlock (13): Workstation logon.
-    LogonType: Option<u32>,
+    pub LogonType: Option<u32>,
 }
 
 /// The `Win32_NetworkLoginProfile`
@@ -415,17 +415,17 @@ pub struct Win32_LogonSession {
 #[allow(non_camel_case_types)]
 pub struct Win32_NetworkLoginProfile {
     /// Short textual description of the current object.
-    Caption: Option<String>,
+    pub Caption: Option<String>,
     /// Textual description of the current object.
-    Description: Option<String>,
+    pub Description: Option<String>,
     /// Identifier by which the current object is known.
-    SettingID: Option<String>,
+    pub SettingID: Option<String>,
     /// Account will expire.
     /// This value is calculated from the number of seconds elapsed since 00:00:00,
     /// January 1, 1970, and is set in this format: yyyymmddhhmmss.mmmmmm sutc.
     ///
     /// Example: 20521201000230.000000 000
-    AccountExpires: Option<WMIDateTime>,
+    pub AccountExpires: Option<WMIDateTime>,
 
     /// Set of flags that specify the resources a user is authorized to use or modify.
     ///
@@ -433,17 +433,17 @@ pub struct Win32_NetworkLoginProfile {
     /// - 2 (0x2):  Communication
     /// - 4 (0x4): Server
     /// - 8 (0x8): Accounts
-    AuthorizationFlags: Option<u32>,
+    pub AuthorizationFlags: Option<u32>,
     /// Number of times the user enters a bad password when logging on to a computer system running Windows.
     ///
     /// Example: 0
-    BadPasswordCount: Option<u32>,
+    pub BadPasswordCount: Option<u32>,
     /// Code page for the user's language of choice. A code page is the character set used.
-    CodePage: Option<u32>,
+    pub CodePage: Option<u32>,
     /// Comment or description for this logon profile.
-    Comment: Option<String>,
+    pub Comment: Option<String>,
     /// Country/region code for the user's language of choice.
-    CountryCode: Option<u32>,
+    pub CountryCode: Option<u32>,
     /// The properties available to this network profile.
     ///
     /// Properties that can be set include:
@@ -476,19 +476,19 @@ pub struct Win32_NetworkLoginProfile {
     /// - UF_WORKSTATION_TRUST_ACCOUNT
     /// - UF_SERVER_TRUST_ACCOUNT
     /// - UF_INTERDOMAIN_TRUST_ACCOUNT
-    Flags: Option<u32>,
+    pub Flags: Option<u32>,
     /// Full name of the user belonging to the network login profile.
     /// This string can be empty if the user chooses not to associate a full name with a user name.
-    FullName: Option<String>,
+    pub FullName: Option<String>,
     /// Path to the home directory of the user. This string may be empty if the user chooses not to
     /// specify a home directory.
     ///
     /// Example:"\HOMEDIR"
-    HomeDirectory: Option<String>,
+    pub HomeDirectory: Option<String>,
     /// Drive letter assigned to the user's home directory for log on purposes.
     ///
     /// Example: "C:"
-    HomeDirectoryDrive: Option<String>,
+    pub HomeDirectoryDrive: Option<String>,
     /// User last logged off the system. This value is calculated from the number of seconds elapsed
     /// since 00:00:00, January 1, 1970. A value of " **************.******+*** " means that the
     /// last logoff time is unknown. The format of this value is yyyymmddhhmmss.mmmmmm sutc. For
@@ -498,7 +498,7 @@ pub struct Win32_NetworkLoginProfile {
     /// Example: 19521201000230.000000 000
     ///
     /// Note: Should be of type WMIDateTime but causes parsing errors due to starting with zeroes.
-    LastLogoff: Option<String>,
+    pub LastLogoff: Option<String>,
     /// User last logged on to the system.
     /// This value is calculated from the number of seconds elapsed since 00:00:00,
     /// January 1, 1970. The format of this value is yyyymmddhhmmss.mmmmmm sutc.
@@ -506,7 +506,7 @@ pub struct Win32_NetworkLoginProfile {
     /// Dates and Times.
     ///
     /// Example: 19521201000230.000000 000
-    LastLogon: Option<WMIDateTime>,
+    pub LastLogon: Option<WMIDateTime>,
     /// Times during the week when the user can log on.
     /// Each bit represents a unit of time specified by the UnitsPerWeek property.
     /// For instance, if the unit of time is hourly, the first bit (bit 0, word 0) is Sunday,
@@ -514,7 +514,7 @@ pub struct Win32_NetworkLoginProfile {
     /// If this member is set to NULL, then there is no time restriction.
     /// The time is set to GMT and must be adjusted for other time zones
     /// (for example, GMT minus 8 hours for PST).
-    LogonHours: Option<String>,
+    pub LogonHours: Option<String>,
     /// Name of the server to which logon requests are sent.
     /// Server names should be preceded by two backslashes (\\).
     /// A server name with an asterisk (\\*)
@@ -522,73 +522,72 @@ pub struct Win32_NetworkLoginProfile {
     /// A null string indicates that requests are sent to the domain controller.
     ///
     /// Example: "\\MyServer"
-    LogonServer: Option<String>,
+    pub LogonServer: Option<String>,
     /// Maximum amount of disk space available to the user.
     /// If MaximumStorage is set to USER_MAXSTORAGE_UNLIMITED,
     /// the user is allowed to use all of the available disk space.
     ///
     /// Example: 10000000
-    MaximumStorage: Option<u64>,
+    pub MaximumStorage: Option<u64>,
     /// User account on a particular domain or computer.
     /// The number of characters in the name cannot exceed the value of UNLEN.
     ///
     /// Example: "somedomain\johndoe"
-    Name: Option<String>,
+    pub Name: Option<String>,
     /// Number of successful times the user tried to log on to this account.
     /// A value of 0xFFFFFFFF indicates that the value is unknown.
     /// This property is maintained separately on each backup domain controller (BDC) in the domain.
     /// To get an accurate value, only the largest value from all BDCs should be used.
     ///
     /// Example: 4
-    NumberOfLogons: Option<u32>,
+    pub NumberOfLogons: Option<u32>,
     /// Space set aside for use by applications.
     /// This string can be null,
     /// or it can have any number of characters before the terminating null character.
     /// Microsoft products use this member to store user configuration information.
     /// Do not modify this information, because this value is specific to an application.
-    Parameters: Option<String>,
+    pub Parameters: Option<String>,
     /// Length of time a password has been in effect.
     /// This value is measured from the number of seconds elapsed since the password was last changed.
     ///
     /// Example: 00001201000230.000000 000
     ///
     /// Note: Should be of type WMIDateTime but causes parsing errors due to starting with zeroes.
-    PasswordAge: Option<String>,
+    pub PasswordAge: Option<String>,
     /// Date and time the password expires.
     /// The value is set in this format: yyyymmddhhmmss.mmmmmm sutc
     ///
     /// Example: 19521201000230.000000 000
-    PasswordExpires: Option<WMIDateTime>,
+    pub PasswordExpires: Option<WMIDateTime>,
     /// Relative identifier (RID) of the Primary Global Group for this user.
     /// The identifier verifies the primary group to which the user's profile belongs.
-    //////////////////////////////////////////////////////////
-    PrimaryGroupId: Option<u32>,
+    pub PrimaryGroupId: Option<u32>,
     /// Level of privilege assigned to the usri3_name property.
     ///
     /// - Guest (0)
     /// - User (1)
     /// - Administrator (2)
-    Privileges: Option<u32>,
+    pub Privileges: Option<u32>,
     /// Path to the user's profile.
     /// This value can be a null string, a local absolute path, or a UNC path.
     /// A user profile contains settings that are customizable for each user such as the desktop colors.
     ///
     /// Example: "C:\Windows"
-    Profile: Option<String>,
+    pub Profile: Option<String>,
     /// Directory path to the user's logon script.
     /// A logon script automatically executes a set of commands each time a user logs on to a system.
     ///
     /// Example: "C:\win\profiles\ThomasSteven"
-    ScriptPath: Option<String>,
+    pub ScriptPath: Option<String>,
     /// Number of time units the week is divided into.
     /// It is used with the LogonHours property to limit user access to the computer.
     ///
     /// Example: 168 (hours per week)
-    UnitsPerWeek: Option<u32>,
+    pub UnitsPerWeek: Option<u32>,
     /// User-defined comment or description for this profile.
-    UserComment: Option<String>,
+    pub UserComment: Option<String>,
     /// RID of the user. The identifier verifies that the user exists and is unique to this domain.
-    UserId: Option<u32>,
+    pub UserId: Option<u32>,
     /// Type of account to which the user has privileges.
     ///
     /// The values are:
@@ -599,11 +598,11 @@ pub struct Win32_NetworkLoginProfile {
     /// - Server Trust Account ("Server Trust Account")
     /// - Interdomain Trust Account ("Interdomain Trust Account")
     /// - Unknown ("Unknown")
-    UserType: Option<String>,
+    pub UserType: Option<String>,
     /// Names of workstations from which the user can log on.
     /// Up to eight workstations can be specified; the names must be separated by commas (,).
     /// A null string indicates no restrictions.
     /// To disable logons from all workstations to this account,
     /// set the UF_ACCOUNTDISABLE in the Flags property of this class.
-    Workstations: Option<String>,
+    pub Workstations: Option<String>,
 }

@@ -66,69 +66,69 @@ update!(UserDesktops, user_desktops);
 #[allow(non_camel_case_types)]
 pub struct Win32_Desktop {
     /// Short textual description of the current object.
-    Caption: Option<String>,
+    pub Caption: Option<String>,
     /// Textual description of the current object.
-    Description: Option<String>,
+    pub Description: Option<String>,
     /// Identifier by which the current object is known.
-    SettingID: Option<String>,
+    pub SettingID: Option<String>,
     /// Width of the borders around all windows with adjustable borders.
     ///
     /// Example: 3
-    BorderWidth: Option<u32>,
+    pub BorderWidth: Option<u32>,
     /// Fast task switching is turned on. Fast task switching allows the user to switch between
     /// windows using the ALT+TAB keyboard combination.
-    CoolSwitch: Option<bool>,
+    pub CoolSwitch: Option<bool>,
     /// Length of time between successive cursor blinks.
     ///
     /// Example: 530
-    CursorBlinkRate: Option<u32>,
+    pub CursorBlinkRate: Option<u32>,
     /// Contents of a window are shown when a user moves the window.
-    DragFullWindows: Option<bool>,
+    pub DragFullWindows: Option<bool>,
     /// Spacing of the grid that windows are bound to on the desktop. This makes organizing windows
     /// easier. The spacing is usually fine enough that the user does not notice it.
     ///
     /// Example: 1
-    GridGranularity: Option<u32>,
+    pub GridGranularity: Option<u32>,
     /// Spacing between icons.
     ///
     /// Example: 75
-    IconSpacing: Option<u32>,
+    pub IconSpacing: Option<u32>,
     /// Font used for the names of the icons.
     ///
     /// Example: "MS San Serif"
-    IconTitleFaceName: Option<String>,
+    pub IconTitleFaceName: Option<String>,
     /// Icon font size.
     ///
     /// Example: 9
-    IconTitleSize: Option<u32>,
+    pub IconTitleSize: Option<u32>,
     /// Icon's title text wraps to the next line.
-    IconTitleWrap: Option<bool>,
+    pub IconTitleWrap: Option<bool>,
     /// Name that identifies the current desktop profile.
     ///
     /// Example: "MainProf"
-    Name: Option<String>,
+    pub Name: Option<String>,
     /// Name of the pattern used as the background for the desktop.
-    Pattern: Option<String>,
+    pub Pattern: Option<String>,
     /// Screen saver is active.
-    ScreenSaverActive: Option<bool>,
+    pub ScreenSaverActive: Option<bool>,
     /// Name of the current screen saver executable file.
     ///
     /// Example: "LOGON.SCR"
-    ScreenSaverExecutable: Option<String>,
+    pub ScreenSaverExecutable: Option<String>,
     /// Password is enabled for the screen saver.
-    ScreenSaverSecure: Option<bool>,
+    pub ScreenSaverSecure: Option<bool>,
     /// Amount of time that passes before the screen saver starts.
-    ScreenSaverTimeout: Option<u32>,
+    pub ScreenSaverTimeout: Option<u32>,
     /// File name for the wallpaper design on the background of the desktop.
     ///
     /// Example: "WINNT.BMP"
-    Wallpaper: Option<String>,
+    pub Wallpaper: Option<String>,
     /// Wallpaper is stretched to fill the entire screen. Microsoft Plus! must be installed before
     /// this option is available. If FALSE, the wallpaper retains its original dimensions on the
     /// desktop background.
-    WallpaperStretched: Option<bool>,
+    pub WallpaperStretched: Option<bool>,
     /// Wallpaper is tiled or centered.
-    WallpaperTiled: Option<bool>,
+    pub WallpaperTiled: Option<bool>,
 }
 
 /// The `Win32_Environment` WMI class represents an environment or system environment setting on a
@@ -146,12 +146,12 @@ pub struct Win32_Desktop {
 #[allow(non_camel_case_types)]
 pub struct Win32_Environment {
     /// A short textual description of the object.
-    Caption: Option<String>,
+    pub Caption: Option<String>,
     /// A textual description of the object.
-    Description: Option<String>,
+    pub Description: Option<String>,
     /// Indicates when the object was installed. Lack of a value does not indicate that the object
     /// is not installed.
-    InstallDate: Option<WMIDateTime>,
+    pub InstallDate: Option<WMIDateTime>,
     /// String that indicates the current status of the object.
     /// Operational and non-operational status can be defined.
     /// Operational status can include "OK", "Degraded", and "Pred Fail".
@@ -178,29 +178,29 @@ pub struct Win32_Environment {
     /// - NonRecover ("NonRecover")
     /// - No Contact ("No Contact")
     /// - Lost Comm ("Lost Comm")
-    Status: Option<String>,
+    pub Status: Option<String>,
     /// Character string that specifies the name of a Windows-based environment variable.
     /// By specifying the name of a variable that does not yet exist,
     /// an application creates a new environment variable.
     ///
     /// Example: "Path"
-    Name: Option<String>,
+    pub Name: Option<String>,
     /// Indicates whether the variable is a system variable.
     /// A system variable is set by the operating system,
     /// and is independent from user environment settings.
-    SystemVariable: Option<bool>,
+    pub SystemVariable: Option<bool>,
     /// Name of the owner of the environment setting.
     /// It is set to <SYSTEM> for settings that are specific to the Windows-based system
     /// (as opposed to a specific user) and <DEFAULT> for default user settings.
     ///
     /// Example: "JSmith"
-    UserName: Option<String>,
+    pub UserName: Option<String>,
     /// Placeholder variable of a Windows-based environment variable.
     /// Information like the file system directory can change from computer to computer.
     /// The operating system substitutes placeholders for these.
     ///
     /// Example: "%SystemRoot%"
-    VariableValue: Option<String>,
+    pub VariableValue: Option<String>,
 }
 
 /// The `Win32_TimeZone`
@@ -213,23 +213,23 @@ pub struct Win32_Environment {
 #[allow(non_camel_case_types)]
 pub struct Win32_TimeZone {
     /// Short textual description of the current object.
-    Caption: Option<String>,
+    pub Caption: Option<String>,
     /// Textual description of the current object.
-    Description: Option<String>,
+    pub Description: Option<String>,
     /// Identifier by which the current object is known.
-    SettingID: Option<String>,
+    pub SettingID: Option<String>,
     /// Current bias for local time translation.
     /// The bias is the difference between Coordinated Universal Time (UTC) and local time.
     /// All translations between UTC and local time are based on the following formula:
     /// UTC = local time - bias.
     /// This property is required.
-    Bias: Option<i32>,
+    pub Bias: Option<i32>,
     /// Bias value to be used during local time translations that occur during daylight saving time.
     /// This property is ignored if a value for the DaylightDay property is not supplied.
     /// The value of this property is added to the Bias property
     /// to form the bias used during daylight time.
     /// In most time zones, the value of this property is -60.
-    DaylightBias: Option<i32>,
+    pub DaylightBias: Option<i32>,
     /// DaylightDayOfWeek of the DaylightMonth when the transition from standard time to daylight
     /// saving time occurs on this operating system.
     ///
@@ -237,7 +237,7 @@ pub struct Win32_TimeZone {
     /// indicates the first Sunday of the DaylightMonth,
     /// "2" indicates the second Sunday, and so on.
     /// The value "5" indicates the last DaylightDayOfWeek in the month.
-    DaylightDay: Option<u32>,
+    pub DaylightDay: Option<u32>,
     /// Day of the week when the transition from standard time to daylight saving time occurs on an
     /// operating system.
     ///
@@ -250,20 +250,20 @@ pub struct Win32_TimeZone {
     /// - Saturday (6)
     ///
     /// Example: 1
-    DaylightDayOfWeek: Option<u8>,
+    pub DaylightDayOfWeek: Option<u8>,
     /// Hour of the day when the transition from standard time to daylight saving time occurs on an
     /// operating system.
     ///
     /// Example: 2
-    DaylightHour: Option<u32>,
+    pub DaylightHour: Option<u32>,
     /// Millisecond of the DaylightSecond when the transition from standard time to daylight saving
     /// time occurs on an operating system.
-    DaylightMillisecond: Option<u32>,
+    pub DaylightMillisecond: Option<u32>,
     /// Minute of the DaylightHour when the transition from standard time to daylight saving time
     /// occurs on an operating system.
     ///
     /// Example: 59
-    DaylightMinute: Option<u32>,
+    pub DaylightMinute: Option<u32>,
     /// Month when the transition from standard time to daylight saving time occurs on an
     /// operating system.
     ///
@@ -279,26 +279,26 @@ pub struct Win32_TimeZone {
     /// - October (10)
     /// - November (11)
     /// - December (12)
-    DaylightMonth: Option<u32>,
+    pub DaylightMonth: Option<u32>,
     /// Time zone being represented when daylight saving time is in effect.
     ///
     /// Example: "EDT" (Eastern Daylight Time)
-    DaylightName: Option<String>,
+    pub DaylightName: Option<String>,
     /// Second of the DaylightMinute when the transition from standard time to daylight saving time
     /// occurs on an operating system.
     ///
     /// Example: 59
-    DaylightSecond: Option<u32>,
+    pub DaylightSecond: Option<u32>,
     /// Year when daylight saving time is in effect. This property is not required.
     ///
     /// Example: 1997
-    DaylightYear: Option<u32>,
+    pub DaylightYear: Option<u32>,
     /// Bias value to use when daylight saving time is not in effect. This property is ignored if a
     /// value for StandardDay is not supplied. The value of this property is added to the Bias
     /// property to form the bias during standard time.
     ///
     /// Example: 0
-    StandardBias: Option<u32>,
+    pub StandardBias: Option<u32>,
     /// StandardDayOfWeek of the StandardMonth when the transition from daylight saving time to
     /// standard time occurs on an operating system.
     ///
@@ -306,7 +306,7 @@ pub struct Win32_TimeZone {
     /// then the value "1" indicates the first Sunday of the StandardMonth,
     /// "2" indicates the second Sunday, and so on.
     /// The value "5" indicates the last StandardDayOfWeek in the month.
-    StandardDay: Option<u32>,
+    pub StandardDay: Option<u32>,
     /// Day of the week when the transition from daylight saving time to standard time occurs on an
     /// operating system.
     ///
@@ -317,20 +317,20 @@ pub struct Win32_TimeZone {
     /// - Thursday (4)
     /// - Friday (5)
     /// - Saturday (6)
-    StandardDayOfWeek: Option<u8>,
+    pub StandardDayOfWeek: Option<u8>,
     /// Hour of the day when the transition from daylight saving time to standard time occurs on an
     /// operating system.
     ///
     /// Example: 11
-    StandardHour: Option<u32>,
+    pub StandardHour: Option<u32>,
     /// Millisecond of the StandardSecond when the transition from daylight saving time to standard
     /// time occurs on an operating system.
-    StandardMillisecond: Option<u32>,
+    pub StandardMillisecond: Option<u32>,
     /// Minute of the StandardDay when the transition from daylight saving time to standard time
     /// occurs on an operating system.
     ///
     /// Example: 59
-    StandardMinute: Option<u32>,
+    pub StandardMinute: Option<u32>,
     /// Month when the transition from daylight saving time to standard time occurs on an
     /// operating system.
     ///
@@ -346,20 +346,20 @@ pub struct Win32_TimeZone {
     /// - October (10)
     /// - November (11)
     /// - December (12)
-    StandardMonth: Option<u32>,
+    pub StandardMonth: Option<u32>,
     /// Name of the time zone being represented when standard time is in effect.
     ///
     /// Example: "EST" (Eastern Standard Time)
-    StandardName: Option<String>,
+    pub StandardName: Option<String>,
     /// Second of the StandardMinute when the transition from daylight saving time to standard time
     /// occurs on an operating system.
     ///
     /// Example: 59
-    StandardSecond: Option<u32>,
+    pub StandardSecond: Option<u32>,
     /// Year when standard time is in effect. This property is not required.
     ///
     /// Example: 1997
-    StandardYear: Option<u32>,
+    pub StandardYear: Option<u32>,
 }
 
 /// The `Win32_UserDesktop` association WMI class relates a user account and desktop settings that
@@ -372,8 +372,8 @@ pub struct Win32_TimeZone {
 pub struct Win32_UserDesktop {
     /// Reference to the instance representing the user account whose desktop can be customized by
     /// the Settings property of this class.
-    Element: Option<Win32_UserAccount>,
+    pub Element: Option<Win32_UserAccount>,
     /// Reference to the instance representing the desktop settings that serve to customize a
     /// specific user account desktop.
-    Setting: Option<Win32_Desktop>,
+    pub Setting: Option<Win32_Desktop>,
 }

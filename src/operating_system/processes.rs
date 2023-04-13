@@ -235,19 +235,19 @@ pub struct Win32_Process {
 #[allow(non_camel_case_types)]
 pub struct Win32_Thread {
     /// Short description of the object.
-    Caption: Option<String>,
+    pub Caption: Option<String>,
     /// Name of the first concrete class to appear in the inheritance chain used in the creation of
     /// an instance. When used with the other key properties of the class, this property allows all
     /// instances of this class and its subclasses to be uniquely identified.
-    CreationClassName: Option<String>,
+    pub CreationClassName: Option<String>,
     /// Creation class name of the scoping computer system.
-    CSCreationClassName: Option<String>,
+    pub CSCreationClassName: Option<String>,
     /// Name of the scoping computer system.
-    CSName: Option<String>,
+    pub CSName: Option<String>,
     /// Description of the object.
-    Description: Option<String>,
+    pub Description: Option<String>,
     /// Total execution time, in milliseconds, given to this thread since its creation.
-    ElapsedTime: Option<u64>,
+    pub ElapsedTime: Option<u64>,
     /// Current operating condition of the thread.
     ///
     /// - Unknown (0)
@@ -257,25 +257,25 @@ pub struct Win32_Thread {
     /// - Blocked (4)
     /// - Suspended Blocked (5)
     /// - Suspended Ready (6)
-    ExecutionState: Option<u16>,
+    pub ExecutionState: Option<u16>,
     /// Handle to a thread. The handle has full access rights by default. With the correct security
     /// access, the handle can be used in any function that accepts a thread handle. Depending on
     /// the inheritance flag specified when it is created, this handle can be inherited by child
     /// processes.
-    Handle: Option<String>,
+    pub Handle: Option<String>,
     /// Object was installed. This property does not need a value to indicate that the object is
     /// installed.
-    InstallDate: Option<WMIDateTime>,
+    pub InstallDate: Option<WMIDateTime>,
     /// Time in kernel mode, in 100 nanosecond units. If this information is not available, a value
     /// of 0 (zero) should be used.
-    KernelModeTime: Option<u64>,
+    pub KernelModeTime: Option<u64>,
     /// Label by which the object is known. When subclassed, the property can be overridden to be a
     /// key property.
-    Name: Option<String>,
+    pub Name: Option<String>,
     /// Creation class name of the scoping operating system.
-    OSCreationClassName: Option<String>,
+    pub OSCreationClassName: Option<String>,
     /// Name of the scoping operating system.
-    OSName: Option<String>,
+    pub OSName: Option<String>,
     /// Dynamic priority of the thread. Each thread has a dynamic priority that the scheduler uses
     /// to determine which thread to execute. Initially, a thread's dynamic priority is the same as
     /// its base priority. The system can raise and lower the dynamic priority, to ensure that it is
@@ -283,21 +283,21 @@ pub struct Win32_Thread {
     /// not boost the priority of threads with a base priority level between 16 and 31. Only threads
     /// with a base priority between 0 and 15 receive dynamic priority boosts. Higher numbers
     /// indicate higher priorities.
-    Priority: Option<u32>,
+    pub Priority: Option<u32>,
     /// Current base priority of a thread. The operating system may raise the thread's dynamic
     /// priority above the base priority if the thread is handling user input, or lower it toward
     /// the base priority if the thread becomes compute-bound. The PriorityBase property can have a
     /// value between 0 and 31.
-    PriorityBase: Option<u32>,
+    pub PriorityBase: Option<u32>,
     /// Value of the scoping process `CreationClassName` property.
-    ProcessCreationClassName: Option<String>,
+    pub ProcessCreationClassName: Option<String>,
     /// Process that created the thread. The contents of this property can be used by Windows
     /// application programming interface (API) elements.
-    ProcessHandle: Option<String>,
+    pub ProcessHandle: Option<String>,
     /// Starting address of the thread. Because any application with appropriate access to the
     /// thread can change the thread's context, this value may only be an approximation of the
     /// thread's starting address.
-    StartAddress: Option<u32>,
+    pub StartAddress: Option<u32>,
     /// Current status of the object. Various operational and nonoperational statuses can be
     /// defined. Operational statuses include: "OK", "Degraded", and "Pred Fail" (an element, such
     /// as a SMART-enabled hard disk drive, may be functioning properly but predicting a failure in
@@ -320,7 +320,7 @@ pub struct Win32_Thread {
     /// - NonRecover ("NonRecover")
     /// - No Contact ("No Contact")
     /// - Lost Comm ("Lost Comm")
-    Status: Option<String>,
+    pub Status: Option<String>,
     /// Current execution state for the thread.
     ///
     /// - Initialized (0) — It is recognized by the microkernel.
@@ -331,7 +331,7 @@ pub struct Win32_Thread {
     /// - Waiting (5) — It is not ready for the processor, when ready, it will be rescheduled.
     /// - Transition (6) — The thread is waiting for resources other than the processor,
     /// - Unknown (7) — The thread state is unknown.
-    ThreadState: Option<u32>,
+    pub ThreadState: Option<u32>,
     /// Reason why the thread is waiting. This value is only valid if the `ThreadState` member is set
     /// to Transition (6). Event pairs allow communication with protected subsystems.
     ///
@@ -356,8 +356,8 @@ pub struct Win32_Thread {
     /// - VirtualMemory (18)
     /// - PageOut (19)
     /// - Unknown (20)
-    ThreadWaitReason: Option<u32>,
+    pub ThreadWaitReason: Option<u32>,
     /// Time in user mode, in 100 nanoseconds units. If this information is not available, a value
     /// of 0 (zero) should be used.
-    UserModeTime: Option<u64>,
+    pub UserModeTime: Option<u64>,
 }

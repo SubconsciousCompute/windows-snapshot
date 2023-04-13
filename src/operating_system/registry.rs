@@ -28,12 +28,12 @@ update!(Registry, registries);
 #[allow(non_camel_case_types)]
 pub struct Win32_Registry {
     /// A short textual description of the object.
-    Caption: Option<String>,
+    pub Caption: Option<String>,
     /// A textual description of the object.
-    Description: Option<String>,
+    pub Description: Option<String>,
     /// Indicates when the object was installed. Lack of a value does not indicate that the object
     /// is not installed.
-    InstallDate: Option<WMIDateTime>,
+    pub InstallDate: Option<WMIDateTime>,
     /// String that indicates the current status of the object. Operational and non-operational
     /// status can be defined. Operational status can include "OK", "Degraded", and "Pred Fail".
     /// "Pred Fail" indicates that an element is functioning properly, but is predicting a failure
@@ -58,17 +58,17 @@ pub struct Win32_Registry {
     /// - NonRecover ("NonRecover")
     /// - No Contact ("No Contact")
     /// - Lost Comm ("Lost Comm")
-    Status: Option<String>,
+    pub Status: Option<String>,
     /// Current physical size of the Windows registry.
     ///
     /// Example: 10
-    CurrentSize: Option<u32>,
+    pub CurrentSize: Option<u32>,
     /// Maximum size of the Windows registry. If the system is successful in using the ProposedSize
     /// property, MaximumSize should contain the same value.
-    MaximumSize: Option<u32>,
+    pub MaximumSize: Option<u32>,
     /// Name of the Windows registry. The maximum length is 256 characters.
-    Name: Option<String>,
+    pub Name: Option<String>,
     /// Proposed size of the Windows registry. It is the only registry setting that can be modified,
     /// and its proposal is attempted the next time the system boots.
-    ProposedSize: Option<u32>,
+    pub ProposedSize: Option<u32>,
 }

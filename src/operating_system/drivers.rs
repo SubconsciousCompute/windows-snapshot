@@ -28,19 +28,19 @@ update!(Drivers, drivers);
 #[allow(non_camel_case_types)]
 pub struct Win32_SystemDriver {
     /// Service can be paused.
-    AcceptPause: Option<bool>,
+    pub AcceptPause: Option<bool>,
     /// Service can be stopped.
-    AcceptStop: Option<bool>,
+    pub AcceptStop: Option<bool>,
     /// Short description of the object.
-    Caption: Option<String>,
+    pub Caption: Option<String>,
     /// Name of the first concrete class to appear in the inheritance chain used in the creation of
     /// an instance. When used with the other key properties of the class, this property allows all
     /// instances of this class and its subclasses to be uniquely identified.
-    CreationClassName: Option<String>,
+    pub CreationClassName: Option<String>,
     /// Description of the object.
-    Description: Option<String>,
+    pub Description: Option<String>,
     /// This service can create or communicate with windows on the desktop.
-    DesktopInteract: Option<bool>,
+    pub DesktopInteract: Option<bool>,
     /// Display name of the service. This string has a maximum length of 256 characters. The name is
     /// case-preserved in the Service Control Manager. DisplayName comparisons are always
     /// case-insensitive.
@@ -48,7 +48,7 @@ pub struct Win32_SystemDriver {
     /// Constraints: Accepts the same value as the Name property.
     ///
     /// Example: "Atdisk"
-    DisplayName: Option<String>,
+    pub DisplayName: Option<String>,
     /// Severity of the error if this service fails to start during startup. This value indicates
     /// the action taken by the startup program if failure occurs. All errors are logged by the
     /// computer system.
@@ -58,27 +58,27 @@ pub struct Win32_SystemDriver {
     /// - Severe ("Severe"): System is restarted with the last-known-good configuration.
     /// - Critical ("Critical"): System attempts to restart with a good configuration.
     /// - Unknown ("Unknown"): Cause of the failure is unknown.
-    ErrorControl: Option<String>,
+    pub ErrorControl: Option<String>,
     /// Windows error code defining any problems encountered in starting or stopping the service.
     /// This property is set to `ERROR_SERVICE_SPECIFIC_ERROR (1066)` when the error is unique to the
     /// service represented by this class, and information about the error is available in the
     /// `ServiceSpecificExitCode` property. The service sets this value to `NO_ERROR` when running, and
     /// again upon normal termination.
-    ExitCode: Option<u32>,
+    pub ExitCode: Option<u32>,
     /// Object was installed. This property does not need a value to indicate that the object is
     /// installed.
-    InstallDate: Option<WMIDateTime>,
+    pub InstallDate: Option<WMIDateTime>,
     /// Unique identifier for the service which provides an indication of the functionality that is
     /// managed. This functionality is described in more detail in the object Description property.
-    Name: Option<String>,
+    pub Name: Option<String>,
     /// Fully qualified path to the service binary file that implements the service.
     ///
     /// Example: "\SystemRoot\System32\drivers\afd.sys"
-    PathName: Option<String>,
+    pub PathName: Option<String>,
     /// Service-specific error code for errors that occur while the service is either starting or
     /// stopping. The exit codes are defined by the service represented by this class. This value is
     /// only set when the ExitCode property value is `ERROR_SERVICE_SPECIFIC_ERROR (1066)`.
-    ServiceSpecificExitCode: Option<u32>,
+    pub ServiceSpecificExitCode: Option<u32>,
     /// Type of service provided to calling processes.
     ///
     /// The values are:
@@ -90,9 +90,9 @@ pub struct Win32_SystemDriver {
     /// - Own Process ("Own Process")
     /// - Share Process ("Share Process")
     /// - Interactive Process ("Interactive Process")
-    ServiceType: Option<String>,
+    pub ServiceType: Option<String>,
     /// Service has been started.
-    Started: Option<bool>,
+    pub Started: Option<bool>,
     /// Start mode of the system driver.
     ///
     /// - Boot ("Boot"): Device driver started by the operating system loader (valid only for driver services).
@@ -100,7 +100,7 @@ pub struct Win32_SystemDriver {
     /// - Auto ("Auto"): Service to be started automatically by the service control manager during system start up.
     /// - Manual ("Manual"): Service to be started by the service control manager when a process calls the StartService method.
     /// - Disabled ("Disabled"): Service that can no longer be started.
-    StartMode: Option<String>,
+    pub StartMode: Option<String>,
     /// Account name under which the service runs. Depending on the service type, the account name
     /// may be in the form of DomainName\Username. The service process will be logged using one of
     /// these two forms when it runs. If the account belongs to the built-in domain, .\Username can
@@ -111,7 +111,7 @@ pub struct Win32_SystemDriver {
     /// object name created by the I/O system based on the service name.
     ///
     /// Example: "DWDOM\Admin"
-    StartName: Option<String>,
+    pub StartName: Option<String>,
     /// Current state of the base service.
     ///
     /// The values are:
@@ -124,7 +124,7 @@ pub struct Win32_SystemDriver {
     /// - Pause Pending ("Pause Pending")
     /// - Paused ("Paused")
     /// - Unknown ("Unknown")
-    State: Option<String>,
+    pub State: Option<String>,
     /// Current status of the object. Various operational and nonoperational statuses can be
     /// defined. Operational statuses include: "OK", "Degraded", and "Pred Fail" (an element, such
     /// as a SMART-enabled hard disk drive, may be functioning properly but predicting a failure in
@@ -147,11 +147,11 @@ pub struct Win32_SystemDriver {
     /// - NonRecover ("NonRecover")
     /// - No Contact ("No Contact")
     /// - Lost Comm ("Lost Comm")
-    Status: Option<String>,
+    pub Status: Option<String>,
     /// Type name of the system that hosts this service.
-    SystemCreationClassName: Option<String>,
+    pub SystemCreationClassName: Option<String>,
     /// Name of the system that hosts this service.
-    SystemName: Option<String>,
+    pub SystemName: Option<String>,
     /// Unique tag value for this service in the group. A value of 0 (zero) indicates that the
     /// service has not been assigned a tag. A tag can be used for ordering service startup within
     /// a load order group by specifying a tag order vector in the registry located at:
@@ -160,5 +160,5 @@ pub struct Win32_SystemDriver {
     ///
     /// Tags are only evaluated for Kernel Driver and File System Driver start-type services that
     /// have Boot or System start modes.
-    TagId: Option<u32>,
+    pub TagId: Option<u32>,
 }
