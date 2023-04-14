@@ -62,37 +62,18 @@ pub struct DiskPartitions {
     pub last_updated: SystemTime,
 }
 
-//update!(DiskPartitions, disk_partitions);
-impl DiskPartitions {
-    ///   Update fields synchronously
-    pub fn update(&mut self) {
-        let com_con = unsafe { COMLibrary::assume_initialized() };
+update!(DiskPartitions, disk_partitions);
 
-        let wmi_con = WMIConnection::new(com_con).unwrap();
-
-        self.last_updated = SystemTime::now();
-        self.disk_partitions = wmi_con.query().unwrap();
-    }
-
-    ///   Update fields asynchronously
-    pub async fn async_update(&mut self) {
-        let com_con = unsafe { COMLibrary::assume_initialized() };
-
-        let wmi_con = WMIConnection::new(com_con).unwrap();
-
-        self.last_updated = SystemTime::now();
-        self.disk_partitions = wmi_con.async_query().await.unwrap();
-    }
+/// Represents the state of Windows Logical Disks
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct LogicalDisks {
+    /// Sequence of windows logical disks
+    pub logical_disks: Vec<Win32_LogicalDisk>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
 }
-impl Default for DiskPartitions {
-    ///   `last_updated`  defaults to the the current  `SystemTime`
-    fn default() -> Self {
-        DiskPartitions {
-            disk_partitions: Default::default(),
-            last_updated: SystemTime::now(),
-        }
-    }
-}
+
+update!(LogicalDisks, logical_disks);
 
 /// The `Win32_Directory` WMI class represents a directory entry on a computer system running Windows.
 /// A directory is a type of file that logically groups data files and provides path information for
@@ -700,4 +681,334 @@ pub struct Win32_DiskPartition {
     /// - Logical Disk Manager ("Logical Disk Manager")
     /// - Unknown ("Unknown")
     pub Type: Option<String>,
+}
+
+/// The `Win32_LogicalDisk` WMI class represents a data source
+/// that resolves to an actual local storage device on a computer system running Windows.
+///
+/// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-logicaldisk>
+// Some struct fields no longer exist
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_LogicalDisk {
+    /// Type of media access available.
+    ///
+    /// - Unknown (0)
+    /// - Readable (1)
+    /// - Writeable (2)
+    /// - Read/Write Supported (3)
+    /// - Write Once (4)
+    pub Access: Option<u16>,
+    /// Availability and status of the device.
+    ///
+    /// - Other (1)
+    /// - Unknown (2)
+    /// - Running/Full Power (3)
+    /// - Warning (4)
+    /// - In Test (5)
+    /// - Not Applicable (6)
+    /// - Power Off (7)
+    /// - Off Line (8)
+    /// - Off Duty (9)
+    /// - Degraded (10)
+    /// - Not Installed (11)
+    /// - Install Error (12)
+    /// - Power Save: Unknown (13): The device is known to be in a power save mode, but its exact status is unknown.
+    /// - Power Save: Low Power Mode (14): he device is in a power save state but still functioning, and may exhibit degraded performance.
+    /// - Power Save: Standby (15): he device is not functioning but could be brought to full power quickly.
+    /// - Power Cycle (16)
+    /// - Power Save: Warning (17): The device is in a warning state, though also in a power save mode.
+    /// - Paused (18): he device is paused.
+    /// - Not Ready (19): The device is not ready.
+    /// - Not Configured (20): The device is not configured.
+    /// - Quiesced (21): he device is quiet.
+    pub Availability: Option<u16>,
+    /// Size, in bytes, of the blocks that form this storage extent.
+    /// If unknown or if a block concept is not valid
+    /// (for example, for aggregate extents, memory or logical disks),
+    /// enter 1.
+    pub BlockSize: Option<u64>,
+    /// Short description of the object a one-line string.
+    pub Caption: Option<String>,
+    /// If True, the logical volume exists as a single compressed entity, such as a DoubleSpace volume.
+    /// If file based compression is supported, such as on NTFS, this property is False.
+    pub Compressed: Option<bool>,
+    /// Windows Configuration Manager error code.
+    ///
+    /// - This device is working properly. (0): Device is working properly.
+    /// - This device is not configured correctly. (1): Device is not configured correctly.
+    /// - Windows cannot load the driver for this device. (2)
+    /// - The driver for this device might be corrupted, or your system may be running low on memory or other resources. (3)
+    /// - This device is not working properly. One of its drivers or your registry might be corrupted. (4)
+    /// - The driver for this device needs a resource that Windows cannot manage. (5)
+    /// - The boot configuration for this device conflicts with other devices. (6)
+    /// - Cannot filter. (7)
+    /// - The driver loader for the device is missing. (8)
+    /// - This device is not working properly because the controlling firmware is reporting the resources for the device incorrectly. (9)
+    /// - This device cannot start. (10)
+    /// - This device failed. (11)
+    /// - This device cannot find enough free resources that it can use. (12)
+    /// - Windows cannot verify this device's resources. (13)
+    /// - This device cannot work properly until you restart your computer. (14)
+    /// - This device is not working properly because there is probably a re-enumeration problem. (15)
+    /// - Windows cannot identify all the resources this device uses. (16)
+    /// - This device is asking for an unknown resource type. (17)
+    /// - Reinstall the drivers for this device. (18)
+    /// - Failure using the VxD loader. (19)
+    /// - Your registry might be corrupted. (20)
+    /// - System failure: Try changing the driver for this device. If that does not work, see your hardware documentation. Windows is removing this device. (21)
+    /// - This device is disabled. (22)
+    /// - System failure: Try changing the driver for this device. If that doesn't work, see your hardware documentation. (23)
+    /// - This device is not present, is not working properly, or does not have all its drivers installed. (24)
+    /// - Windows is still setting up this device. (25)
+    /// - Windows is still setting up this device. (26)
+    /// - This device does not have valid log configuration. (27)
+    /// - The drivers for this device are not installed. (28)
+    /// - This device is disabled because the firmware of the device did not give it the required resources. (29)
+    /// - This device is using an Interrupt Request (IRQ) resource that another device is using. (30)
+    /// - This device is not working properly because Windows cannot load the drivers required for this device. (31)
+    pub ConfigManagerErrorCode: Option<u32>,
+    /// If True, the device is using a user-defined configuration.
+    pub ConfigManagerUserConfig: Option<bool>,
+    /// Name of the first concrete class to appear in the inheritance chain
+    /// used in the creation of an instance.
+    /// When used with the other key properties of the class,
+    /// the property allows all instances of this class and its subclasses to be uniquely identified.
+    pub CreationClassName: Option<String>,
+    /// Description of the object.
+    pub Description: Option<String>,
+    /// Unique identifier of the logical disk from other devices on the system.
+    pub DeviceID: Option<String>,
+    /// Numeric value that corresponds to the type of disk drive this logical disk represents.
+    ///
+    /// - Unknown (0)
+    /// - No Root Directory (1)
+    /// - Removable Disk (2)
+    /// - Local Disk (3)
+    /// - Network Drive (4)
+    /// - Compact Disc (5)
+    /// - RAM Disk (6)
+    pub DriveType: Option<u32>,
+    /// If True, the error reported in LastErrorCode is now cleared.
+    pub ErrorCleared: Option<bool>,
+    /// More information about the error recorded in LastErrorCode,
+    /// and information on any corrective actions that may be taken.
+    pub ErrorDescription: Option<String>,
+    /// Type of error detection and correction supported by this storage extent.
+    pub ErrorMethodology: Option<String>,
+    /// File system on the logical disk.
+    ///
+    /// Example: "NTFS"
+    pub FileSystem: Option<String>,
+    /// Space, in bytes, available on the logical disk.
+    pub FreeSpace: Option<u64>,
+    /// Date and time the object was installed.
+    /// This property does not require a value to indicate that the object is installed.
+    pub InstallDate: Option<WMIDateTime>,
+    /// Last error code reported by the logical device.
+    pub LastErrorCode: Option<u32>,
+    /// Maximum length of a filename component supported by the Windows drive.
+    /// A filename component is that portion of a filename between backslashes.
+    /// The value can be used to indicate that long names are supported by the specified file system.
+    /// For example, for a FAT file system supporting long names,
+    /// the function stores the value 255, rather than the previous 8.3 indicator.
+    /// Long names can also be supported on systems that use the NTFS file system.
+    ///
+    /// Example: 255
+    pub MaximumComponentLength: Option<u32>,
+    /// Type of media currently present in the logical drive. This value will be one of the values of the MEDIA_TYPE enumeration defined in Winioctl.h. The value may not be exact for removable drives if currently there is no media in the drive.
+    ///
+    /// Format is unknown (0)
+    ///
+    /// 5 -Inch Floppy Disk (1)
+    ///
+    ///     5 1/4-Inch Floppy Disk - 1.2 MB - 512 bytes/sector
+    ///
+    /// 3 -Inch Floppy Disk (2)
+    ///
+    ///     3 1/2-Inch Floppy Disk - 1.44 MB -512 bytes/sector
+    ///
+    /// 3 -Inch Floppy Disk (3)
+    ///
+    ///     3 1/2-Inch Floppy Disk - 2.88 MB - 512 bytes/sector
+    ///
+    /// 3 -Inch Floppy Disk (4)
+    ///
+    ///     3 1/2-Inch Floppy Disk - 20.8 MB - 512 bytes/sector
+    ///
+    /// 3 -Inch Floppy Disk (5)
+    ///
+    ///     3 1/2-Inch Floppy Disk - 720 KB - 512 bytes/sector
+    ///
+    /// 5 -Inch Floppy Disk (6)
+    ///
+    ///     5 1/4-Inch Floppy Disk - 360 KB - 512 bytes/sector
+    ///
+    /// 5 -Inch Floppy Disk (7)
+    ///
+    ///     5 1/4-Inch Floppy Disk - 320 KB - 512 bytes/sector
+    ///
+    /// 5 -Inch Floppy Disk (8)
+    ///
+    ///     5 1/4-Inch Floppy Disk - 320 KB - 1024 bytes/sector
+    ///
+    /// 5 -Inch Floppy Disk (9)
+    ///
+    ///     5 1/4-Inch Floppy Disk - 180 KB - 512 bytes/sector
+    ///
+    /// 5 -Inch Floppy Disk (10)
+    ///
+    ///     5 1/4-Inch Floppy Disk - 160 KB - 512 bytes/sector
+    ///
+    /// Removable media other than floppy (11)
+    ///
+    /// Fixed hard disk media (12)
+    ///
+    /// 3 -Inch Floppy Disk (13)
+    ///
+    ///     3 1/2-Inch Floppy Disk - 120 MB - 512 bytes/sector
+    ///
+    /// 3 -Inch Floppy Disk (14)
+    ///
+    ///     3 1/2-Inch Floppy Disk - 640 KB - 512 bytes/sector
+    ///
+    /// 5 -Inch Floppy Disk (15)
+    ///
+    ///     5 1/4-Inch Floppy Disk - 640 KB - 512 bytes/sector
+    ///
+    /// 5 -Inch Floppy Disk (16)
+    ///
+    ///     5 1/4-Inch Floppy Disk - 720 KB - 512 bytes/sector
+    ///
+    /// 3 -Inch Floppy Disk (17)
+    ///
+    ///     3 1/2-Inch Floppy Disk - 1.2 MB - 512 bytes/sector
+    ///
+    /// 3 -Inch Floppy Disk (18)
+    ///
+    ///     3 1/2-Inch Floppy Disk - 1.23 MB - 1024 bytes/sector
+    ///
+    /// 5 -Inch Floppy Disk (19)
+    ///
+    ///     5 1/4-Inch Floppy Disk - 1.23 MB - 1024 bytes/sector
+    ///
+    /// 3 -Inch Floppy Disk (20)
+    ///
+    ///     3 1/2-Inch Floppy Disk - 128 MB - 512 bytes/sector
+    ///
+    /// 3 -Inch Floppy Disk (21)
+    ///
+    ///     3 1/2-Inch Floppy Disk - 230 MB - 512 bytes/sector
+    ///
+    /// 8-Inch Floppy Disk (22)
+    ///
+    ///     8-Inch Floppy Disk - 256 KB - 128 bytes/sector
+    pub MediaType: Option<u32>,
+    /// Label by which the object is known.
+    /// When subclassed, this property can be overridden to be a key property.
+    pub Name: Option<String>,
+    /// Total number of consecutive blocks,
+    /// each block the size of the value contained in the BlockSize property,
+    /// which form this storage extent.
+    /// Total size of the storage extent can be calculated by multiplying the value of the BlockSize property by the value of this property.
+    /// If the value of BlockSize is 1, this property is the total size of the storage extent.
+    pub NumberOfBlocks: Option<u64>,
+    /// Windows Plug and Play device identifier of the logical device.
+    ///
+    /// Example: "*PNP030b"
+    pub PNPDeviceID: Option<String>,
+    /// Array of the specific power-related capabilities of a logical device.
+    ///
+    /// - Unknown (0)
+    /// - Not Supported (1)
+    /// - Disabled (2)
+    /// - Enabled (3): he power management features are currently enabled but the exact feature set is unknown or the information is unavailable.
+    /// - Power Saving Modes Entered Automatically (4): The device can change its power state based on usage or other criteria.
+    /// - Power State Settable (5): The SetPowerState method is supported. This method is found on the parent CIM_LogicalDevice class and can be implemented. For more information, see Designing Managed Object Format (MOF) Classes.
+    /// - Power Cycling Supported (6): The SetPowerState method can be invoked with the PowerState parameter set to 5 (Power Cycle).
+    /// - Timed Power On Supported (7): Timed Power-On Supported
+    ///
+    /// The SetPowerState method can be invoked with the PowerState parameter set to 5 (Power Cycle) and Time set to a specific date and time, or interval, for power-on.
+    pub PowerManagementCapabilities: Option<Vec<u16>>,
+    /// If True, the device can be power-managed (can be put into suspend mode, and so on).
+    /// This property does not indicate that power management features are currently enabled,
+    /// only that the logical device is capable of power management.
+    pub PowerManagementSupported: Option<bool>,
+    /// Network path to the logical device.
+    pub ProviderName: Option<String>,
+    /// Free-form string describing the media and its use.
+    pub Purpose: Option<String>,
+    /// Indicates that quota management is not enabled (TRUE) on this system.
+    pub QuotasDisabled: Option<bool>,
+    /// Indicates that the quota management was used but has been disabled (True).
+    /// Incomplete refers to the information left in the file system after quota management was disabled.
+    pub QuotasIncomplete: Option<bool>,
+    /// If True,
+    /// indicates
+    /// that the file system is in the active process of compiling information
+    /// and setting the disk up for quota management.
+    pub QuotasRebuilding: Option<bool>,
+    /// Size of the disk drive.
+    pub Size: Option<u64>,
+    /// Current status of the object.
+    /// Various operational and nonoperational statuses can be defined.
+    /// Operational statuses include: "OK", "Degraded", and "Pred Fail"
+    /// (an element, such as a SMART-enabled hard disk drive,
+    /// may be functioning properly but predicting a failure in the near future).
+    /// Nonoperational statuses include: "Error", "Starting", "Stopping", and "Service".
+    /// The latter, "Service", could apply during mirror-resilvering of a disk,
+    /// reload of a user permissions list, or other administrative work.
+    /// Not all such work is online,
+    /// yet the managed element is neither "OK" nor in one of the other states.
+    ///
+    /// Values include the following:
+    ///
+    /// - OK ("OK")
+    /// - Error ("Error")
+    /// - Degraded ("Degraded")
+    /// - Unknown ("Unknown")
+    /// - Pred Fail ("Pred Fail")
+    /// - Starting ("Starting")
+    /// - Stopping ("Stopping")
+    /// - Service ("Service")
+    /// - Stressed ("Stressed")
+    /// - NonRecover ("NonRecover")
+    /// - No Contact ("No Contact")
+    /// - Lost Comm ("Lost Comm")
+    pub Status: Option<String>,
+    /// State of the logical device.
+    /// If this property does not apply to the logical device, the value 5 (Not Applicable) should be used.
+    ///
+    /// - Other (1)
+    /// - Unknown (2)
+    /// - Enabled (3)
+    /// - Disabled (4)
+    /// - Not Applicable (5)
+    pub StatusInfo: Option<u16>,
+    /// If True, this volume supports disk quotas.
+    pub SupportsDiskQuotas: Option<bool>,
+    /// If True, the logical disk partition supports file-based compression,
+    /// such as is the case with the NTFS file system.
+    /// This property is False when the Compressed property is True.
+    pub SupportsFileBasedCompression: Option<bool>,
+    /// Value of the scoping computer CreationClassName property.
+    pub SystemCreationClassName: Option<String>,
+    /// Name of the scoping system.
+    pub SystemName: Option<String>,
+    /// If True, the disk requires ChkDsk to be run at the next restart.
+    /// This property is only applicable to those instances of logical disk
+    /// that represent a physical disk in the machine.
+    /// It is not applicable to mapped logical drives.
+    pub VolumeDirty: Option<bool>,
+    /// Volume name of the logical disk.
+    ///
+    /// Constraints: Maximum 32 characters.
+    pub VolumeName: Option<String>,
+    /// Volume serial number of the logical disk.
+    ///
+    /// Constraints: Maximum 11 characters.
+    ///
+    /// Example: "A8C3-D032"
+    pub VolumeSerialNumber: Option<String>,
 }

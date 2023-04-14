@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.disk_partition.update();
+    k.logical_disks.update();
 
-    println!("{:#?}", k.disk_partition);
+    println!("{:#?}", k.logical_disks);
 }

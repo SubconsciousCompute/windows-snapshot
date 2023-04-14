@@ -51,6 +51,8 @@ pub struct Windows {
     pub directories_specifications: file_system::DirectorySpecifications,
     /// State of windows Directory Disk Partitions
     pub disk_partition: file_system::DiskPartitions,
+    /// State of windows Logical Disks
+    pub logical_disks: file_system::LogicalDisks,
 }
 
 impl Windows {
@@ -74,6 +76,7 @@ impl Windows {
         self.directories.update();
         self.directories_specifications.update();
         self.disk_partition.update();
+        self.logical_disks.update();
     }
 
     /// Asynchronously update all the fields
@@ -97,6 +100,7 @@ impl Windows {
             self.directories.async_update(),
             self.directories_specifications.async_update(),
             self.disk_partition.async_update(),
+            self.logical_disks.async_update(),
         );
     }
 }
