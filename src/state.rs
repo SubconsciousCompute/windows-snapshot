@@ -55,6 +55,8 @@ pub struct Windows {
     pub logical_disks: file_system::LogicalDisks,
     /// State of windows Mapped Logical Disks
     pub mapped_logical_disks: file_system::MappedLogicalDisks,
+    /// State of windows Quota Settings
+    pub quota_settings: file_system::QuotaSettings,
 }
 
 impl Windows {
@@ -80,6 +82,7 @@ impl Windows {
         self.disk_partition.update();
         self.logical_disks.update();
         self.mapped_logical_disks.update();
+        self.quota_settings.update();
     }
 
     /// Asynchronously update all the fields
@@ -105,6 +108,7 @@ impl Windows {
             self.disk_partition.async_update(),
             self.logical_disks.async_update(),
             self.mapped_logical_disks.async_update(),
+            self.quota_settings.async_update(),
         );
     }
 }

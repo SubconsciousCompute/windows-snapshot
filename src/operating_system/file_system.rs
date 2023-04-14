@@ -86,6 +86,17 @@ pub struct MappedLogicalDisks {
 
 update!(MappedLogicalDisks, mapped_logical_disks);
 
+/// Represents the state of Windows Quota Settings
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct QuotaSettings {
+    /// Sequence of windows quota settings
+    pub quota_settings: Vec<Win32_MappedLogicalDisk>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(QuotaSettings, quota_settings);
+
 /// The `Win32_Directory` WMI class represents a directory entry on a computer system running Windows.
 /// A directory is a type of file that logically groups data files and provides path information for
 /// the grouped files. Example: C:\TEMP. Win32_Directory does not include directories of network
@@ -1248,4 +1259,45 @@ pub struct Win32_MappedLogicalDisk {
     ///
     /// Example: "A8C3-D032"
     pub VolumeSerialNumber: Option<String>,
+}
+
+/// The `Win32_QuotaSetting` WMI class contains setting information for disk quotas on a volume.
+///
+/// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmipdskq/win32-quotasetting>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_QuotaSetting {
+    /// Short description of the object a one line string.
+    pub Caption: Option<String>,
+    /// Default limit set for quotas on this specific volume.
+    pub DefaultLimit: Option<i64>,
+    /// Default warning limit set for quotas on this specific volume.
+    pub DefaultWarningLimit: Option<i64>,
+    /// Comment that describes the link
+    pub Description: Option<String>,
+    /// If TRUE, events are written to the event log when quotas are exceeded.
+    pub ExceededNotification: Option<bool>,
+    pub SettingID: Option<String>,
+    /// Level of quota management set for this volume.
+    ///
+    /// The values are:
+    ///
+    /// Values: Meaning
+    ///
+    /// 0: Disabled
+    /// Quota management is not enabled on this volume.
+    ///
+    /// 1: Tracked
+    /// Quotas are tracked but the limit value is not enforced and users may exceed their quota limit.
+    ///
+    /// 2: Enforced
+    /// Quotas are tracked and enforced on this volume.
+    pub State: Option<u32>,
+    /// Name of the volume where disk quotas are located.
+    /// It can be volume name, volume path (such as D:\),
+    /// or it can be the unique volume name (such as "\\\\?Volume{GUID}\\.").
+    pub VolumePath: Option<String>,
+    /// If TRUE, events are written to the event log when warnings are exceeded.
+    pub WarningExceededNotification: Option<bool>,
 }
