@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.logical_disks.update();
+    k.mapped_logical_disks.update();
 
-    println!("{:#?}", k.logical_disks);
+    println!("{:#?}", k.mapped_logical_disks);
 }

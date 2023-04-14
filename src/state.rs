@@ -53,6 +53,8 @@ pub struct Windows {
     pub disk_partition: file_system::DiskPartitions,
     /// State of windows Logical Disks
     pub logical_disks: file_system::LogicalDisks,
+    /// State of windows Mapped Logical Disks
+    pub mapped_logical_disks: file_system::MappedLogicalDisks,
 }
 
 impl Windows {
@@ -77,6 +79,7 @@ impl Windows {
         self.directories_specifications.update();
         self.disk_partition.update();
         self.logical_disks.update();
+        self.mapped_logical_disks.update();
     }
 
     /// Asynchronously update all the fields
@@ -101,6 +104,7 @@ impl Windows {
             self.directories_specifications.async_update(),
             self.disk_partition.async_update(),
             self.logical_disks.async_update(),
+            self.mapped_logical_disks.async_update(),
         );
     }
 }
