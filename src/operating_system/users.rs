@@ -638,12 +638,12 @@ pub struct Win32_NetworkLoginProfile {
 #[allow(non_camel_case_types)]
 pub struct Win32_SystemAccount {
     /// A short textual description of the object.
-    pub caption: Option<String>,
+    pub Caption: Option<String>,
     /// A textual description of the object.
-    pub description: Option<String>,
+    pub Description: Option<String>,
     /// Indicates when the object was installed.
     /// Lack of a value does not indicate that the object is not installed.
-    pub install_date: Option<WMIDateTime>,
+    pub InstallDate: Option<WMIDateTime>,
     /// String that indicates the current status of the object.
     /// Operational and non-operational status can be defined.
     /// Operational status can include "OK", "Degraded", and "Pred Fail".
@@ -670,11 +670,11 @@ pub struct Win32_SystemAccount {
     /// - NonRecover ("NonRecover")
     /// - No Contact ("No Contact")
     /// - Lost Comm ("Lost Comm")
-    pub status: Option<String>,
+    pub Status: Option<String>,
     /// If TRUE, the account is defined on the local machine.
     /// To retrieve only accounts defined on the local machine,
     /// design a query that includes the condition "LocalAccount=TRUE".
-    pub local_account: Option<bool>,
+    pub LocalAccount: Option<bool>,
     /// Security identifier (SID) for this account.
     /// A SID is a string value of variable length used to identify a trustee.
     /// Each account has a unique SID issued by an authority (such as a Windows domain),
@@ -685,7 +685,7 @@ pub struct Win32_SystemAccount {
     /// to identify the user in all subsequent interactions with Windows security.
     /// When a SID has been used as the unique identifier for a user or group,
     /// it cannot be used again to identify another user or group.
-    pub sid: Option<String>,
+    pub SID: Option<String>,
     /// Enumerated values that specify the type of security identifier (SID).
     ///
     /// - SidTypeUser (1)
@@ -697,11 +697,11 @@ pub struct Win32_SystemAccount {
     /// - SidTypeInvalid (7)
     /// - SidTypeUnknown (8)
     /// - SidTypeComputer (9)
-    pub sid_type: Option<u8>,
+    pub SIDType: Option<u8>,
     /// Name of the Windows domain to which the system account belongs.
     ///
     /// Example: "NA-SALES"
-    pub domain: Option<String>,
+    pub Domain: Option<String>,
     /// Name of the Windows system account on the domain specified by the Domain property of this class.
-    pub name: Option<String>,
+    pub Name: Option<String>,
 }

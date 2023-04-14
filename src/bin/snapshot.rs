@@ -13,5 +13,5 @@ async fn main() {
 
     // println!("{k:#?}");
 
-    println!("{:#?}", k.network_login_profiles);
+    println!("{:#?}", k.directories);
 }

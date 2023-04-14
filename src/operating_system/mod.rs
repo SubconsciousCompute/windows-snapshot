@@ -31,6 +31,7 @@
 
 pub mod desktop;
 pub mod drivers;
+pub mod file_system;
 pub mod processes;
 pub mod registry;
 pub mod services;

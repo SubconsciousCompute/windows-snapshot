@@ -1,6 +1,8 @@
 //! Stores the main state of Windows machine
 
-use crate::operating_system::{desktop, drivers, processes, registry, services, users};
+use crate::operating_system::{
+    desktop, drivers, file_system, processes, registry, services, users,
+};
 use serde::{Deserialize, Serialize};
 use tokio::join;
 
@@ -43,6 +45,8 @@ pub struct Windows {
     pub network_login_profiles: users::NetworkLoginProfiles,
     /// State of Windows System Accounts
     pub system_accounts: users::SystemAccounts,
+    /// State of windows Directory
+    pub directories: file_system::Directories,
 }
 
 impl Windows {
@@ -63,6 +67,7 @@ impl Windows {
         self.logon_sessions.update();
         self.network_login_profiles.update();
         self.system_accounts.update();
+        self.directories.update();
     }
 
     /// Asynchronously update all the fields
@@ -83,6 +88,7 @@ impl Windows {
             self.logon_sessions.async_update(),
             self.network_login_profiles.async_update(),
             self.system_accounts.async_update(),
+            self.directories.async_update(),
         );
     }
 }
