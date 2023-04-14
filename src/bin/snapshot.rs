@@ -8,10 +8,11 @@ async fn main() {
 
     let mut k = windows_snapshot::state::Windows::default();
 
-    k.async_update().await;
+    //k.async_update().await;
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
+    k.directories_specifications.update();
 
-    println!("{:#?}", k.directories);
+    println!("{:#?}", k.directories_specifications);
 }

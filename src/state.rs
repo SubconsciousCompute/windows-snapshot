@@ -47,6 +47,8 @@ pub struct Windows {
     pub system_accounts: users::SystemAccounts,
     /// State of windows Directory
     pub directories: file_system::Directories,
+    /// State of windows Directory Specifications
+    pub directories_specifications: file_system::DirectorySpecifications,
 }
 
 impl Windows {
@@ -68,6 +70,7 @@ impl Windows {
         self.network_login_profiles.update();
         self.system_accounts.update();
         self.directories.update();
+        self.directories_specifications.update();
     }
 
     /// Asynchronously update all the fields
@@ -89,6 +92,7 @@ impl Windows {
             self.network_login_profiles.async_update(),
             self.system_accounts.async_update(),
             self.directories.async_update(),
+            self.directories_specifications.async_update(),
         );
     }
 }

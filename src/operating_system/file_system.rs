@@ -42,6 +42,17 @@ pub struct Directories {
 
 update!(Directories, directories);
 
+/// Represents the state of Windows Directory Specification
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct DirectorySpecifications {
+    /// Sequence of windows directories specifications
+    pub directory_specifications: Vec<Win32_DirectorySpecification>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(DirectorySpecifications, directory_specifications);
+
 /// The `Win32_Directory` WMI class represents a directory entry on a computer system running Windows.
 /// A directory is a type of file that logically groups data files and provides path information for
 /// the grouped files. Example: C:\TEMP. Win32_Directory does not include directories of network
@@ -186,4 +197,151 @@ pub struct Win32_Directory {
     pub System: Option<bool>,
     /// If True, the file can be written.
     pub Writeable: Option<bool>,
+}
+
+/// The `Win32_DirectorySpecification` class represents the directory layout for the product.
+/// Each instance of the class represents a directory in both the source image and the destination image.
+///
+/// Directory resolution is performed as follows:
+///
+/// - Root destination directories:
+/// The root directory entries are those with a null Directory_Parent value or a Directory_Parent value identical to the Directory value.
+/// The value in the Directory property is interpreted as the name of a property
+/// defining the location of the destination directory.
+/// If the property is defined, the destination directory is resolved to the property's value.
+/// If the property is undefined, the ROOTDRIVE property is used instead to resolve the path.
+/// - Root source directories:
+/// The value of the DefaultDir column for root entries is interpreted as the name of a property
+/// defining the source location of this directory.
+/// This property must be defined or an error will occur.
+/// - Nonroot destination directories:
+/// The Directory value for a nonroot directory is also interpreted as the name of a property
+/// defining the location of the destination.
+/// If the property is defined, the destination directory is resolved to the property's value.
+/// If the property is not defined,
+/// the destination directory is resolved to a subdirectory beneath the resolved destination directory for the Directory_Parent entry.
+/// The DefaultDir value defines the name of the subdirectory.
+/// - Nonroot source directories:
+/// The source directory for a nonroot directory is resolved to a subdirectory of the resolved source directory for the Directory_Parent entry.
+/// Again, the DefaultDir value defines the name of the subdirectory.
+///
+/// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/msiprov/win32-directoryspecification>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_DirectorySpecification {
+    /// Short description of the object.
+    pub Caption: Option<String>,
+    /// Identifier used in conjunction with other keys to uniquely identify the check.
+    pub CheckID: Option<String>,
+    /// Condition is expected to exist or not exist in the environment.
+    /// When TRUE,
+    /// the condition is expected to exist (a file is expected to be on a system)
+    /// so the Invoke() method is expected to return TRUE.
+    pub CheckMode: Option<bool>,
+    pub DefaultDir: Option<String>,
+    /// Description of the objects.
+    pub Description: Option<String>,
+    pub Directory: Option<String>,
+    /// Name of a directory.
+    /// The value supplied by an application provider is actually a default or recommended path name
+    /// and can be changed for a particular environment.
+    pub DirectoryPath: Option<String>,
+    /// Type of directory being described.
+    ///
+    /// Value: Meaning
+    ///
+    /// - 1: Product log directory
+    /// - 2: Shared base directory
+    /// - 3: Shared executable directory
+    /// - 4: Shared library directory
+    /// - 5: Shared include directory
+    /// - 6: System base directory
+    /// - 7: System executable directory
+    /// - 8: System library directory
+    /// - 9: System configuration directory
+    /// - 10: System include directory
+    /// - 11: System log directory
+    /// - 12: Other
+    pub DirectoryType: Option<u16>,
+    /// Name used to identify this software element.
+    pub Name: Option<String>,
+    /// Identifier for this software element.
+    pub SoftwareElementID: Option<String>,
+    /// State of a software element.
+    ///
+    /// Value: Meaning
+    ///
+    /// - 1: Disabled
+    /// - 2: Installable
+    /// - 3: Executable
+    /// - 4: Running
+    pub SoftwareElementState: Option<u16>,
+    /// Target operating system of the owning software element. The possible values for this
+    /// property are as follows.
+    ///
+    /// Value: Meaning
+    ///
+    /// - 0: Unknown
+    /// - 1: Other
+    /// - 2: MACOS
+    /// - 3: ATTUNIX
+    /// - 4: DGUX
+    /// - 5: DECNT
+    /// - 6: Digital UNIX
+    /// - 7: OpenVMS
+    /// - 8: HPUX
+    /// - 9: AIX
+    /// - 10: MVS
+    /// - 11: OS400
+    /// - 12: OS/2
+    /// - 13: JavaVM
+    /// - 14: MSDOS
+    /// - 15: WIN3x
+    /// - 16: WIN95
+    /// - 17: WIN98
+    /// - 18: WINNT
+    /// - 19: WINCE
+    /// - 20: NCR3000
+    /// - 21: NetWare
+    /// - 22: OSF
+    /// - 23: DC/OS
+    /// - 24: Reliant UNIX
+    /// - 25: SCO UnixWare
+    /// - 26: SCO OpenServer
+    /// - 27: Sequent
+    /// - 28: IRIX
+    /// - 29: Solaris
+    /// - 30: SunOS
+    /// - 31: U6000
+    /// - 32: ASERIES
+    /// - 33: TandemNSK
+    /// - 34: TandemNT
+    /// - 35: BS2000
+    /// - 36: LINUX
+    /// - 37: Lynx
+    /// - 38: XENIX
+    /// - 39: VM/ESA
+    /// - 40: Interactive UNIX
+    /// - 41: BSDUNIX
+    /// - 42: FreeBSD
+    /// - 43: NetBSD
+    /// - 44: GNU Hurd
+    /// - 45: OS9
+    /// - 46: MACH Kernel
+    /// - 47: Inferno
+    /// - 48: QNX
+    /// - 49: EPOC
+    /// - 50: IxWorks
+    /// - 51: VxWorks
+    /// - 52: MiNT
+    /// - 53: BeOS
+    /// - 54: HP MPE
+    /// - 55: NextStep
+    /// - 56: PalmPilot
+    /// - 57: Rhapsody
+    pub TargetOperatingSystem: Option<u16>,
+    /// Version of the software element. Version should be in the form <Major>.<Minor>.<Revision> or
+    /// <Major>.<Minor><letter><revision>.
+    pub Version: Option<String>,
 }
