@@ -97,6 +97,17 @@ pub struct QuotaSettings {
 
 update!(QuotaSettings, quota_settings);
 
+/// Represents the state of Windows Shortcut Files
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct ShortcutFiles {
+    /// Sequence of windows shortcut files
+    pub shortcut_files: Vec<Win32_ShortcutFile>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(ShortcutFiles, shortcut_files);
+
 /// The `Win32_Directory` WMI class represents a directory entry on a computer system running Windows.
 /// A directory is a type of file that logically groups data files and provides path information for
 /// the grouped files. Example: C:\TEMP. Win32_Directory does not include directories of network
@@ -1300,4 +1311,150 @@ pub struct Win32_QuotaSetting {
     pub VolumePath: Option<String>,
     /// If TRUE, events are written to the event log when warnings are exceeded.
     pub WarningExceededNotification: Option<bool>,
+}
+
+/// The `Win32_ShortcutFile` WMI class represents files that are shortcuts to other files,
+/// directories, and commands.
+///
+/// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-shortcutfile>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_ShortcutFile {
+    /// A short textual description of the object.
+    pub Caption: Option<String>,
+    /// A textual description of the object.
+    pub Description: Option<String>,
+    /// Indicates when the object was installed.
+    /// Lack of a value does not indicate that the object is not installed.
+    pub InstallDate: Option<WMIDateTime>,
+    /// String that indicates the current status of the object.
+    /// Operational and non-operational status can be defined.
+    /// Operational status can include "OK", "Degraded", and "Pred Fail".
+    /// "Pred Fail" indicates that an element is functioning properly,
+    /// but is predicting a failure (for example, a SMART-enabled hard disk drive).
+    ///
+    /// Non-operational status can include "Error", "Starting", "Stopping", and "Service".
+    /// "Service" can apply during disk mirror-resilvering,
+    /// reloading a user permissions list, or other administrative work.
+    /// Not all such work is online,
+    /// but the managed element is neither "OK" nor in one of the other states.
+    ///
+    /// Values include the following:
+    /// - OK ("OK")
+    /// - Error ("Error")
+    /// - Degraded ("Degraded")
+    /// - Unknown ("Unknown")
+    /// - Pred Fail ("Pred Fail")
+    /// - Starting ("Starting")
+    /// - Stopping ("Stopping")
+    /// - Service ("Service")
+    /// - Stressed ("Stressed")
+    /// - NonRecover ("NonRecover")
+    /// - No Contact ("No Contact")
+    /// - Lost Comm ("Lost Comm")
+    pub Status: Option<String>,
+    /// Bitmask that represents the access rights required to access or perform specific operations
+    /// on the directory. For bit values, see File and Directory Access Rights Constants.
+    ///
+    /// Note: On FAT volumes, the FULL_ACCESS value is returned instead, which indicates no security
+    /// has been set on the object.
+    ///
+    /// - FILE_READ_DATA (file) or FILE_LIST_DIRECTORY (directory) (1): Grants the right to read data from the file. For a directory, this value grants the right to list the contents of the directory.
+    /// - FILE_WRITE_DATA (file) or FILE_ADD_FILE (directory) (2): Grants the right to write data to the file. For a directory, this value grants the right to create a file in the directory.
+    /// - FILE_APPEND_DATA (file) or FILE_ADD_SUBDIRECTORY (4): Grants the right to append data to the file. For a directory, this value grants the right to create a subdirectory.
+    /// - FILE_READ_EA (8): Grants the right to read extended attributes.
+    /// - FILE_WRITE_EA (16): Grants the right to write extended attributes.
+    /// - FILE_EXECUTE (file) or FILE_TRAVERSE (directory) (32): Grants the right to execute a file. For a directory, the directory can be traversed.
+    /// - FILE_DELETE_CHILD (directory) (64): Grants the right to delete a directory and all of the files it contains (its children), even if the files are read-only.
+    /// - FILE_READ_ATTRIBUTES (128): Grants the right to read file attributes.
+    /// - FILE_WRITE_ATTRIBUTES (256): Grants the right to change file attributes.
+    /// - DELETE (65536): Grants delete access.
+    /// - READ_CONTROL (131072): Grants read access to the security descriptor and owner.
+    /// - WRITE_DAC (262144): Grants write access to the discretionary ACL.
+    /// - WRITE_OWNER (524288): Assigns the write owner.
+    /// - SYNCHRONIZE (1048576): Synchronizes access and allows a process to wait for an object to enter the signaled state.
+    /// - ACCESS_SYSTEM_SECURITY (18809343): Controls the ability to get or set the SACL in an object's security descriptor.
+    pub AccessMask: Option<u32>,
+    /// If True, the file should be archived.
+    pub Archive: Option<bool>,
+    /// If True, the file is compressed.
+    pub Compressed: Option<bool>,
+    /// Free-form string that indicates the algorithm or tool used to compress the logical file.
+    /// If the compression scheme is unknown or not described, use "Unknown".
+    /// If the logical file is compressed,
+    /// but the compression scheme is unknown or not described, use "Compressed".
+    /// If the logical file is not compressed, use "Not Compressed".
+    pub CompressionMethod: Option<String>,
+    /// Name of the class.
+    pub CreationClassName: Option<String>,
+    /// Date and time of the file's creation.
+    pub CreationDate: Option<WMIDateTime>,
+    /// Class of the computer system.
+    pub CSCreationClassName: Option<String>,
+    /// Name of the computer system.
+    pub CSName: Option<String>,
+    /// Drive letter (including the colon that follows the drive letter) of the file.
+    ///
+    /// Example: "c:"
+    pub Drive: Option<String>,
+    /// File name in 8.3 format.
+    ///
+    /// Example: "c:\progra~1"
+    pub EightDotThreeFileName: Option<String>,
+    /// If True, the file is encrypted.
+    pub Encrypted: Option<bool>,
+    /// Free-form string that identifies the algorithm or tool used to encrypt a logical file.
+    /// If the encryption scheme is not indulged (for security reasons, for example), use "Unknown".
+    /// If the file is encrypted,
+    /// but either its encryption scheme is unknown or not disclosed, use "Encrypted".
+    /// If the logical file is not encrypted, use "Not Encrypted".
+    pub EncryptionMethod: Option<String>,
+    /// The Name property is a string
+    /// representing the inherited name
+    /// that serves as a key of a logical file instance within a file system.
+    /// Full path names should be provided.
+    ///
+    /// Example: C:\Windows\system\win.ini
+    pub Name: Option<String>,
+    /// File name extension without the preceding period (dot).
+    ///
+    /// Example: "txt", "mof", "mdb"
+    pub Extension: Option<String>,
+    /// File name without the file name extension.
+    ///
+    /// Example: "MyDataFile"
+    pub FileName: Option<String>,
+    /// Size of the file, in bytes.
+    pub FileSize: Option<u64>,
+    /// Descriptor that represents the file type indicated by the Extension property.
+    pub FileType: Option<String>,
+    /// Class of the file system.
+    pub FSCreationClassName: Option<String>,
+    /// Name of the file system.
+    pub FSName: Option<String>,
+    /// If True, the file is hidden.
+    pub Hidden: Option<bool>,
+    /// Number of "file opens" that are currently active against the file.
+    pub InUseCount: Option<u64>,
+    /// Date and time the file was last accessed.
+    pub LastAccessed: Option<WMIDateTime>,
+    /// Date and time the file was last modified.
+    pub LastModified: Option<WMIDateTime>,
+    /// Path of the file including the leading and trailing backslashes.
+    ///
+    /// Example: "\windows\system\"
+    pub Path: Option<String>,
+    /// If True, the file can be read.
+    pub Readable: Option<bool>,
+    /// If True, the file is a system file.
+    pub System: Option<bool>,
+    /// If True, the file can be written.
+    pub Writeable: Option<bool>,
+    /// Manufacturer string from the version resource (if one is present).
+    pub Manufacturer: Option<String>,
+    /// Version string from the version resource (if one is present).
+    pub Version: Option<String>,
+    /// Name of the object that this is a shortcut to.
+    pub Target: Option<String>,
 }

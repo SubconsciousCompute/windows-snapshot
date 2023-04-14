@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.quota_settings.update();
+    k.shortcut_files.update();
 
-    println!("{:#?}", k.quota_settings);
+    println!("{:#?}", k.shortcut_files);
 }
