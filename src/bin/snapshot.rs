@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.shortcut_files.update();
+    k.volumes.update();
 
-    println!("{:#?}", k.shortcut_files);
+    println!("{:#?}", k.volumes);
 }

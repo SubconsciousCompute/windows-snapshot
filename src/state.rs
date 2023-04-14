@@ -59,6 +59,8 @@ pub struct Windows {
     pub quota_settings: file_system::QuotaSettings,
     /// State of windows Shortcut Files
     pub shortcut_files: file_system::ShortcutFiles,
+    /// State of windows Volumes
+    pub volumes: file_system::Volumes,
 }
 
 impl Windows {
@@ -86,6 +88,7 @@ impl Windows {
         self.mapped_logical_disks.update();
         self.quota_settings.update();
         self.shortcut_files.update();
+        self.volumes.update();
     }
 
     /// Asynchronously update all the fields
@@ -113,6 +116,7 @@ impl Windows {
             self.mapped_logical_disks.async_update(),
             self.quota_settings.async_update(),
             self.shortcut_files.async_update(),
+            self.volumes.async_update(),
         );
     }
 }
