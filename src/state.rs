@@ -49,6 +49,8 @@ pub struct Windows {
     pub directories: file_system::Directories,
     /// State of windows Directory Specifications
     pub directories_specifications: file_system::DirectorySpecifications,
+    /// State of windows Directory Disk Partitions
+    pub disk_partition: file_system::DiskPartitions,
 }
 
 impl Windows {
@@ -71,6 +73,7 @@ impl Windows {
         self.system_accounts.update();
         self.directories.update();
         self.directories_specifications.update();
+        self.disk_partition.update();
     }
 
     /// Asynchronously update all the fields
@@ -93,6 +96,7 @@ impl Windows {
             self.system_accounts.async_update(),
             self.directories.async_update(),
             self.directories_specifications.async_update(),
+            self.disk_partition.async_update(),
         );
     }
 }

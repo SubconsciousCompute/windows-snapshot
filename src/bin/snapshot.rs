@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.directories_specifications.update();
+    k.disk_partition.update();
 
-    println!("{:#?}", k.directories_specifications);
+    println!("{:#?}", k.disk_partition);
 }
