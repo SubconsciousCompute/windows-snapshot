@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.volumes.update();
+    k.nt_event_log_files.update();
 
-    println!("{:#?}", k.volumes);
+    println!("{:#?}", k.nt_event_log_files);
 }

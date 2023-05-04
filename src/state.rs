@@ -1,7 +1,7 @@
 //! Stores the main state of Windows machine
 
 use crate::operating_system::{
-    desktop, drivers, file_system, processes, registry, services, users,
+    desktop, drivers, file_system, processes, registry, services, users, event_log
 };
 use serde::{Deserialize, Serialize};
 use tokio::join;
@@ -61,6 +61,8 @@ pub struct Windows {
     pub shortcut_files: file_system::ShortcutFiles,
     /// State of windows Volumes
     pub volumes: file_system::Volumes,
+    /// State of windows NTEventLogFiles
+    pub nt_event_log_files: event_log::NTEventlogFiles,
 }
 
 impl Windows {
@@ -89,6 +91,7 @@ impl Windows {
         self.quota_settings.update();
         self.shortcut_files.update();
         self.volumes.update();
+        self.nt_event_log_files.update();
     }
 
     /// Asynchronously update all the fields
@@ -117,6 +120,7 @@ impl Windows {
             self.quota_settings.async_update(),
             self.shortcut_files.async_update(),
             self.volumes.async_update(),
+            self.nt_event_log_files.async_update(),
         );
     }
 }
