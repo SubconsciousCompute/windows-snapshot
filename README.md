@@ -2,7 +2,7 @@
 
 The aim is to provide a snapshot of Windows system asynchronously. It achieves this by using `WMI`.
 
-Our global state is `windows_snapshot::state::Windows` which stores the states of Windows machine at any given instance.
+Our global state is `wsadasdasxcZcasxcindows_snapshot::state::Windows` which stores the states of Windows machine at any given instance.
 Each state member can be updated synchronously or asynchronously, alone or alongside other states.
 
 Example:
