@@ -63,6 +63,8 @@ pub struct Windows {
     pub volumes: file_system::Volumes,
     /// State of windows NTEventLogFiles
     pub nt_event_log_files: event_log::NTEventlogFiles,
+    /// State of windows NTLogEvents
+    pub nt_log_events: event_log::NTLogEvents,
 }
 
 impl Windows {
@@ -92,6 +94,7 @@ impl Windows {
         self.shortcut_files.update();
         self.volumes.update();
         self.nt_event_log_files.update();
+        self.nt_log_events.update();
     }
 
     /// Asynchronously update all the fields
@@ -121,6 +124,7 @@ impl Windows {
             self.shortcut_files.async_update(),
             self.volumes.async_update(),
             self.nt_event_log_files.async_update(),
+            self.nt_log_events.async_update(),
         );
     }
 }
