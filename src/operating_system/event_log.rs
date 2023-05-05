@@ -24,10 +24,10 @@ pub struct NTEventlogFiles {
 
 update!(NTEventlogFiles, nt_event_log_files);
 
-/// Represents sequence of Windows NTLogEvents
+/// Represents the state of Windows NTLogEvents
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct NTLogEvents {
-    /// Represents Windows events
+    /// Represents sequence of Windows `NTLogEvents`
     pub nt_log_events: Vec<Win32_NTLogEvent>,
     /// When was the record last updated
     pub last_updated: SystemTime,
