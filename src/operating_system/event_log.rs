@@ -16,13 +16,24 @@ use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 /// Represents the state of Windows NTEventlogFiles
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct NTEventlogFiles {
-    /// Represents data stored in a Windows Event log file.
+    /// Represents data stored in a Windows Event log file
     pub nt_event_log_files: Vec<Win32_NTEventlogFile>,
     /// When was the record last updated
     pub last_updated: SystemTime,
 }
 
 update!(NTEventlogFiles, nt_event_log_files);
+
+/// Represents the state of Windows NTLogEvents
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct NTLogEvents {
+    /// Represents sequence of Windows `NTLogEvents`
+    pub nt_log_events: Vec<Win32_NTLogEvent>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(NTLogEvents, nt_log_events);
 
 /// The `Win32_NTEventlogFile` WMI class represents a logical file or directory of operating system
 /// events. The file is also known as the event log.
@@ -178,3 +189,85 @@ pub struct Win32_NTEventlogFile {
     pub Writeable: Option<bool>,
 }
 
+/// The `Win32_NTLogEvent` WMI class is used to translate instances from the Windows event log. 
+/// An application must have `SeSecurityPrivilege` to receive events from the security event log, 
+/// otherwise "Access Denied" is returned to the application.
+/// 
+/// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/eventlogprov/win32-ntlogevent>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_NTLogEvent {
+    /// Classification of the event as determined by the source. This subcategory is source-specific.
+    /// 
+    /// Although primarily used when recording Security events, this property is available in other 
+    /// event logs as well. Common Security categories include Logon/Logoff, Account Management, and 
+    /// System Event.
+    pub Category: Option<u16>,
+    /// Translation of the subcategory. The translation is source-specific.
+    pub CategoryString: Option<String>,
+    /// Name of the computer that generated this event.
+    pub ComputerName: Option<String>,
+    /// List of the binary data that accompanied the report of the Windows event.
+    pub Data: Option<Vec<u8>>,
+    /// Value of the lower 16-bits of the `EventIdentifier` property. It is present to match the value 
+    /// displayed in the Windows Event Viewer.
+    /// 
+    /// Note: Two events from the same source may have the same value for this property but may have 
+    /// different severity and EventIdentifier values. For example, a successful logoff is recorded in 
+    /// the Security log with the Event ID 538. However, Event IDs are not necessarily unique. 
+    /// It is possible that, when retrieving Event ID 538, you can get other kinds of events with ID 538. 
+    /// If this happens, you might need to filter by the source as well as ID.
+    pub EventCode: Option<u16>,
+    /// Identifier of the event. This is specific to the source that generated the event log entry and 
+    /// is used, together with `SourceName`, to uniquely identify a Windows event type.
+    pub EventIdentifier: Option<u32>,
+    /// Type of event.
+    /// 
+    /// Value: Meaning
+    /// 
+    /// - 1: Error
+    /// - 2: Warning
+    /// - 3: Information
+    /// - 4: Security Audit Success
+    /// - 5: Security Audit Failure
+    pub EventType: Option<u8>,
+    /// List of the insertion strings that accompanied the report of the Windows event.
+    pub InsertionStrings: Option<Vec<String>>,
+    /// Name of Windows event log file. Together with `RecordNumber`, this is used to uniquely identify 
+    /// an instance of this class.
+    pub Logfile: Option<String>,
+    /// Event message as it appears in the Windows event log. This is a standard message with zero or more 
+    /// insertion strings supplied by the source of the Windows event. The insertion strings are inserted 
+    /// into the standard message in a predefined format. If there are no insertion strings or there is a 
+    /// problem inserting the insertion strings, only the standard message will be present in this field.
+    pub Message: Option<String>,
+    /// Identifies the event within the Windows event log file. This is specific to the log file and is 
+    /// used together with the log file name to uniquely identify an instance of this class.
+    /// 
+    /// Record numbers are always unique; they are not reset to 1 when an event log is cleared. As a result, 
+    /// the highest record number also indicates the number of records that have been written to the event log 
+    /// since the operating system was installed
+    pub RecordNumber: Option<u32>,
+    /// Name of the source (application, service, driver, or subsystem) that generated the entry. It is used, 
+    /// together with `EventIdentifier` to uniquely identify a Windows event type.
+    pub SourceName: Option<String>,
+    /// The time when the event is generated.
+    pub TimeGenerated: Option<WMIDateTime>,
+    /// The time when the event is written to the log file.
+    pub TimeWritten: Option<WMIDateTime>,
+    /// Type of event. This is an enumerated string. It is preferable to use the `EventType` property rather than 
+    /// the `Type` property.
+    /// 
+    /// Value: Meaning
+    /// 
+    /// - 1: Error
+    /// - 2: Warning
+    /// - 4: Information
+    /// - 8: Security Audit Success
+    /// - 16: Security Audit Failure
+    pub Type: Option<String>,
+    /// User name of the logged-on user when the event occurred. If the user name cannot be determined, 
+    /// this will be `NULL`.
+    pub User: Option<String>,
+}
