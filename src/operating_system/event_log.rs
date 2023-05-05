@@ -46,8 +46,6 @@ pub struct Win32_NTEventlogFile {
     pub Compressed: Option<bool>,
     /// Algorithm or tool used to compress the logical file that contains Windows events.
     pub CompressionMethod: Option<String>,
-    /// Qualifiers: Key, Dynamic, MaxLen (256) , Dynamic
-    /// 
     /// Name of the first concrete class to appear in the inheritance chain used in the creation of an 
     /// instance. When used with the other key properties of the class, this property allows all 
     /// instances of this class and its subclasses to be uniquely identified.
@@ -120,8 +118,6 @@ pub struct Win32_NTEventlogFile {
     /// of the number of events contained within the log and because event logs are not optimized for 
     /// data retrieval.
     pub MaxFileSize: Option<u32>,
-    /// Qualifiers: Key, Dynamic
-    /// 
     /// Inherited name that serves as a key of a logical file instance that contains Windows events 
     /// within a file system. Full path names should be provided.
     /// 
@@ -130,8 +126,6 @@ pub struct Win32_NTEventlogFile {
     /// Number of records in the file that contains Windows events. This value is determined by calling 
     /// the Windows function `GetNumberOfEventLogRecords`.
     pub NumberOfRecords: Option<u32>,
-    /// Qualifiers: Units (Days) , Dynamic
-    /// 
     /// Number of days after which an event can be overwritten.
     /// 
     /// Possible values for `OverwriteOutDated` include the following.
