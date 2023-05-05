@@ -16,7 +16,7 @@ use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 /// Represents the state of Windows NTEventlogFiles
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct NTEventlogFiles {
-    /// Represents data stored in a Windows Event log file.
+    /// Represents data stored in a Windows Event log file
     pub nt_event_log_files: Vec<Win32_NTEventlogFile>,
     /// When was the record last updated
     pub last_updated: SystemTime,
@@ -24,10 +24,10 @@ pub struct NTEventlogFiles {
 
 update!(NTEventlogFiles, nt_event_log_files);
 
-/// Represents the state of Windows NTLogEvents
+/// Represents sequence of Windows NTLogEvents
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct NTLogEvents {
-    /// Represents Windows events.
+    /// Represents Windows events
     pub nt_log_events: Vec<Win32_NTLogEvent>,
     /// When was the record last updated
     pub last_updated: SystemTime,
@@ -193,7 +193,7 @@ pub struct Win32_NTEventlogFile {
 /// An application must have `SeSecurityPrivilege` to receive events from the security event log, 
 /// otherwise "Access Denied" is returned to the application.
 /// 
-/// https://learn.microsoft.com/en-us/previous-versions/windows/desktop/eventlogprov/win32-ntlogevent
+/// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/eventlogprov/win32-ntlogevent>
 #[derive(Default, Deserialize, Serialize, Debug, Clone)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
@@ -212,6 +212,12 @@ pub struct Win32_NTLogEvent {
     pub Data: Option<Vec<u8>>,
     /// Value of the lower 16-bits of the `EventIdentifier` property. It is present to match the value 
     /// displayed in the Windows Event Viewer.
+    /// 
+    /// Note: Two events from the same source may have the same value for this property but may have 
+    /// different severity and EventIdentifier values. For example, a successful logoff is recorded in 
+    /// the Security log with the Event ID 538. However, Event IDs are not necessarily unique. 
+    /// It is possible that, when retrieving Event ID 538, you can get other kinds of events with ID 538. 
+    /// If this happens, you might need to filter by the source as well as ID.
     pub EventCode: Option<u16>,
     /// Identifier of the event. This is specific to the source that generated the event log entry and 
     /// is used, together with `SourceName`, to uniquely identify a Windows event type.
