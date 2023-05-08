@@ -65,8 +65,9 @@ pub struct Windows {
     pub nt_event_log_files: event_log::NTEventlogFiles,
     /// State of windows NTLogEvents
     pub nt_log_events: event_log::NTLogEvents,
-    /// State of windows NTLogEvents
+    /// State of windows PageFiles
     pub pagefiles: memory_and_page_files::PageFiles,
+
 }
 
 impl Windows {
