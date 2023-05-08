@@ -34,6 +34,17 @@ pub struct PageFileSettings {
 
 update!(PageFileSettings, pagefile_settings);
 
+/// Represents the state of Windows PageFileUsages
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct PageFileUsages {
+    /// Represents the Windows `PageFileUsages` details
+    pub pagefile_usage: Vec<Win32_PageFileUsage>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(PageFileUsages, pagefile_usage);
+
 /// The `Win32_PageFile` WMI class represents the file used for handling virtual memory file swapping 
 /// on a Win32 system. This class has been deprecated.
 /// 
@@ -269,4 +280,66 @@ pub struct Win32_PageFileSetting {
     /// 
     /// Example: "C:\PAGEFILE.SYS"
     pub Name: Option<String>,
+}
+
+/// The `Win32_PageFileUsage` WMI class represents the file used for handling virtual memory file swapping on 
+/// a Win32 system. Information contained within objects instantiated from this class specify the run-time state 
+/// of the page file.
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_PageFileUsage {
+    /// A short textual description of the object.
+    /// 
+    /// This property is inherited from `CIM_ManagedSystemElement`.
+    pub Caption: Option<String>,
+    /// A textual description of the object.
+    /// 
+    /// This property is inherited from `CIM_ManagedSystemElement`.
+    pub Description: Option<String>,
+    /// Indicates when the object was installed. Lack of a value does not indicate that the object is not installed.
+    /// 
+    /// This property is inherited from `CIM_ManagedSystemElement`.
+    pub InstallDate: Option<String>,
+    /// String that indicates the current status of the object. Operational and non-operational status can be defined. 
+    /// Operational status can include "OK", "Degraded", and "Pred Fail". "Pred Fail" indicates that an element is 
+    /// functioning properly, but is predicting a failure (for example, a SMART-enabled hard disk drive).
+    /// 
+    /// Non-operational status can include "Error", "Starting", "Stopping", and "Service". "Service" can apply during 
+    /// disk mirror-resilvering, reloading a user permissions list, or other administrative work. Not all such work is 
+    /// online, but the managed element is neither "OK" nor in one of the other states.
+    /// 
+    /// This property is inherited from CIM_ManagedSystemElement.
+    /// 
+    /// Values include the following:
+    /// - `OK` ("OK")
+    /// - `Error` ("Error")
+    /// - `Degraded` ("Degraded")
+    /// - `Unknown` ("Unknown")
+    /// - `Pred Fail` ("Pred Fail")
+    /// - `Starting` ("Starting")
+    /// - `Stopping` ("Stopping")
+    /// - `Service` ("Service")
+    /// - `Stressed` ("Stressed")
+    /// - `NonRecover` ("NonRecover")
+    /// - `No Contact` ("No Contact")
+    /// - `Lost Comm` ("Lost Comm")
+    pub Status: Option<String>,
+    /// Actual amount of disk space allocated for use with this page file. This value corresponds to the range 
+    /// established in `Win32_PageFileSetting` under the `InitialSize` and `MaximumSize` properties, set at 
+    /// system startup.
+    /// 
+    /// Example: 178
+    pub AllocatedBaseSize: Option<u32>,
+    /// Amount of disk space currently used by the page file.
+    pub CurrentUsage: Option<u32>,
+    /// Name of the page file.
+    ///
+    /// Example: "C:\PAGEFILE.SYS"
+    pub Name: Option<String>,
+    /// Highest use page file.
+    pub PeakUsage: Option<u32>,
+    /// If true, a temporary page file has been created, usually because there is no permanent page file on the 
+    /// current computer system.
+    pub TempPageFile: Option<bool>,
 }

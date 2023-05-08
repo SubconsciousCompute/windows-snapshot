@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.pagefile_settings.update();
+    k.pagefile_usages.update();
 
-    println!("{:#?}", k.pagefile_settings);
+    println!("{:#?}", k.pagefile_usages);
 }
