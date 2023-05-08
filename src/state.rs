@@ -1,7 +1,7 @@
 //! Stores the main state of Windows machine
 
 use crate::operating_system::{
-    desktop, drivers, file_system, processes, registry, services, users, event_log
+    desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_page_files
 };
 use serde::{Deserialize, Serialize};
 use tokio::join;
@@ -65,6 +65,8 @@ pub struct Windows {
     pub nt_event_log_files: event_log::NTEventlogFiles,
     /// State of windows NTLogEvents
     pub nt_log_events: event_log::NTLogEvents,
+    /// State of windows NTLogEvents
+    pub pagefiles: memory_and_page_files::PageFiles,
 }
 
 impl Windows {
