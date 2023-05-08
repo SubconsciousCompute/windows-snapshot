@@ -2,10 +2,10 @@
 //! 
 //! | Class                                                                 | Description                                                                                                                                   |
 //! |-----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-//! | [**Win32\_PageFile**](win32-pagefile.md)                             | Instance class<br/> Represents the file used for handling virtual memory file swapping on a Windows system.<br/>                  |
-//! | [**Win32\_PageFileElementSetting**](win32-pagefileelementsetting.md) | Association class<br/> Relates the initial settings of a page file and the state of those settings during normal use.<br/>        |
-//! | [**Win32\_PageFileSetting**](win32-pagefilesetting.md)               | Instance class<br/> Represents the settings of a page file.<br/>                                                                  |
-//! | [**Win32\_PageFileUsage**](win32-pagefileusage.md)                   | Instance class<br/> Represents the file used for handling virtual memory file swapping on a computer system running Windows.<br/> |
+//! | [**Win32\_PageFile**](win32-pagefile)                                | Instance class<br/> Represents the file used for handling virtual memory file swapping on a Windows system.<br/>                  |
+//! | [**Win32\_PageFileElementSetting**](win32-pagefileelementsetting)    | Association class<br/> Relates the initial settings of a page file and the state of those settings during normal use.<br/>        |
+//! | [**Win32\_PageFileSetting**](win32-pagefilesetting)                  | Instance class<br/> Represents the settings of a page file.<br/>                                                                  |
+//! | [**Win32\_PageFileUsage**](win32-pagefileusage)                      | Instance class<br/> Represents the file used for handling virtual memory file swapping on a computer system running Windows.<br/> |
 
 use crate::update;
 use serde::{Deserialize, Serialize};
@@ -43,139 +43,80 @@ update!(PageFileSettings, pagefile_settings);
 #[allow(non_camel_case_types)]
 pub struct Win32_PageFile {
     /// A short textual description of the object.
-    /// 
-    /// This property is inherited from `CIM_ManagedSystemElement`.
     pub Caption: Option<String>,
     /// A textual description of the object.
-    /// 
-    /// This property is inherited from `CIM_ManagedSystemElement`.
     pub Description: Option<String>,
     /// Indicates when the object was installed. Lack of a value does not indicate that the object is 
     /// not installed.
-    /// 
-    /// This property is inherited from `CIM_ManagedSystemElement`.
     pub InstallDate: Option<WMIDateTime>,
     /// If `True`, the file should be archived.
-    /// 
-    /// This property is inherited from `CIM_LogicalFile`.
     pub Archive: Option<bool>,
     /// If `True`, the file is compressed.
-    /// 
-    /// This property is inherited from `CIM_LogicalFile`.
     pub Compressed: Option<bool>,
     /// Free-form string that indicates the algorithm or tool used to compress the logical file. If the 
     /// compression scheme is unknown or not described, use "Unknown". If the logical file is compressed, 
     /// but the compression scheme is unknown or not described, use "Compressed". If the logical file is 
     /// not compressed, use "Not Compressed".
-    /// 
-    /// This property is inherited from `CIM_LogicalFile`.
     pub CompressionMethod: Option<String>,
     /// Name of the class.
-    /// 
-    /// This property is inherited from `CIM_LogicalFile`.
     pub CreationClassName: Option<String>,
     /// Date and time of the file's creation.
-    /// 
-    /// This property is inherited from `CIM_LogicalFile`.
     pub CreationDate: Option<WMIDateTime>,
     /// Class of the computer system.
-    /// 
-    /// This property is inherited from `CIM_LogicalFile`.
     pub CSCreationClassName: Option<String>,
     /// Name of the computer system.
-    /// 
-    /// This property is inherited from `CIM_LogicalFile`.
     pub CSName: Option<String>,
-    /// Drive letter (including the colon that follows the drive letter) of the file. This property is 
-    /// inherited from `CIM_LogicalFile`.
+    /// Drive letter (including the colon that follows the drive letter) of the file. 
     /// 
     /// Example: "c:"
-    /// 
-    /// This property is inherited from `CIM_LogicalFile`.
     pub Drive: Option<String>,
     /// DOS-compatible file name.
     /// 
     /// Example: "c:\progra~1"
-    /// 
-    /// This property is inherited from `CIM_LogicalFile`.
     pub EightDotThreeFileName: Option<String>,
     /// If `True`, the file is encrypted.
-    /// 
-    /// This property is inherited from `CIM_LogicalFile`.
     pub Encrypted: Option<bool>,
     /// Free-form string that identifies the algorithm or tool used to encrypt a logical file. If the encryption 
     /// scheme is not indulged (for security reasons, for example), use "Unknown". If the file is encrypted, but 
     /// either its encryption scheme is unknown or not disclosed, use "Encrypted". If the logical file is not 
     /// encrypted, use "Not Encrypted".
-    /// 
-    /// This property is inherited from `CIM_LogicalFile`.
     pub EncryptionMethod: Option<String>,
     /// File name extension without the preceding period (dot).
     /// 
     /// Example: "txt", "mof", "mdb"
-    /// 
-    /// This property is inherited from `CIM_LogicalFile`.
     pub Extension: Option<String>,
     /// File name without the file name extension. Example: "MyDataFile"
-    /// 
-    /// This property is inherited from `CIM_LogicalFile`.
     pub FileName: Option<String>,
     /// For more information about using `uint64` values in scripts, see Scripting in WMI.
-    /// 
-    /// This property is inherited from `CIM_LogicalFile`.
     pub FileSize: Option<u64>,
     /// Descriptor that represents the file type indicated by the `Extension` property.
-    /// 
-    /// This property is inherited from `CIM_LogicalFile`.
     pub FileType: Option<String>,
     /// Class of the file system.
-    /// 
-    /// This property is inherited from `CIM_LogicalFile`.
     pub FSCreationClassName: Option<String>,
     /// Name of the file system.
-    /// 
-    /// This property is inherited from `CIM_LogicalFile`.
     pub FSName: Option<String>,
     /// If `True`, the file is hidden.
-    /// 
-    /// This property is inherited from `CIM_LogicalFile`.
     pub Hidden: Option<bool>,
     /// Number of "file opens" that are currently active against the file.
     /// 
     /// For more information about using uint64 values in scripts, see Scripting in WMI.
-    /// 
-    /// This property is inherited from `CIM_LogicalFile`.
     pub InUseCount: Option<u64>,
     /// Date and time the file was last accessed.
-    /// 
-    /// This property is inherited from `CIM_LogicalFile`.
     pub LastAccessed: Option<WMIDateTime>,
     /// Date and time the file was last modified.
-    ///
-    /// This property is inherited from `CIM_LogicalFile`.
     pub LastModified: Option<WMIDateTime>,
     /// Path of the file including the leading and trailing backslashes.
     /// 
     /// Example: "\windows\system\"
-    /// 
-    /// This property is inherited from `CIM_LogicalFile`.
     pub Path: Option<String>,
     /// If `True`, the file can be read.
-    /// 
-    /// This property is inherited from `CIM_LogicalFile`.
     pub Readable: Option<bool>,
     /// If `True`, the file is a system file.
-    /// 
-    /// This property is inherited from `CIM_LogicalFile`.
     pub System: Option<bool>,
     /// If `True`, the file can be written.
-    /// 
-    /// This property is inherited from `CIM_LogicalFile`.
     pub Writeable: Option<bool>,
     /// Bitmask that represents the access rights required to access or perform specific operations 
     /// on the file. For values, see `File and Directory Access Rights Constants`.
-    /// 
-    /// This property is inherited from `CIM_LogicalFile`.
     /// 
     /// - `FILE_READ_DATA` (file) or `FILE_LIST_DIRECTORY` (directory) (1)
     /// - `FILE_WRITE_DATA` (file) or `FILE_ADD_FILE` (directory) (2)
@@ -193,12 +134,8 @@ pub struct Win32_PageFile {
     /// - `SYNCHRONIZE` (1048576)
     pub AccessMask: Option<u32>,
     /// Manufacturer string from the version resource (if one is present).
-    /// 
-    /// This property is inherited from `CIM_DataFile`.
     pub Manufacturer: Option<String>,
     /// String that indicates the current status of the object.
-    /// 
-    /// This property is inherited from `CIM_ManagedSystemElement`.
     /// 
     /// Values include the following:
     /// - `OK` ("OK")
@@ -215,8 +152,6 @@ pub struct Win32_PageFile {
     /// - `Lost Comm` ("Lost Comm")
     pub Status: Option<String>,
     /// Version string from the version resource (if one is present).
-    /// 
-    /// This property is inherited from `CIM_DataFile`.
     pub Version: Option<String>,
     /// Space available in the paging file. The operating system can enlarge the paging file as necessary, 
     /// up to the limit imposed by the user. This property shows the difference between the size of current 
@@ -246,16 +181,10 @@ pub struct Win32_PageFile {
 #[allow(non_camel_case_types)]
 pub struct Win32_PageFileSetting {
     /// Short textual description of the current object.
-    /// 
-    /// This property is inherited from `CIM_Setting`.
     pub Caption: Option<String>,
     /// Textual description of the current object.
-    /// 
-    /// This property is inherited from `CIM_Setting`.
     pub Description: Option<String>,
     /// Identifier by which the current object is known.
-    /// 
-    /// This property is inherited from `CIM_Setting`.
     pub SettingID: Option<String>,
     /// Initial size of the page file.
     /// 
