@@ -97,6 +97,7 @@ impl Windows {
         self.volumes.update();
         self.nt_event_log_files.update();
         self.nt_log_events.update();
+        self.pagefiles.update();
     }
 
     /// Asynchronously update all the fields
@@ -127,6 +128,7 @@ impl Windows {
             self.volumes.async_update(),
             self.nt_event_log_files.async_update(),
             self.nt_log_events.async_update(),
+            self.pagefiles.async_update(),
         );
     }
 }
