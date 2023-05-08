@@ -23,6 +23,17 @@ pub struct PageFiles {
 
 update!(PageFiles, pagefiles);
 
+/// Represents the state of Windows PageFileSettings
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct PageFileSettings {
+    /// Represents the Windows `PageFileSettings`
+    pub pagefile_settings: Vec<Win32_PageFileSetting>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(PageFileSettings, pagefile_settings);
+
 /// The `Win32_PageFile` WMI class represents the file used for handling virtual memory file swapping 
 /// on a Win32 system. This class has been deprecated.
 /// 
@@ -218,6 +229,43 @@ pub struct Win32_PageFile {
     /// to exceed this limit.
     pub MaximumSize: Option<u32>,
     /// Name of the page file.
+    /// 
+    /// Example: "C:\PAGEFILE.SYS"
+    pub Name: Option<String>,
+}
+
+/// The `Win32_PageFileSetting` WMI class represents the settings of a page file. Information contained within 
+/// objects instantiated from this class specify the page file parameters used when the file is created at 
+/// system startup. The properties in this class can be modified and deferred until startup. These settings 
+/// are different from the run-time state of a page file expressed through the associated class `Win32_PageFileUsage`.
+/// 
+/// To create an instance of this class, enable the `SeCreatePagefilePrivilege` privilege. For more information, 
+/// see `Privilege Constants` and Executing Privileged Operations.
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_PageFileSetting {
+    /// Short textual description of the current object.
+    /// 
+    /// This property is inherited from `CIM_Setting`.
+    pub Caption: Option<String>,
+    /// Textual description of the current object.
+    /// 
+    /// This property is inherited from `CIM_Setting`.
+    pub Description: Option<String>,
+    /// Identifier by which the current object is known.
+    /// 
+    /// This property is inherited from `CIM_Setting`.
+    pub SettingID: Option<String>,
+    /// Initial size of the page file.
+    /// 
+    /// Example: 139
+    pub InitialSize: Option<u32>,
+    /// Maximum size of the page file.
+    /// 
+    /// Example: 178
+    pub MaximumSize: Option<u32>,
+    /// Path and file name of the page file.
     /// 
     /// Example: "C:\PAGEFILE.SYS"
     pub Name: Option<String>,
