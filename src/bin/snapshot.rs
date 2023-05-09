@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.nt_log_events.update();
+    k.pagefile_settings.update();
 
-    println!("{:#?}", k.nt_log_events.nt_log_events.len());
+    println!("{:#?}", k.pagefile_settings);
 }

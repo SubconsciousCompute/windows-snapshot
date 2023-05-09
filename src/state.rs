@@ -1,7 +1,7 @@
 //! Stores the main state of Windows machine
 
 use crate::operating_system::{
-    desktop, drivers, file_system, processes, registry, services, users, event_log
+    desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_page_files
 };
 use serde::{Deserialize, Serialize};
 use tokio::join;
@@ -65,6 +65,10 @@ pub struct Windows {
     pub nt_event_log_files: event_log::NTEventlogFiles,
     /// State of windows NTLogEvents
     pub nt_log_events: event_log::NTLogEvents,
+    /// State of windows PageFiles
+    pub pagefiles: memory_and_page_files::PageFiles,
+    /// State of windows PageFileSettings
+    pub pagefile_settings: memory_and_page_files::PageFileSettings,
 }
 
 impl Windows {
@@ -95,6 +99,8 @@ impl Windows {
         self.volumes.update();
         self.nt_event_log_files.update();
         self.nt_log_events.update();
+        self.pagefiles.update();
+        self.pagefile_settings.update();
     }
 
     /// Asynchronously update all the fields
@@ -125,6 +131,8 @@ impl Windows {
             self.volumes.async_update(),
             self.nt_event_log_files.async_update(),
             self.nt_log_events.async_update(),
+            self.pagefiles.async_update(),
+            self.pagefile_settings.async_update(),
         );
     }
 }
