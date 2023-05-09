@@ -104,6 +104,7 @@ impl Windows {
         self.pagefiles.update();
         self.pagefile_settings.update();
         self.pagefile_usages.update();
+
     }
 
     /// Asynchronously update all the fields
