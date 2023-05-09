@@ -69,6 +69,8 @@ pub struct Windows {
     pub pagefiles: memory_and_page_files::PageFiles,
     /// State of windows PageFileSettings
     pub pagefile_settings: memory_and_page_files::PageFileSettings,
+    /// State of windows PageFileUsages
+    pub pagefile_usages: memory_and_page_files::PageFileUsages,
 }
 
 impl Windows {
@@ -101,6 +103,8 @@ impl Windows {
         self.nt_log_events.update();
         self.pagefiles.update();
         self.pagefile_settings.update();
+        self.pagefile_usages.update();
+
     }
 
     /// Asynchronously update all the fields
@@ -133,6 +137,7 @@ impl Windows {
             self.nt_log_events.async_update(),
             self.pagefiles.async_update(),
             self.pagefile_settings.async_update(),
+            self.pagefile_usages.async_update(),
         );
     }
 }
