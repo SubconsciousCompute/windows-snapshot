@@ -1,7 +1,7 @@
 //! Stores the main state of Windows machine
 
 use crate::operating_system::{
-    desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_page_files
+    desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_page_files, scheduler_jobs
 };
 use serde::{Deserialize, Serialize};
 use tokio::join;
@@ -71,6 +71,8 @@ pub struct Windows {
     pub pagefile_settings: memory_and_page_files::PageFileSettings,
     /// State of windows PageFileUsages
     pub pagefile_usages: memory_and_page_files::PageFileUsages,
+    /// State of windows ScheduledJobs
+    pub scheduled_jobs: scheduler_jobs::ScheduledJobs,
 }
 
 impl Windows {
@@ -104,7 +106,7 @@ impl Windows {
         self.pagefiles.update();
         self.pagefile_settings.update();
         self.pagefile_usages.update();
-
+        self.scheduled_jobs.update();
     }
 
     /// Asynchronously update all the fields
@@ -138,6 +140,7 @@ impl Windows {
             self.pagefiles.async_update(),
             self.pagefile_settings.async_update(),
             self.pagefile_usages.async_update(),
+            self.scheduled_jobs.async_update(),
         );
     }
 }
