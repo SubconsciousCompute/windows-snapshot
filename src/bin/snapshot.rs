@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.scheduled_jobs.update();
+    k.local_times.update();
 
-    println!("{:#?}", k.scheduled_jobs);
+    println!("{:#?}", k.local_times);
 }

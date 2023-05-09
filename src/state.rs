@@ -73,6 +73,8 @@ pub struct Windows {
     pub pagefile_usages: memory_and_page_files::PageFileUsages,
     /// State of windows ScheduledJobs
     pub scheduled_jobs: scheduler_jobs::ScheduledJobs,
+    /// State of windows LocalTimes
+    pub local_times: scheduler_jobs::LocalTimes,
 }
 
 impl Windows {
@@ -107,6 +109,7 @@ impl Windows {
         self.pagefile_settings.update();
         self.pagefile_usages.update();
         self.scheduled_jobs.update();
+        self.local_times.update();
     }
 
     /// Asynchronously update all the fields
@@ -141,6 +144,7 @@ impl Windows {
             self.pagefile_settings.async_update(),
             self.pagefile_usages.async_update(),
             self.scheduled_jobs.async_update(),
+            self.local_times.async_update(),
         );
     }
 }
