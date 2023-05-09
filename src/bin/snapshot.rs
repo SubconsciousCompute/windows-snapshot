@@ -15,7 +15,4 @@ async fn main() {
     k.pagefile_usages.update();
 
     println!("{:#?}", k.pagefile_usages);
-    k.pagefile_settings.update();
-
-    println!("{:#?}", k.pagefile_settings);
 }
