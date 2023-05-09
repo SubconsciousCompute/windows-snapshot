@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.local_times.update();
+    k.utc_times.update();
 
-    println!("{:#?}", k.local_times);
+    println!("{:#?}", k.utc_times);
 }

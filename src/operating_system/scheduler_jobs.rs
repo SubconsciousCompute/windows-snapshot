@@ -32,6 +32,17 @@ pub struct LocalTimes {
 
 update!(LocalTimes, local_times);
 
+/// Represents the state of Windows UTCTimes
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct UTCTimes {
+    /// Represents sequence of Windows `UTCTimes`
+    pub utc_times: Vec<Win32_UTCTime>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(UTCTimes, utc_times);
+
 /// The `Win32_ScheduledJob` WMI class represents a job created with the `AT` command.
 /// 
 /// Note: The Win32_ScheduledJob class does not represent a job created with the Scheduled Task Wizard 
@@ -206,5 +217,40 @@ pub struct Win32_LocalTime {
     /// Current week (1 6) in the current month (1 12).
     pub WeekInMonth: Option<u32>,
     /// Current year that matches the query (4 digits).
+    pub Year: Option<u32>,
+}
+
+/// The Win32_UTCTimeWMI class describes a point in time that is returned as Win32_UTCTime objects 
+/// that result from a query. These are returned as the value for the TargetInstance property in the 
+/// __InstanceModificationEvent system class. The Hour property is returned as the Coordinated 
+/// Universal Time (UTC) time on a 24 hour clock.
+/// 
+/// Note: The smallest time segment supported is a second.
+/// 
+/// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmitimepprov/win32-utctime>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_UTCTime {
+    /// Current day that matches the query (1 31).
+    pub Day: Option<u32>,
+    /// Current day of the current week that matches the query (0 6). By convention, the value 0 (zero) 
+    /// is always Sunday, regardless of the culture or the locale set on the machine.
+    pub DayOfWeek: Option<u32>,
+    /// Current hour of the current day (0 23).
+    pub Hour: Option<u32>,
+    /// Not implemented.
+    pub Milliseconds: Option<u32>,
+    /// Current minute (0 59).
+    pub Minute: Option<u32>,
+    /// Current month that matches the query (1 12).
+    pub Month: Option<u32>,
+    /// Current quarter of the current year (1 4).
+    pub Quarter: Option<u32>,
+    /// Current second of the current minute (0 59).
+    pub Second: Option<u32>,
+    /// Current week in the current month (1 6).
+    pub WeekInMonth: Option<u32>,
+    /// Current year matching the query (4 digits).
     pub Year: Option<u32>,
 }

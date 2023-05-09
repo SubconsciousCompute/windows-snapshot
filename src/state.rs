@@ -75,6 +75,8 @@ pub struct Windows {
     pub scheduled_jobs: scheduler_jobs::ScheduledJobs,
     /// State of windows LocalTimes
     pub local_times: scheduler_jobs::LocalTimes,
+    /// State of windows UTCTimes
+    pub utc_times: scheduler_jobs::UTCTimes,
 }
 
 impl Windows {
@@ -110,6 +112,7 @@ impl Windows {
         self.pagefile_usages.update();
         self.scheduled_jobs.update();
         self.local_times.update();
+        self.utc_times.update();
     }
 
     /// Asynchronously update all the fields
@@ -145,6 +148,7 @@ impl Windows {
             self.pagefile_usages.async_update(),
             self.scheduled_jobs.async_update(),
             self.local_times.async_update(),
+            self.utc_times.async_update(),
         );
     }
 }
