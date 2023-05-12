@@ -54,17 +54,6 @@ update!(PageFileUsages, pagefile_usage);
 #[allow(non_camel_case_types)]
 pub struct Win32_PageFile {
     /// A short textual description of the object.
-    /// 
-    /// This property is inherited from `CIM_ManagedSystemElement`.
-    pub Caption: Option<String>,
-    /// A textual description of the object.
-    pub Description: Option<String>,
-    /// Indicates when the object was installed. Lack of a value does not indicate that the object is 
-    /// not installed.
-    pub InstallDate: Option<WMIDateTime>,
-    /// If `True`, the file should be archived.
-    pub Archive: Option<bool>,
-    /// If `True`, the file is compressed.
     pub Caption: Option<String>,
     /// A textual description of the object.
     pub Description: Option<String>,
@@ -88,19 +77,6 @@ pub struct Win32_PageFile {
     pub CSCreationClassName: Option<String>,
     /// Name of the computer system.
     pub CSName: Option<String>,
-    /// Drive letter (including the colon that follows the drive letter) of the file. This property is 
-    /// inherited from `CIM_LogicalFile`.
-    /// 
-    /// Example: "c:"
-    pub CompressionMethod: Option<String>,
-    /// Name of the class.
-    pub CreationClassName: Option<String>,
-    /// Date and time of the file's creation.
-    pub CreationDate: Option<WMIDateTime>,
-    /// Class of the computer system.
-    pub CSCreationClassName: Option<String>,
-    /// Name of the computer system.
-    pub CSName: Option<String>,
     /// Drive letter (including the colon that follows the drive letter) of the file. 
     /// 
     /// Example: "c:"
@@ -108,10 +84,6 @@ pub struct Win32_PageFile {
     /// DOS-compatible file name.
     /// 
     /// Example: "c:\progra~1"
-    pub EightDotThreeFileName: Option<String>,
-    /// If `True`, the file is encrypted.
-    /// 
-    /// This property is inherited from `CIM_LogicalFile`.
     pub EightDotThreeFileName: Option<String>,
     /// If `True`, the file is encrypted.
     pub Encrypted: Option<bool>,
@@ -135,26 +107,10 @@ pub struct Win32_PageFile {
     /// Name of the file system.
     pub FSName: Option<String>,
     /// If `True`, the file is hidden.
-    pub Extension: Option<String>,
-    /// File name without the file name extension. Example: "MyDataFile"
-    pub FileName: Option<String>,
-    /// For more information about using `uint64` values in scripts, see Scripting in WMI.
-    pub FileSize: Option<u64>,
-    /// Descriptor that represents the file type indicated by the `Extension` property.
-    pub FileType: Option<String>,
-    /// Class of the file system.
-    pub FSCreationClassName: Option<String>,
-    /// Name of the file system.
-    pub FSName: Option<String>,
-    /// If `True`, the file is hidden.
     pub Hidden: Option<bool>,
     /// Number of "file opens" that are currently active against the file.
     /// 
     /// For more information about using uint64 values in scripts, see Scripting in WMI.
-    pub InUseCount: Option<u64>,
-    /// Date and time the file was last accessed.
-    pub LastAccessed: Option<WMIDateTime>,
-    /// Date and time the file was last modified.
     pub InUseCount: Option<u64>,
     /// Date and time the file was last accessed.
     pub LastAccessed: Option<WMIDateTime>,
@@ -169,17 +125,9 @@ pub struct Win32_PageFile {
     /// If `True`, the file is a system file.
     pub System: Option<bool>,
     /// If `True`, the file can be written.
-    pub Path: Option<String>,
-    /// If `True`, the file can be read.
-    pub Readable: Option<bool>,
-    /// If `True`, the file is a system file.
-    pub System: Option<bool>,
-    /// If `True`, the file can be written.
     pub Writeable: Option<bool>,
     /// Bitmask that represents the access rights required to access or perform specific operations 
     /// on the file. For values, see `File and Directory Access Rights Constants`.
-    /// 
-    /// This property is inherited from `CIM_LogicalFile`.
     /// 
     /// - `FILE_READ_DATA` (file) or `FILE_LIST_DIRECTORY` (directory) (1)
     /// - `FILE_WRITE_DATA` (file) or `FILE_ADD_FILE` (directory) (2)
@@ -197,8 +145,6 @@ pub struct Win32_PageFile {
     /// - `SYNCHRONIZE` (1048576)
     pub AccessMask: Option<u32>,
     /// Manufacturer string from the version resource (if one is present).
-    pub Manufacturer: Option<String>,
-    /// String that indicates the current status of the object.
     pub Manufacturer: Option<String>,
     /// String that indicates the current status of the object.
     /// 
@@ -246,10 +192,6 @@ pub struct Win32_PageFile {
 #[allow(non_camel_case_types)]
 pub struct Win32_PageFileSetting {
     /// Short textual description of the current object.
-    pub Caption: Option<String>,
-    /// Textual description of the current object.
-    pub Description: Option<String>,
-    /// Identifier by which the current object is known.
     pub Caption: Option<String>,
     /// Textual description of the current object.
     pub Description: Option<String>,
