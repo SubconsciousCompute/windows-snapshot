@@ -1,0 +1,21 @@
+name: Rust
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - name: Build
+      run: cargo run --bin snapshot --release
+    - name: Generate Documentation
+      run: cargo doc --open
