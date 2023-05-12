@@ -1,6 +1,6 @@
 # windows-snapshot
 
-[![Rust](https://github.com/NidhiHemanth/windows-snapshot/actions/workflows/rust.yml/badge.svg)](https://github.com/NidhiHemanth/windows-snapshot/actions/workflows/rust.yml)
+[![Rust](https://github.com/SubconsciousCompute/windows-snapshot/actions/workflows/rust.yml/badge.svg)](https://github.com/SubconsciousCompute/windows-snapshot/actions/workflows/rust.yml)
 
 The aim is to provide a snapshot of Windows system asynchronously. It achieves this by using `WMI`.
 
