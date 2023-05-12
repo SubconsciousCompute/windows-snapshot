@@ -16,7 +16,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build & Run
-      run: cargo run --bin snapshot --release
+    - name: Build
+      run: cargo build --release
     - name: Generate Documentation
       run: cargo doc --open
