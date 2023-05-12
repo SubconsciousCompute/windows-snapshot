@@ -1,5 +1,7 @@
 # windows-snapshot
 
+[![Rust](https://github.com/NidhiHemanth/windows-snapshot/actions/workflows/rust.yml/badge.svg)](https://github.com/NidhiHemanth/windows-snapshot/actions/workflows/rust.yml)
+
 The aim is to provide a snapshot of Windows system asynchronously. It achieves this by using `WMI`.
 
 Our global state is `windows_snapshot::state::Windows` which stores the states of Windows machine at any given instance.
