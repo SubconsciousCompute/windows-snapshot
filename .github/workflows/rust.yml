@@ -15,7 +15,8 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Build
+    - uses: actions/checkout@v3
+    - name: Build & Run
       run: cargo run --bin snapshot --release
     - name: Generate Documentation
       run: cargo doc --open
