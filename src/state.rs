@@ -79,6 +79,8 @@ pub struct Windows {
     pub utc_times: scheduler_jobs::UTCTimes,
     /// State of windows Proxys
     pub proxys: windows_product_activation::Proxys,
+    /// State of windows WindowsProductActivations
+    pub windows_product_activations: windows_product_activation::WindowsProductActivations,
 }
 
 impl Windows {
