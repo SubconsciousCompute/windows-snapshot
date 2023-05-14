@@ -1,7 +1,7 @@
 //! Stores the main state of Windows machine
 
 use crate::operating_system::{
-    desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_page_files, scheduler_jobs
+    desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_page_files, scheduler_jobs, windows_product_activation
 };
 use serde::{Deserialize, Serialize};
 use tokio::join;
@@ -77,6 +77,8 @@ pub struct Windows {
     pub local_times: scheduler_jobs::LocalTimes,
     /// State of windows UTCTimes
     pub utc_times: scheduler_jobs::UTCTimes,
+    /// State of windows Proxys
+    pub proxys: windows_product_activation::Proxys,
 }
 
 impl Windows {

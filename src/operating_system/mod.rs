@@ -39,3 +39,4 @@ pub mod users;
 pub mod event_log;
 pub mod memory_and_page_files;
 pub mod scheduler_jobs;
+pub mod windows_product_activation;
