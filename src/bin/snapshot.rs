@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.utc_times.update();
+    k.software_licensing_token_activation_licenses.update();
 
-    println!("{:#?}", k.utc_times);
+    println!("{:#?}", k.software_licensing_token_activation_licenses);
 }

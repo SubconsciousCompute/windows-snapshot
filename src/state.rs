@@ -1,7 +1,7 @@
 //! Stores the main state of Windows machine
 
 use crate::operating_system::{
-    desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_pagefiles, scheduler_jobs, product_activation
+    desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_pagefiles, scheduler_jobs, product_activation, software_license_provider
 };
 use serde::{Deserialize, Serialize};
 use tokio::join;
@@ -81,6 +81,12 @@ pub struct Windows {
     pub proxys: product_activation::Proxys,
     /// State of windows WindowsProductActivations
     pub windows_product_activations: product_activation::WindowsProductActivations,
+    /// State of windows SoftwareLicensingProducts
+    pub software_licensing_products: software_license_provider::SoftwareLicensingProducts,
+    /// State of windows SoftwareLicensingServices
+    pub software_licensing_services: software_license_provider::SoftwareLicensingServices,
+    /// State of windows SoftwareLicensingTokenActivationLicenses
+    pub software_licensing_token_activation_licenses: software_license_provider::SoftwareLicensingTokenActivationLicenses,
 }
 
 impl Windows {
@@ -117,6 +123,9 @@ impl Windows {
         self.scheduled_jobs.update();
         self.local_times.update();
         self.utc_times.update();
+        self.software_licensing_products.update();
+        self.software_licensing_services.update();
+        self.software_licensing_token_activation_licenses.update();
     }
 
     /// Asynchronously update all the fields
@@ -153,6 +162,9 @@ impl Windows {
             self.scheduled_jobs.async_update(),
             self.local_times.async_update(),
             self.utc_times.async_update(),
+            self.software_licensing_products.async_update(),
+            self.software_licensing_services.async_update(),
+            self.software_licensing_token_activation_licenses.async_update(),
         );
     }
 }
