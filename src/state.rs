@@ -1,7 +1,7 @@
 //! Stores the main state of Windows machine
 
 use crate::operating_system::{
-    desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_page_files, scheduler_jobs
+    desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_pagefiles, scheduler_jobs, product_activation
 };
 use serde::{Deserialize, Serialize};
 use tokio::join;
@@ -66,17 +66,21 @@ pub struct Windows {
     /// State of windows NTLogEvents
     pub nt_log_events: event_log::NTLogEvents,
     /// State of windows PageFiles
-    pub pagefiles: memory_and_page_files::PageFiles,
+    pub pagefiles: memory_and_pagefiles::PageFiles,
     /// State of windows PageFileSettings
-    pub pagefile_settings: memory_and_page_files::PageFileSettings,
+    pub pagefile_settings: memory_and_pagefiles::PageFileSettings,
     /// State of windows PageFileUsages
-    pub pagefile_usages: memory_and_page_files::PageFileUsages,
+    pub pagefile_usages: memory_and_pagefiles::PageFileUsages,
     /// State of windows ScheduledJobs
     pub scheduled_jobs: scheduler_jobs::ScheduledJobs,
     /// State of windows LocalTimes
     pub local_times: scheduler_jobs::LocalTimes,
     /// State of windows UTCTimes
     pub utc_times: scheduler_jobs::UTCTimes,
+    /// State of windows Proxys
+    pub proxys: product_activation::Proxys,
+    /// State of windows WindowsProductActivations
+    pub windows_product_activations: product_activation::WindowsProductActivations,
 }
 
 impl Windows {

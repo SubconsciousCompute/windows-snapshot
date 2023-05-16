@@ -37,5 +37,6 @@ pub mod registry;
 pub mod services;
 pub mod users;
 pub mod event_log;
-pub mod memory_and_page_files;
+pub mod memory_and_pagefiles;
 pub mod scheduler_jobs;
+pub mod product_activation;
