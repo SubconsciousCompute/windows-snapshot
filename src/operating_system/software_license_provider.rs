@@ -22,6 +22,17 @@ pub struct SoftwareLicensingProducts {
 
 update!(SoftwareLicensingProducts, software_licensing_products);
 
+/// Represents the state of Windows SoftwareLicensingServices
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct SoftwareLicensingServices {
+    /// Represents data stored in a Windows SoftwareLicensingServices
+    pub software_licensing_services: Vec<SoftwareLicensingService>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(SoftwareLicensingServices, software_licensing_services);
+
 /// This class exposes the product-specific properties and methods of the Software Licensing service.
 /// 
 /// <https://learn.microsoft.com/en-gb/previous-versions/windows/desktop/sppwmi/softwarelicensingproduct>
@@ -146,4 +157,102 @@ pub struct SoftwareLicensingProduct {
     pub TokenActivationAdditionalInfo: Option<String>,
     /// Specifies the trusted time for the product.
     pub TrustedTime: Option<WMIDateTime>,
+}
+
+/// This class exposes the product-independent properties and methods of the Software Licensing service.
+/// 
+/// <https://learn.microsoft.com/en-gb/previous-versions/windows/desktop/sppwmi/softwarelicensingservice>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct SoftwareLicensingService {
+    /// Specifies the version of the Software Licensing service.
+    pub Version: Option<String>,
+    /// Specifies the registered key management service machine name. Returns null if 
+    /// `SetKeyManagementServiceMachine` has not been called.
+    pub KeyManagementServiceMachine: Option<String>,
+    /// Indicates whether the machine has a key management service (KMS) enabled. The following values 
+    /// are possible.
+    /// 
+    /// Value: Description
+    /// - 0: False
+    /// - 1: True
+    pub IsKeyManagementServiceMachine: Option<u32>,
+    /// Specifies the frequency, in minutes, of how often a client should contact the KMS machine before 
+    /// the client is licensed.
+    pub VLActivationInterval: Option<u32>,
+    /// Specifies the frequency, in minutes, of how often the current machine should contact the KMS machine 
+    /// after the client is licensed.
+    pub VLRenewalInterval: Option<u32>,
+    /// Specifies the count of currently active volume clients. A value of -1 indicates that the machine 
+    /// is not enabled as a KMS or that it has not received any client licensing-requests.
+    pub KeyManagementServiceCurrentCount: Option<u32>,
+    /// Specifies the minimum number of clients required to connect to a KMS machine to enable volume 
+    /// licensing.
+    pub RequiredClientCount: Option<u32>,
+    /// Specifies the KMS product key ID. Returns null if not applicable.
+    pub KeyManagementServiceProductKeyID: Option<String>,
+    /// Specifies the last discovered KMS host name through DNS.
+    pub DiscoveredKeyManagementServiceMachineName: Option<String>,
+    /// Specifies the last discovered KMS host port through DNS.
+    pub DiscoveredKeyManagementServiceMachinePort: Option<u32>,
+    /// Indicates whether the licensing policy cache needs to be updated. The following values are possible.
+    /// 
+    /// Value: Description
+    /// - 0: Refresh not required.
+    /// - 1: Refresh required.
+    pub PolicyCacheRefreshRequired: Option<u32>,
+    /// Specifies the unique identifier for this volume client machine. The client includes this CMID 
+    /// in requests it sends to the KMS.
+    pub ClientMachineID: Option<String>,
+    /// Specifies the remaining number of times that the client can be successfully rearmed.
+    pub RemainingWindowsReArmCount: Option<u32>,
+    /// Specifies the TCP port on which the KMS host listens for activation requests.
+    pub KeyManagementServiceListeningPort: Option<u32>,
+    /// Indicates the DNS publishing status of a KMS host. The following values are possible.
+    /// 
+    /// Value: Description
+    /// - 0: Disabled
+    /// - 1: Auto-publish enabled (default)
+    pub KeyManagementServiceDnsPublishing: Option<bool>,
+    /// Indicates the thread priority status of the KMS. The following values are possible.
+    /// 
+    /// Value: Description
+    /// - 0: Normal priority (default)
+    /// - 1: Low priority
+    pub KeyManagementServiceLowPriority: Option<bool>,
+    /// Indicates the caching status of the KMS host name and port. The following values are possible.
+    /// 
+    /// Value: Description
+    /// - 0: Caching disabled
+    /// - 1: Caching enabled (default)
+    pub KeyManagementServiceHostCaching: Option<bool>,
+    /// Specifies the count of KMS requests from clients with `LicenseStatus` set to 0 (Unlicensed).
+    pub KeyManagementServiceUnlicensedRequests: Option<u32>,
+    /// Specifies the count of KMS requests from clients with `LicenseStatus` set to 1 (Licensed).
+    pub KeyManagementServiceLicensedRequests: Option<u32>,
+    /// Specifies the count of KMS requests from clients with `LicenseStatus` set to 2 (OOBGrace).
+    pub KeyManagementServiceOOBGraceRequests: Option<u32>,
+    /// Specifies the count of KMS requests from clients with `LicenseStatus` set to 3 (OOTGrace).
+    pub KeyManagementServiceOOTGraceRequests: Option<u32>,
+    /// Specifies the count of KMS requests from clients with `LicenseStatus` set to 4 (NonGenuineGrace).
+    pub KeyManagementServiceNonGenuineGraceRequests: Option<u32>,
+    /// Specifies the total count of valid KMS requests.
+    pub KeyManagementServiceTotalRequests: Option<u32>,
+    /// Specifies the total count of failed KMS requests.
+    pub KeyManagementServiceFailedRequests: Option<u32>,
+    /// Specifies the count of KMS requests from clients with `LicenseStatus` set to 5 (Notification).
+    pub KeyManagementServiceNotificationRequests: Option<u32>,
+    /// Specifies the ID of the token-based activation license that activated the computer.
+    pub TokenActivationILID: Option<String>,
+    /// Specifies the version of the token-based activation license that activated the computer.
+    pub TokenActivationILVID: Option<u32>,
+    /// Specifies the grant number in the token-based activation license that activated the computer.
+    pub TokenActivationGrantNumber: Option<u32>,
+    /// Specifies the thumbprint of the certificate that activated the computer.
+    pub TokenActivationCertificateThumbprint: Option<String>,
+    /// Specifies additional information for token-based activation.
+    pub TokenActivationAdditionalInfo: Option<String>,
+    // /// Indicates whether the volume activation through key management service is disabled.
+    // pub KeyManagementServiceActivationDisabled: Option<bool>,
 }
