@@ -33,6 +33,17 @@ pub struct SoftwareLicensingServices {
 
 update!(SoftwareLicensingServices, software_licensing_services);
 
+/// Represents the state of Windows SoftwareLicensingTokenActivationLicenses
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct SoftwareLicensingTokenActivationLicenses {
+    /// Represents data stored in a Windows SoftwareLicensingTokenActivationLicenses
+    pub software_licensing_token_activation_licenses: Vec<SoftwareLicensingTokenActivationLicense>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(SoftwareLicensingTokenActivationLicenses, software_licensing_token_activation_licenses);
+
 /// This class exposes the product-specific properties and methods of the Software Licensing service.
 /// 
 /// <https://learn.microsoft.com/en-gb/previous-versions/windows/desktop/sppwmi/softwarelicensingproduct>
@@ -255,4 +266,30 @@ pub struct SoftwareLicensingService {
     pub TokenActivationAdditionalInfo: Option<String>,
     // /// Indicates whether the volume activation through key management service is disabled.
     // pub KeyManagementServiceActivationDisabled: Option<bool>,
+}
+
+/// This class exposes properties of installed token-based activation licenses.
+/// 
+/// <https://learn.microsoft.com/en-gb/previous-versions/windows/desktop/sppwmi/softwarelicensingtokenactivationlicense>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct SoftwareLicensingTokenActivationLicense {
+    /// Specifies a GUID that is used by the Software Licensing service to uniquely identify an XRML 
+    /// license.
+    pub ID: Option<String>,
+    /// Specifies a GUID that is used to identify the IL to the customer. The ILID is not unique, unless 
+    /// combined with the ILVID.
+    pub ILID: Option<String>,
+    /// Specifies a version number that is used along with the ILID to allow customers to version their 
+    /// licenses.
+    pub ILVID: Option<u32>,
+    /// Specifies an HRESULT returned from the issuance license (IL) authorization.
+    pub AuthorizationStatus: Option<u32>,
+    /// Specifies a UTC datetime after which the IL cannot be used for token activation.
+    pub ExpirationDate: Option<WMIDateTime>,
+    /// Specifies optional text provided by the customer and included in the IL.
+    pub Description: Option<String>,
+    /// Specifies optional text to provide additional metadata.
+    pub AdditionalInfo: Option<String>,
 }
