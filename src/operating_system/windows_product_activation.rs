@@ -35,7 +35,7 @@ pub struct WindowsProductActivations {
     pub last_updated: SystemTime,
 }
 
-update!(Proxys, proxys);
+update!(WindowsProductActivations, windows_product_activations);
 
 /// The `Win32_Proxy` WMI class contains properties and methods to query and configure an Internet 
 /// connection related to Windows Product Activation (WPA).
