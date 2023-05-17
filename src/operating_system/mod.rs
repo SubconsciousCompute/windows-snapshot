@@ -41,3 +41,4 @@ pub mod memory_and_pagefiles;
 pub mod scheduler_jobs;
 pub mod product_activation;
 pub mod software_license_provider;
+pub mod shares;

@@ -1,7 +1,7 @@
 //! Stores the main state of Windows machine
 
 use crate::operating_system::{
-    desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_pagefiles, scheduler_jobs, product_activation, software_license_provider
+    desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_pagefiles, scheduler_jobs, product_activation, software_license_provider, shares
 };
 use serde::{Deserialize, Serialize};
 use tokio::join;
@@ -87,6 +87,12 @@ pub struct Windows {
     pub software_licensing_services: software_license_provider::SoftwareLicensingServices,
     /// State of windows SoftwareLicensingTokenActivationLicenses
     pub software_licensing_token_activation_licenses: software_license_provider::SoftwareLicensingTokenActivationLicenses,
+    /// State of windows ServerConnections
+    pub server_connections: shares::ServerConnections,
+    /// State of windows ServerSessions
+    pub server_sessions: shares::ServerSessions,
+    /// State of windows Shares
+    pub shares: shares::Shares,
 }
 
 impl Windows {
@@ -126,6 +132,9 @@ impl Windows {
         self.software_licensing_products.update();
         self.software_licensing_services.update();
         self.software_licensing_token_activation_licenses.update();
+        self.server_connections.update();
+        self.server_sessions.update();
+        self.shares.update();
     }
 
     /// Asynchronously update all the fields
@@ -165,6 +174,9 @@ impl Windows {
             self.software_licensing_products.async_update(),
             self.software_licensing_services.async_update(),
             self.software_licensing_token_activation_licenses.async_update(),
+            self.server_connections.async_update(),
+            self.server_sessions.async_update(),
+            self.shares.async_update(),
         );
     }
 }
