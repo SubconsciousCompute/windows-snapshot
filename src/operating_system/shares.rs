@@ -30,6 +30,17 @@ pub struct ServerConnections {
 
 update!(ServerConnections, server_connections);
 
+/// Represents the state of Windows ServerSessions
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct ServerSessions {
+    /// Represents sequence of Windows `ServerSessions`
+    pub server_sessions: Vec<Win32_ServerSession>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(ServerSessions, server_sessions);
+
 /// The `Win32_ServerConnection` WMI class represents the connections made from a remote computer 
 /// to a shared resource on the local computer.
 /// 
@@ -85,5 +96,70 @@ pub struct Win32_ServerConnection {
     /// Share resource to which the connection is established.
     pub ShareName: Option<String>,
     /// Name of the user that made a connection.
+    pub UserName: Option<String>,
+}
+
+/// The `Win32_ServerSession` WMI class represents the sessions that have been established with the 
+/// local computer by users on a remote computer.
+/// 
+/// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmipsess/win32-serversession>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_ServerSession {
+    /// A short textual description of the object.
+    pub Caption: Option<String>,
+    /// A textual description of the object. 
+    pub Description: Option<String>,
+    /// Indicates when the object was installed. Lack of a value does not indicate that the object 
+    /// is not installed.
+    pub InstallDate: Option<WMIDateTime>,
+    /// Label by which the object is known. When subclassed, this property can be overridden to be 
+    /// a key property.
+    pub Name: Option<String>,
+    /// String that indicates the current status of the object. Operational and non-operational status 
+    /// can be defined. Operational status can include "OK", "Degraded", and "Pred Fail". "Pred Fail" 
+    /// indicates that an element is functioning properly, but is predicting a failure (for example, a 
+    /// SMART-enabled hard disk drive).
+    /// 
+    /// Non-operational status can include "Error", "Starting", "Stopping", and "Service". "Service" can 
+    /// apply during disk mirror-resilvering, reloading a user permissions list, or other administrative 
+    /// work. Not all such work is online, but the managed element is neither "OK" nor in one of the other 
+    /// states.
+    /// 
+    /// Values include the following:
+    /// - OK ("OK")
+    /// - Error ("Error")
+    /// - Degraded ("Degraded")
+    /// - Unknown ("Unknown")
+    /// - Pred Fail ("Pred Fail")
+    /// - Starting ("Starting")
+    /// - Stopping ("Stopping")
+    /// - Service ("Service")
+    /// - Stressed ("Stressed")
+    /// - NonRecover ("NonRecover")
+    /// - No Contact ("No Contact")
+    /// - Lost Comm ("Lost Comm")
+    pub Status: Option<String>,
+    /// Number of seconds since this session was established.
+    pub ActiveTime: Option<u32>,
+    /// Type of the connected client.
+    pub ClientType: Option<String>,
+    /// Name of the computer from which the session is established.
+    pub ComputerName: Option<String>,
+    /// Number of seconds that the session has been idle.
+    pub IdleTime: Option<u32>,
+    /// Number of files, devices, and pipes opened during this session.
+    pub ResourcesOpened: Option<u32>,
+    /// Method of opening the session.
+    /// 
+    /// Possible values:
+    /// - Guest (0)
+    /// - NoEncryption (1)
+    /// - Other (2)
+    pub SessionType: Option<u32>,
+    /// Name of the transport that the client is using to communicate with the server.
+    pub TransportName: Option<String>,
+    /// Name of the user that established the session.
     pub UserName: Option<String>,
 }

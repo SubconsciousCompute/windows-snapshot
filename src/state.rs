@@ -87,8 +87,10 @@ pub struct Windows {
     pub software_licensing_services: software_license_provider::SoftwareLicensingServices,
     /// State of windows SoftwareLicensingTokenActivationLicenses
     pub software_licensing_token_activation_licenses: software_license_provider::SoftwareLicensingTokenActivationLicenses,
-    /// State of windows SoftwareLicensingTokenActivationLicenses
+    /// State of windows ServerConnections
     pub server_connections: shares::ServerConnections,
+    /// State of windows ServerSessions
+    pub server_sessions: shares::ServerSessions,
 }
 
 impl Windows {
@@ -129,6 +131,7 @@ impl Windows {
         self.software_licensing_services.update();
         self.software_licensing_token_activation_licenses.update();
         self.server_connections.update();
+        self.server_sessions.update();
     }
 
     /// Asynchronously update all the fields
@@ -169,6 +172,7 @@ impl Windows {
             self.software_licensing_services.async_update(),
             self.software_licensing_token_activation_licenses.async_update(),
             self.server_connections.async_update(),
+            self.server_sessions.async_update(),
         );
     }
 }

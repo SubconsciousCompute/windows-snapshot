@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.server_connections.update();
+    k.server_sessions.update();
 
-    println!("{:#?}", k.server_connections);
+    println!("{:#?}", k.server_sessions);
 }
