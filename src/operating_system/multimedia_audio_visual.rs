@@ -103,8 +103,6 @@ pub struct Win32_CodecFile {
     /// Example: "autoexec"
     pub FileName: Option<String>,
     /// Size of the file (in bytes).
-    /// 
-    /// For more information about using `uint64` values in scripts, see Scripting in WMI.
     pub FileSize: Option<u64>,
     /// File type (indicated by the `Extension` property).
     pub FileType: Option<String>,
