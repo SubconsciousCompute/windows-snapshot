@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.server_sessions.update();
+    k.shares.update();
 
-    println!("{:#?}", k.server_sessions);
+    println!("{:#?}", k.shares);
 }
