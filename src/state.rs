@@ -1,7 +1,7 @@
 //! Stores the main state of Windows machine
 
 use crate::operating_system::{
-    desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_pagefiles, scheduler_jobs, product_activation, software_license_provider, shares, multimedia_audio_visual
+    desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_pagefiles, scheduler_jobs, product_activation, software_license_provider, shares, multimedia_audio_visual, storage
 };
 use serde::{Deserialize, Serialize};
 use tokio::join;
@@ -95,6 +95,8 @@ pub struct Windows {
     pub shares: shares::Shares,
     /// State of Windows CodecFiles
     pub codec_files: multimedia_audio_visual::CodecFiles,
+    /// State of Windows ShadowCopys
+    pub shadow_copys: storage::ShadowCopys,
 }
 
 impl Windows {
@@ -138,6 +140,7 @@ impl Windows {
         self.server_sessions.update();
         self.shares.update();
         self.codec_files.update();
+        self.shadow_copys.update();
     }
 
     /// Asynchronously update all the fields
@@ -181,6 +184,7 @@ impl Windows {
             self.server_sessions.async_update(),
             self.shares.async_update(),
             self.codec_files.async_update(),
+            self.shadow_copys.async_update(),
         );
     }
 }

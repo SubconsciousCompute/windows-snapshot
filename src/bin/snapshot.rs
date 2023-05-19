@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.codec_files.update();
+    k.shadow_copys.update();
 
-    println!("{:#?}", k.codec_files);
+    println!("{:#?}", k.shadow_copys);
 }
