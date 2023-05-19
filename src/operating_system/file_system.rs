@@ -1479,6 +1479,8 @@ pub struct Win32_ShortcutFile {
 ///
 /// Windows XP and earlier: This class is not available.
 ///
+/// Note: This class has been repeated in Storage as well. 
+/// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa394515(v=vs.85)>
 #[derive(Default, Deserialize, Serialize, Debug, Clone)]
 #[allow(non_snake_case)]
