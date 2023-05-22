@@ -78,7 +78,7 @@ pub struct Win32_ServerConnection {
     /// Non-operational status can include "Error", "Starting", "Stopping", and "Service". "Service" 
     /// can apply during disk mirror-resilvering, reloading a user permissions list, or other 
     /// administrative work. Not all such work is online, but the managed element is neither "OK" nor 
-    /// in one of the other states. This property is inherited from CIM_ManagedSystemElement.
+    /// in one of the other states.
     /// 
     /// Values include the following:
     /// - OK ("OK")

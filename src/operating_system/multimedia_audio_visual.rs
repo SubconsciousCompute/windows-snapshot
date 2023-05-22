@@ -4,7 +4,7 @@
 //! |---------------------------------------------|------------------------------------------------------------------------------------------------------------|
 //! | [**Win32\_CodecFile**](win32-codecfile.md) | Instance class<br/> Represents the audio or video codec installed on the computer system.<br/> |
 
-use crate::update;
+use crate::{update};
 use serde::{Deserialize, Serialize};
 use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
@@ -125,8 +125,6 @@ pub struct Win32_CodecFile {
     /// Object was installed. This property does not require a value to indicate that the object is installed.
     pub InstallDate: Option<WMIDateTime>,
     /// Number of "file opens" that are currently active against the file.
-    /// 
-    /// For more information about using `uint64` values in scripts, see Scripting in WMI.
     pub InUseCount: Option<u64>,
     /// File was last accessed.
     pub LastAccessed: Option<WMIDateTime>,

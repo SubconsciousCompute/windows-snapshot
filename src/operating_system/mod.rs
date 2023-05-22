@@ -43,3 +43,4 @@ pub mod product_activation;
 pub mod software_license_provider;
 pub mod shares;
 pub mod multimedia_audio_visual;
+pub mod storage;
