@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.shadow_copys.update();
+    k.shadow_contexts.update();
 
-    println!("{:#?}", k.shadow_copys);
+    println!("{:#?}", k.shadow_contexts);
 }

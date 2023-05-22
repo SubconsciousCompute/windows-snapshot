@@ -41,6 +41,17 @@ pub struct Volumes {
 
 update!(Volumes, volumes);
 
+/// Represents the state of Windows ShadowContexts
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct ShadowContexts {
+    /// Represents sequence of `ShadowContexts`
+    pub shadow_contexts: Vec<Win32_ShadowContext>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(ShadowContexts, shadow_contexts);
+
 /// The `Win32_ShadowCopy` class is a storage extent that represents a duplicate copy of the 
 /// original volume at a previous time.
 /// 
@@ -393,4 +404,46 @@ pub struct Win32_Volume {
     /// If `True`, the logical disk partition supports file-based compression, such as is the case 
     /// with the NTFS file system. This property is `False` when the `Compressed` property is `True`.
     pub SupportsFileBasedCompression: Option<bool>,
+}
+
+/// The `Win32_ShadowContext` class specifies how a shadow copy is to be created, queried, or deleted, 
+/// and the degree of writer involvement.
+/// 
+/// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/vsswmi/win32-shadowcontext>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_ShadowContext {
+    /// Name of the context.
+    pub Name: Option<String>,
+    /// If `true`, the shadow copy persists across restarts.
+    pub Persistent: Option<bool>,
+    /// If `true`, the shadow copy is created by the Windows Previous Versions component.
+    pub ClientAccessible: Option<bool>,
+    /// If `true`, the shadow copy is retained after the requestor process ends. If `false`, the shadow 
+    /// copy is automatically deleted when the shadow copy requestor process ends.
+    pub NoAutoRelease: Option<bool>,
+    /// If `true`, the shadow copy is created without involvement of shadow copy writer components.
+    pub NoWriters: Option<bool>,
+    /// If `true`, the shadow copy can be surfaced on another computer. If `false`, and the volumes are 
+    /// surfaced locally, it may not be possible to surface them later on a different computer.
+    pub Transportable: Option<bool>,
+    /// If `true`, the shadow copy is not currently in the device namespace of the local computer.
+    pub NotSurfaced: Option<bool>,
+    /// If `true`, the shadow copy is created by a hardware shadow copy provider.
+    pub HardwareAssisted: Option<bool>,
+    /// If `true`, the shadow copy is created by a differential shadow copy provider. The provider can be 
+    /// implemented in hardware or software.
+    pub Differential: Option<bool>,
+    /// If `true`, the shadow copy is created by a split-mirror shadow copy provider.
+    pub Plex: Option<bool>,
+    /// If `true`, the shadow copy is imported to a computer by using the `Import` method and is not created 
+    /// by using the `Create` method.
+    pub Imported: Option<bool>,
+    /// If `true`, the shadow copy is exposed on a remote computer with a network share. If both 
+    /// `ExposedRemotely` and `ExposedLocally` are `false`, the shadow copy is hidden.
+    pub ExposedRemotely: Option<bool>,
+    /// If `true`, the shadow copy is exposed on a remote computer with a network share. If both 
+    /// `ExposedLocally` and `ExposedRemotely` are `false`, the shadow copy is hidden.
+    pub ExposedLocally: Option<bool>,
 }

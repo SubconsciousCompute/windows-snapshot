@@ -97,6 +97,8 @@ pub struct Windows {
     pub codec_files: multimedia_audio_visual::CodecFiles,
     /// State of Windows ShadowCopys
     pub shadow_copys: storage::ShadowCopys,
+    /// State of Windows ShadowContexts
+    pub shadow_contexts: storage:: ShadowContexts
 }
 
 impl Windows {
@@ -141,6 +143,7 @@ impl Windows {
         self.shares.update();
         self.codec_files.update();
         self.shadow_copys.update();
+        self.shadow_contexts.update();
     }
 
     /// Asynchronously update all the fields
@@ -185,6 +188,7 @@ impl Windows {
             self.shares.async_update(),
             self.codec_files.async_update(),
             self.shadow_copys.async_update(),
+            self.shadow_contexts.async_update(),
         );
     }
 }
