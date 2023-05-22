@@ -1,5 +1,5 @@
 [package]
-name = "windows-snapshot"
+name = "windows_snapshot"
 version = "0.1.0"
 edition = "2021"
 authors = ["sn99 <siddharthn.099@gmail.com>", "nidhihemanth <nidhihemanth123@gmail.com>"]
