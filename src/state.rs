@@ -98,7 +98,9 @@ pub struct Windows {
     /// State of Windows ShadowCopys
     pub shadow_copys: storage::ShadowCopys,
     /// State of Windows ShadowContexts
-    pub shadow_contexts: storage:: ShadowContexts
+    pub shadow_contexts: storage::ShadowContexts,
+    /// State of Windows ShadowProviders
+    pub shadow_providers: storage::ShadowProviders,
 }
 
 impl Windows {
@@ -144,6 +146,7 @@ impl Windows {
         self.codec_files.update();
         self.shadow_copys.update();
         self.shadow_contexts.update();
+        self.shadow_providers.update();
     }
 
     /// Asynchronously update all the fields
@@ -189,6 +192,7 @@ impl Windows {
             self.codec_files.async_update(),
             self.shadow_copys.async_update(),
             self.shadow_contexts.async_update(),
+            self.shadow_providers.async_update(),
         );
     }
 }

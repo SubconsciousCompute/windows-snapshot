@@ -52,6 +52,17 @@ pub struct ShadowContexts {
 
 update!(ShadowContexts, shadow_contexts);
 
+/// Represents the state of Windows ShadowProviders
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct ShadowProviders {
+    /// Represents sequence of `ShadowProviders`
+    pub shadow_providers: Vec<Win32_ShadowProvider>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(ShadowProviders, shadow_providers);
+
 /// The `Win32_ShadowCopy` class is a storage extent that represents a duplicate copy of the 
 /// original volume at a previous time.
 /// 
@@ -446,4 +457,34 @@ pub struct Win32_ShadowContext {
     /// If `true`, the shadow copy is exposed on a remote computer with a network share. If both 
     /// `ExposedLocally` and `ExposedRemotely` are `false`, the shadow copy is hidden.
     pub ExposedLocally: Option<bool>,
+}
+
+/// Typically, the `Win32_ShadowProvider` class represents a component that is a combination of user-mode 
+/// and kernel or firmware implementation, that creates and represents volume shadow copies.
+/// 
+/// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/vsswmi/win32-shadowprovider>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_ShadowProvider {
+    /// Uniquely identifies the shadow provider on a system.
+    pub ID: Option<String>,
+    /// Descriptive name of a provider.
+    pub Name: Option<String>,
+    /// Common Object Model (COM) class ID registered for a shadow provider.
+    pub CLSID: Option<String>,
+    /// Specifies the class to which a shadow provider belongs.
+    /// 
+    /// Possible values:
+    /// 
+    /// Value: Meaning
+    /// - 0: Unknown
+    /// - 1: System
+    /// - 2: Software
+    /// - 3: Hardware
+    pub Type: Option<u32>,
+    /// Text representation of a shadow provider version.
+    pub Version: Option<String>,
+    /// Numeric representation of a shadow provider version.
+    pub VersionID: Option<String>,
 }
