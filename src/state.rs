@@ -123,6 +123,8 @@ pub struct Windows {
     pub program_group_or_items: start_menu::ProgramGroupOrItems,
     /// State of Windows IP4PersistedRouteTables
     pub ip4_persisted_route_tables: networking::IP4PersistedRouteTables,
+    /// State of Windows IP4RouteTables
+    pub ip4_route_tables: networking::IP4RouteTables,
 }
 
 impl Windows {
@@ -180,6 +182,7 @@ impl Windows {
         self.logical_program_group_items.update();
         self.program_group_or_items.update();
         self.ip4_persisted_route_tables.update();
+        self.ip4_route_tables.update();
     }
 
     /// Asynchronously update all the fields
@@ -237,6 +240,7 @@ impl Windows {
             self.logical_program_group_items.async_update(),
             self.program_group_or_items.async_update(),
             self.ip4_persisted_route_tables.async_update(),
+            self.ip4_route_tables.async_update(),
         );
     }
 }
