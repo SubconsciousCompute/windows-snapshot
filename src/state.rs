@@ -109,6 +109,8 @@ pub struct Windows {
     pub privileges_statuses: security::PrivilegesStatuses,
     /// State of Windows Trustees
     pub trustees: security::Trustees,
+    /// State of Windows ACEs
+    pub aces: security::ACEs,
 }
 
 impl Windows {
@@ -159,6 +161,7 @@ impl Windows {
         self.logical_share_security_settings.update();
         self.privileges_statuses.update();
         self.trustees.update();
+        self.aces.update();
     }
 
     /// Asynchronously update all the fields
@@ -209,6 +212,7 @@ impl Windows {
             self.logical_share_security_settings.async_update(),
             self.privileges_statuses.async_update(),
             self.trustees.async_update(),
+            self.aces.async_update(),
         );
     }
 }

@@ -41,6 +41,17 @@ pub struct LogicalFileSecuritySettings {
 
 update!(LogicalFileSecuritySettings, logical_file_security_settings);
 
+/// Represents the state of Windows ACEs
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct ACEs {
+    /// Represents sequence of Windows `ACEs`
+    pub aces: Vec<Win32_ACE>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(ACEs, aces);
+
 /// Represents the state of Windows LogicalShareSecuritySettings
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct LogicalShareSecuritySettings {
@@ -74,6 +85,58 @@ pub struct Trustees {
 
 update!(Trustees, trustees);
 
+/// The `Win32_ACE` abstract WMI class specifies an access control entry (ACE). An ACE grants permission 
+/// to execute a restricted operation, such as writing to a file or formatting a disk. An ACE that 
+/// is specific to WMI allows logon, remote access, method execution, and writing to the WMI repository.
+/// 
+/// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/secrcw32prov/win32-ace>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_ACE {
+    /// The time, in the CIM_DATETIME format, when the security descriptor was created.
+    pub TIME_CREATED: Option<u64>,
+    /// Bit flags that indicate rights granted or denied to the trustee. 
+    /// 
+    /// - `FILE_READ_DATA` (file) or FILE_LIST_DIRECTORY (directory) (1 (0x1)): Grants the right to read data from the file. For a directory, this value grants the right to list the contents of the directory.
+    /// - `FILE_WRITE_DATA` (file) or FILE_ADD_FILE (directory) (2 (0x2)): Grants the right to write data to the file. For a directory, this value grants the right to create a file in the directory.
+    /// - `FILE_APPEND_DATA` (file) or FILE_ADD_SUBDIRECTORY (directory) (4 (0x4)): Grants the right to append data to the file. For a directory, this value grants the right to create a subdirectory.
+    /// - `FILE_READ_EA` (8 (0x8)): Grants the right to read extended attributes.
+    /// - `FILE_WRITE_EA` (16 (0x10)): Grants the right to write extended attributes.
+    /// - `FILE_EXECUTE` (file) or FILE_TRAVERSE (directory) (32 (0x20)): Grants the right to execute a file. For a directory, the directory can be traversed.
+    /// - `FILE_DELETE_CHILD` (64 (0x40)): Grants the right to delete a directory and all the files it contains (its children), even if the files are read-only.
+    /// - `FILE_READ_ATTRIBUTES` (128 (0x80)): Grants the right to read file attributes.
+    /// - `FILE_WRITE_ATTRIBUTES` (256 (0x100)): Grants the right to change file attributes.
+    /// - `DELETE` (65536 (0x10000)): Grants delete access.
+    /// - `READ_CONTROL` (131072 (0x20000)): Grants read access to the security descriptor and owner.
+    /// - `WRITE_DAC` (262144 (0x40000)): Grants write access to the discretionary access control list (ACL).
+    /// - `WRITE_OWNER` (524288 (0x80000)): Assigns the write owner.
+    /// - `SYNCHRONIZE` (1048576 (0x100000)): Synchronizes access and allows a process to wait for an object to enter the signaled state.
+    pub AccessMask: Option<u32>,
+    /// Bit flags that specify inheritance of the ACE. The the relevant permission values for `AceFlags` are 
+    /// listed below.
+    /// 
+    /// - `OBJECT_INHERIT_ACE` (1 (0x1)): Noncontainer child objects inherit the ACE as an effective ACE. For child objects that are containers, the ACE is inherited as an inherit-only ACE unless the NO_PROPAGATE_INHERIT_ACE bit flag is also set.
+    /// - `CONTAINER_INHERIT_ACE` (2 (0x2)): Child objects that are containers, such as directories, inherit the ACE as an effective ACE. The inherited ACE is inheritable unless the NO_PROPAGATE_INHERIT_ACE bit flag is also set.
+    /// - `NO_PROPAGATE_INHERIT_ACE` (4 (0x4)): If the ACE is inherited by a child object, the system clears the OBJECT_INHERIT_ACE and CONTAINER_INHERIT_ACE flags in the inherited ACE. This prevents the ACE from being inherited by subsequent generations of objects.
+    /// - `INHERIT_ONLY_ACE` (8 (0x8)): Indicates an inherit-only ACE which does not control access to the object to which it is attached. If this flag is not set, the ACE is an effective ACE which controls access to the object to which it is attached. Both effective and inherit-only ACEs can be inherited depending on the state of the other inheritance flags.
+    /// - `INHERITED_ACE` (16 (0x10)): The system sets this bit when it propagates an inherited ACE to a child object. The two possible values for AceFlags that pertain only to an ACE contained within a system access control list (SACL) are listed below.
+    /// - `SUCCESSFUL_ACCESS_ACE_FLAG` (64 (0x40)): Used with system-audit ACEs in an SACL to generate audit messages for successful access attempts.
+    /// - `FAILED_ACCESS_ACE_FLAG` (128 (0x80)): Used with system-audit ACEs in an SACL to generate audit messages for failed access attempts.
+    pub AceFlags: Option<u32>,
+    /// Type of ACE.
+    /// - `Access Allowed` (0)
+    /// - `Access Denied` (1)
+    /// - `Audit` (2)
+    pub AceType: Option<u32>,
+    /// Globally unique identifier (GUID) associated with the parent of the object to which these rights apply.
+    pub GuidInheritedObjectType: Option<String>,
+    /// GUID associated with the type of object to which these rights apply.
+    pub GuidObjectType: Option<String>,
+    /// Object representing the user account, group account, or logon session to which an ACE applies.
+    pub Trustee: Option<Win32_Trustee>,
+}
+
 /// The `Win32_LogicalFileSecuritySetting` WMI class represents security settings for a logical file. 
 /// You cannot enumerate instances of this class.
 /// 
@@ -91,19 +154,19 @@ pub struct Win32_LogicalFileSecuritySetting {
     /// Control bits that qualify the meaning of an SD or its individual members. For 
     /// 
     /// The following list lists the flags in `ControlFlags`. 
-    /// - SE_OWNER_DEFAULTED (1 (0x1)): Indicates an SD with a default owner security identifier (SID). You can use this bit to find all of the objects that have default owner permissions set.
-    /// - SE_GROUP_DEFAULTED (2 (0x2)): Indicates an SD with a default group SID. You can use this bit to find all of the objects that have default group permissions set.
-    /// - SE_DACL_PRESENT (4 (0x4)): Indicates an SD that has a discretionary access control list (DACL). If this flag is not set, or if this flag is set and the DACL is `NULL`, the SD allows full access to everyone.
-    /// - SE_DACL_DEFAULTED (8 (0x8)): Indicates an SD with a default DACL. For example, if an object creator does not specify a DACL, the object receives the default DACL from the access token of the creator. This flag can affect how the system treats the DACL, with respect to access control entry (ACE) inheritance. The system ignores this flag if the `SE_DACL_PRESENT` flag is not set.
-    /// - SE_SACL_PRESENT (16 (0x10)): Indicates an SD that has a system access control list (SACL).
-    /// - SE_SACL_DEFAULTED (32 (0x20)): Indicates an SD with a default SACL. For example, if an object creator does not specify an SACL, the object receives the default SACL from the access token of the creator. This flag can affect how the system treats the SACL, with respect to ACE inheritance. The system ignores this flag if the `SE_SACL_PRESENT` flag is not set.
-    /// - SE_DACL_AUTO_INHERIT_REQ (256 (0x100)): Requests that the provider for the object protected by the SD automatically propagate the DACL to existing child objects. If the provider supports automatic inheritance, it propagates the DACL to any existing child objects, and sets the `SE_DACL_AUTO_INHERITED` bit in the security descriptors of the object and its child objects.
-    /// - SE_SACL_AUTO_INHERIT_REQ (512 (0x200)): Requests that the provider for the object protected by the SD automatically propagate the SACL to existing child objects. If the provider supports automatic inheritance, it propagates the SACL to any existing child objects, and sets the `SE_SACL_AUTO_INHERITED` bit in the SDs of the object and its child objects.
-    /// - SE_DACL_AUTO_INHERITED (1024 (0x400)): Windows 2000 only. Indicates an SD in which the DACL is set up to support automatic propagation of inheritable ACEs to existing child objects. The system sets this bit when it performs the automatic inheritance algorithm for the object and its existing child objects. This bit is not set in SDs for Windows NT versions 4.0 and earlier, which do not support automatic propagation of inheritable ACEs.
-    /// - SE_SACL_AUTO_INHERITED (2048 (0x800)): Windows 2000: Indicates an SD in which the SACL is set up to support automatic propagation of inheritable ACEs to existing child objects. The system sets this bit when it performs the automatic inheritance algorithm for the object and its existing child objects. This bit is not set in SDs for Windows NT versions 4.0 and earlier, which do not support automatic propagation of inheritable ACEs.
-    /// - SE_DACL_PROTECTED (4096 (0x1000)): Windows 2000: Prevents the DACL of the SD from being modified by inheritable ACEs.
-    /// - SE_SACL_PROTECTED (8192 (0x2000)): Windows 2000: Prevents the SACL of the SD from being modified by inheritable ACEs.
-    /// - SE_SELF_RELATIVE (32768 (0x8000)): Indicates an SD in self-relative format with all of the security information in a contiguous block of memory. If this flag is not set, the SD is in absolute format. 
+    /// - `SE_OWNER_DEFAULTED` (1 (0x1)): Indicates an SD with a default owner security identifier (SID). You can use this bit to find all of the objects that have default owner permissions set.
+    /// - `SE_GROUP_DEFAULTED` (2 (0x2)): Indicates an SD with a default group SID. You can use this bit to find all of the objects that have default group permissions set.
+    /// - `SE_DACL_PRESENT` (4 (0x4)): Indicates an SD that has a discretionary access control list (DACL). If this flag is not set, or if this flag is set and the DACL is `NULL`, the SD allows full access to everyone.
+    /// - `SE_DACL_DEFAULTED` (8 (0x8)): Indicates an SD with a default DACL. For example, if an object creator does not specify a DACL, the object receives the default DACL from the access token of the creator. This flag can affect how the system treats the DACL, with respect to access control entry (ACE) inheritance. The system ignores this flag if the `SE_DACL_PRESENT` flag is not set.
+    /// - `SE_SACL_PRESENT` (16 (0x10)): Indicates an SD that has a system access control list (SACL).
+    /// - `SE_SACL_DEFAULTED` (32 (0x20)): Indicates an SD with a default SACL. For example, if an object creator does not specify an SACL, the object receives the default SACL from the access token of the creator. This flag can affect how the system treats the SACL, with respect to ACE inheritance. The system ignores this flag if the `SE_SACL_PRESENT` flag is not set.
+    /// - `SE_DACL_AUTO_INHERIT_REQ` (256 (0x100)): Requests that the provider for the object protected by the SD automatically propagate the DACL to existing child objects. If the provider supports automatic inheritance, it propagates the DACL to any existing child objects, and sets the `SE_DACL_AUTO_INHERITED` bit in the security descriptors of the object and its child objects.
+    /// - `SE_SACL_AUTO_INHERIT_REQ` (512 (0x200)): Requests that the provider for the object protected by the SD automatically propagate the SACL to existing child objects. If the provider supports automatic inheritance, it propagates the SACL to any existing child objects, and sets the `SE_SACL_AUTO_INHERITED` bit in the SDs of the object and its child objects.
+    /// - `SE_DACL_AUTO_INHERITED` (1024 (0x400)): Windows 2000 only. Indicates an SD in which the DACL is set up to support automatic propagation of inheritable ACEs to existing child objects. The system sets this bit when it performs the automatic inheritance algorithm for the object and its existing child objects. This bit is not set in SDs for Windows NT versions 4.0 and earlier, which do not support automatic propagation of inheritable ACEs.
+    /// - `SE_SACL_AUTO_INHERITED` (2048 (0x800)): Windows 2000: Indicates an SD in which the SACL is set up to support automatic propagation of inheritable ACEs to existing child objects. The system sets this bit when it performs the automatic inheritance algorithm for the object and its existing child objects. This bit is not set in SDs for Windows NT versions 4.0 and earlier, which do not support automatic propagation of inheritable ACEs.
+    /// - `SE_DACL_PROTECTED` (4096 (0x1000)): Windows 2000: Prevents the DACL of the SD from being modified by inheritable ACEs.
+    /// - `SE_SACL_PROTECTED` (8192 (0x2000)): Windows 2000: Prevents the SACL of the SD from being modified by inheritable ACEs.
+    /// - `SE_SELF_RELATIVE` (32768 (0x8000)): Indicates an SD in self-relative format with all of the security information in a contiguous block of memory. If this flag is not set, the SD is in absolute format. 
     pub ControlFlags: Option<u32>,
     /// Owner permissions to the object.
     pub OwnerPermissions: Option<bool>,
@@ -128,19 +191,19 @@ pub struct Win32_LogicalShareSecuritySetting {
     /// 
     /// The following list lists the flags in `ControlFlags`.
     /// 
-    /// - SE_OWNER_DEFAULTED (1 (0x1)): Indicates an SD with a default owner security identifier (SID). You can use this bit to find all of the objects that have default owner permissions set.
-    /// - SE_GROUP_DEFAULTED (2 (0x2)): Indicates an SD with a default group SID. You can use this bit to find all of the objects that have default group permissions set.
-    /// - SE_DACL_PRESENT (4 (0x4)): Indicates an SD that has a discretionary access control list (DACL). If this flag is not set, or if this flag is set and the DACL is `NULL, the SD allows full access to everyone.
-    /// - SE_DACL_DEFAULTED (8 (0x8)): Indicates an SD with a default DACL. For example, if an object creator does not specify a DACL, the object receives the default DACL from the access token of the creator. This flag can affect how the system treats the DACL, with respect to access control entry (ACE) inheritance. The system ignores this flag if the `SE_DACL_PRESENT` flag is not set.
-    /// - SE_SACL_PRESENT (16 (0x10)): Indicates an SD that has a system access control list (SACL).
-    /// - SE_SACL_DEFAULTED (32 (0x20)): Indicates an SD with a default SACL. For example, if an object creator does not specify an SACL, the object receives the default SACL from the access token of the creator. This flag can affect how the system treats the SACL, with respect to ACE inheritance. The system ignores this flag if the `SE_SACL_PRESENT` flag is not set.
-    /// - SE_DACL_AUTO_INHERIT_REQ (256 (0x100)): Requests that the provider for the object protected by the SD automatically propagate the DACL to existing child objects. If the provider supports automatic inheritance, it propagates the DACL to any existing child objects, and sets the `SE_DACL_AUTO_INHERITED` bit in the security descriptors of the object and its child objects.
-    /// - SE_SACL_AUTO_INHERIT_REQ (512 (0x200)): Requests that the provider for the object protected by the SD automatically propagate the SACL to existing child objects. If the provider supports automatic inheritance, it propagates the SACL to any existing child objects, and sets the `SE_SACL_AUTO_INHERITED` bit in the SDs of the object and its child objects.
-    /// - SE_DACL_AUTO_INHERITED (1024 (0x400)): Windows 2000 only. Indicates an SD in which the DACL is set up to support automatic propagation of inheritable ACEs to existing child objects. The system sets this bit when it performs the automatic inheritance algorithm for the object and its existing child objects. This bit is not set in SDs for Windows NT versions 4.0 and earlier, which do not support automatic propagation of inheritable ACEs.
-    /// - SE_SACL_AUTO_INHERITED (2048 (0x800)): Windows 2000: Indicates an SD in which the SACL is set up to support automatic propagation of inheritable ACEs to existing child objects. The system sets this bit when it performs the automatic inheritance algorithm for the object and its existing child objects. This bit is not set in SDs for Windows NT versions 4.0 and earlier, which do not support automatic propagation of inheritable ACEs.
-    /// - SE_DACL_PROTECTED (4096 (0x1000)): Windows 2000: Prevents the DACL of the SD from being modified by inheritable ACEs.
-    /// - SE_SACL_PROTECTED (8192 (0x2000)): Windows 2000: Prevents the SACL of the SD from being modified by inheritable ACEs.
-    /// - SE_SELF_RELATIVE (32768 (0x8000)): Indicates an SD in self-relative format with all of the security information in a contiguous block of memory. If this flag is not set, the SD is in absolute format.
+    /// - `SE_OWNER_DEFAULTED` (1 (0x1)): Indicates an SD with a default owner security identifier (SID). You can use this bit to find all of the objects that have default owner permissions set.
+    /// - `SE_GROUP_DEFAULTED` (2 (0x2)): Indicates an SD with a default group SID. You can use this bit to find all of the objects that have default group permissions set.
+    /// - `SE_DACL_PRESENT` (4 (0x4)): Indicates an SD that has a discretionary access control list (DACL). If this flag is not set, or if this flag is set and the DACL is `NULL, the SD allows full access to everyone.
+    /// - `SE_DACL_DEFAULTED` (8 (0x8)): Indicates an SD with a default DACL. For example, if an object creator does not specify a DACL, the object receives the default DACL from the access token of the creator. This flag can affect how the system treats the DACL, with respect to access control entry (ACE) inheritance. The system ignores this flag if the `SE_DACL_PRESENT` flag is not set.
+    /// - `SE_SACL_PRESENT` (16 (0x10)): Indicates an SD that has a system access control list (SACL).
+    /// - `SE_SACL_DEFAULTED` (32 (0x20)): Indicates an SD with a default SACL. For example, if an object creator does not specify an SACL, the object receives the default SACL from the access token of the creator. This flag can affect how the system treats the SACL, with respect to ACE inheritance. The system ignores this flag if the `SE_SACL_PRESENT` flag is not set.
+    /// - `SE_DACL_AUTO_INHERIT_REQ` (256 (0x100)): Requests that the provider for the object protected by the SD automatically propagate the DACL to existing child objects. If the provider supports automatic inheritance, it propagates the DACL to any existing child objects, and sets the `SE_DACL_AUTO_INHERITED` bit in the security descriptors of the object and its child objects.
+    /// - `SE_SACL_AUTO_INHERIT_REQ` (512 (0x200)): Requests that the provider for the object protected by the SD automatically propagate the SACL to existing child objects. If the provider supports automatic inheritance, it propagates the SACL to any existing child objects, and sets the `SE_SACL_AUTO_INHERITED` bit in the SDs of the object and its child objects.
+    /// - `SE_DACL_AUTO_INHERITED` (1024 (0x400)): Windows 2000 only. Indicates an SD in which the DACL is set up to support automatic propagation of inheritable ACEs to existing child objects. The system sets this bit when it performs the automatic inheritance algorithm for the object and its existing child objects. This bit is not set in SDs for Windows NT versions 4.0 and earlier, which do not support automatic propagation of inheritable ACEs.
+    /// - `SE_SACL_AUTO_INHERITED` (2048 (0x800)): Windows 2000: Indicates an SD in which the SACL is set up to support automatic propagation of inheritable ACEs to existing child objects. The system sets this bit when it performs the automatic inheritance algorithm for the object and its existing child objects. This bit is not set in SDs for Windows NT versions 4.0 and earlier, which do not support automatic propagation of inheritable ACEs.
+    /// - `SE_DACL_PROTECTED` (4096 (0x1000)): Windows 2000: Prevents the DACL of the SD from being modified by inheritable ACEs.
+    /// - `SE_SACL_PROTECTED` (8192 (0x2000)): Windows 2000: Prevents the SACL of the SD from being modified by inheritable ACEs.
+    /// - `SE_SELF_RELATIVE` (32768 (0x8000)): Indicates an SD in self-relative format with all of the security information in a contiguous block of memory. If this flag is not set, the SD is in absolute format.
     pub ControlFlags: Option<u32>,
     /// Name of the share.
     pub Name: Option<String>,
