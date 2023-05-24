@@ -52,6 +52,17 @@ pub struct LogicalShareSecuritySettings {
 
 update!(LogicalShareSecuritySettings, logical_share_security_settings);
 
+/// Represents the state of Windows PrivilegesStatuses
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct PrivilegesStatuses {
+    /// Represents sequence of Windows `PrivilegesStatuses`
+    pub privileges_statuses: Vec<Win32_PrivilegesStatus>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(PrivilegesStatuses, privileges_statuses);
+
 /// The `Win32_LogicalFileSecuritySetting` WMI class represents security settings for a logical file. 
 /// You cannot enumerate instances of this class.
 /// 
@@ -122,4 +133,40 @@ pub struct Win32_LogicalShareSecuritySetting {
     pub ControlFlags: Option<u32>,
     /// Name of the share.
     pub Name: Option<String>,
+}
+
+/// The `Win32_PrivilegesStatus` WMI class reports information about privileges required to complete 
+/// an operation. It may be returned when an operation failed or when a partially populated instance 
+/// has been returned.
+/// 
+/// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-privilegesstatus>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_PrivilegesStatus {
+    /// Any user-defined string that describes an error or operational status.
+    pub Description: Option<String>,
+    /// Operation that takes place at the time of a failure or anomaly. Typically, Windows Management 
+    /// Instrumentation (WMI) sets this property to the name of a COM API for WMI method such as the 
+    /// following: `IWbemServices::CreateInstanceEnum`.
+    pub Operation: Option<String>,
+    /// Parameters involved in an error or status change. For example, if an application attempts to 
+    /// retrieve a class that does not exist, this property is set to the offending class name.
+    pub ParameterInfo: Option<String>,
+    /// Identifies the provider that causes or reports an error or status change. If a provider is not 
+    /// involved, this string is set to "Windows Management".
+    pub ProviderName: Option<String>,
+    /// Contains an error or information code for an operation. This can be any value defined by the 
+    /// provider, but the value 0 (zero) is usually reserved to indicate success.
+    pub StatusCode: Option<u32>,
+    /// Listing required access privileges missing to complete an operation. The types of access 
+    /// privileges can be found under the Windows Privileges.
+    /// 
+    /// Example: "SE_SHUTDOWN_NAME"
+    pub PrivilegesNotHeld: Option<Vec<String>>,
+    /// Listing of all of the privileges required to perform an operation. This includes values from 
+    /// the PrivilegesNotHeld property.
+    /// 
+    /// Example: "SE_SHUTDOWN_NAME"
+    pub PrivilegesRequired: Option<Vec<String>>,
 }

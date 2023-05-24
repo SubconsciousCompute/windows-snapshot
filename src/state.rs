@@ -105,6 +105,8 @@ pub struct Windows {
     pub logical_file_security_settings: security::LogicalFileSecuritySettings,
     /// State of Windows LogicalShareSecuritySettings
     pub logical_share_security_settings: security::LogicalShareSecuritySettings,
+    /// State of Windows PrivilegesStatuses
+    pub privileges_statuses: security::PrivilegesStatuses,
 }
 
 impl Windows {
@@ -153,6 +155,7 @@ impl Windows {
         self.shadow_providers.update();
         self.logical_file_security_settings.update();
         self.logical_share_security_settings.update();
+        self.privileges_statuses.update();
     }
 
     /// Asynchronously update all the fields
@@ -201,6 +204,7 @@ impl Windows {
             self.shadow_providers.async_update(),
             self.logical_file_security_settings.async_update(),
             self.logical_share_security_settings.async_update(),
+            self.privileges_statuses.async_update(),
         );
     }
 }
