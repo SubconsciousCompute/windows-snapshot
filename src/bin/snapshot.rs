@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.shadow_providers.update();
+    k.logical_file_security_settings.update();
 
-    println!("{:#?}", k.shadow_providers);
+    println!("{:#?}", k.logical_file_security_settings);
 }

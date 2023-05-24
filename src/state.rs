@@ -1,7 +1,7 @@
 //! Stores the main state of Windows machine
 
 use crate::operating_system::{
-    desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_pagefiles, scheduler_jobs, product_activation, software_license_provider, shares, multimedia_audio_visual, storage
+    desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_pagefiles, scheduler_jobs, product_activation, software_license_provider, shares, multimedia_audio_visual, storage, security
 };
 use serde::{Deserialize, Serialize};
 use tokio::join;
@@ -101,6 +101,8 @@ pub struct Windows {
     pub shadow_contexts: storage::ShadowContexts,
     /// State of Windows ShadowProviders
     pub shadow_providers: storage::ShadowProviders,
+    /// State of Windows LogicalFileSecuritySettings
+    pub logical_file_security_settings: security::LogicalFileSecuritySettings,
 }
 
 impl Windows {
@@ -147,6 +149,7 @@ impl Windows {
         self.shadow_copys.update();
         self.shadow_contexts.update();
         self.shadow_providers.update();
+        self.logical_file_security_settings.update();
     }
 
     /// Asynchronously update all the fields
@@ -193,6 +196,7 @@ impl Windows {
             self.shadow_copys.async_update(),
             self.shadow_contexts.async_update(),
             self.shadow_providers.async_update(),
+            self.logical_file_security_settings.async_update(),
         );
     }
 }
