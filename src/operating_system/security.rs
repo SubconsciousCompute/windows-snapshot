@@ -30,17 +30,6 @@ use serde::{Deserialize, Serialize};
 use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection};
 
-/// Represents the state of Windows LogicalFileSecuritySettings
-#[derive(Deserialize, Serialize, Debug, Clone)]
-pub struct LogicalFileSecuritySettings {
-    /// Represents sequence of Windows `LogicalFileSecuritySettings`
-    pub logical_file_security_settings: Vec<Win32_LogicalFileSecuritySetting>,
-    /// When was the record last updated
-    pub last_updated: SystemTime,
-}
-
-update!(LogicalFileSecuritySettings, logical_file_security_settings);
-
 /// Represents the state of Windows ACEs
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct ACEs {
@@ -51,6 +40,17 @@ pub struct ACEs {
 }
 
 update!(ACEs, aces);
+
+/// Represents the state of Windows LogicalFileSecuritySettings
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct LogicalFileSecuritySettings {
+    /// Represents sequence of Windows `LogicalFileSecuritySettings`
+    pub logical_file_security_settings: Vec<Win32_LogicalFileSecuritySetting>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(LogicalFileSecuritySettings, logical_file_security_settings);
 
 /// Represents the state of Windows LogicalShareSecuritySettings
 #[derive(Deserialize, Serialize, Debug, Clone)]
@@ -369,4 +369,31 @@ pub struct Win32_Trustee {
     /// 
     /// Example: "S-1-1-0"
     pub SIDString: Option<String>,
+}
+
+/// The `Win32_SID` WMI class represents an arbitrary security identifier (SID). This property cannot be enumerated.
+/// 
+/// Note: This class cannot be accessed.
+/// 
+/// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/secrcw32prov/win32-sid>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+struct Win32_SID {
+    /// Name of the account associated with the SID.
+    AccountName: Option<String>,
+    /// SID in binary format.
+    BinaryRepresentation: Option<Vec<u8>>,
+    /// Domain of the account associated with the SID.
+    ReferencedDomainName: Option<String>,
+    /// SID in string format. 
+    /// 
+    /// The values of the string are as follows (in order).
+    /// 1. The literal character "S" (identifies the string as a SID).
+    /// 2. The revision level.
+    /// 3. Identifier authority value.
+    /// 4. One or more subauthority values.
+    SID: Option<String>,
+    /// Length of the SID in bytes.
+    SidLength: Option<u32>,
 }
