@@ -111,6 +111,8 @@ pub struct Windows {
     pub trustees: security::Trustees,
     /// State of Windows ACEs
     pub aces: security::ACEs,
+    /// State of Windows SecurityDescriptors
+    pub security_descriptors: security::SecurityDescriptors,
 }
 
 impl Windows {
@@ -162,6 +164,7 @@ impl Windows {
         self.privileges_statuses.update();
         self.trustees.update();
         self.aces.update();
+        self.security_descriptors.update();
     }
 
     /// Asynchronously update all the fields
@@ -213,6 +216,7 @@ impl Windows {
             self.privileges_statuses.async_update(),
             self.trustees.async_update(),
             self.aces.async_update(),
+            self.security_descriptors.async_update(),
         );
     }
 }
