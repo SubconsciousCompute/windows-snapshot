@@ -351,7 +351,7 @@ pub struct Win32_Volume {
     /// - 2 (0x2): Disabled
     /// - 3 (0x3): Enabled [The power management features are currently enabled but the exact feature set is unknown or the information is unavailable]
     /// - 4 (0x4): Power Saving Modes Entered Automatically [The device can change its power state based on usage or other criteria]
-    /// - 5 (0x5): Power State Settable [The SetPowerState method is supported. This method is found on the parent CIM_LogicalDevice class and can be implemented. For more information, see Designing Managed Object Format (MOF) Classes]
+    /// - 5 (0x5): Power State Settable [The SetPowerState method is supported. This method is found on the parent CIM_LogicalDevice class and can be implemented]
     /// - 6 (0x6): Power Cycling Supported [The SetPowerState method can be invoked with the PowerState parameter set to 5 (Power Cycle)]
     /// - 7 (0x7): Timed Power-On Supported [The SetPowerState method can be invoked with the PowerState parameter set to 5 (Power Cycle) and Time set to a specific date and time, or interval, for power-on]
     pub PowerManagementCapabilities: Option<Vec<u16>>,

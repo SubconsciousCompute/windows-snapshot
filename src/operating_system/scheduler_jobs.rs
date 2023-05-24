@@ -47,7 +47,6 @@ update!(UTCTimes, utc_times);
 /// 
 /// Note: The Win32_ScheduledJob class does not represent a job created with the Scheduled Task Wizard 
 /// from the Control Panel. You cannot change a task created by WMI in the Scheduled Tasks UI. 
-/// For more information, see the Remarks section.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-scheduledjob>
 #[derive(Default, Deserialize, Serialize, Debug, Clone)]

@@ -1,7 +1,7 @@
 //! Stores the main state of Windows machine
 
 use crate::operating_system::{
-    desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_pagefiles, scheduler_jobs, product_activation, software_license_provider, shares, multimedia_audio_visual, storage, security
+    desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_pagefiles, scheduler_jobs, product_activation, software_license_provider, shares, multimedia_audio_visual, storage, security, start_menu, networking
 };
 use serde::{Deserialize, Serialize};
 use tokio::join;
@@ -115,6 +115,16 @@ pub struct Windows {
     pub security_descriptors: security::SecurityDescriptors,
     /// State of Windows SecuritySettings
     pub security_settings: security::SecuritySettings,
+    /// State of Windows LogicalProgramGroups
+    pub logical_program_groups: start_menu::LogicalProgramGroups,
+    /// State of Windows LogicalProgramGroupItems
+    pub logical_program_group_items: start_menu::LogicalProgramGroupItems,
+    /// State of Windows ProgramGroupOrItems
+    pub program_group_or_items: start_menu::ProgramGroupOrItems,
+    /// State of Windows IP4PersistedRouteTables
+    pub ip4_persisted_route_tables: networking::IP4PersistedRouteTables,
+    /// State of Windows IP4RouteTables
+    pub ip4_route_tables: networking::IP4RouteTables,
 }
 
 impl Windows {
@@ -168,6 +178,11 @@ impl Windows {
         self.aces.update();
         self.security_descriptors.update();
         self.security_settings.update();
+        self.logical_program_groups.update();
+        self.logical_program_group_items.update();
+        self.program_group_or_items.update();
+        self.ip4_persisted_route_tables.update();
+        self.ip4_route_tables.update();
     }
 
     /// Asynchronously update all the fields
@@ -221,6 +236,11 @@ impl Windows {
             self.aces.async_update(),
             self.security_descriptors.async_update(),
             self.security_settings.async_update(),
+            self.logical_program_groups.async_update(),
+            self.logical_program_group_items.async_update(),
+            self.program_group_or_items.async_update(),
+            self.ip4_persisted_route_tables.async_update(),
+            self.ip4_route_tables.async_update(),
         );
     }
 }

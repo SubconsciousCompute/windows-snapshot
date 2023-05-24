@@ -90,8 +90,6 @@ pub struct Win32_NTEventlogFile {
     /// Example: "autoexec"
     pub FileName: Option<String>,
     /// Size of the file that contains Windows events (in bytes).
-    /// 
-    /// For more information about using `uint64` values in scripts, see Scripting in WMI.
     pub FileSize: Option<u64>,
     /// File type (indicated by the `Extension` property).
     pub FileType: Option<String>,
@@ -104,8 +102,6 @@ pub struct Win32_NTEventlogFile {
     /// Object is installed. This property does not need a value to indicate that the object is installed.
     pub InstallDate: Option<WMIDateTime>,
     /// Number of "file opens" that are currently active against the file that contains Windows events.
-    /// 
-    /// For more information about using `uint64` values in scripts, see Scripting in WMI.
     pub InUseCount: Option<u64>,
     /// Date and time that the file that contains Windows events was last accessed.
     pub LastAccessed: Option<WMIDateTime>,
