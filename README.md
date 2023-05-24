@@ -1,6 +1,8 @@
 # windows-snapshot
 
 [![Rust](https://github.com/SubconsciousCompute/windows-snapshot/actions/workflows/rust.yml/badge.svg)](https://github.com/SubconsciousCompute/windows-snapshot/actions/workflows/rust.yml)
+[![Crates.io](https://img.shields.io/crates/v/windows-snapshot)](https://crates.io/crates/windows-snapshot)
+[![docs.rs](https://img.shields.io/docsrs/windows-snapshot)](https://docs.rs/query-wmi/windows-snapshot/)
 
 The aim is to provide a snapshot of Windows system asynchronously. It achieves this by using `WMI`.
 
