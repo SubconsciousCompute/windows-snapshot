@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.security_descriptors.update();
+    k.security_settings.update();
 
-    println!("{:#?}", k.security_descriptors);
+    println!("{:#?}", k.security_settings);
 }

@@ -74,17 +74,6 @@ pub struct PrivilegesStatuses {
 
 update!(PrivilegesStatuses, privileges_statuses);
 
-/// Represents the state of Windows Trustees
-#[derive(Deserialize, Serialize, Debug, Clone)]
-pub struct Trustees {
-    /// Represents sequence of Windows `Trustees`
-    pub trustees: Vec<Win32_Trustee>,
-    /// When was the record last updated
-    pub last_updated: SystemTime,
-}
-
-update!(Trustees, trustees);
-
 /// Represents the state of Windows SecurityDescriptors
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct SecurityDescriptors {
@@ -95,6 +84,28 @@ pub struct SecurityDescriptors {
 }
 
 update!(SecurityDescriptors, security_descriptors);
+
+/// Represents the state of Windows SecuritySettings
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct SecuritySettings {
+    /// Represents sequence of Windows `SecuritySettings`
+    pub security_settings: Vec<Win32_SecuritySetting>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(SecuritySettings, security_settings);
+
+/// Represents the state of Windows Trustees
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct Trustees {
+    /// Represents sequence of Windows `Trustees`
+    pub trustees: Vec<Win32_Trustee>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(Trustees, trustees);
 
 /// The `Win32_ACE` abstract WMI class specifies an access control entry (ACE). An ACE grants permission 
 /// to execute a restricted operation, such as writing to a file or formatting a disk. An ACE that 
@@ -296,6 +307,39 @@ pub struct Win32_SecurityDescriptor {
     /// Each array entry defines the type of access attempts that generate audit records for a specific 
     /// user or group.
     pub SACL: Option<Vec<Win32_ACE>>,
+}
+
+/// The `Win32_SecuritySetting` abstract WMI class represents security settings for a managed element.
+/// 
+/// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/secrcw32prov/win32-securitysetting>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_SecuritySetting {
+    /// Short textual description of the `CIM_Setting` object.
+    pub Caption: Option<String>,
+    /// Textual description of the `CIM_Setting` object.
+    pub Description: Option<String>,
+    /// Identifier by which the `CIM_Setting` object is known.
+    pub SettingID: Option<String>,
+    /// Control bits that qualify the meaning of an SD or its individual members.
+    /// 
+    /// The following list lists the flags in `ControlFlags`.
+    /// 
+    /// - `SE_OWNER_DEFAULTED` (1 (0x1)): Indicates an SD with a default owner security identifier (SID). You can use this bit to find all of the objects that have default owner permissions set.
+    /// - `SE_GROUP_DEFAULTED` (2 (0x2)): Indicates an SD with a default group SID. You can use this bit to find all of the objects that have default group permissions set.
+    /// - `SE_DACL_PRESENT` (4 (0x4)): Indicates an SD that has a discretionary access control list (DACL). If this flag is not set, or if this flag is set and the DACL is NULL, the SD allows full access to everyone.
+    /// - `SE_DACL_DEFAULTED` (8 (0x8)): Indicates an SD with a default DACL. For example, if an object creator does not specify a DACL, the object receives the default DACL from the access token of the creator. This flag can affect how the system treats the DACL, with respect to access control entry (ACE) inheritance. The system ignores this flag if the SE_DACL_PRESENT flag is not set.
+    /// - `SE_SACL_PRESENT` (16 (0x10)): Indicates an SD that has a system access control list (SACL).
+    /// - `SE_SACL_DEFAULTED` (32 (0x20)): Indicates an SD with a default SACL. For example, if an object creator does not specify an SACL, the object receives the default SACL from the access token of the creator. This flag can affect how the system treats the SACL, with respect to ACE inheritance. The system ignores this flag if the SE_SACL_PRESENT flag is not set.
+    /// - `SE_DACL_AUTO_INHERIT_REQ` (256 (0x100)): Requests that the provider for the object protected by the SD automatically propagate the DACL to existing child objects. If the provider supports automatic inheritance, it propagates the DACL to any existing child objects, and sets the SE_DACL_AUTO_INHERITED bit in the security descriptors of the object and its child objects.
+    /// - `SE_SACL_AUTO_INHERIT_REQ` (512 (0x200)): Requests that the provider for the object protected by the SD automatically propagate the SACL to existing child objects. If the provider supports automatic inheritance, it propagates the SACL to any existing child objects, and sets the SE_SACL_AUTO_INHERITED bit in the SDs of the object and its child objects.
+    /// - `SE_DACL_AUTO_INHERITED` (1024 (0x400)): Windows 2000 only. Indicates an SD in which the DACL is set up to support automatic propagation of inheritable ACEs to existing child objects. The system sets this bit when it performs the automatic inheritance algorithm for the object and its existing child objects. This bit is not set in SDs for Windows NT versions 4.0 and earlier, which do not support automatic propagation of inheritable ACEs.
+    /// - `SE_SACL_AUTO_INHERITED` (2048 (0x800)): Windows 2000: Indicates an SD in which the SACL is set up to support automatic propagation of inheritable ACEs to existing child objects. The system sets this bit when it performs the automatic inheritance algorithm for the object and its existing child objects. This bit is not set in SDs for Windows NT versions 4.0 and earlier, which do not support automatic propagation of inheritable ACEs.
+    /// - `SE_DACL_PROTECTED` (4096 (0x1000)): Windows 2000: Prevents the DACL of the SD from being modified by inheritable ACEs.
+    /// - `SE_SACL_PROTECTED` (8192 (0x2000)): Windows 2000: Prevents the SACL of the SD from being modified by inheritable ACEs.
+    /// - `SE_SELF_RELATIVE` (32768 (0x8000)): Indicates an SD in self-relative format with all of the security information in a contiguous block of memory. If this flag is not set, the SD is in absolute format.
+    pub ControlFlags: Option<u32>,
 }
 
 /// The `Win32_Trustee` abstract WMI class specifies a trustee that can be a name or a security 
