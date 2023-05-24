@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.logical_program_groups.update();
+    k.logical_program_group_items.update();
 
-    println!("{:#?}", k.logical_program_groups);
+    println!("{:#?}", k.logical_program_group_items);
 }

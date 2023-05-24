@@ -117,6 +117,8 @@ pub struct Windows {
     pub security_settings: security::SecuritySettings,
     /// State of Windows LogicalProgramGroups
     pub logical_program_groups: start_menu::LogicalProgramGroups,
+    /// State of Windows LogicalProgramGroupItems
+    pub logical_program_group_items: start_menu::LogicalProgramGroupItems,
 }
 
 impl Windows {
@@ -171,6 +173,7 @@ impl Windows {
         self.security_descriptors.update();
         self.security_settings.update();
         self.logical_program_groups.update();
+        self.logical_program_group_items.update();
     }
 
     /// Asynchronously update all the fields
@@ -225,6 +228,7 @@ impl Windows {
             self.security_descriptors.async_update(),
             self.security_settings.async_update(),
             self.logical_program_groups.async_update(),
+            self.logical_program_group_items.async_update(),
         );
     }
 }

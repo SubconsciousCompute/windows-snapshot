@@ -25,6 +25,17 @@ pub struct LogicalProgramGroups {
 
 update!(LogicalProgramGroups, logical_program_groups);
 
+/// Represents the state of Windows LogicalProgramGroupItems
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct LogicalProgramGroupItems {
+    /// Represents sequence of Windows `LogicalProgramGroupItems`
+    pub logical_program_group_items: Vec<Win32_LogicalProgramGroupItem>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(LogicalProgramGroupItems, logical_program_group_items);
+
 /// The `Win32_LogicalProgramGroup` WMI class represents a program group in a computer system running 
 /// Windows. For example, Accessories or Startup.
 /// 
@@ -78,4 +89,50 @@ pub struct Win32_LogicalProgramGroup {
     /// 
     /// Example: "All Users"
     pub UserName: Option<String>,
+}
+
+/// The `Win32_LogicalProgramGroupItem` WMI class represents an element contained by a `Win32_LogicalProgramGroup` 
+/// that is not also another `Win32_LogicalProgramGroup` instance.
+/// 
+/// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-logicalprogramgroupitem>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_LogicalProgramGroupItem {
+    /// A short textual description of the object.
+    pub Caption: Option<String>,
+    /// A textual description of the object.
+    pub Description: Option<String>,
+    /// Indicates when the object was installed. Lack of a value does not indicate that the object is 
+    /// not installed.
+    pub InstallDate: Option<WMIDateTime>,
+    /// String that indicates the current status of the object. Operational and non-operational status 
+    /// can be defined. Operational status can include "OK", "Degraded", and "Pred Fail". "Pred Fail" 
+    /// indicates that an element is functioning properly, but is predicting a failure (for example, a 
+    /// SMART-enabled hard disk drive).
+    /// 
+    /// Non-operational status can include "Error", "Starting", "Stopping", and "Service". "Service" 
+    /// can apply during disk mirror-resilvering, reloading a user permissions list, or other 
+    /// administrative work. Not all such work is online, but the managed element is neither "OK" nor in 
+    /// one of the other states.
+    /// 
+    /// Values include the following:
+    /// - `OK` ("OK")
+    /// - `Error` ("Error")
+    /// - `Degraded` ("Degraded")
+    /// - `Unknown` ("Unknown")
+    /// - `Pred Fail` ("Pred Fail")
+    /// - `Starting` ("Starting")
+    /// - `Stopping` ("Stopping")
+    /// - `Service` ("Service")
+    /// - `Stressed` ("Stressed")
+    /// - `NonRecover` ("NonRecover")
+    /// - `No Contact` ("No Contact")
+    /// - `Lost Comm` ("Lost Comm")
+    pub Status: Option<String>,
+    /// Instance within a computer system. Program groups are implemented as file folders in Win32. 
+    /// Full path names should be provided.
+    /// 
+    /// Example: "C:\Users\someone\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Accessories\NotePad.Lnk"
+    pub Name: Option<String>,
 }
