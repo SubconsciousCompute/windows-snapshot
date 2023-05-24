@@ -36,6 +36,17 @@ pub struct LogicalProgramGroupItems {
 
 update!(LogicalProgramGroupItems, logical_program_group_items);
 
+/// Represents the state of Windows ProgramGroupOrItems
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct ProgramGroupOrItems {
+    /// Represents sequence of Windows `LogicalProgramGroupItems`
+    pub program_group_or_items: Vec<Win32_ProgramGroupOrItem>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(ProgramGroupOrItems, program_group_or_items);
+
 /// The `Win32_LogicalProgramGroup` WMI class represents a program group in a computer system running 
 /// Windows. For example, Accessories or Startup.
 /// 
@@ -135,4 +146,48 @@ pub struct Win32_LogicalProgramGroupItem {
     /// 
     /// Example: "C:\Users\someone\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Accessories\NotePad.Lnk"
     pub Name: Option<String>,
+}
+
+/// The `Win32_ProgramGroupOrItem` abstract WMI class represents a logical grouping of programs on the 
+/// user's `Start\Programs` menu. It contains program groups and program group items.
+/// 
+/// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-programgrouporitem>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_ProgramGroupOrItem {
+    /// A short textual description of the object.
+    pub Caption: Option<String>,
+    /// A textual description of the object.
+    pub Description: Option<String>,
+    /// Indicates when the object was installed. Lack of a value does not indicate that the object 
+    /// is not installed.
+    pub InstallDate: Option<WMIDateTime>,
+    /// Label by which the object is known. When subclassed, this property can be overridden to be 
+    /// a key property.
+    pub Name: Option<String>,
+    /// String that indicates the current status of the object. Operational and non-operational status 
+    /// can be defined. Operational status can include "OK", "Degraded", and "Pred Fail". "Pred Fail" 
+    /// indicates that an element is functioning properly, but is predicting a failure (for example, a 
+    /// SMART-enabled hard disk drive).
+    /// 
+    /// Non-operational status can include "Error", "Starting", "Stopping", and "Service". "Service" can 
+    /// apply during disk mirror-resilvering, reloading a user permissions list, or other administrative 
+    /// work. Not all such work is online, but the managed element is neither "OK" nor in one of the other 
+    /// states.
+    /// 
+    /// Values include the following:
+    /// - `OK` ("OK")
+    /// - `Error` ("Error")
+    /// - `Degraded` ("Degraded")
+    /// - `Unknown` ("Unknown")
+    /// - `Pred Fail` ("Pred Fail")
+    /// - `Starting` ("Starting")
+    /// - `Stopping` ("Stopping")
+    /// - `Service` ("Service")
+    /// - `Stressed` ("Stressed")
+    /// - `NonRecover` ("NonRecover")
+    /// - `No Contact` ("No Contact")
+    /// - `Lost Comm` ("Lost Comm")
+    pub Status: Option<String>,
 }
