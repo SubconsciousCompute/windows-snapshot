@@ -107,6 +107,8 @@ pub struct Windows {
     pub logical_share_security_settings: security::LogicalShareSecuritySettings,
     /// State of Windows PrivilegesStatuses
     pub privileges_statuses: security::PrivilegesStatuses,
+    /// State of Windows Trustees
+    pub trustees: security::Trustees,
 }
 
 impl Windows {
@@ -156,6 +158,7 @@ impl Windows {
         self.logical_file_security_settings.update();
         self.logical_share_security_settings.update();
         self.privileges_statuses.update();
+        self.trustees.update();
     }
 
     /// Asynchronously update all the fields
@@ -205,6 +208,7 @@ impl Windows {
             self.logical_file_security_settings.async_update(),
             self.logical_share_security_settings.async_update(),
             self.privileges_statuses.async_update(),
+            self.trustees.async_update(),
         );
     }
 }

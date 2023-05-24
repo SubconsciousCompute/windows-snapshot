@@ -63,6 +63,17 @@ pub struct PrivilegesStatuses {
 
 update!(PrivilegesStatuses, privileges_statuses);
 
+/// Represents the state of Windows Trustees
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct Trustees {
+    /// Represents sequence of Windows `Trustees`
+    pub trustees: Vec<Win32_Trustee>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(Trustees, trustees);
+
 /// The `Win32_LogicalFileSecuritySetting` WMI class represents security settings for a logical file. 
 /// You cannot enumerate instances of this class.
 /// 
@@ -169,4 +180,33 @@ pub struct Win32_PrivilegesStatus {
     /// 
     /// Example: "SE_SHUTDOWN_NAME"
     pub PrivilegesRequired: Option<Vec<String>>,
+}
+
+/// The `Win32_Trustee` abstract WMI class specifies a trustee that can be a name or a security 
+/// identifier (SID) byte array.
+/// 
+/// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/secrcw32prov/win32-trustee>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_Trustee {
+    /// Time in the CIM_DATETIME format when the security descriptor was created.
+    pub TIME_CREATED: Option<u64>,
+    /// Domain to which a trustee belongs.
+    pub Domain: Option<String>,
+    /// A trustee can be a user account, group account, or logon session.
+    pub Name: Option<String>,
+    /// SID that uniquely identifies a user or group.
+    pub SID: Option<Vec<u8>>,
+    /// Length of a SID in bytes.
+    pub SidLength: Option<u32>,
+    /// SID of a trustee in string format. The format for a string value is the following:
+    /// 
+    /// 1. The "S" character identifies the series of digits as a SID.
+    /// 2. The revision level.
+    /// 3. Identifier authority value.
+    /// 4. One or more subauthority values.
+    /// 
+    /// Example: "S-1-1-0"
+    pub SIDString: Option<String>,
 }

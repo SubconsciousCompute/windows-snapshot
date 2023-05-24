@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.privileges_statuses.update();
+    k.trustees.update();
 
-    println!("{:#?}", k.privileges_statuses);
+    println!("{:#?}", k.trustees);
 }
