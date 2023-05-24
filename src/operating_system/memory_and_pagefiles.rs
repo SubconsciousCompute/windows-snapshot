@@ -98,7 +98,7 @@ pub struct Win32_PageFile {
     pub Extension: Option<String>,
     /// File name without the file name extension. Example: "MyDataFile"
     pub FileName: Option<String>,
-    /// For more information about using `uint64` values in scripts, see Scripting in WMI.
+    /// Size of the file, in bytes.
     pub FileSize: Option<u64>,
     /// Descriptor that represents the file type indicated by the `Extension` property.
     pub FileType: Option<String>,
@@ -109,8 +109,6 @@ pub struct Win32_PageFile {
     /// If `True`, the file is hidden.
     pub Hidden: Option<bool>,
     /// Number of "file opens" that are currently active against the file.
-    /// 
-    /// For more information about using uint64 values in scripts, see Scripting in WMI.
     pub InUseCount: Option<u64>,
     /// Date and time the file was last accessed.
     pub LastAccessed: Option<WMIDateTime>,
@@ -185,8 +183,7 @@ pub struct Win32_PageFile {
 /// system startup. The properties in this class can be modified and deferred until startup. These settings 
 /// are different from the run-time state of a page file expressed through the associated class `Win32_PageFileUsage`.
 /// 
-/// To create an instance of this class, enable the `SeCreatePagefilePrivilege` privilege. For more information, 
-/// see `Privilege Constants` and Executing Privileged Operations.
+/// To create an instance of this class, enable the `SeCreatePagefilePrivilege` privilege. 
 #[derive(Default, Deserialize, Serialize, Debug, Clone)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]

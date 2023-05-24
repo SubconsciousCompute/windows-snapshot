@@ -176,8 +176,7 @@ pub struct Win32_ServerSession {
 }
 
 /// The `Win32_Share` class represents a shared resource on a computer system running Windows. This 
-/// may be a disk drive, printer, interprocess communication, or other sharable device. For more 
-/// information about retrieving WMI classes, see Retrieving a Class.
+/// may be a disk drive, printer, interprocess communication, or other sharable device.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-share>
 #[derive(Default, Deserialize, Serialize, Debug, Clone)]
@@ -212,8 +211,7 @@ pub struct Win32_Share {
     /// - `Lost Comm` ("Lost Comm")
     pub Status: Option<String>,
     /// This property is obsolete and is no longer used. Use the `Win32_Share.GetAccessMask` method 
-    /// instead. The value of the `AccessMask` property is set to `null` by WMI. For more information 
-    /// about setting access when a share is created, see the `Create` method.
+    /// instead. The value of the `AccessMask` property is set to `null` by WMI. 
     pub AccessMask: Option<u32>,
     /// Number of concurrent users for this resource has been limited. If `True`, the value in the 
     /// `MaximumAllowed` property is ignored.
