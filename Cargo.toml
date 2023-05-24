@@ -1,6 +1,6 @@
 [package]
 name = "windows-snapshot"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["sn99 <siddharthn.099@gmail.com>", "nidhihemanth <nidhihemanth123@gmail.com>"]
 description = "Find out windows state asynchronously and more"
@@ -11,9 +11,12 @@ repository = "https://github.com/SubconsciousCompute/windows-snapshot"
 homepage = "https://github.com/SubconsciousCompute/windows-snapshot"
 license = "AGPL-3.0-only"
 
+[package.metadata.docs.rs]
+default-target = "x86_64-pc-windows-msvc"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-[dependencies]
+[target.'cfg(target_os = "windows")'.dependencies]
 serde = "1.0.159"
 wmi = "0.12.2"
 tokio = { version = "1.28.1", features = ["full"] }
