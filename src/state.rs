@@ -1,7 +1,7 @@
 //! Stores the main state of Windows machine
 
 use crate::operating_system::{
-    desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_pagefiles, scheduler_jobs, product_activation, software_license_provider, shares, multimedia_audio_visual, storage, security, start_menu
+    desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_pagefiles, scheduler_jobs, product_activation, software_license_provider, shares, multimedia_audio_visual, storage, security, start_menu, networking
 };
 use serde::{Deserialize, Serialize};
 use tokio::join;
@@ -121,6 +121,8 @@ pub struct Windows {
     pub logical_program_group_items: start_menu::LogicalProgramGroupItems,
     /// State of Windows ProgramGroupOrItems
     pub program_group_or_items: start_menu::ProgramGroupOrItems,
+    /// State of Windows IP4PersistedRouteTables
+    pub ip4_persisted_route_tables: networking::IP4PersistedRouteTables,
 }
 
 impl Windows {
@@ -177,6 +179,7 @@ impl Windows {
         self.logical_program_groups.update();
         self.logical_program_group_items.update();
         self.program_group_or_items.update();
+        self.ip4_persisted_route_tables.update();
     }
 
     /// Asynchronously update all the fields
@@ -233,6 +236,7 @@ impl Windows {
             self.logical_program_groups.async_update(),
             self.logical_program_group_items.async_update(),
             self.program_group_or_items.async_update(),
+            self.ip4_persisted_route_tables.async_update(),
         );
     }
 }

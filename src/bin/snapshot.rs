@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.program_group_or_items.update();
+    k.ip4_persisted_route_tables.update();
 
-    println!("{:#?}", k.program_group_or_items);
+    println!("{:#?}", k.ip4_persisted_route_tables);
 }
