@@ -589,3 +589,107 @@ pub struct Win32_NTDomain {
     /// system, this property might contain the string, "Switch" or "Bridge".
     pub Roles: Option<Vec<String>>,
 }
+
+/// The `Win32_PingStatus` WMI class represents the values returned by the standard `ping` command.
+/// 
+/// Note: This class cannot be accessed.
+/// 
+/// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmipicmp/win32-pingstatus> 
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+struct Win32_PingStatus {
+    /// Value of the address requested. The form of the value can be either the computer name ("wxyz1234"), 
+    /// IPv4 address ("192.168.177.124"), or IPv6 address ("2010:836B:4179::836B:4179").
+    Address: Option<String>,
+    /// Buffer size sent with the `ping` command. The default value is 32.
+    BufferSize: Option<u32>,
+    /// If `TRUE`, "Do not Fragment" is marked on the packets sent. The default is `FALSE`, not fragmented.
+    NoFragmentation: Option<bool>,
+    /// Status of the address resolution process. If successful, the value is 0 (zero). Any other value 
+    /// indicates an unsuccessful address resolution.
+    /// 
+    /// - `Success` (0)
+    /// - `Other` (1 4294967295)
+    PrimaryAddressResolutionStatus: Option<u32>,
+    /// Address that the destination used to reply. The default is "".
+    ProtocolAddress: Option<String>,
+    /// Resolved address corresponding to the `ProtocolAddress` property. The default is "".
+    ProtocolAddressResolved: Option<String>,
+    /// How many hops should be recorded while the packet is in route. The default is 0 (zero).
+    RecordRoute: Option<u32>,
+    /// Inconsistent reply data is reported.
+    ReplyInconsistency: Option<bool>,
+    /// Represents the size of the buffer returned.
+    ReplySize: Option<u32>,
+    /// Command resolves address names of output address values. The default is `FALSE`, which indicates no resolution.
+    ResolveAddressNames: Option<bool>,
+    /// Time elapsed to handle the request.
+    ResponseTime: Option<u32>,
+    /// Time to live from the moment the request is received.
+    ResponseTimeToLive: Option<u32>,
+    /// Record of intermediate hops.
+    RouteRecord: Option<Vec<String>>,
+    /// Resolved address that corresponds to the `RouteRecord` value.
+    RouteRecordResolved: Option<Vec<String>>,
+    /// Comma-separated list of valid Source Routes. The default is "".
+    SourceRoute: Option<String>,
+    /// Type of source route option to be used on the host list specified in the `SourceRoute` property. If a value 
+    /// outside of the `ValueMap` is specified, then 0 (zero) is assumed. The default is 0 (zero).
+    /// 
+    /// - `None` (0)
+    /// - `Loose Source Routing` (1)
+    /// - `Strict Source Routing` (2)
+    SourceRouteType: Option<u32>,
+    /// `Ping` command status codes.
+    /// 
+    /// - `Success` (0)
+    /// - `Buffer Too Small` (11001)
+    /// - `Destination Net Unreachable` (11002)
+    /// - `Destination Host Unreachable` (11003)
+    /// - `Destination Protocol Unreachable` (11004)
+    /// - `Destination Port Unreachable` (11005)
+    /// - `No Resources` (11006)
+    /// - `Bad Option` (11007)
+    /// - `Hardware Error` (11008)
+    /// - `Packet Too Big` (11009)
+    /// - `Request Timed Out` (11010)
+    /// - `Bad Request` (11011)
+    /// - `Bad Route` (11012)
+    /// - `TimeToLive Expired Transit` (11013)
+    /// - `TimeToLive Expired Reassembly` (11014)
+    /// - `Parameter Problem` (11015)
+    /// - `Source Quench` (11016)
+    /// - `Option Too Big` (11017)
+    /// - `Bad Destination` (11018)
+    /// - `Negotiating IPSEC` (11032)
+    /// - `General Failure` (11050)
+    StatusCode: Option<u32>,
+    /// Time-out value in milliseconds. If a response is not received in this time, no response is assumed. The 
+    /// default is 1000 milliseconds.
+    Timeout: Option<u32>,
+    /// Record of time stamps for intermediate hops.
+    TimeStampRecord: Option<Vec<u32>>,
+    /// Intermediate hop that corresponds to the `TimeStampRecord` value.
+    TimeStampRecordAddress: Option<Vec<String>>,
+    /// Resolved address that corresponds to the `TimeStampRecordAddress` value.
+    TimeStampRecordAddressResolved: Option<Vec<String>>,
+    /// How many hops should be recorded with time stamp information while the packet is in route. A time stamp is the 
+    /// number of milliseconds that have passed since midnight Universal Time (UT). If the time is not available in 
+    /// milliseconds or cannot be provided with respect to midnight UT, then any time may be inserted as a time stamp, 
+    /// provided the high order bit of the `Timestamp` property is set to 1 (one) to indicate the use of a nonstandard 
+    /// value. The default is 0 (zero).
+    TimeStampRoute: Option<u32>,
+    /// Life span of the `ping` packet in seconds. The value is treated as an upper limit. All routers must decrement 
+    /// this value by 1 (one). When this value becomes 0 (zero), the packet is dropped by the router. The default 
+    /// value is 80 seconds. The hops between routers rarely take this amount of time.
+    TimeToLive: Option<u32>,
+    /// Type of service that is used. The default value is 0 (zero).
+    /// 
+    /// - `0`: Normal
+    /// - `2`: Minimize Monetary Cost
+    /// - `4`: Maximize Reliability
+    /// - `8`: Maximize Throughput
+    /// - `16`: Minimize Delay
+    TypeofService: Option<u32>,
+}
