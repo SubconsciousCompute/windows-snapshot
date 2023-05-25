@@ -137,6 +137,8 @@ pub struct Windows {
     pub ip4_route_table_events: networking::IP4RouteTableEvents,
     /// State of Windows LUIDs
     pub luids: job_objects::LUIDs,
+    /// State of Windows LUIDandAttributes
+    pub luid_and_attributes: job_objects::LUIDandAttributes,
 }
 
 impl Windows {
@@ -201,6 +203,7 @@ impl Windows {
         self.nt_domains.update();
         self.ip4_route_table_events.update();
         self.luids.update();
+        self.luid_and_attributes.update();
     }
 
     /// Asynchronously update all the fields
@@ -265,6 +268,7 @@ impl Windows {
             self.nt_domains.async_update(),
             self.ip4_route_table_events.async_update(),
             self.luids.async_update(),
+            self.luid_and_attributes.async_update(),
         );
     }
 }

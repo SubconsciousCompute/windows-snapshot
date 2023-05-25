@@ -33,6 +33,17 @@ pub struct LUIDs {
 
 update!(LUIDs, luids);
 
+/// Represents the state of Windows LUIDandAttributes
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct LUIDandAttributes {
+    /// Represents sequence of Windows `LUIDs`
+    pub luid_and_attributes: Vec<Win32_LUIDandAttributes>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(LUIDandAttributes, luid_and_attributes);
+
 /// The `Win32_LUID` abstract WMI class represents a locally unique identifier (LUID), an identifier unique on the 
 /// local computer that is used in security tokens.
 /// 
@@ -45,4 +56,19 @@ pub struct Win32_LUID {
     pub HighPart: Option<u32>,
     /// Least significant bits of the LUID.
     pub LowPart: Option<u32>,
+}
+
+/// The `Win32_LUIDandAttribute` abstract WMI class represents a locally unique identifier (LUID) and its attributes. 
+/// Each LUID and attributes structure defines the availability of a security privilege.
+/// 
+/// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmipjobobjprov/win32-luidandattributes>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_LUIDandAttributes {
+    /// Instance containing the attributes of the LUID. This value holds two 32-bit flags. Its meaning is dependent 
+    /// on the definition and use of the LUID.
+    pub Attributes: Option<u32>,
+    /// Representing a LUID value.
+    pub LUID: Option<Win32_LUID>,
 }

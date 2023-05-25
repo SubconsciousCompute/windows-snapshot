@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.luids.update();
+    k.luid_and_attributes.update();
 
-    println!("{:#?}", k.luids);
+    println!("{:#?}", k.luid_and_attributes);
 }
