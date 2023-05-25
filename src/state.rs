@@ -143,6 +143,8 @@ pub struct Windows {
     pub named_job_objects: job_objects::NamedJobObjects,
     /// State of Windows NamedJobObjectActgInfos
     pub named_job_object_actg_infos: job_objects::NamedJobObjectActgInfos,
+    /// State of Windows NamedJobObjectLimitSettings
+    pub named_job_object_limit_settings: job_objects::NamedJobObjectLimitSettings,
 }
 
 impl Windows {
@@ -210,6 +212,7 @@ impl Windows {
         self.luid_and_attributes.update();
         self.named_job_objects.update();
         self.named_job_object_actg_infos.update();
+        self.named_job_object_limit_settings.update();
     }
 
     /// Asynchronously update all the fields
@@ -277,6 +280,7 @@ impl Windows {
             self.luid_and_attributes.async_update(),
             self.named_job_objects.async_update(),
             self.named_job_object_actg_infos.async_update(),
+            self.named_job_object_limit_settings.async_update(),
         );
     }
 }

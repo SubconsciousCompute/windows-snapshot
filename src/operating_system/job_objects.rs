@@ -66,6 +66,17 @@ pub struct NamedJobObjectActgInfos {
 
 update!(NamedJobObjectActgInfos, named_job_object_actg_infos);
 
+/// Represents the state of Windows NamedJobObjectLimitSettings
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct NamedJobObjectLimitSettings {
+    /// Represents sequence of Windows `NamedJobObjectLimitSettings`
+    pub named_job_object_limit_settings: Vec<Win32_NamedJobObjectLimitSetting>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(NamedJobObjectLimitSettings, named_job_object_limit_settings);
+
 /// The `Win32_LUID` abstract WMI class represents a locally unique identifier (LUID), an identifier unique on the 
 /// local computer that is used in security tokens.
 /// 
@@ -191,4 +202,76 @@ pub struct Win32_NamedJobObjectActgInfo {
     /// Number of bytes written by all of the processes that have been associated with a job, and all processes 
     /// currently associated with a job.
     pub WriteTransferCount: Option<u64>,
+}
+
+/// The Win32_NamedJobObjectLimitSetting WMI class represents the limit settings for a job object.
+/// 
+/// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmipjobobjprov/win32-namedjobobjectlimitsetting>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_NamedJobObjectLimitSetting {
+    /// Short textual description of the `CIM_Setting` object.
+    pub Caption: Option<String>,
+    /// Textual description of the `CIM_Setting` object.
+    pub Description: Option<String>,
+    /// Active process limit for a job. If associating a process with a job causes the active process count to exceed 
+    /// the limit, the process is terminated and the association fails. This property is ignored unless the LimitFlags 
+    /// property specifies the Active Process Limit value.
+    pub ActiveProcessLimit: Option<u32>,
+    /// Processor affinity for all of the processes associated with a job. The affinity of each thread is set to this 
+    /// value, but threads are free to set the affinity subsequently, when it is a subset of the specified affinity 
+    /// mask. Processes cannot set an affinity mask. This property is ignored unless `LimitFlags` specifies the Limit 
+    /// Affinity value.
+    pub Affinity: Option<u32>,
+    /// Per-job memory limit in kilobytes. This property is ignored unless `LimitFlags` specifies the Limit Job Memory 
+    /// value.
+    pub JobMemoryLimit: Option<u32>,
+    /// Bitmap that represents the job limits. One or more of the limits can be in effect at the same time.
+    /// 
+    /// - 1 (0x1): Limit Working Set [Causes all of the processes associated with the job to use the same minimum and maximum working set sizes]
+    /// - 2 (0x2): Limit Process Time [Establishes a user-mode execution time limit for each currently active process and all of the future processes associated with a job]
+    /// - 4 (0x4): Limit Job Time [Establishes a user-mode execution time limit for the job. This flag cannot be used with Limit Preserve Job Time]
+    /// - 8 (0x8): Active Process Limit [Establishes a maximum number of simultaneously active processes associated with the job]
+    /// - 16 (0x10): Limit Affinity [Causes all of the processes associated with the job to use the same processor affinity]
+    /// - 32 (0x20): Limit Priority Class [Causes all of the processes associated with a job to use the same priority class]
+    /// - 64 (0x40): Limit Preserve Job Time [Preserves any job time limits you set previously. When this flag is set, you can establish a per-job time limit one time, then alter other limits in subsequent calls. This flag cannot be used with Limit Job Time]
+    /// - 128 (0x80): Limit Scheduling Class [Causes all of the processes in a job to use the same scheduling class]
+    /// - 256 (0x100): Limit Process Memory [Causes all of the processes associated with a job to limit their committed memory. When a process attempts to commit memory that exceeds the perprocess limit, it fails. If the job object is associated with a completion port, a `JOB_OBJECT_MSG_PROCESS_MEMORY_LIMIT` message is sent to the completion port]
+    /// - 512 (0x200): Limit Job Memory [Causes all of the processes associated with a job to limit the job-wide sum of the committed memory. When a process attempts to commit memory that exceeds the job-wide limit, it fails. If the job object is associated with a completion port, a `JOB_OBJECT_MSG_JOB_MEMORY_LIMIT` message is sent to the completion port]
+    /// - 1024 (0x400): Limit Die On Unhandled Exception [Forces a call to the `SetErrorMode` function with the `SEM_NOGPFAULTERRORBOX` flag for each process associated with a job]
+    /// - 2048 (0x800): Limit Breakaway OK [If any of the process associated with a job creates a child process using the `CREATE_BREAKAWAY_FROM_JOB` flag while this limit is in effect, the child process is not associated with the job]
+    /// - 4096 (0x1000): Silent Breakaway OK [Allows any process associated with a job to create child processes that are not associated with the job]
+    pub LimitFlags: Option<u32>,
+    /// Maximum working set size for all of the processes associated with a job. This property is ignored unless 
+    /// `LimitFlags` specifies the Limit Working Set value.
+    pub MaximumWorkingSetSize: Option<u32>,
+    /// Minimum working set size for all of the processes associated with a job. This property is ignored unless 
+    /// `LimitFlags` specifies the Limit Working Set value.
+    pub MinimumWorkingSetSize: Option<u32>,
+    /// Per-job user-mode execution time limit, in 100 nanosecond units. The system adds the current time of the 
+    /// processes associated with the job to this limit. For example, if you set this limit to 1 minute, and the 
+    /// job has a process that has accumulated 5 minutes of user mode time, the limit actually enforced is 6 minutes.
+    pub PerJobUserTimeLimit: Option<u64>,
+    /// Per-process user-mode execution time limit, in 100-nanosecond units. This property is ignored unless `LimitFlags` 
+    /// specifies Limit Process Time. The system periodically checks to determine whether or not each process 
+    /// associated with the job has accumulated more user-mode time than the set limit. If it has, the process is 
+    /// terminated.
+    pub PerProcessUserTimeLimit: Option<u64>,
+    /// Priority class for all of the processes associated with the job. Processes and threads cannot modify their 
+    /// priority class. This property is ignored unless `LimitFlags` specifies the Limit Priority value.
+    pub PriorityClass: Option<u32>,
+    /// Per-process memory limit in kilobytes. This property is ignored unless `LimitFlags` specifies the Limit Process 
+    /// Memory value.
+    pub ProcessMemoryLimit: Option<u32>,
+    /// Scheduling class for all of the processes associated with the job. The valid values are 0 (zero) to 9 (nine). 
+    /// Use 0 (zero) for the least favorable scheduling class relative to other threads, and 9 (nine) for the most 
+    /// favorable scheduling class relative to other threads. This property is ignored unless `LimitFlags` specifies the 
+    /// Limit Scheduling Class value.
+    pub SchedulingClass: Option<u32>,
+    /// Job object limit setting instance. Because they are kernel objects, job object names are case-sensitive. 
+    /// However, Windows Management Instrumentation (WMI) keys are case-insensitive and must be decorated to 
+    /// distinguish case. To indicate a capital letter, precede the letter by a backslash. For example, "A" and "a" 
+    /// are lowercase and "\A" and "\a" are uppercase.
+    pub SettingID: Option<String>,
 }

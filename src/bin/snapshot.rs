@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.named_job_object_actg_infos.update();
+    k.named_job_object_limit_settings.update();
 
-    println!("{:#?}", k.named_job_object_actg_infos);
+    println!("{:#?}", k.named_job_object_limit_settings);
 }
