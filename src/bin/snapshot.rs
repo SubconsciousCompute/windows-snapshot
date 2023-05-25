@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.load_order_groups.update();
+    k.operating_systems.update();
 
-    println!("{:#?}", k.load_order_groups);
+    println!("{:#?}", k.operating_systems);
 }
