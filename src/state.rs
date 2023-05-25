@@ -149,6 +149,8 @@ pub struct Windows {
     pub boot_configurations: operating_system_settings::BootConfigurations,
     /// State of Windows ComputerSystems
     pub computer_systems: operating_system_settings::ComputerSystems,
+    /// State of Windows ComputerSystemProducts
+    pub computer_system_products: operating_system_settings::ComputerSystemProducts,
 }
 
 impl Windows {
@@ -212,6 +214,7 @@ impl Windows {
         self.named_job_object_limit_settings.update();
         self.boot_configurations.update();
         self.computer_systems.update();
+        self.computer_system_products.update();
     }
 
     /// Asynchronously update all the fields
@@ -275,6 +278,7 @@ impl Windows {
             self.named_job_object_limit_settings.async_update(),
             self.boot_configurations.async_update(),
             self.computer_systems.async_update(),
+            self.computer_system_products.async_update(),
         );
     }
 }

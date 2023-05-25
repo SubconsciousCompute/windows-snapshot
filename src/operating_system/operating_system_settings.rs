@@ -57,6 +57,17 @@ pub struct ComputerSystems {
 
 update!(ComputerSystems, computer_systems);
 
+/// Represents the state of Windows ComputerSystemProducts
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct ComputerSystemProducts {
+    /// Represents sequence of Windows `ComputerSystemProducts`
+    pub computer_system_products: Vec<Win32_ComputerSystemProduct>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(ComputerSystemProducts, computer_system_products);
+
 /// The Win32_BootConfiguration WMI class represents the boot configuration of a computer system running Windows.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-bootconfiguration>
@@ -500,4 +511,34 @@ pub struct Win32_ComputerSystem {
     /// Name of the workgroup for this computer. If the value of the `PartOfDomain` property is `False`, then the name of 
     /// the workgroup is returned.
     pub Workgroup: Option<String>,
+}
+
+/// The `Win32_ComputerSystemProduct` WMI class represents a product. This includes software and hardware used on this 
+/// computer system.
+/// 
+/// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-computersystemproduct>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_ComputerSystemProduct {
+    /// Short textual description for the product.
+    pub Caption: Option<String>,
+    /// Textual description of the product.
+    pub Description: Option<String>,
+    /// Product identification, such as a serial number on software, a die number on a hardware chip, or 
+    /// (for noncommercial products) a project number.
+    pub IdentifyingNumber: Option<String>,
+    /// Commonly used product name.
+    pub Name: Option<String>,
+    /// Product's stock-keeping unit (SKU) information.
+    pub SKUNumber: Option<String>,
+    /// Name of the product's supplier, or the entity selling the product (the manufacturer, reseller, OEM, and so on).
+    pub Vendor: Option<String>,
+    /// Product version information.
+    pub Version: Option<String>,
+    /// Universally unique identifier (UUID) for this product. A UUID is a 128-bit identifier that is guaranteed to be 
+    /// different from other generated UUIDs. If a UUID is not available, a UUID of all zeros is used.
+    /// 
+    /// This value comes from the `UUID` member of the `System Information` structure in the SMBIOS information.
+    pub UUID: Option<String>,
 }
