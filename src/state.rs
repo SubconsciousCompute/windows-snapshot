@@ -151,6 +151,8 @@ pub struct Windows {
     pub computer_systems: operating_system_settings::ComputerSystems,
     /// State of Windows ComputerSystemProducts
     pub computer_system_products: operating_system_settings::ComputerSystemProducts,
+    /// State of Windows LoadOrderGroups
+    pub load_order_groups: operating_system_settings::LoadOrderGroups,
 }
 
 impl Windows {
@@ -215,6 +217,7 @@ impl Windows {
         self.boot_configurations.update();
         self.computer_systems.update();
         self.computer_system_products.update();
+        self.load_order_groups.update();
     }
 
     /// Asynchronously update all the fields
@@ -279,6 +282,7 @@ impl Windows {
             self.boot_configurations.async_update(),
             self.computer_systems.async_update(),
             self.computer_system_products.async_update(),
+            self.load_order_groups.async_update(),
         );
     }
 }

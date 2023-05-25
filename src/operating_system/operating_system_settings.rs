@@ -68,6 +68,17 @@ pub struct ComputerSystemProducts {
 
 update!(ComputerSystemProducts, computer_system_products);
 
+/// Represents the state of Windows LoadOrderGroups
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct LoadOrderGroups {
+    /// Represents sequence of Windows `LoadOrderGroups`
+    pub load_order_groups: Vec<Win32_LoadOrderGroup>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(LoadOrderGroups, load_order_groups);
+
 /// The Win32_BootConfiguration WMI class represents the boot configuration of a computer system running Windows.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-bootconfiguration>
@@ -541,4 +552,55 @@ pub struct Win32_ComputerSystemProduct {
     /// 
     /// This value comes from the `UUID` member of the `System Information` structure in the SMBIOS information.
     pub UUID: Option<String>,
+}
+
+/// The `Win32_LoadOrderGroup` WMI class represents a group of system services that define execution dependencies. 
+/// The services must be initiated in the order specified by the Load Order Group, as the services are dependent on 
+/// each other. These dependent services require the presence of the antecedent services to function correctly. The 
+/// data in this class is derived by the provider from the registry key: 
+/// `HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\ServiceGroupOrder`
+/// 
+/// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-loadordergroup>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_LoadOrderGroup {
+    /// A short textual description of the object.
+    pub Caption: Option<String>,
+    /// A textual description of the object.
+    pub Description: Option<String>,
+    /// Indicates when the object was installed. Lack of a value does not indicate that the object is not installed.
+    pub InstallDate: Option<WMIDateTime>,
+    /// String that indicates the current status of the object. Operational and non-operational status can be defined. 
+    /// Operational status can include "OK", "Degraded", and "Pred Fail". "Pred Fail" indicates that an element is 
+    /// functioning properly, but is predicting a failure (for example, a SMART-enabled hard disk drive).
+    /// 
+    /// Non-operational status can include "Error", "Starting", "Stopping", and "Service". "Service" can apply during 
+    /// disk mirror-resilvering, reloading a user permissions list, or other administrative work. Not all such work is 
+    /// online, but the managed element is neither "OK" nor in one of the other states.
+    /// 
+    /// Values include the following:
+    /// - `OK` ("OK")
+    /// - `Error` ("Error")
+    /// - `Degraded` ("Degraded")
+    /// - `Unknown` ("Unknown")
+    /// - `Pred Fail` ("Pred Fail")
+    /// - `Starting` ("Starting")
+    /// - `Stopping` ("Stopping")
+    /// - `Service` ("Service")
+    /// - `Stressed` ("Stressed")
+    /// - `NonRecover` ("NonRecover")
+    /// - `No Contact` ("No Contact")
+    /// - `Lost Comm` ("Lost Comm")
+    pub Status: Option<String>,
+    /// Indicates whether this load order group can include drivers along with system services.
+    pub DriverEnabled: Option<bool>,
+    /// Sequence in which this group of services is loaded onto the operating system.
+    /// 
+    /// Example: 2
+    pub GroupOrder: Option<u32>,
+    /// Name of the load order group.
+    /// 
+    /// Example: "Primary disk"
+    pub Name: Option<String>,
 }
