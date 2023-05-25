@@ -125,6 +125,16 @@ pub struct Windows {
     pub ip4_persisted_route_tables: networking::IP4PersistedRouteTables,
     /// State of Windows IP4RouteTables
     pub ip4_route_tables: networking::IP4RouteTables,
+    /// State of Windows NetworkClients
+    pub nework_clients: networking::NetworkClients,
+    /// State of Windows NetworkConnections
+    pub nework_connections: networking::NetworkConnections,
+    /// State of Windows NetworkProtocols
+    pub nework_protocols: networking::NetworkProtocols,
+    /// State of Windows NTDomains
+    pub nt_domains: networking::NTDomains,
+    /// State of Windows IP4RouteTableEvents
+    pub ip4_route_table_events: networking::IP4RouteTableEvents,
 }
 
 impl Windows {
@@ -183,6 +193,11 @@ impl Windows {
         self.program_group_or_items.update();
         self.ip4_persisted_route_tables.update();
         self.ip4_route_tables.update();
+        self.nework_clients.update();
+        self.nework_connections.update();
+        self.nework_protocols.update();
+        self.nt_domains.update();
+        self.ip4_route_table_events.update();
     }
 
     /// Asynchronously update all the fields
@@ -241,6 +256,11 @@ impl Windows {
             self.program_group_or_items.async_update(),
             self.ip4_persisted_route_tables.async_update(),
             self.ip4_route_tables.async_update(),
+            self.nework_clients.async_update(),
+            self.nework_connections.async_update(),
+            self.nework_protocols.async_update(),
+            self.nt_domains.async_update(),
+            self.ip4_route_table_events.async_update(),
         );
     }
 }

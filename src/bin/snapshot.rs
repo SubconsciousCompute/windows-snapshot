@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.ip4_route_tables.update();
+    k.ip4_route_table_events.update();
 
-    println!("{:#?}", k.ip4_route_tables);
+    println!("{:#?}", k.ip4_route_table_events);
 }
