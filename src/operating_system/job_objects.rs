@@ -55,6 +55,17 @@ pub struct NamedJobObjects {
 
 update!(NamedJobObjects, named_job_objects);
 
+/// Represents the state of Windows NamedJobObjectActgInfos
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct NamedJobObjectActgInfos {
+    /// Represents sequence of Windows `NamedJobObjectActgInfos`
+    pub named_job_object_actg_infos: Vec<Win32_NamedJobObjectActgInfo>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(NamedJobObjectActgInfos, named_job_object_actg_infos);
+
 /// The `Win32_LUID` abstract WMI class represents a locally unique identifier (LUID), an identifier unique on the 
 /// local computer that is used in security tokens.
 /// 
@@ -113,4 +124,71 @@ pub struct Win32_NamedJobObject {
     /// 
     /// For example, "A" and "a" are lowercase and "\A" and "\a" are uppercase. 
     pub CollectionID: Option<String>,
+}
+
+/// The `Win32_NamedJobObjectActgInfo` WMI class class represents the I/O accounting information for a job object.
+/// 
+/// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmipjobobjprov/win32-namedjobobjectactginfo>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_NamedJobObjectActgInfo {
+    /// Short textual description for the statistic or metric.
+    pub Caption: Option<String>,
+    /// Textual description of the statistic or metric.
+    pub Description: Option<String>,
+    /// Total number of processes associated with a job. When a process is associated with a job, but the association 
+    /// fails because of a limit violation, the value is temporarily incremented. When the terminated process exits 
+    /// and all references to the process are released, the value is decremented.
+    pub ActiveProcesses: Option<u32>,
+    /// Label by which the statistic or metric is known. When subclassed, this property can be overridden to be a key 
+    /// property.
+    pub Name: Option<String>,
+    /// Number of I/O operations performed, other than read and write operations, by all of the processes that have been 
+    /// associated with the job including all of the processes currently associated with the job.
+    pub OtherOperationCount: Option<u64>,
+    /// Number of bytes transferred during operations, other than read and write, by all of the processes that have been 
+    /// associated with the job including all of the processes currently associated with the job.
+    pub OtherTransferCount: Option<u64>,
+    /// Peak memory in kilobyte usage of all of the processes associated with the job.
+    pub PeakJobMemoryUsed: Option<u32>,
+    /// The most process memory in kilobytes used by any process ever associated with the job.
+    pub PeakProcessMemoryUsed: Option<u32>,
+    /// Number of read operations performed by all of the processes that have ever been associated with the job, in 
+    /// addition to all of the processes currently associated with the job.
+    pub ReadOperationCount: Option<u64>,
+    /// Number of bytes read by all of the processes that have been associated with the job including all of the 
+    /// processes currently associated with the job.
+    pub ReadTransferCount: Option<u64>,
+    /// Total amount of kernel-mode execution time, in 100 nanosecond units, for all active processes associated with 
+    /// the job (and all terminated processes no longer associated with the job) after the last call that set a 
+    /// per-job kernel-mode time limit. This property is set to 0 (zero) when a job is created, and each time a 
+    /// per-job kernel-mode time limit is established.
+    pub ThisPeriodTotalKernelTime: Option<u64>,
+    /// Total amount of user-mode execution time, in 100 nanosecond units, for all active processes associated with 
+    /// the job (and all terminated processes no longer associated with the job) since the last call that set a 
+    /// per-job user-mode time limit. This property is set to 0 (zero) when a job is created, and each time a 
+    /// per-job user-mode time limit is established.
+    pub ThisPeriodTotalUserTime: Option<u64>,
+    /// Total amount of kernel-mode execution time, in 100 nanosecond units, for all active processes associated with 
+    /// the job, as well as all terminated processes no longer associated with the job.
+    pub TotalKernelTime: Option<u64>,
+    /// Total number of page faults encountered by all of the active processes associated with the job, as well as all 
+    /// of the terminated processes no longer associated with the job.
+    pub TotalPageFaultCount: Option<u32>,
+    /// Total number of processes associated with the job during its lifetime, including those that are terminated. 
+    /// For example, when a process is associated with a job, but the association fails because of a limit violation, 
+    /// the value is incremented.
+    pub TotalProcesses: Option<u32>,
+    /// Total number of processes terminated because of a limit violation.
+    pub TotalTerminatedProcesses: Option<u32>,
+    /// Total amount of user-mode execution time, in 100 nanosecond units, for all active processes associated with a 
+    /// job, and all of the terminated processes not associated with a job.
+    pub TotalUserTime: Option<u64>,
+    /// Number of write operations performed by all processes that have been associated with a job, and all of the 
+    /// processes currently associated with the job.
+    pub WriteOperationCount: Option<u64>,
+    /// Number of bytes written by all of the processes that have been associated with a job, and all processes 
+    /// currently associated with a job.
+    pub WriteTransferCount: Option<u64>,
 }

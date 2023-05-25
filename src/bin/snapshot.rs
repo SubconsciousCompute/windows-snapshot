@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.named_job_objects.update();
+    k.named_job_object_actg_infos.update();
 
-    println!("{:#?}", k.named_job_objects);
+    println!("{:#?}", k.named_job_object_actg_infos);
 }

@@ -141,6 +141,8 @@ pub struct Windows {
     pub luid_and_attributes: job_objects::LUIDandAttributes,
     /// State of Windows NamedJobObjects
     pub named_job_objects: job_objects::NamedJobObjects,
+    /// State of Windows NamedJobObjectActgInfos
+    pub named_job_object_actg_infos: job_objects::NamedJobObjectActgInfos,
 }
 
 impl Windows {
@@ -207,6 +209,7 @@ impl Windows {
         self.luids.update();
         self.luid_and_attributes.update();
         self.named_job_objects.update();
+        self.named_job_object_actg_infos.update();
     }
 
     /// Asynchronously update all the fields
@@ -273,6 +276,7 @@ impl Windows {
             self.luids.async_update(),
             self.luid_and_attributes.async_update(),
             self.named_job_objects.async_update(),
+            self.named_job_object_actg_infos.async_update(),
         );
     }
 }
