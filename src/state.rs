@@ -125,6 +125,8 @@ pub struct Windows {
     pub ip4_persisted_route_tables: networking::IP4PersistedRouteTables,
     /// State of Windows IP4RouteTables
     pub ip4_route_tables: networking::IP4RouteTables,
+    /// State of Windows NetworkClients
+    pub nework_clients: networking::NetworkClients,
 }
 
 impl Windows {
@@ -183,6 +185,7 @@ impl Windows {
         self.program_group_or_items.update();
         self.ip4_persisted_route_tables.update();
         self.ip4_route_tables.update();
+        self.nework_clients.update();
     }
 
     /// Asynchronously update all the fields
@@ -241,6 +244,7 @@ impl Windows {
             self.program_group_or_items.async_update(),
             self.ip4_persisted_route_tables.async_update(),
             self.ip4_route_tables.async_update(),
+            self.nework_clients.async_update(),
         );
     }
 }

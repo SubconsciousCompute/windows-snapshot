@@ -40,7 +40,18 @@ pub struct IP4RouteTables {
 
 update!(IP4RouteTables, ip4_route_tables);
 
-/// The Win32_IP4PersistedRouteTable WMI class represents persisted IP routes. By default, the routes 
+/// Represents the state of Windows NetworkClients
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct NetworkClients {
+    /// Represents sequence of Windows `NetworkClients`
+    pub nework_clients: Vec<Win32_NetworkClient>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(NetworkClients, nework_clients);
+
+/// The `Win32_IP4PersistedRouteTable` WMI class represents persisted IP routes. By default, the routes 
 /// added to the routing table are not permanent. Rebooting the computer clears the routes from the 
 /// table. However, the following command makes the route persist after the computer is restarted: 
 /// route -p add.
@@ -204,4 +215,50 @@ pub struct Win32_IP4RouteTable {
     /// management stations can receive information from agents that applies to entries not currently in use. To 
     /// interpret such entries, examine the relevant ipRouteType object.
     pub Type: Option<u32>,
+}
+
+/// The `Win32_NetworkClient` WMI class represents a network client on a Windows system. Any computer system on the network 
+/// with a client relationship to the system is a descendant (or member) of this class.
+/// 
+/// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-networkclient>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_NetworkClient {
+    /// A short textual description of the object.
+    pub Caption: Option<String>,
+    /// A textual description of the object.
+    pub Description: Option<String>,
+    /// Indicates when the object was installed. Lack of a value does not indicate that the object is not installed.
+    pub InstallDate: Option<WMIDateTime>,
+    /// String that indicates the current status of the object. Operational and non-operational status can be defined. 
+    /// Operational status can include "OK", "Degraded", and "Pred Fail". "Pred Fail" indicates that an element is 
+    /// functioning properly, but is predicting a failure (for example, a SMART-enabled hard disk drive).
+    /// 
+    /// Non-operational status can include "Error", "Starting", "Stopping", and "Service". "Service" can apply during 
+    /// disk mirror-resilvering, reloading a user permissions list, or other administrative work. Not all such work is 
+    /// online, but the managed element is neither "OK" nor in one of the other states.
+    /// 
+    /// Values include the following:
+    /// - `OK` ("OK")
+    /// - `Error` ("Error")
+    /// - `Degraded` ("Degraded")
+    /// - `Unknown` ("Unknown")
+    /// - `Pred Fail` ("Pred Fail")
+    /// - `Starting` ("Starting")
+    /// - `Stopping` ("Stopping")
+    /// - `Service` ("Service")
+    /// - `Stressed` ("Stressed")
+    /// - `NonRecover` ("NonRecover")
+    /// - `No Contact` ("No Contact")
+    /// - `Lost Comm` ("Lost Comm")
+    pub Status: Option<String>,
+    /// Name of the manufacturer of the network client running on the computer system running Windows.
+    /// 
+    /// Example: "Microsoft Corporation"
+    pub Manufacturer: Option<String>,
+    /// Network name of the network client running on the computer system running Windows.
+    /// 
+    /// Example: "Microsoft Windows Network"
+    pub Name: Option<String>,
 }
