@@ -62,6 +62,17 @@ pub struct NetworkConnections {
 
 update!(NetworkConnections, nework_connections);
 
+/// Represents the state of Windows NetworkProtocols
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct NetworkProtocols {
+    /// Represents sequence of Windows `NetworkProtocols`
+    pub nework_protocols: Vec<Win32_NetworkProtocol>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(NetworkProtocols, nework_protocols);
+
 /// The `Win32_IP4PersistedRouteTable` WMI class represents persisted IP routes. By default, the routes 
 /// added to the routing table are not permanent. Rebooting the computer clears the routes from the 
 /// table. However, the following command makes the route persist after the computer is restarted: 
@@ -381,4 +392,101 @@ pub struct Win32_NetworkConnection {
     /// 
     /// Example: "SYSTEM"
     pub UserName: Option<String>,
+}
+
+/// The `Win32_NetworkProtocol` WMI class represents a protocol and its network characteristics on a Win32 computer 
+/// system.
+/// 
+/// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-networkprotocol>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_NetworkProtocol {
+    /// A short textual description of the object.
+    pub Caption: Option<String>,
+    /// A textual description of the object.
+    pub Description: Option<String>,
+    /// Indicates when the object was installed. Lack of a value does not indicate that the object is not installed.
+    pub InstallDate: Option<WMIDateTime>,
+    /// String that indicates the current status of the object. Operational and non-operational status can be defined. 
+    /// Operational status can include "OK", "Degraded", and "Pred Fail". "Pred Fail" indicates that an element is 
+    /// functioning properly, but is predicting a failure (for example, a SMART-enabled hard disk drive).
+    /// 
+    /// Non-operational status can include "Error", "Starting", "Stopping", and "Service". "Service" can apply during
+    /// disk mirror-resilvering, reloading a user permissions list, or other administrative work. Not all such work 
+    /// is online, but the managed element is neither "OK" nor in one of the other states.
+    /// 
+    /// Values include the following:
+    // - `OK` ("OK")
+    // - `Error` ("Error")
+    // - `Degraded` ("Degraded")
+    // - `Unknown` ("Unknown")
+    // - `Pred Fail` ("Pred Fail")
+    // - `Starting` ("Starting")
+    // - `Stopping` ("Stopping")
+    // - `Service` ("Service")
+    // - `Stressed` ("Stressed")
+    // - `NonRecover` ("NonRecover")
+    // - `No Contact` ("No Contact")
+    // - `Lost Comm` ("Lost Comm")
+    pub Status: Option<String>,
+    /// Protocol supports connectionless service. A connectionless (datagram) service describes a communications 
+    /// protocol or transport in which data packets are routed independently of each other and may follow different 
+    /// routes and arrive in a different order from that in which they were sent. Conversely, a connection-oriented 
+    /// service provides a virtual circuit through which data packets are received in the same order they were 
+    /// transmitted. If the connection between computers fails, the application is notified.
+    pub ConnectionlessService: Option<bool>,
+    /// Protocol supports delivery of data packets. If this flag is `FALSE`, it is uncertain that all of the data sent 
+    /// will reach the intended destination.
+    pub GuaranteesDelivery: Option<bool>,
+    /// Protocol ensures that data will arrive in the order in which it was sent. Be aware that this characteristic 
+    /// does not ensure delivery of the data, only its order.
+    pub GuaranteesSequencing: Option<bool>,
+    /// Maximum length of a socket address supported by the protocol. Socket addresses may be items such as a URL 
+    /// (www.microsoft.com) or an IP address (130.215.24.1).
+    pub MaximumAddressSize: Option<u32>,
+    /// Maximum message size supported by the protocol. This is the maximum size of a message that can be sent from 
+    /// or received by the host. For protocols that do not support message framing, the actual maximum size of a 
+    /// message that can be sent to a given address may be less than this value.
+    pub MaximumMessageSize: Option<u32>,
+    /// Protocol is message-oriented. A message-oriented protocol uses packets of data to transfer information. 
+    /// Conversely, stream-oriented protocols transfer data as a continuous stream of bytes.
+    pub MessageOriented: Option<bool>,
+    /// Minimum length of a socket address supported by the protocol.
+    pub MinimumAddressSize: Option<u32>,
+    /// Name for the protocol.
+    /// 
+    /// Example: "TCP/IP"
+    pub Name: Option<String>,
+    /// Protocol is a message-oriented protocol that can receive variable-length data packets or streamed data for 
+    /// all receive operations. This optional ability is useful when an application does not want the protocol to 
+    /// frame messages, and requires stream-oriented characteristics. If `TRUE`, the protocol is pseudo stream-oriented.
+    pub PseudoStreamOriented: Option<bool>,
+    /// Protocol supports a mechanism for broadcasting messages across the network.
+    pub SupportsBroadcasting: Option<bool>,
+    /// Protocol allows data to be connected across the network.
+    pub SupportsConnectData: Option<bool>,
+    /// Protocol allows data to be disconnected across the network.
+    pub SupportsDisconnectData: Option<bool>,
+    /// Protocol supports data encryption.
+    pub SupportsEncryption: Option<bool>,
+    /// Protocol supports expedited data (also known as urgent data) across the network. Expedited data can bypass 
+    /// flow control and receive priority over normal data packets.
+    pub SupportsExpeditedData: Option<bool>,
+    /// Protocol supports transmitting the data in fragments. Physical network maximum transfer unit (MTU) is hidden 
+    /// from applications. Each media type has a maximum frame size that cannot be exceeded. The link layer discovers 
+    /// the MTU and reports it to the protocols used.
+    pub SupportsFragmentation: Option<bool>,
+    /// Protocol supports two-phase close operations, also known as "graceful close operations". If not, the protocol 
+    /// supports only abortive close operations.
+    pub SupportsGracefulClosing: Option<bool>,
+    /// Protocol has a mechanism to establish and maintain a bandwidth.
+    pub SupportsGuaranteedBandwidth: Option<bool>,
+    /// Protocol supports multicasting.
+    pub SupportsMulticasting: Option<bool>,
+    /// Protocol is capable of Quality of Service (QoS) support by the underlying layered service provider or 
+    /// transport carrier. QoS is a collection of components that enable differentiation and preferential treatment 
+    /// for subsets of data transmitted over the network. QoS means subsets of data get higher priority or guaranteed 
+    /// service when traversing a network.
+    pub SupportsQualityofService: Option<bool>,
 }

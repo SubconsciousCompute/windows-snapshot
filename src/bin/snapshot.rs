@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.nework_connections.update();
+    k.nework_protocols.update();
 
-    println!("{:#?}", k.nework_connections);
+    println!("{:#?}", k.nework_protocols);
 }
