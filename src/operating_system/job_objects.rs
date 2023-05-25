@@ -1,0 +1,48 @@
+//! The Job Objects subcategory groups classes that represent classes that provide the means of instrumenting named job objects. An unnamed job object cannot be instrumented.
+//! 
+//! | Class                                                                               | Description                                                                                                                                                                                |
+//! |-------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+//! | [**Win32\_CollectionStatistics**](/previous-versions/windows/desktop/cimwin32a/win32-collectionstatistics)                   | Association class<br/> Relates a managed system element collection and the class representing statistical information about the collection.<br/>                               |
+//! | [**Win32\_LUID**](/previous-versions/windows/desktop/wmipjobobjprov/win32-luid)                                                   | Instance class<br/> Represents a locally unique identifier (LUID)<br/>                                                                                                         |
+//! | [**Win32\_LUIDandAttributes**](/previous-versions/windows/desktop/wmipjobobjprov/win32-luidandattributes)                         | Instance class<br/> Represents a LUID and its attributes.<br/>                                                                                                                 |
+//! | [**Win32\_NamedJobObject**](/previous-versions/windows/desktop/wmipjobobjprov/win32-namedjobobject)                               | Instance class<br/> Represents a kernel object that is used to group processes for the sake of controlling the life and resources of the processes within the job object.<br/> |
+//! | [**Win32\_NamedJobObjectActgInfo**](/previous-versions/windows/desktop/wmipjobobjprov/win32-namedjobobjectactginfo)               | Instance class<br/> Represents the I/O accounting information for a job object.<br/>                                                                                           |
+//! | [**Win32\_NamedJobObjectLimit**](/previous-versions/windows/desktop/wmipjobobjprov/win32-namedjobobjectlimit)                     | Instance class<br/> Represents an association between a job object and the job object limit settings.<br/>                                                                     |
+//! | [**Win32\_NamedJobObjectLimitSetting**](/previous-versions/windows/desktop/wmipjobobjprov/win32-namedjobobjectlimitsetting)       | Instance class<br/> Represents the limit settings for a job object.<br/>                                                                                                       |
+//! | [**Win32\_NamedJobObjectProcess**](/previous-versions/windows/desktop/wmipjobobjprov/win32-namedjobobjectprocess)                 | Instance class<br/> Relates a job object and the process contained in the job object.<br/>                                                                                     |
+//! | [**Win32\_NamedJobObjectSecLimit**](/previous-versions/windows/desktop/wmipjobobjprov/win32-namedjobobjectseclimit)               | Instance class<br/> Relates a job object and the job object security limit settings.<br/>                                                                                      |
+//! | [**Win32\_NamedJobObjectSecLimitSetting**](/previous-versions/windows/desktop/wmipjobobjprov/win32-namedjobobjectseclimitsetting) | Instance class<br/> Represents the security limit settings for a job object.<br/>                                                                                              |
+//! | [**Win32\_NamedJobObjectStatistics**](/previous-versions/windows/desktop/wmipjobobjprov/win32-namedjobobjectstatistics)           | Instance class<br/> Represents an association between a job object and the job object I/O accounting information class.<br/>                                                   |
+//! | [**Win32\_SIDandAttributes**](/previous-versions/windows/desktop/wmipjobobjprov/win32-sidandattributes)                           | Instance class<br/> Represents a security identifier (SID) and its attributes.<br/>                                                                                            |
+//! | [**Win32\_TokenGroups**](/previous-versions/windows/desktop/wmipjobobjprov/win32-tokengroups)                                     | Event class<br/> Represents information about the group SIDs in an access token.<br/>                                                                                          |
+//! | [**Win32\_TokenPrivileges**](/previous-versions/windows/desktop/wmipjobobjprov/win32-tokenprivileges)                             | Event class<br/> Represents information about a set of privileges for an access token.<br/>                                                                                    |
+
+use crate::update;
+use serde::{Deserialize, Serialize};
+use std::time::SystemTime;
+use wmi::{COMLibrary, WMIConnection};
+
+/// Represents the state of Windows LUIDs
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct LUIDs {
+    /// Represents sequence of Windows `LUIDs`
+    pub luids: Vec<Win32_LUID>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(LUIDs, luids);
+
+/// The `Win32_LUID` abstract WMI class represents a locally unique identifier (LUID), an identifier unique on the 
+/// local computer that is used in security tokens.
+/// 
+/// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmipjobobjprov/win32-luid>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_LUID {
+    /// Most significant bits of the LUID.
+    pub HighPart: Option<u32>,
+    /// Least significant bits of the LUID.
+    pub LowPart: Option<u32>,
+}

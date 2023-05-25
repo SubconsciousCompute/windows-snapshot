@@ -1,7 +1,7 @@
 //! Stores the main state of Windows machine
 
 use crate::operating_system::{
-    desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_pagefiles, scheduler_jobs, product_activation, software_license_provider, shares, multimedia_audio_visual, storage, security, start_menu, networking
+    desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_pagefiles, scheduler_jobs, product_activation, software_license_provider, shares, multimedia_audio_visual, storage, security, start_menu, networking, job_objects
 };
 use serde::{Deserialize, Serialize};
 use tokio::join;
@@ -135,6 +135,8 @@ pub struct Windows {
     pub nt_domains: networking::NTDomains,
     /// State of Windows IP4RouteTableEvents
     pub ip4_route_table_events: networking::IP4RouteTableEvents,
+    /// State of Windows LUIDs
+    pub luids: job_objects::LUIDs,
 }
 
 impl Windows {
@@ -198,6 +200,7 @@ impl Windows {
         self.nework_protocols.update();
         self.nt_domains.update();
         self.ip4_route_table_events.update();
+        self.luids.update();
     }
 
     /// Asynchronously update all the fields
@@ -261,6 +264,7 @@ impl Windows {
             self.nework_protocols.async_update(),
             self.nt_domains.async_update(),
             self.ip4_route_table_events.async_update(),
+            self.luids.async_update(),
         );
     }
 }
