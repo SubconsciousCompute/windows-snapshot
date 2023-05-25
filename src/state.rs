@@ -133,6 +133,8 @@ pub struct Windows {
     pub nework_protocols: networking::NetworkProtocols,
     /// State of Windows NTDomains
     pub nt_domains: networking::NTDomains,
+    /// State of Windows IP4RouteTableEvents
+    pub ip4_route_table_events: networking::IP4RouteTableEvents,
 }
 
 impl Windows {
@@ -195,6 +197,7 @@ impl Windows {
         self.nework_connections.update();
         self.nework_protocols.update();
         self.nt_domains.update();
+        self.ip4_route_table_events.update();
     }
 
     /// Asynchronously update all the fields
@@ -257,6 +260,7 @@ impl Windows {
             self.nework_connections.async_update(),
             self.nework_protocols.async_update(),
             self.nt_domains.async_update(),
+            self.ip4_route_table_events.async_update(),
         );
     }
 }

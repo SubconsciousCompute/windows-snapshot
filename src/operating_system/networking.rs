@@ -84,6 +84,17 @@ pub struct NTDomains {
 
 update!(NTDomains, nt_domains);
 
+/// Represents the state of Windows IP4RouteTableEvents
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct IP4RouteTableEvents {
+    /// Represents sequence of Windows `IP4RouteTableEvents`
+    pub ip4_route_table_events: Vec<Win32_IP4RouteTableEvent>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(IP4RouteTableEvents, ip4_route_table_events);
+
 /// The `Win32_IP4PersistedRouteTable` WMI class represents persisted IP routes. By default, the routes 
 /// added to the routing table are not permanent. Rebooting the computer clears the routes from the 
 /// table. However, the following command makes the route persist after the computer is restarted: 
@@ -692,4 +703,22 @@ struct Win32_PingStatus {
     /// - `8`: Maximize Throughput
     /// - `16`: Minimize Delay
     TypeofService: Option<u32>,
+}
+
+/// The `Win32_IP4RouteTableEvent` WMI class represents IP route change events resulting from the addition, removal, 
+/// or modification of IP routes on the computer system.
+/// 
+/// This class is only applicable to IP4 and does not return IPX or IP6 data.
+/// 
+/// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmiiprouteprov/win32-ip4routetableevent>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_IP4RouteTableEvent {
+    /// Descriptor used by the event provider to determine which users can receive the event. 
+    pub SECURITY_DESCRIPTOR: Option<Vec<u8>>,
+    /// Unique value that indicates the time at which the event was generated. This is a 64-bit value that represents 
+    /// the number of 100-nanosecond intervals after January 1, 1601. The information is in the Coordinated Universal 
+    /// Times (UTC) format.
+    pub TIME_CREATED: Option<u64>,
 }
