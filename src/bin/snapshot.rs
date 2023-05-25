@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.nework_clients.update();
+    k.nework_connections.update();
 
-    println!("{:#?}", k.nework_clients);
+    println!("{:#?}", k.nework_connections);
 }

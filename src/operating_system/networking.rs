@@ -51,6 +51,17 @@ pub struct NetworkClients {
 
 update!(NetworkClients, nework_clients);
 
+/// Represents the state of Windows NetworkConnections
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct NetworkConnections {
+    /// Represents sequence of Windows `NetworkConnections`
+    pub nework_connections: Vec<Win32_NetworkConnection>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(NetworkConnections, nework_connections);
+
 /// The `Win32_IP4PersistedRouteTable` WMI class represents persisted IP routes. By default, the routes 
 /// added to the routing table are not permanent. Rebooting the computer clears the routes from the 
 /// table. However, the following command makes the route persist after the computer is restarted: 
@@ -261,4 +272,113 @@ pub struct Win32_NetworkClient {
     /// 
     /// Example: "Microsoft Windows Network"
     pub Name: Option<String>,
+}
+
+/// The `Win32_NetworkConnection` WMI classrepresents an active network connection in a Windows-based environment.
+/// 
+/// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-networkconnection>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_NetworkConnection {
+    /// A short textual description of the object.
+    pub Caption: Option<String>,
+    /// A textual description of the object.
+    pub Description: Option<String>,
+    /// Indicates when the object was installed. Lack of a value does not indicate that the object is not installed.
+    pub InstallDate: Option<WMIDateTime>,
+    /// String that indicates the current status of the object. Operational and non-operational status can be defined. 
+    /// Operational status can include "OK", "Degraded", and "Pred Fail". "Pred Fail" indicates that an element is 
+    /// functioning properly, but is predicting a failure (for example, a SMART-enabled hard disk drive).
+    /// 
+    /// Non-operational status can include "Error", "Starting", "Stopping", and "Service". "Service" can apply during 
+    /// disk mirror-resilvering, reloading a user permissions list, or other administrative work. Not all such work is 
+    /// online, but the managed element is neither "OK" nor in one of the other states.
+    /// 
+    /// Values include the following:
+    /// - `OK` ("OK")
+    /// - `Error` ("Error")
+    /// - `Degraded` ("Degraded")
+    /// - `Unknown` ("Unknown")
+    /// - `Pred Fail` ("Pred Fail")
+    /// - `Starting` ("Starting")
+    /// - `Stopping` ("Stopping")
+    /// - `Service` ("Service")
+    /// - `Stressed` ("Stressed")
+    /// - `NonRecover` ("NonRecover")
+    /// - `No Contact` ("No Contact")
+    /// - `Lost Comm` ("Lost Comm")
+    pub Status: Option<String>,
+    /// List of access rights to the given file or directory held by the user or group on whose behalf the instance is 
+    /// returned. On FAT volumes, the `FULL_ACCESS` value is returned instead, indicating no security has been set on the 
+    /// object.
+    /// 
+    /// - `FILE_READ_DATA (file) or FILE_LIST_DIRECTORY (directory) (1)`: Grants the right to read data from the file. For a directory, this value grants the right to list the contents of the directory.
+    /// - `FILE_WRITE_DATA (file) or FILE_ADD_FILE (directory) (2)`: Grants the right to write data to the file. For a directory, this value grants the right to create a file in the directory.
+    /// - `FILE_APPEND_DATA (file) or FILE_ADD_SUBDIRECTORY (4)`: Grants the right to append data to the file. For a directory, this value grants the right to create a subdirectory.
+    /// - `FILE_READ_EA (8)`: Grants the right to read extended attributes.
+    /// - `FILE_WRITE_EA (16)`: Grants the right to write extended attributes.
+    /// - `FILE_EXECUTE (file) or FILE_TRAVERSE (directory) (32)`: Grants the right to execute a file. For a directory, the directory can be traversed.
+    /// - `FILE_DELETE_CHILD (directory) (64)`: Grants the right to delete a directory and all of the files it contains (its children), even if the files are read-only.
+    /// - `FILE_READ_ATTRIBUTES (128)`: Grants the right to read file attributes.
+    /// - `FILE_WRITE_ATTRIBUTES (256)`: Grants the right to change file attributes.
+    /// - `DELETE (65536)`: Grants delete access.
+    /// - `READ_CONTROL (131072)`: Grants read access to the security descriptor and owner.
+    /// - `WRITE_DAC (262144)`: Grants write access to the discretionary access control list (DACL).
+    /// - `WRITE_OWNER (524288)`: Assigns the write owner.
+    /// - `SYNCHRONIZE (1048576)`: Synchronizes access and allows a process to wait for an object to enter the signaled state.
+    pub AccessMask: Option<u32>,
+    /// Comment supplied by the network provider. 
+    pub Comment: Option<String>,
+    /// Current state of the network connection.
+    /// 
+    /// Connected ("Connected")
+    /// - `Error` ("Error")
+    /// - `Paused` ("Paused")
+    /// - `Disconnected` ("Disconnected")
+    /// - `Connecting` ("Connecting")
+    /// - `Reconnecting` ("Reconnecting")
+    pub ConnectionState: Option<String>,
+    /// Persistence type of the connection used for connecting to the network.
+    /// 
+    /// `Current Connection` ("Current Connection")
+    /// `Persistent Connection` ("Persistent Connection")
+    pub ConnectionType: Option<String>,
+    /// Network object should be displayed in a network browsing user interface.
+    /// - `Domain` ("Domain")
+    /// - `Generic` ("Generic")
+    /// - `Server` ("Server")
+    /// - `Share` ("Share")
+    pub DisplayType: Option<String>,
+    /// Local name of the connected network device.
+    /// 
+    /// Example: "c:\public"
+    pub LocalName: Option<String>,
+    /// Name of the current network connection. It is the combination of the values in `RemoteName` and `LocalName`.
+    /// 
+    /// Example: "\\NTRELEASE (c:\public)"
+    pub Name: Option<String>,
+    /// Connection will be reconnected automatically by the operating system on the next logon.
+    pub Persistent: Option<bool>,
+    /// Name of the provider that owns the resource. This property can be `NULL` if the provider name is unknown.
+    pub ProviderName: Option<String>,
+    /// Remote network resource name for a network resource. For a current or persistent connection, `RemoteName` 
+    /// contains the network name associated with the name of the value in the `LocalName` property. The name in 
+    /// `RemoteName` must follow the network provider's naming conventions.
+    /// 
+    /// Example: "\\NTRELEASE"
+    pub RemoteName: Option<String>,
+    /// Full path to the network resource.
+    /// 
+    /// Example: "\\infosrv1\public"
+    pub RemotePath: Option<String>,
+    /// Type of resource to enumerate or connect to.
+    /// - `Disk` ("Disk")
+    /// - `Print` ("Print")
+    /// - `Any` ("Any")
+    pub ResourceType: Option<String>,
+    /// User name or the default user name used to establish a network connection.
+    /// 
+    /// Example: "SYSTEM"
+    pub UserName: Option<String>,
 }
