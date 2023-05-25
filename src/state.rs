@@ -1,7 +1,7 @@
 //! Stores the main state of Windows machine
 
 use crate::operating_system::{
-    desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_pagefiles, scheduler_jobs, product_activation, software_license_provider, shares, multimedia_audio_visual, storage, security, start_menu, networking, job_objects
+    desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_pagefiles, scheduler_jobs, product_activation, software_license_provider, shares, multimedia_audio_visual, storage, security, start_menu, networking, job_objects, operating_system_settings
 };
 use serde::{Deserialize, Serialize};
 use tokio::join;
@@ -145,6 +145,8 @@ pub struct Windows {
     pub named_job_object_actg_infos: job_objects::NamedJobObjectActgInfos,
     /// State of Windows NamedJobObjectLimitSettings
     pub named_job_object_limit_settings: job_objects::NamedJobObjectLimitSettings,
+    /// State of Windows BootConfigurations
+    pub boot_configurations: operating_system_settings::BootConfigurations,
 }
 
 impl Windows {
@@ -206,6 +208,7 @@ impl Windows {
         self.named_job_objects.update();
         self.named_job_object_actg_infos.update();
         self.named_job_object_limit_settings.update();
+        self.boot_configurations.update();
     }
 
     /// Asynchronously update all the fields
@@ -267,6 +270,7 @@ impl Windows {
             self.named_job_objects.async_update(),
             self.named_job_object_actg_infos.async_update(),
             self.named_job_object_limit_settings.async_update(),
+            self.boot_configurations.async_update(),
         );
     }
 }
