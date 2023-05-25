@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.ip4_route_table_events.update();
+    k.named_job_object_limit_settings.update();
 
-    println!("{:#?}", k.ip4_route_table_events);
+    println!("{:#?}", k.named_job_object_limit_settings);
 }
