@@ -73,6 +73,17 @@ pub struct NetworkProtocols {
 
 update!(NetworkProtocols, nework_protocols);
 
+/// Represents the state of Windows NTDomains
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct NTDomains {
+    /// Represents sequence of Windows `NTDomains`
+    pub nt_domains: Vec<Win32_NTDomain>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(NTDomains, nt_domains);
+
 /// The `Win32_IP4PersistedRouteTable` WMI class represents persisted IP routes. By default, the routes 
 /// added to the routing table are not permanent. Rebooting the computer clears the routes from the 
 /// table. However, the following command makes the route persist after the computer is restarted: 
@@ -489,4 +500,92 @@ pub struct Win32_NetworkProtocol {
     /// for subsets of data transmitted over the network. QoS means subsets of data get higher priority or guaranteed 
     /// service when traversing a network.
     pub SupportsQualityofService: Option<bool>,
+}
+
+/// The Win32_NTDomain WMI class represents a Windows domain.
+/// 
+/// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/cimwin32a/win32-ntdomain>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_NTDomain {
+    /// Short textual description of the object.
+    pub Caption: Option<String>,
+    /// Name of the class or subclass used in the creation of an instance. When used with other key properties of the 
+    /// class, this property allows all instances of the class and its subclasses to be uniquely identified.
+    pub CreationClassName: Option<String>,
+    /// Textual description of the object.
+    pub Description: Option<String>,
+    /// Date and time the object was installed. This property does not need a value to indicate that the object is 
+    /// installed.
+    pub InstallDate: Option<WMIDateTime>,
+    /// Label by which the object is known.
+    pub Name: Option<String>,
+    /// How the primary system owner can be reached (for example, phone number or email address).
+    pub PrimaryOwnerContact: Option<String>,
+    /// Name of the primary system owner.
+    pub PrimaryOwnerName: Option<String>,
+    /// Current status of the object.
+    /// 
+    /// Values include the following:
+    /// - `OK` ("OK")
+    /// - `Error` ("Error")
+    /// - `Degraded` ("Degraded")
+    /// - `Unknown` ("Unknown")
+    /// - `Pred Fail` ("Pred Fail")
+    /// - `Starting` ("Starting")
+    /// - `Stopping` ("Stopping")
+    /// - `Service` ("Service")
+    /// - `Stressed` ("Stressed")
+    /// - `NonRecover` ("NonRecover")
+    /// - `No Contact` ("No Contact")
+    /// - `Lost Comm` ("Lost Comm")
+    pub Status: Option<String>,
+    /// Name of the site where the domain controller is configured. This value can be `NULL`.
+    pub ClientSiteName: Option<String>,
+    /// Name of the site where the domain controller is located. This value can be `NULL`.
+    pub DcSiteName: Option<String>,
+    /// Name of the root of the DNS tree.
+    pub DNSForestName: Option<String>,
+    /// Address of the discovered domain controller.
+    pub DomainControllerAddress: Option<String>,
+    /// Type of address specified in the DomainControllerAddress property.
+    // - `DS_INET_ADDRESS` (1)
+    // - `DS_NETBIOS_ADDRESS` (2)
+    pub DomainControllerAddressType: Option<i32>,
+    /// Computer name for the discovered domain controller.
+    pub DomainControllerName: Option<String>,
+    /// Globally unique identifier (`GUID`) of the domain controller. This property is 0 (zero) 
+    /// if the domain controller does not have a `GUID`.
+    pub DomainGUID: Option<String>,
+    /// Name of the domain.
+    /// 
+    /// Example: microsoft.com
+    pub DomainName: Option<String>,
+    /// If `TRUE`, the domain controller is a directory service server.
+    pub DSDirectoryServiceFlag: Option<bool>,
+    /// If  TRUE`, the Domain Controller Name is in DNS format.
+    /// 
+    /// Example: www.mynode.com or 135.5.33.19
+    pub DSDnsControllerFlag: Option<bool>,
+    /// If `TRUE`, the DomainName value is in DNS format.
+    pub DSDnsDomainFlag: Option<bool>,
+    /// If `TRUE`, the `DNSForestName` value is in Domain Name System (DNS) format.
+    pub DSDnsForestFlag: Option<bool>,
+    /// If `TRUE`, the domain controller is a Global Catalog server for the `DNSForestName` value.
+    pub DSGlobalCatalogFlag: Option<bool>,
+    /// If `TRUE`, the domain controller is a Kerberos Key Distribution Center for the domain.
+    pub DSKerberosDistributionCenterFlag: Option<bool>,
+    /// If `TRUE`, the domain controller is the Primary Domain Controller.
+    pub DSPrimaryDomainControllerFlag: Option<bool>,
+    /// If `TRUE`, the domain is running the Windows Time service.
+    pub DSTimeServiceFlag: Option<bool>,
+    /// If `TRUE`, the domain controller hosts a writeable DS or security accounts manager (SAM).
+    pub DSWritableFlag: Option<bool>,
+    /// Format to generate the system name using the subclass heuristic.
+    pub NameFormat: Option<String>,
+    /// An array of strings that specify the roles the computer system plays in the IT environment. Values are defined 
+    /// by the IT environment in which the computer system resides. For example, for an instance of a networking 
+    /// system, this property might contain the string, "Switch" or "Bridge".
+    pub Roles: Option<Vec<String>>,
 }

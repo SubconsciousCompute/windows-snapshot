@@ -131,6 +131,8 @@ pub struct Windows {
     pub nework_connections: networking::NetworkConnections,
     /// State of Windows NetworkProtocols
     pub nework_protocols: networking::NetworkProtocols,
+    /// State of Windows NTDomains
+    pub nt_domains: networking::NTDomains,
 }
 
 impl Windows {
@@ -192,6 +194,7 @@ impl Windows {
         self.nework_clients.update();
         self.nework_connections.update();
         self.nework_protocols.update();
+        self.nt_domains.update();
     }
 
     /// Asynchronously update all the fields
@@ -253,6 +256,7 @@ impl Windows {
             self.nework_clients.async_update(),
             self.nework_connections.async_update(),
             self.nework_protocols.async_update(),
+            self.nt_domains.async_update(),
         );
     }
 }
