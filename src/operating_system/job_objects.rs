@@ -44,6 +44,17 @@ pub struct LUIDandAttributes {
 
 update!(LUIDandAttributes, luid_and_attributes);
 
+/// Represents the state of Windows NamedJobObjects
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct NamedJobObjects {
+    /// Represents sequence of Windows `NamedJobObjects`
+    pub named_job_objects: Vec<Win32_NamedJobObject>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(NamedJobObjects, named_job_objects);
+
 /// The `Win32_LUID` abstract WMI class represents a locally unique identifier (LUID), an identifier unique on the 
 /// local computer that is used in security tokens.
 /// 
@@ -71,4 +82,35 @@ pub struct Win32_LUIDandAttributes {
     pub Attributes: Option<u32>,
     /// Representing a LUID value.
     pub LUID: Option<Win32_LUID>,
+}
+
+/// The `Win32_NamedJobObject` WMI class represents a kernel object that is used to group processes for controlling 
+/// the life cycle and resources of the processes within the job object. Only the job objects that are named are 
+/// instrumented.
+/// 
+/// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmipjobobjprov/win32-namedjobobject>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_NamedJobObject {
+    /// Short textual description of the object.
+    pub Caption: Option<String>,
+    /// Textual description of the object.
+    pub Description: Option<String>,
+    /// Restrictions on a job regarding the user interface.
+    /// - 1 (0x1): Desktop
+    /// - 2 (0x2): Display Settings
+    /// - 4 (0x4): Exit Windows
+    /// - 8 (0x8): Global Atoms
+    /// - 16 (0x10): Handles
+    /// - 32 (0x20): Read Clipboard
+    /// - 64 (0x40): System Parameters
+    /// - 128 (0x80): Write Clipboard
+    pub BasicUIRestrictions: Option<u32>,
+    /// Number that identifies a job object. Because they are kernel objects, job object names are case sensitive. 
+    /// However, Windows Management Instrumentation (WMI) keys are case insensitive and must be decorated to 
+    /// distinguish case. To indicate a capital letter, precede the letter by using a backslash. 
+    /// 
+    /// For example, "A" and "a" are lowercase and "\A" and "\a" are uppercase. 
+    pub CollectionID: Option<String>,
 }

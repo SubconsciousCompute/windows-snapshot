@@ -139,6 +139,8 @@ pub struct Windows {
     pub luids: job_objects::LUIDs,
     /// State of Windows LUIDandAttributes
     pub luid_and_attributes: job_objects::LUIDandAttributes,
+    /// State of Windows NamedJobObjects
+    pub named_job_objects: job_objects::NamedJobObjects,
 }
 
 impl Windows {
@@ -204,6 +206,7 @@ impl Windows {
         self.ip4_route_table_events.update();
         self.luids.update();
         self.luid_and_attributes.update();
+        self.named_job_objects.update();
     }
 
     /// Asynchronously update all the fields
@@ -269,6 +272,7 @@ impl Windows {
             self.ip4_route_table_events.async_update(),
             self.luids.async_update(),
             self.luid_and_attributes.async_update(),
+            self.named_job_objects.async_update(),
         );
     }
 }
