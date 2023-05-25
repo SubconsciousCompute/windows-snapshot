@@ -147,6 +147,8 @@ pub struct Windows {
     pub named_job_object_limit_settings: job_objects::NamedJobObjectLimitSettings,
     /// State of Windows BootConfigurations
     pub boot_configurations: operating_system_settings::BootConfigurations,
+    /// State of Windows ComputerSystems
+    pub computer_systems: operating_system_settings::ComputerSystems,
 }
 
 impl Windows {
@@ -209,6 +211,7 @@ impl Windows {
         self.named_job_object_actg_infos.update();
         self.named_job_object_limit_settings.update();
         self.boot_configurations.update();
+        self.computer_systems.update();
     }
 
     /// Asynchronously update all the fields
@@ -271,6 +274,7 @@ impl Windows {
             self.named_job_object_actg_infos.async_update(),
             self.named_job_object_limit_settings.async_update(),
             self.boot_configurations.async_update(),
+            self.computer_systems.async_update(),
         );
     }
 }
