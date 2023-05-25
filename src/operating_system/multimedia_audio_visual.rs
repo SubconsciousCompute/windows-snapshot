@@ -2,7 +2,7 @@
 //! 
 //! | Class                                       | Description                                                                                                |
 //! |---------------------------------------------|------------------------------------------------------------------------------------------------------------|
-//! | [**Win32\_CodecFile**](win32-codecfile.md) | Instance class<br/> Represents the audio or video codec installed on the computer system.<br/> |
+//! | [**Win32\_CodecFile**](win32-codecfile) | Instance class<br/> Represents the audio or video codec installed on the computer system.<br/> |
 
 use crate::{update};
 use serde::{Deserialize, Serialize};

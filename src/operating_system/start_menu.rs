@@ -2,12 +2,12 @@
 //! 
 //! | Class                                                                                   | Description                                                                                                                                                              |
 //! |-----------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-//! | [**Win32\_LogicalProgramGroup**](win32-logicalprogramgroup.md)                         | Instance class<br/> Represents a program group in a computer system running Windows.<br/>                                                                    |
-//! | [**Win32\_LogicalProgramGroupDirectory**](win32-logicalprogramgroupdirectory.md)       | Association class<br/> Relates logical program groups (groupings in the Start menu), and the file directories in which they are stored.<br/>                 |
-//! | [**Win32\_LogicalProgramGroupItem**](win32-logicalprogramgroupitem.md)                 | Instance class<br/> Represents an element contained by a **Win32\_ProgramGroup** instance, that is not itself another **Win32\_ProgramGroup** instance.<br/> |
-//! | [**Win32\_LogicalProgramGroupItemDataFile**](win32-logicalprogramgroupitemdatafile.md) | Association class<br/> Relates the program group items of the Start menu, and the files in which they are stored.<br/>                                       |
-//! | [**Win32\_ProgramGroupContents**](win32-programgroupcontents.md)                       | Association class<br/> Relates a program group order and an individual program group or item contained in it.<br/>                                           |
-//! | [**Win32\_ProgramGroupOrItem**](win32-programgrouporitem.md)                           | Instance class<br/> Represents a logical grouping of programs on the user's **Start**\|**Programs** menu.<br/>                                               |
+//! | [**Win32\_LogicalProgramGroup**](win32-logicalprogramgroup)                         | Instance class<br/> Represents a program group in a computer system running Windows.<br/>                                                                    |
+//! | [**Win32\_LogicalProgramGroupDirectory**](win32-logicalprogramgroupdirectory)       | Association class<br/> Relates logical program groups (groupings in the Start menu), and the file directories in which they are stored.<br/>                 |
+//! | [**Win32\_LogicalProgramGroupItem**](win32-logicalprogramgroupitem)                 | Instance class<br/> Represents an element contained by a **Win32\_ProgramGroup** instance, that is not itself another **Win32\_ProgramGroup** instance.<br/> |
+//! | [**Win32\_LogicalProgramGroupItemDataFile**](win32-logicalprogramgroupitemdatafile) | Association class<br/> Relates the program group items of the Start menu, and the files in which they are stored.<br/>                                       |
+//! | [**Win32\_ProgramGroupContents**](win32-programgroupcontents)                       | Association class<br/> Relates a program group order and an individual program group or item contained in it.<br/>                                           |
+//! | [**Win32\_ProgramGroupOrItem**](win32-programgrouporitem)                           | Instance class<br/> Represents a logical grouping of programs on the user's **Start**\|**Programs** menu.<br/>                                               |
 
 use crate::update;
 use serde::{Deserialize, Serialize};

@@ -6,12 +6,12 @@
 //! | [**Win32\_IP4PersistedRouteTable**](/previous-versions/windows/desktop/wmiiprouteprov/win32-ip4persistedroutetable) | Instance class<br/> Represents persisted IP routes.<br/>                                                             |
 //! | [**Win32\_IP4RouteTable**](/previous-versions/windows/desktop/wmiiprouteprov/win32-ip4routetable)                   | Instance class<br/> Represents information that governs the routing of network data packets.<br/>                    |
 //! | [**Win32\_IP4RouteTableEvent**](/previous-versions/windows/desktop/wmiiprouteprov/win32-ip4routetableevent)         | Event class<br/> Represents IP route change events.<br/>                                                             |
-//! | [**Win32\_NetworkClient**](win32-networkclient.md)                              | Instance class<br/> Represents a network client on a computer system running Windows.<br/>                           |
-//! | [**Win32\_NetworkConnection**](win32-networkconnection.md)                      | Instance class<br/> Represents an active network connection in a Windows environment.<br/>                           |
-//! | [**Win32\_NetworkProtocol**](win32-networkprotocol.md)                          | Instance class<br/> Represents a protocol and its network characteristics on a computer system running Windows.<br/> |
+//! | [**Win32\_NetworkClient**](win32-networkclient)                              | Instance class<br/> Represents a network client on a computer system running Windows.<br/>                           |
+//! | [**Win32\_NetworkConnection**](win32-networkconnection)                      | Instance class<br/> Represents an active network connection in a Windows environment.<br/>                           |
+//! | [**Win32\_NetworkProtocol**](win32-networkprotocol)                          | Instance class<br/> Represents a protocol and its network characteristics on a computer system running Windows.<br/> |
 //! | [**Win32\_NTDomain**](/previous-versions/windows/desktop/cimwin32a/win32-ntdomain)                                        | Instance class<br/> Represents a Windows NT domain.<br/>                                                             |
 //! | [**Win32\_PingStatus**](/previous-versions/windows/desktop/wmipicmp/win32-pingstatus)                               | Instance class<br/> Represents the values returned by the standard **ping** command.<br/>                            |
-//! | [**Win32\_ProtocolBinding**](win32-protocolbinding.md)                          | Association class<br/> Relates a system-level driver, network protocol, and network adapter.<br/>                    |
+//! | [**Win32\_ProtocolBinding**](win32-protocolbinding)                          | Association class<br/> Relates a system-level driver, network protocol, and network adapter.<br/>                    |
 
 use crate::update;
 use serde::{Deserialize, Serialize};

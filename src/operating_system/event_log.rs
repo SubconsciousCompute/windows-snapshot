@@ -4,9 +4,9 @@
 //! |---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 //! | [**Win32\_NTEventlogFile**](/previous-versions/windows/desktop/legacy/aa394225(v=vs.85))         | Instance class<br/> Represents data stored in a Windows Event log file.<br/>                                                                                      |
 //! | [**Win32\_NTLogEvent**](win32-ntlogevent)                 | Instance class<br/> Represents Windows events.<br/>                                                                                                               |
-//! | [**Win32\_NTLogEventComputer**](win32-ntlogeventcomputer) | Association class<br/> Relates instances of [**Win32\_NTLogEvent**](/previous-versions/windows/desktop/eventlogprov/win32-ntlogevent) and [**Win32\_ComputerSystem**](win32-computersystem.md).<br/>         |
+//! | [**Win32\_NTLogEventComputer**](win32-ntlogeventcomputer) | Association class<br/> Relates instances of [**Win32\_NTLogEvent**](/previous-versions/windows/desktop/eventlogprov/win32-ntlogevent) and [**Win32\_ComputerSystem**](win32-computersystem).<br/>         |
 //! | [**Win32\_NTLogEventLog**](/previous-versions/windows/desktop/eventlogprov/win32-ntlogeventlog)           | Association class<br/> Relates instances of [**Win32\_NTLogEvent**](/previous-versions/windows/desktop/eventlogprov/win32-ntlogevent) and [**Win32\_NTEventlogFile**](/previous-versions/windows/desktop/legacy/aa394225(v=vs.85)) classes.<br/> |
-//! | [**Win32\_NTLogEventUser**](/previous-versions/windows/desktop/eventlogprov/win32-ntlogeventuser)         | Association class<br/> Relates instances of [**Win32\_NTLogEvent**](/previous-versions/windows/desktop/eventlogprov/win32-ntlogevent) and [**Win32\_UserAccount**](win32-useraccount.md).<br/>               |
+//! | [**Win32\_NTLogEventUser**](/previous-versions/windows/desktop/eventlogprov/win32-ntlogeventuser)         | Association class<br/> Relates instances of [**Win32\_NTLogEvent**](/previous-versions/windows/desktop/eventlogprov/win32-ntlogevent) and [**Win32\_UserAccount**](win32-useraccount).<br/>               |
 
 use crate::update;
 use serde::{Deserialize, Serialize};
