@@ -107,20 +107,20 @@ pub struct Windows {
     pub logical_share_security_settings: security::LogicalShareSecuritySettings,
     /// State of Windows PrivilegesStatuses
     pub privileges_statuses: security::PrivilegesStatuses,
-    /// State of Windows Trustees
-    pub trustees: security::Trustees,
-    /// State of Windows ACEs
-    pub aces: security::ACEs,
-    /// State of Windows SecurityDescriptors
-    pub security_descriptors: security::SecurityDescriptors,
-    /// State of Windows SecuritySettings
-    pub security_settings: security::SecuritySettings,
+    // /// State of Windows Trustees
+    // pub trustees: security::Trustees,
+    // /// State of Windows ACEs
+    // pub aces: security::ACEs,
+    // /// State of Windows SecurityDescriptors
+    // pub security_descriptors: security::SecurityDescriptors,
+    // /// State of Windows SecuritySettings
+    // pub security_settings: security::SecuritySettings,
     /// State of Windows LogicalProgramGroups
     pub logical_program_groups: start_menu::LogicalProgramGroups,
     /// State of Windows LogicalProgramGroupItems
     pub logical_program_group_items: start_menu::LogicalProgramGroupItems,
-    /// State of Windows ProgramGroupOrItems
-    pub program_group_or_items: start_menu::ProgramGroupOrItems,
+    // /// State of Windows ProgramGroupOrItems
+    // pub program_group_or_items: start_menu::ProgramGroupOrItems,
     /// State of Windows IP4PersistedRouteTables
     pub ip4_persisted_route_tables: networking::IP4PersistedRouteTables,
     /// State of Windows IP4RouteTables
@@ -135,10 +135,10 @@ pub struct Windows {
     pub nt_domains: networking::NTDomains,
     /// State of Windows IP4RouteTableEvents
     pub ip4_route_table_events: networking::IP4RouteTableEvents,
-    /// State of Windows LUIDs
-    pub luids: job_objects::LUIDs,
-    /// State of Windows LUIDandAttributes
-    pub luid_and_attributes: job_objects::LUIDandAttributes,
+    // /// State of Windows LUIDs
+    // pub luids: job_objects::LUIDs,
+    // /// State of Windows LUIDandAttributes
+    // pub luid_and_attributes: job_objects::LUIDandAttributes,
     /// State of Windows NamedJobObjects
     pub named_job_objects: job_objects::NamedJobObjects,
     /// State of Windows NamedJobObjectActgInfos
@@ -194,13 +194,8 @@ impl Windows {
         self.logical_file_security_settings.update();
         self.logical_share_security_settings.update();
         self.privileges_statuses.update();
-        self.trustees.update();
-        self.aces.update();
-        self.security_descriptors.update();
-        self.security_settings.update();
         self.logical_program_groups.update();
         self.logical_program_group_items.update();
-        self.program_group_or_items.update();
         self.ip4_persisted_route_tables.update();
         self.ip4_route_tables.update();
         self.nework_clients.update();
@@ -208,8 +203,6 @@ impl Windows {
         self.nework_protocols.update();
         self.nt_domains.update();
         self.ip4_route_table_events.update();
-        self.luids.update();
-        self.luid_and_attributes.update();
         self.named_job_objects.update();
         self.named_job_object_actg_infos.update();
         self.named_job_object_limit_settings.update();
@@ -262,13 +255,8 @@ impl Windows {
             self.logical_file_security_settings.async_update(),
             self.logical_share_security_settings.async_update(),
             self.privileges_statuses.async_update(),
-            self.trustees.async_update(),
-            self.aces.async_update(),
-            self.security_descriptors.async_update(),
-            self.security_settings.async_update(),
             self.logical_program_groups.async_update(),
             self.logical_program_group_items.async_update(),
-            self.program_group_or_items.async_update(),
             self.ip4_persisted_route_tables.async_update(),
             self.ip4_route_tables.async_update(),
             self.nework_clients.async_update(),
@@ -276,8 +264,6 @@ impl Windows {
             self.nework_protocols.async_update(),
             self.nt_domains.async_update(),
             self.ip4_route_table_events.async_update(),
-            self.luids.async_update(),
-            self.luid_and_attributes.async_update(),
             self.named_job_objects.async_update(),
             self.named_job_object_actg_infos.async_update(),
             self.named_job_object_limit_settings.async_update(),
