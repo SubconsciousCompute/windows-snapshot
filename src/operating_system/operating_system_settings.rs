@@ -90,6 +90,39 @@ pub struct OperatingSystems {
 
 update!(OperatingSystems, operating_systems);
 
+/// Represents the state of Windows OSRecoveryConfigurations
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct OSRecoveryConfigurations {
+    /// Represents sequence of Windows `OSRecoveryConfigurations`
+    pub os_recovery_configurations: Vec<Win32_OSRecoveryConfiguration>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(OSRecoveryConfigurations, os_recovery_configurations);
+
+/// Represents the state of Windows QuickFixEngineerings
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct QuickFixEngineerings {
+    /// Represents sequence of Windows `QuickFixEngineerings`
+    pub quick_fix_engineerings: Vec<Win32_QuickFixEngineering>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(QuickFixEngineerings, quick_fix_engineerings);
+
+/// Represents the state of Windows StartupCommands
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct StartupCommands {
+    /// Represents sequence of Windows `StartupCommands`
+    pub startup_commands: Vec<Win32_StartupCommand>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(StartupCommands, startup_commands);
+
 /// The Win32_BootConfiguration WMI class represents the boot configuration of a computer system running Windows.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-bootconfiguration>
@@ -1179,4 +1212,171 @@ pub struct Win32_OperatingSystem {
     /// - `Variable` (2)
     pub QuantumType: Option<u8>,
     */
+}
+
+/// The `Win32_OSRecoveryConfiguration` WMI class represents the types of information that will 
+/// be gathered from memory when the operating system fails. This includes boot failures and 
+/// system crashes.
+/// 
+/// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-osrecoveryconfiguration>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_OSRecoveryConfiguration {
+    /// Short textual description of the current object.
+    pub Caption: Option<String>,
+    /// Textual description of the current object.
+    pub Description: Option<String>,
+    /// Identifier by which the current object is known.
+    pub SettingID: Option<String>,
+    /// System will automatically reboot during a recovery operation.
+    pub AutoReboot: Option<bool>,
+    /// Full path to the debug file. A debug file is created with the memory state of the 
+    /// computer after a computer failure.
+    /// 
+    /// Example: "C:\Windows\Memory.dmp"
+    pub DebugFilePath: Option<String>,
+    /// Type of debugging information written to the log file.
+    /// 
+    /// - `None` (0)
+    /// - `Complete memory dump` (1)
+    /// - `Kernel memory dump` (2)
+    /// - `Small memory dump` (3)
+    pub DebugInfoType: Option<u32>,
+    /// Expanded version of the `DebugFilePath` property.
+    /// 
+    /// Example: "C:\Windows\Memory.dmp"
+    pub ExpandedDebugFilePath: Option<String>,
+    /// Expanded version of the `MiniDumpDirectory` property.
+    /// 
+    /// Example: "C:\Windows\MiniDump"
+    pub ExpandedMiniDumpDirectory: Option<String>,
+    /// Only kernel debug information will be written to the debug log file. If `TRUE`, then only 
+    /// the state of the kernel is written to a file in the event of a system failure. If `FALSE`, 
+    /// the system will try to log the state of the memory, and any devices that can provide 
+    /// information about the system when it failed.
+    pub KernelDumpOnly: Option<bool>,
+    /// Directory where small memory dump files will be recorded and accumulated.
+    /// 
+    /// Example: "%systemRoot%\MiniDump"
+    pub MiniDumpDirectory: Option<String>,
+    /// Identifying name for this instance of the `Win32_OSRecoveryConfiguration` class.
+    pub Name: Option<String>,
+    /// New debug file will overwrite an existing one.
+    pub OverwriteExistingDebugFile: Option<bool>,
+    /// Alert message will be sent to the system administrator in the event of an operating system 
+    /// failure.
+    pub SendAdminAlert: Option<bool>,
+    /// Debugging information is to be written to a log file.
+    pub WriteDebugInfo: Option<bool>,
+    /// Events will be written to a system log.
+    pub WriteToSystemLog: Option<bool>,
+}
+
+/// The `Win32_QuickFixEngineering` WMI class represents a small system-wide update, commonly referred to as a 
+/// quick-fix engineering (QFE) update, applied to the current operating system. This class returns only the updates 
+/// supplied by Component Based Servicing (CBS). These updates are not listed in the registry. Updates supplied by 
+/// Microsoft Windows Installer (MSI) or the Windows update site (https://update.microsoft.com) are not returned by 
+/// `Win32_QuickFixEngineering`.
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_QuickFixEngineering {
+    /// A short textual description of the object.
+    pub Caption: Option<String>,
+    /// A textual description of the object.
+    pub Description: Option<String>,
+    /// Indicates when the object was installed. Lack of a value does not indicate that the object is not installed.
+    pub InstallDate: Option<WMIDateTime>,
+    /// Label by which the object is known. When subclassed, this property can be overridden to be a key property.
+    pub Name: Option<String>,
+    /// String that indicates the current status of the object. Operational and non-operational status can be 
+    /// defined. Operational status can include "OK", "Degraded", and "Pred Fail". "Pred Fail" indicates that an 
+    /// element is functioning properly, but is predicting a failure (for example, a SMART-enabled hard disk drive).
+    /// 
+    /// Non-operational status can include "Error", "Starting", "Stopping", and "Service". "Service" can apply 
+    /// during disk mirror-resilvering, reloading a user permissions list, or other administrative work. Not all such 
+    /// work is online, but the managed element is neither "OK" nor in one of the other states.
+    /// 
+    /// Values include the following:
+    /// 
+    /// - `OK` ("OK")
+    /// - `Error` ("Error")
+    /// - `Degraded` ("Degraded")
+    /// - `Unknown` ("Unknown")
+    /// - `Pred Fail` ("Pred Fail")
+    /// - `Starting` ("Starting")
+    /// - `Stopping` ("Stopping")
+    /// - `Service` ("Service")
+    /// - `Stressed` ("Stressed")
+    /// - `NonRecover` ("NonRecover")
+    /// - `No Contact` ("No Contact")
+    /// - `Lost Comm` ("Lost Comm")
+    pub Status: Option<String>,
+    /// Local name of the computer system. 
+    pub CSName: Option<String>,
+    /// Additional comments that relate to the update.
+    pub FixComments: Option<String>,
+    /// Unique identifier associated with a particular update.
+    pub HotFixID: Option<String>,
+    /// Person who installed the update. If this value is unknown, the property is empty.
+    pub InstalledBy: Option<String>,
+    /// Date that the update was installed. If this value is unknown, the property is empty.
+    /// 
+    /// Note: This property may use different formats, depending on when the QuickFix was installed. Most systems 
+    /// use a standard date format, such as "23-10-2013". However, some systems may return a 64-bit hexidecimal 
+    /// value in the Win32 `FILETIME` format.
+    pub InstalledOn: Option<String>,
+    /// Service pack in effect when the update was applied. If no service pack has been applied, the property takes 
+    /// on the value SP0. If it cannot be determined what service pack was in effect, this property is `NULL`.
+    pub ServicePackInEffect: Option<String>,
+}
+
+/// The `Win32_StartupCommand` WMI class represents a command that runs automatically when a user logs onto the 
+/// computer system.
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_StartupCommand {
+    /// Short textual description of the current object.
+    pub Caption: Option<String>,
+    /// Textual description of the current object.
+    pub Description: Option<String>,
+    /// Identifier by which the current object is known.
+    pub SettingID: Option<String>,
+    /// Command run by the startup command.
+    /// 
+    /// WMI obtains this data from the registry key
+    /// 
+    /// `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run`
+    /// 
+    /// Example: "C:\Windows\notepad.exe myfile.txt"
+    pub Command: Option<String>,
+    /// Path where the startup command resides on the disk file system.
+    /// 
+    /// For example: HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+    /// 
+    /// `Startup` ("Startup")
+    /// 
+    /// `Common Startup` ("Common Startup")
+    /// 
+    /// `HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run` ("HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run")
+    /// 
+    /// `HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunServices` ("HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunServices")
+    pub Location: Option<String>,
+    /// File name of the startup command.
+    /// 
+    /// Example: "FindFast"
+    pub Name: Option<String>,
+    /// User name for whom this startup command will run.
+    /// 
+    /// Example: "mydomain\myname"
+    pub User: Option<String>,
+    /// The UserSID property indicates the SID of the user for whom this startup command will run. That User property 
+    /// may be empty but UserSID still has a value if the user name can't be resolved (like in the case of a deleted 
+    /// user). The property is helpful to distinguish between commands associated w/ two different users with unresolved 
+    /// names. It may be NULL when the command is associated with items not actually identifying a user like All Users.
+    /// 
+    /// Example:S-1-5-21-1579938362-1064596589-3161144252-1006
+    pub UserSID: Option<String>,
 }
