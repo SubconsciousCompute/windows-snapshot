@@ -9,7 +9,7 @@ use serde::{Deserialize, Serialize};
 use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
-/// Represents the state of Windows CodecFiles
+/// Represents the state of Windows `CodecFiles`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct CodecFiles {
     /// Represents sequence of Windows `CodecFiles`

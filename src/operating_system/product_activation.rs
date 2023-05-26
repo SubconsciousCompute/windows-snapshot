@@ -24,7 +24,7 @@ pub struct Proxys {
 
 update!(Proxys, proxys);
 
-/// Represents the state of Windows WindowsProductActivations
+/// Represents the state of Windows `WindowsProductActivations`
 /// 
 /// Note: this class doesn't exist anymore
 #[derive(Deserialize, Serialize, Debug, Clone)]
@@ -60,7 +60,7 @@ pub struct Win32_Proxy {
     pub SettingID: Option<String>,
 }
 
-/// The Win32_WindowsProductActivation WMI class contains properties and methods related to Windows 
+/// The `Win32_WindowsProductActivation` WMI class contains properties and methods related to Windows 
 /// Product Activation (WPA), such as activation state and grace period. This class also provides the 
 /// ability to activate the customer's computer online and offline.
 /// 
@@ -97,6 +97,6 @@ pub struct Win32_WindowsProductActivation {
     /// System whose WPA properties and methods are to be accessed. This property is a string that specifies 
     /// the name of the computer or its IP address.
     pub ServerName: Option<String>,
-    /// Identifier by which the CIM_Setting object is known.
+    /// Identifier by which the `CIM_Setting` object is known.
     pub SettingID: Option<String>,
 }

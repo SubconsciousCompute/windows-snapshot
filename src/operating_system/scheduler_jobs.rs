@@ -10,7 +10,7 @@ use serde::{Deserialize, Serialize};
 use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
-/// Represents the state of Windows ScheduledJobs
+/// Represents the state of Windows `ScheduledJobs`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct ScheduledJobs {
     /// Represents sequence of Windows `ScheduledJobs`
@@ -21,7 +21,7 @@ pub struct ScheduledJobs {
 
 update!(ScheduledJobs, scheduled_jobs);
 
-/// Represents the state of Windows LocalTimes
+/// Represents the state of Windows `LocalTimes`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct LocalTimes {
     /// Represents sequence of Windows `LocalTimes`
@@ -32,7 +32,7 @@ pub struct LocalTimes {
 
 update!(LocalTimes, local_times);
 
-/// Represents the state of Windows UTCTimes
+/// Represents the state of Windows `UTCTimes`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct UTCTimes {
     /// Represents sequence of Windows `UTCTimes`
@@ -45,7 +45,7 @@ update!(UTCTimes, utc_times);
 
 /// The `Win32_ScheduledJob` WMI class represents a job created with the `AT` command.
 /// 
-/// Note: The Win32_ScheduledJob class does not represent a job created with the Scheduled Task Wizard 
+/// Note: The `Win32_ScheduledJob` class does not represent a job created with the Scheduled Task Wizard 
 /// from the Control Panel. You cannot change a task created by WMI in the Scheduled Tasks UI. 
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-scheduledjob>
@@ -186,7 +186,7 @@ pub struct Win32_ScheduledJob {
 }
 
 /// The `Win32_LocalTime` WMI class describes a point in time returned as `Win32_LocalTime` objects that result 
-/// from a query. These are returned as the value for the `TargetInstance` property in the __InstanceModificationEvent 
+/// from a query. These are returned as the value for the `TargetInstance` property in the `__InstanceModificationEvent` 
 /// system class. The Hour property is returned as the local time on a 24-hour clock.
 /// 
 /// Note: The smallest time segment supported is 1 second.
@@ -219,9 +219,9 @@ pub struct Win32_LocalTime {
     pub Year: Option<u32>,
 }
 
-/// The Win32_UTCTimeWMI class describes a point in time that is returned as Win32_UTCTime objects 
-/// that result from a query. These are returned as the value for the TargetInstance property in the 
-/// __InstanceModificationEvent system class. The Hour property is returned as the Coordinated 
+/// The `Win32_UTCTimeWMI` class describes a point in time that is returned as `Win32_UTCTime` objects 
+/// that result from a query. These are returned as the value for the `TargetInstance` property in the 
+/// `__InstanceModificationEvent` system class. The Hour property is returned as the Coordinated 
 /// Universal Time (UTC) time on a 24 hour clock.
 /// 
 /// Note: The smallest time segment supported is a second.

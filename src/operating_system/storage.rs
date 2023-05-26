@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
-/// Represents the state of Windows ShadowCopys
+/// Represents the state of Windows `ShadowCopys`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct ShadowCopys {
     /// Represents sequence of `ShadowCopys`
@@ -30,7 +30,7 @@ pub struct ShadowCopys {
 
 update!(ShadowCopys, shadow_copys);
 
-/// Represents the state of Windows Volumes
+/// Represents the state of Windows `Volumes`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct Volumes {
     /// Represents sequence of `Volumes`
@@ -41,7 +41,7 @@ pub struct Volumes {
 
 update!(Volumes, volumes);
 
-/// Represents the state of Windows ShadowContexts
+/// Represents the state of Windows `ShadowContexts`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct ShadowContexts {
     /// Represents sequence of `ShadowContexts`
@@ -52,7 +52,7 @@ pub struct ShadowContexts {
 
 update!(ShadowContexts, shadow_contexts);
 
-/// Represents the state of Windows ShadowProviders
+/// Represents the state of Windows `ShadowProviders`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct ShadowProviders {
     /// Represents sequence of `ShadowProviders`

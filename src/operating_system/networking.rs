@@ -18,7 +18,7 @@ use serde::{Deserialize, Serialize};
 use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
-/// Represents the state of Windows IP4PersistedRouteTables
+/// Represents the state of Windows `IP4PersistedRouteTables`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct IP4PersistedRouteTables {
     /// Represents sequence of Windows `IP4PersistedRouteTables`
@@ -29,7 +29,7 @@ pub struct IP4PersistedRouteTables {
 
 update!(IP4PersistedRouteTables, ip4_persisted_route_tables);
 
-/// Represents the state of Windows IP4RouteTables
+/// Represents the state of Windows `IP4RouteTables`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct IP4RouteTables {
     /// Represents sequence of Windows `IP4RouteTables`
@@ -40,7 +40,7 @@ pub struct IP4RouteTables {
 
 update!(IP4RouteTables, ip4_route_tables);
 
-/// Represents the state of Windows NetworkClients
+/// Represents the state of Windows `NetworkClients`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct NetworkClients {
     /// Represents sequence of Windows `NetworkClients`
@@ -51,7 +51,7 @@ pub struct NetworkClients {
 
 update!(NetworkClients, nework_clients);
 
-/// Represents the state of Windows NetworkConnections
+/// Represents the state of Windows `NetworkConnections`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct NetworkConnections {
     /// Represents sequence of Windows `NetworkConnections`
@@ -62,7 +62,7 @@ pub struct NetworkConnections {
 
 update!(NetworkConnections, nework_connections);
 
-/// Represents the state of Windows NetworkProtocols
+/// Represents the state of Windows `NetworkProtocols`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct NetworkProtocols {
     /// Represents sequence of Windows `NetworkProtocols`
@@ -73,7 +73,7 @@ pub struct NetworkProtocols {
 
 update!(NetworkProtocols, nework_protocols);
 
-/// Represents the state of Windows NTDomains
+/// Represents the state of Windows `NTDomains`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct NTDomains {
     /// Represents sequence of Windows `NTDomains`
@@ -84,7 +84,7 @@ pub struct NTDomains {
 
 update!(NTDomains, nt_domains);
 
-/// Represents the state of Windows IP4RouteTableEvents
+/// Represents the state of Windows `IP4RouteTableEvents`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct IP4RouteTableEvents {
     /// Represents sequence of Windows `IP4RouteTableEvents`
@@ -102,7 +102,7 @@ update!(IP4RouteTableEvents, ip4_route_table_events);
 /// 
 /// Persistent entries are automatically inserted again in the route table each time the route table 
 /// is rebuilt. The operating system stores persistent routes in the registry. An entry can be removed 
-/// through the method call SWbemServices.Delete for scripting or IWbemServices::DeleteInstance for C++ 
+/// through the method call SWbemServices.Delete for scripting or `IWbemServices::DeleteInstance` for C++ 
 /// programming.
 /// 
 /// This class is only applicable to IPv4 and does not return IPX or IPv6 data. 
@@ -513,7 +513,7 @@ pub struct Win32_NetworkProtocol {
     pub SupportsQualityofService: Option<bool>,
 }
 
-/// The Win32_NTDomain WMI class represents a Windows domain.
+/// The `Win32_NTDomain` WMI class represents a Windows domain.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/cimwin32a/win32-ntdomain>
 #[derive(Default, Deserialize, Serialize, Debug, Clone)]

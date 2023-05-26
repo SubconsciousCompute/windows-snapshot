@@ -90,7 +90,7 @@ update!(MappedLogicalDisks, mapped_logical_disks);
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct QuotaSettings {
     /// Sequence of windows quota settings
-    pub quota_settings: Vec<Win32_MappedLogicalDisk>,
+    pub quota_settings: Vec<Win32_QuotaSetting>,
     /// When was the record last updated
     pub last_updated: SystemTime,
 }
@@ -121,7 +121,7 @@ update!(Volumes, volumes);
 
 /// The `Win32_Directory` WMI class represents a directory entry on a computer system running Windows.
 /// A directory is a type of file that logically groups data files and provides path information for
-/// the grouped files. Example: C:\TEMP. Win32_Directory does not include directories of network
+/// the grouped files. Example: C:\TEMP. `Win32_Directory` does not include directories of network
 /// drives.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-directory>
@@ -271,13 +271,13 @@ pub struct Win32_Directory {
 /// Directory resolution is performed as follows:
 ///
 /// - Root destination directories:
-/// The root directory entries are those with a null Directory_Parent value or a Directory_Parent value identical to the Directory value.
+/// The root directory entries are those with a null `Directory_Parent` value or a `Directory_Parent` value identical to the Directory value.
 /// The value in the Directory property is interpreted as the name of a property
 /// defining the location of the destination directory.
 /// If the property is defined, the destination directory is resolved to the property's value.
 /// If the property is undefined, the ROOTDRIVE property is used instead to resolve the path.
 /// - Root source directories:
-/// The value of the DefaultDir column for root entries is interpreted as the name of a property
+/// The value of the `DefaultDir` column for root entries is interpreted as the name of a property
 /// defining the source location of this directory.
 /// This property must be defined or an error will occur.
 /// - Nonroot destination directories:
@@ -285,11 +285,11 @@ pub struct Win32_Directory {
 /// defining the location of the destination.
 /// If the property is defined, the destination directory is resolved to the property's value.
 /// If the property is not defined,
-/// the destination directory is resolved to a subdirectory beneath the resolved destination directory for the Directory_Parent entry.
-/// The DefaultDir value defines the name of the subdirectory.
+/// the destination directory is resolved to a subdirectory beneath the resolved destination directory for the `Directory_Parent` entry.
+/// The `DefaultDir` value defines the name of the subdirectory.
 /// - Nonroot source directories:
-/// The source directory for a nonroot directory is resolved to a subdirectory of the resolved source directory for the Directory_Parent entry.
-/// Again, the DefaultDir value defines the name of the subdirectory.
+/// The source directory for a nonroot directory is resolved to a subdirectory of the resolved source directory for the `Directory_Parent` entry.
+/// Again, the `DefaultDir` value defines the name of the subdirectory.
 ///
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/msiprov/win32-directoryspecification>
 #[derive(Default, Deserialize, Serialize, Debug, Clone)]
@@ -1475,7 +1475,7 @@ pub struct Win32_ShortcutFile {
 /// A volume is formatted by using a file system, such as FAT or NTFS,
 /// and might have a drive letter assigned to it.
 /// One hard disk can have multiple volumes, and volumes can span multiple physical disks.
-/// The Win32_Volume class does not support disk drive management.
+/// The `Win32_Volume` class does not support disk drive management.
 ///
 /// Windows XP and earlier: This class is not available.
 ///

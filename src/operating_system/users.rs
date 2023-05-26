@@ -87,8 +87,8 @@ update!(SystemAccounts, system_accounts);
 /// The `Win32_UserAccount` WMI class contains information about a user account on a computer system
 /// running Windows.
 ///
-/// Note: Because both the Name and Domain are key properties, enumerating Win32_UserAccount on a
-/// large network can negatively affect performance. Calling GetObject or querying for a specific
+/// Note: Because both the Name and Domain are key properties, enumerating `Win32_UserAccount` on a
+/// large network can negatively affect performance. Calling `GetObject` or querying for a specific
 /// instance has less impact.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-useraccount>

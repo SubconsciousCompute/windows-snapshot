@@ -2,28 +2,28 @@
 //! 
 //! | Class                                                                               | Description                                                                                                                                                  |
 //! |-------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-//! | [**Win32\_AccountSID**](/previous-versions/windows/desktop/secrcw32prov/win32-accountsid)                                       | Association class<br/> Relates a security account instance with a security descriptor instance.<br/>                                             |
-//! | [**Win32\_ACE**](/previous-versions/windows/desktop/secrcw32prov/win32-ace)                                                     | Instance class<br/> Represents an access control entry (ACE).<br/>                                                                               |
-//! | [**Win32\_LogicalFileAccess**](/previous-versions/windows/desktop/secrcw32prov/win32-logicalfileaccess)                         | Association class<br/> Relates the security settings of a file or directory and one member of its discretionary access control list (DACL).<br/> |
-//! | [**Win32\_LogicalFileAuditing**](/previous-versions/windows/desktop/secrcw32prov/win32-logicalfileauditing)                     | Association class<br/> Relates the security settings of a file or directory one member of its system access control list (SACL).<br/>            |
-//! | [**Win32\_LogicalFileGroup**](/previous-versions/windows/desktop/secrcw32prov/win32-logicalfilegroup)                           | Association class<br/> Relates the security settings of a file or directory and its group.<br/>                                                  |
-//! | [**Win32\_LogicalFileOwner**](/previous-versions/windows/desktop/secrcw32prov/win32-logicalfileowner)                           | Association class<br/> Relates the security settings of a file or directory and its owner.<br/>                                                  |
-//! | [**Win32\_LogicalFileSecuritySetting**](/previous-versions/windows/desktop/secrcw32prov/win32-logicalfilesecuritysetting)       | Instance class<br/> Represents security settings for a logical file.<br/>                                                                        |
-//! | [**Win32\_LogicalShareAccess**](/previous-versions/windows/desktop/secrcw32prov/win32-logicalshareaccess)                       | Association class<br/> Relates the security settings of a share and one member of its DACL.<br/>                                                 |
-//! | [**Win32\_LogicalShareAuditing**](/previous-versions/windows/desktop/secrcw32prov/win32-logicalshareauditing)                   | Association class<br/> Relates the security settings of a share and one member of its SACL.<br/>                                                 |
-//! | [**Win32\_LogicalShareSecuritySetting**](/previous-versions/windows/desktop/secrcw32prov/win32-logicalsharesecuritysetting)     | Instance class<br/> Represents security settings for a logical file.<br/>                                                                        |
-//! | [**Win32\_PrivilegesStatus**](win32-privilegesstatus)                           | Instance class<br/> Represents information about the privileges required to complete an operation.<br/>                                          |
-//! | [**Win32\_SecurityDescriptor**](/previous-versions/windows/desktop/secrcw32prov/win32-securitydescriptor)                       | Instance class<br/> Represents a structural representation of a [**SECURITY\_DESCRIPTOR**](/windows/desktop/api/winnt/ns-winnt-security_descriptor).<br/>                   |
-//! | [**Win32\_SecuritySetting**](/previous-versions/windows/desktop/secrcw32prov/win32-securitysetting)                             | Instance class<br/> Represents security settings for a managed element.<br/>                                                                     |
-//! | [**Win32\_SecuritySettingAccess**](/previous-versions/windows/desktop/secrcw32prov/win32-securitysettingaccess)                 | Instance class<br/> Represents the rights granted and denied to a trustee for a given object.<br/>                                               |
-//! | [**Win32\_SecuritySettingAuditing**](/previous-versions/windows/desktop/secrcw32prov/win32-securitysettingauditing)             | Instance class<br/> Represents the auditing for a given trustee on a given object.<br/>                                                          |
-//! | [**Win32\_SecuritySettingGroup**](/previous-versions/windows/desktop/secrcw32prov/win32-securitysettinggroup)                   | Association class<br/> Relates the security of an object and its group.<br/>                                                                     |
-//! | [**Win32\_SecuritySettingOfLogicalFile**](/previous-versions/windows/desktop/secrcw32prov/win32-securitysettingoflogicalfile)   | Instance class<br/> Represents security settings of a file or directory object.<br/>                                                             |
-//! | [**Win32\_SecuritySettingOfLogicalShare**](/previous-versions/windows/desktop/secrcw32prov/win32-securitysettingoflogicalshare) | Instance class<br/> Represents security settings of a shared object.<br/>                                                                        |
-//! | [**Win32\_SecuritySettingOfObject**](/previous-versions/windows/desktop/secrcw32prov/win32-securitysettingofobject)             | Association class<br/> Relates an object to its security settings.<br/>                                                                          |
-//! | [**Win32\_SecuritySettingOwner**](/previous-versions/windows/desktop/secrcw32prov/win32-securitysettingowner)                   | Association class<br/> Relates the security settings of an object and its owner.<br/>                                                            |
-//! | [**Win32\_SID**](/previous-versions/windows/desktop/secrcw32prov/win32-sid)                                                     | Instance class<br/> Represents an arbitrary SID.<br/>                                                                                            |
-//! | [**Win32\_Trustee**](/previous-versions/windows/desktop/secrcw32prov/win32-trustee)                                             | Instance class<br/> Represents a trustee.<br/>                                                                                                   |
+//! | [**`Win32\_AccountSID**](/previous-versions/windows/desktop/secrcw32prov/win32-accountsid)                                       | Association class<br/> Relates a security account instance with a security descriptor instance.<br/>                                             |
+//! | [**`Win32\_ACE**](/previous-versions/windows/desktop/secrcw32prov/win32-ace)                                                     | Instance class<br/> Represents an access control entry (ACE).<br/>                                                                               |
+//! | [**`Win32\_LogicalFileAccess**](/previous-versions/windows/desktop/secrcw32prov/win32-logicalfileaccess)                         | Association class<br/> Relates the security settings of a file or directory and one member of its discretionary access control list (DACL).<br/> |
+//! | [**`Win32\_LogicalFileAuditing**](/previous-versions/windows/desktop/secrcw32prov/win32-logicalfileauditing)                     | Association class<br/> Relates the security settings of a file or directory one member of its system access control list (SACL).<br/>            |
+//! | [**`Win32\_LogicalFileGroup**](/previous-versions/windows/desktop/secrcw32prov/win32-logicalfilegroup)                           | Association class<br/> Relates the security settings of a file or directory and its group.<br/>                                                  |
+//! | [**`Win32\_LogicalFileOwner**](/previous-versions/windows/desktop/secrcw32prov/win32-logicalfileowner)                           | Association class<br/> Relates the security settings of a file or directory and its owner.<br/>                                                  |
+//! | [**`Win32\_LogicalFileSecuritySetting**](/previous-versions/windows/desktop/secrcw32prov/win32-logicalfilesecuritysetting)       | Instance class<br/> Represents security settings for a logical file.<br/>                                                                        |
+//! | [**`Win32\_LogicalShareAccess**](/previous-versions/windows/desktop/secrcw32prov/win32-logicalshareaccess)                       | Association class<br/> Relates the security settings of a share and one member of its DACL.<br/>                                                 |
+//! | [**`Win32\_LogicalShareAuditing**](/previous-versions/windows/desktop/secrcw32prov/win32-logicalshareauditing)                   | Association class<br/> Relates the security settings of a share and one member of its SACL.<br/>                                                 |
+//! | [**`Win32\_LogicalShareSecuritySetting**](/previous-versions/windows/desktop/secrcw32prov/win32-logicalsharesecuritysetting)     | Instance class<br/> Represents security settings for a logical file.<br/>                                                                        |
+//! | [**`Win32\_PrivilegesStatus**](win32-privilegesstatus)                           | Instance class<br/> Represents information about the privileges required to complete an operation.<br/>                                          |
+//! | [**`Win32\_SecurityDescriptor**](/previous-versions/windows/desktop/secrcw32prov/win32-securitydescriptor)                       | Instance class<br/> Represents a structural representation of a [**`SECURITY\_DESCRIPTO`R**](/windows/desktop/api/winnt/ns-winnt-security_descriptor).<br/>                   |
+//! | [**`Win32\_SecuritySetting**](/previous-versions/windows/desktop/secrcw32prov/win32-securitysetting)                             | Instance class<br/> Represents security settings for a managed element.<br/>                                                                     |
+//! | [**`Win32\_SecuritySettingAccess**](/previous-versions/windows/desktop/secrcw32prov/win32-securitysettingaccess)                 | Instance class<br/> Represents the rights granted and denied to a trustee for a given object.<br/>                                               |
+//! | [**`Win32\_SecuritySettingAuditing**](/previous-versions/windows/desktop/secrcw32prov/win32-securitysettingauditing)             | Instance class<br/> Represents the auditing for a given trustee on a given object.<br/>                                                          |
+//! | [**`Win32\_SecuritySettingGroup**](/previous-versions/windows/desktop/secrcw32prov/win32-securitysettinggroup)                   | Association class<br/> Relates the security of an object and its group.<br/>                                                                     |
+//! | [**`Win32\_SecuritySettingOfLogicalFile**](/previous-versions/windows/desktop/secrcw32prov/win32-securitysettingoflogicalfile)   | Instance class<br/> Represents security settings of a file or directory object.<br/>                                                             |
+//! | [**`Win32\_SecuritySettingOfLogicalShare**](/previous-versions/windows/desktop/secrcw32prov/win32-securitysettingoflogicalshare) | Instance class<br/> Represents security settings of a shared object.<br/>                                                                        |
+//! | [**`Win32\_SecuritySettingOfObject**](/previous-versions/windows/desktop/secrcw32prov/win32-securitysettingofobject)             | Association class<br/> Relates an object to its security settings.<br/>                                                                          |
+//! | [**`Win32\_SecuritySettingOwner**](/previous-versions/windows/desktop/secrcw32prov/win32-securitysettingowner)                   | Association class<br/> Relates the security settings of an object and its owner.<br/>                                                            |
+//! | [**`Win32\_SID**](/previous-versions/windows/desktop/secrcw32prov/win32-sid)                                                     | Instance class<br/> Represents an arbitrary SID.<br/>                                                                                            |
+//! | [**`Win32\_Trustee**](/previous-versions/windows/desktop/secrcw32prov/win32-trustee)                                             | Instance class<br/> Represents a trustee.<br/>                                                                                                   |
 
 use crate::update;
 use serde::{Deserialize, Serialize};
@@ -41,7 +41,7 @@ pub struct ACEs {
 
 update!(ACEs, aces);
 
-/// Represents the state of Windows LogicalFileSecuritySettings
+/// Represents the state of Windows `LogicalFileSecuritySettings`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct LogicalFileSecuritySettings {
     /// Represents sequence of Windows `LogicalFileSecuritySettings`
@@ -52,10 +52,10 @@ pub struct LogicalFileSecuritySettings {
 
 update!(LogicalFileSecuritySettings, logical_file_security_settings);
 
-/// Represents the state of Windows LogicalShareSecuritySettings
+/// Represents the state of Windows `LogicalShareSecuritySettings`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct LogicalShareSecuritySettings {
-    /// Represents sequence of Windows `LogicalFileSecuritySettings`
+    /// Represents sequence of Windows `LogicalShareSecuritySettings`
     pub logical_share_security_settings: Vec<Win32_LogicalShareSecuritySetting>,
     /// When was the record last updated
     pub last_updated: SystemTime,
@@ -63,7 +63,7 @@ pub struct LogicalShareSecuritySettings {
 
 update!(LogicalShareSecuritySettings, logical_share_security_settings);
 
-/// Represents the state of Windows PrivilegesStatuses
+/// Represents the state of Windows `PrivilegesStatuses`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct PrivilegesStatuses {
     /// Represents sequence of Windows `PrivilegesStatuses`
@@ -74,7 +74,7 @@ pub struct PrivilegesStatuses {
 
 update!(PrivilegesStatuses, privileges_statuses);
 
-/// Represents the state of Windows SecurityDescriptors
+/// Represents the state of Windows `SecurityDescriptors`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct SecurityDescriptors {
     /// Represents sequence of Windows `SecurityDescriptors`
@@ -85,7 +85,7 @@ pub struct SecurityDescriptors {
 
 update!(SecurityDescriptors, security_descriptors);
 
-/// Represents the state of Windows SecuritySettings
+/// Represents the state of Windows `SecuritySettings`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct SecuritySettings {
     /// Represents sequence of Windows `SecuritySettings`

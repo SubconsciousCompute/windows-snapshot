@@ -12,7 +12,7 @@ use serde::{Deserialize, Serialize};
 use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
-/// Represents the state of Windows PageFiles
+/// Represents the state of Windows `PageFiles`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct PageFiles {
     /// Represents sequence of Windows `PageFiles`
@@ -23,7 +23,7 @@ pub struct PageFiles {
 
 update!(PageFiles, pagefiles);
 
-/// Represents the state of Windows PageFileSettings
+/// Represents the state of Windows `PageFileSettings`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct PageFileSettings {
     /// Represents the Windows `PageFileSettings`
@@ -34,7 +34,7 @@ pub struct PageFileSettings {
 
 update!(PageFileSettings, pagefile_settings);
 
-/// Represents the state of Windows PageFileUsages
+/// Represents the state of Windows `PageFileUsages`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct PageFileUsages {
     /// Represents the Windows `PageFileUsages` details
