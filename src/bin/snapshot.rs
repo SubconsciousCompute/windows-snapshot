@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.quick_fix_engineerings.update();
+    k.startup_commands.update();
 
-    println!("{:#?}", k.quick_fix_engineerings);
+    println!("{:#?}", k.startup_commands);
 }

@@ -112,6 +112,17 @@ pub struct QuickFixEngineerings {
 
 update!(QuickFixEngineerings, quick_fix_engineerings);
 
+/// Represents the state of Windows StartupCommands
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct StartupCommands {
+    /// Represents sequence of Windows `StartupCommands`
+    pub startup_commands: Vec<Win32_StartupCommand>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(StartupCommands, startup_commands);
+
 /// The Win32_BootConfiguration WMI class represents the boot configuration of a computer system running Windows.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-bootconfiguration>
@@ -1319,4 +1330,53 @@ pub struct Win32_QuickFixEngineering {
     /// Service pack in effect when the update was applied. If no service pack has been applied, the property takes 
     /// on the value SP0. If it cannot be determined what service pack was in effect, this property is `NULL`.
     pub ServicePackInEffect: Option<String>,
+}
+
+/// The `Win32_StartupCommand` WMI class represents a command that runs automatically when a user logs onto the 
+/// computer system.
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_StartupCommand {
+    /// Short textual description of the current object.
+    pub Caption: Option<String>,
+    /// Textual description of the current object.
+    pub Description: Option<String>,
+    /// Identifier by which the current object is known.
+    pub SettingID: Option<String>,
+    /// Command run by the startup command.
+    /// 
+    /// WMI obtains this data from the registry key
+    /// 
+    /// `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run`
+    /// 
+    /// Example: "C:\Windows\notepad.exe myfile.txt"
+    pub Command: Option<String>,
+    /// Path where the startup command resides on the disk file system.
+    /// 
+    /// For example: HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+    /// 
+    /// `Startup` ("Startup")
+    /// 
+    /// `Common Startup` ("Common Startup")
+    /// 
+    /// `HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run` ("HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run")
+    /// 
+    /// `HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunServices` ("HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunServices")
+    pub Location: Option<String>,
+    /// File name of the startup command.
+    /// 
+    /// Example: "FindFast"
+    pub Name: Option<String>,
+    /// User name for whom this startup command will run.
+    /// 
+    /// Example: "mydomain\myname"
+    pub User: Option<String>,
+    /// The UserSID property indicates the SID of the user for whom this startup command will run. That User property 
+    /// may be empty but UserSID still has a value if the user name can't be resolved (like in the case of a deleted 
+    /// user). The property is helpful to distinguish between commands associated w/ two different users with unresolved 
+    /// names. It may be NULL when the command is associated with items not actually identifying a user like All Users.
+    /// 
+    /// Example:S-1-5-21-1579938362-1064596589-3161144252-1006
+    pub UserSID: Option<String>,
 }
