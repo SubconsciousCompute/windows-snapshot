@@ -157,6 +157,8 @@ pub struct Windows {
     pub operating_systems: operating_system_settings::OperatingSystems,
     /// State of Windows OSRecoveryConfigurations
     pub os_recovery_configurations: operating_system_settings::OSRecoveryConfigurations,
+    /// State of Windows QuickFixEngineerings
+    pub quick_fix_engineerings: operating_system_settings::QuickFixEngineerings,
 }
 
 impl Windows {
@@ -224,6 +226,7 @@ impl Windows {
         self.load_order_groups.update();
         self.operating_systems.update();
         self.os_recovery_configurations.update();
+        self.quick_fix_engineerings.update();
     }
 
     /// Asynchronously update all the fields
@@ -291,6 +294,7 @@ impl Windows {
             self.load_order_groups.async_update(),
             self.operating_systems.async_update(),
             self.os_recovery_configurations.async_update(),
+            self.quick_fix_engineerings.async_update(),
         );
     }
 }

@@ -101,6 +101,17 @@ pub struct OSRecoveryConfigurations {
 
 update!(OSRecoveryConfigurations, os_recovery_configurations);
 
+/// Represents the state of Windows QuickFixEngineerings
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct QuickFixEngineerings {
+    /// Represents sequence of Windows `QuickFixEngineerings`
+    pub quick_fix_engineerings: Vec<Win32_QuickFixEngineering>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(QuickFixEngineerings, quick_fix_engineerings);
+
 /// The Win32_BootConfiguration WMI class represents the boot configuration of a computer system running Windows.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-bootconfiguration>
@@ -1249,4 +1260,63 @@ pub struct Win32_OSRecoveryConfiguration {
     pub WriteDebugInfo: Option<bool>,
     /// Events will be written to a system log.
     pub WriteToSystemLog: Option<bool>,
+}
+
+/// The `Win32_QuickFixEngineering` WMI class represents a small system-wide update, commonly referred to as a 
+/// quick-fix engineering (QFE) update, applied to the current operating system. This class returns only the updates 
+/// supplied by Component Based Servicing (CBS). These updates are not listed in the registry. Updates supplied by 
+/// Microsoft Windows Installer (MSI) or the Windows update site (https://update.microsoft.com) are not returned by 
+/// `Win32_QuickFixEngineering`.
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_QuickFixEngineering {
+    /// A short textual description of the object.
+    pub Caption: Option<String>,
+    /// A textual description of the object.
+    pub Description: Option<String>,
+    /// Indicates when the object was installed. Lack of a value does not indicate that the object is not installed.
+    pub InstallDate: Option<WMIDateTime>,
+    /// Label by which the object is known. When subclassed, this property can be overridden to be a key property.
+    pub Name: Option<String>,
+    /// String that indicates the current status of the object. Operational and non-operational status can be 
+    /// defined. Operational status can include "OK", "Degraded", and "Pred Fail". "Pred Fail" indicates that an 
+    /// element is functioning properly, but is predicting a failure (for example, a SMART-enabled hard disk drive).
+    /// 
+    /// Non-operational status can include "Error", "Starting", "Stopping", and "Service". "Service" can apply 
+    /// during disk mirror-resilvering, reloading a user permissions list, or other administrative work. Not all such 
+    /// work is online, but the managed element is neither "OK" nor in one of the other states.
+    /// 
+    /// Values include the following:
+    /// 
+    /// - `OK` ("OK")
+    /// - `Error` ("Error")
+    /// - `Degraded` ("Degraded")
+    /// - `Unknown` ("Unknown")
+    /// - `Pred Fail` ("Pred Fail")
+    /// - `Starting` ("Starting")
+    /// - `Stopping` ("Stopping")
+    /// - `Service` ("Service")
+    /// - `Stressed` ("Stressed")
+    /// - `NonRecover` ("NonRecover")
+    /// - `No Contact` ("No Contact")
+    /// - `Lost Comm` ("Lost Comm")
+    pub Status: Option<String>,
+    /// Local name of the computer system. 
+    pub CSName: Option<String>,
+    /// Additional comments that relate to the update.
+    pub FixComments: Option<String>,
+    /// Unique identifier associated with a particular update.
+    pub HotFixID: Option<String>,
+    /// Person who installed the update. If this value is unknown, the property is empty.
+    pub InstalledBy: Option<String>,
+    /// Date that the update was installed. If this value is unknown, the property is empty.
+    /// 
+    /// Note: This property may use different formats, depending on when the QuickFix was installed. Most systems 
+    /// use a standard date format, such as "23-10-2013". However, some systems may return a 64-bit hexidecimal 
+    /// value in the Win32 `FILETIME` format.
+    pub InstalledOn: Option<String>,
+    /// Service pack in effect when the update was applied. If no service pack has been applied, the property takes 
+    /// on the value SP0. If it cannot be determined what service pack was in effect, this property is `NULL`.
+    pub ServicePackInEffect: Option<String>,
 }
