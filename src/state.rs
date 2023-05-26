@@ -155,6 +155,8 @@ pub struct Windows {
     pub load_order_groups: operating_system_settings::LoadOrderGroups,
     /// State of Windows OperatingSystems
     pub operating_systems: operating_system_settings::OperatingSystems,
+    /// State of Windows OSRecoveryConfigurations
+    pub os_recovery_configurations: operating_system_settings::OSRecoveryConfigurations,
 }
 
 impl Windows {
@@ -221,6 +223,7 @@ impl Windows {
         self.computer_system_products.update();
         self.load_order_groups.update();
         self.operating_systems.update();
+        self.os_recovery_configurations.update();
     }
 
     /// Asynchronously update all the fields
@@ -287,6 +290,7 @@ impl Windows {
             self.computer_system_products.async_update(),
             self.load_order_groups.async_update(),
             self.operating_systems.async_update(),
+            self.os_recovery_configurations.async_update(),
         );
     }
 }

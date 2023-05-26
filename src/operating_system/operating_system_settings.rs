@@ -90,6 +90,17 @@ pub struct OperatingSystems {
 
 update!(OperatingSystems, operating_systems);
 
+/// Represents the state of Windows OSRecoveryConfigurations
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct OSRecoveryConfigurations {
+    /// Represents sequence of Windows `OSRecoveryConfigurations`
+    pub os_recovery_configurations: Vec<Win32_OSRecoveryConfiguration>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+}
+
+update!(OSRecoveryConfigurations, os_recovery_configurations);
+
 /// The Win32_BootConfiguration WMI class represents the boot configuration of a computer system running Windows.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-bootconfiguration>
@@ -1179,4 +1190,63 @@ pub struct Win32_OperatingSystem {
     /// - `Variable` (2)
     pub QuantumType: Option<u8>,
     */
+}
+
+/// The `Win32_OSRecoveryConfiguration` WMI class represents the types of information that will 
+/// be gathered from memory when the operating system fails. This includes boot failures and 
+/// system crashes.
+/// 
+/// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-osrecoveryconfiguration>
+#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_OSRecoveryConfiguration {
+    /// Short textual description of the current object.
+    pub Caption: Option<String>,
+    /// Textual description of the current object.
+    pub Description: Option<String>,
+    /// Identifier by which the current object is known.
+    pub SettingID: Option<String>,
+    /// System will automatically reboot during a recovery operation.
+    pub AutoReboot: Option<bool>,
+    /// Full path to the debug file. A debug file is created with the memory state of the 
+    /// computer after a computer failure.
+    /// 
+    /// Example: "C:\Windows\Memory.dmp"
+    pub DebugFilePath: Option<String>,
+    /// Type of debugging information written to the log file.
+    /// 
+    /// - `None` (0)
+    /// - `Complete memory dump` (1)
+    /// - `Kernel memory dump` (2)
+    /// - `Small memory dump` (3)
+    pub DebugInfoType: Option<u32>,
+    /// Expanded version of the `DebugFilePath` property.
+    /// 
+    /// Example: "C:\Windows\Memory.dmp"
+    pub ExpandedDebugFilePath: Option<String>,
+    /// Expanded version of the `MiniDumpDirectory` property.
+    /// 
+    /// Example: "C:\Windows\MiniDump"
+    pub ExpandedMiniDumpDirectory: Option<String>,
+    /// Only kernel debug information will be written to the debug log file. If `TRUE`, then only 
+    /// the state of the kernel is written to a file in the event of a system failure. If `FALSE`, 
+    /// the system will try to log the state of the memory, and any devices that can provide 
+    /// information about the system when it failed.
+    pub KernelDumpOnly: Option<bool>,
+    /// Directory where small memory dump files will be recorded and accumulated.
+    /// 
+    /// Example: "%systemRoot%\MiniDump"
+    pub MiniDumpDirectory: Option<String>,
+    /// Identifying name for this instance of the `Win32_OSRecoveryConfiguration` class.
+    pub Name: Option<String>,
+    /// New debug file will overwrite an existing one.
+    pub OverwriteExistingDebugFile: Option<bool>,
+    /// Alert message will be sent to the system administrator in the event of an operating system 
+    /// failure.
+    pub SendAdminAlert: Option<bool>,
+    /// Debugging information is to be written to a log file.
+    pub WriteDebugInfo: Option<bool>,
+    /// Events will be written to a system log.
+    pub WriteToSystemLog: Option<bool>,
 }

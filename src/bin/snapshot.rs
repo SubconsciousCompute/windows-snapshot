@@ -12,7 +12,7 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.operating_systems.update();
+    k.os_recovery_configurations.update();
 
-    println!("{:#?}", k.operating_systems);
+    println!("{:#?}", k.os_recovery_configurations);
 }
