@@ -39,7 +39,7 @@ update!(LogicalProgramGroupItems, logical_program_group_items);
 /// Represents the state of Windows ProgramGroupOrItems
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct ProgramGroupOrItems {
-    /// Represents sequence of Windows `LogicalProgramGroupItems`
+    /// Represents sequence of Windows `ProgramGroupOrItems`
     pub program_group_or_items: Vec<Win32_ProgramGroupOrItem>,
     /// When was the record last updated
     pub last_updated: SystemTime,

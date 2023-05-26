@@ -55,7 +55,7 @@ update!(LogicalFileSecuritySettings, logical_file_security_settings);
 /// Represents the state of Windows LogicalShareSecuritySettings
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct LogicalShareSecuritySettings {
-    /// Represents sequence of Windows `LogicalFileSecuritySettings`
+    /// Represents sequence of Windows `LogicalShareSecuritySettings`
     pub logical_share_security_settings: Vec<Win32_LogicalShareSecuritySetting>,
     /// When was the record last updated
     pub last_updated: SystemTime,

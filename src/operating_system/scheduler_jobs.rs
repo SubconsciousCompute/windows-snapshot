@@ -219,7 +219,7 @@ pub struct Win32_LocalTime {
     pub Year: Option<u32>,
 }
 
-/// The Win32_UTCTimeWMI class describes a point in time that is returned as Win32_UTCTime objects 
+/// The `Win32_UTCTimeWMI` class describes a point in time that is returned as Win32_UTCTime objects 
 /// that result from a query. These are returned as the value for the TargetInstance property in the 
 /// __InstanceModificationEvent system class. The Hour property is returned as the Coordinated 
 /// Universal Time (UTC) time on a 24 hour clock.

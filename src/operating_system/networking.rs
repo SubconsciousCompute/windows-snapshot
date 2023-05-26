@@ -513,7 +513,7 @@ pub struct Win32_NetworkProtocol {
     pub SupportsQualityofService: Option<bool>,
 }
 
-/// The Win32_NTDomain WMI class represents a Windows domain.
+/// The `Win32_NTDomain` WMI class represents a Windows domain.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/cimwin32a/win32-ntdomain>
 #[derive(Default, Deserialize, Serialize, Debug, Clone)]

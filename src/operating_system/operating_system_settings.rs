@@ -123,7 +123,7 @@ pub struct StartupCommands {
 
 update!(StartupCommands, startup_commands);
 
-/// The Win32_BootConfiguration WMI class represents the boot configuration of a computer system running Windows.
+/// The `Win32_BootConfiguration` WMI class represents the boot configuration of a computer system running Windows.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-bootconfiguration>
 #[derive(Default, Deserialize, Serialize, Debug, Clone)]
@@ -156,7 +156,7 @@ pub struct Win32_BootConfiguration {
     pub TempDirectory: Option<String>,
 }
 
-/// The Win32_ComputerSystem WMI class represents a computer system running Windows.
+/// The `Win32_ComputerSystem` WMI class represents a computer system running Windows.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-computersystem>
 #[derive(Default, Deserialize, Serialize, Debug, Clone)]

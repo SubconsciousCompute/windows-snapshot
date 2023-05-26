@@ -90,7 +90,7 @@ update!(MappedLogicalDisks, mapped_logical_disks);
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct QuotaSettings {
     /// Sequence of windows quota settings
-    pub quota_settings: Vec<Win32_MappedLogicalDisk>,
+    pub quota_settings: Vec<Win32_QuotaSetting>,
     /// When was the record last updated
     pub last_updated: SystemTime,
 }
