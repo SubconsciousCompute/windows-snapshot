@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
-/// Represents the state of Windows ServerConnections
+/// Represents the state of Windows `ServerConnections`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct ServerConnections {
     /// Represents sequence of Windows `ServerConnections`
@@ -30,7 +30,7 @@ pub struct ServerConnections {
 
 update!(ServerConnections, server_connections);
 
-/// Represents the state of Windows ServerSessions
+/// Represents the state of Windows `ServerSessions`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct ServerSessions {
     /// Represents sequence of Windows `ServerSessions`
@@ -41,7 +41,7 @@ pub struct ServerSessions {
 
 update!(ServerSessions, server_sessions);
 
-/// Represents the state of Windows Shares
+/// Represents the state of Windows `Shares`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct Shares {
     /// Represents sequence of Windows `Shares`

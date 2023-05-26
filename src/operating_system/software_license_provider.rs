@@ -11,7 +11,7 @@ use serde::{Deserialize, Serialize};
 use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
-/// Represents the state of Windows SoftwareLicensingProducts
+/// Represents the state of Windows `SoftwareLicensingProducts`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct SoftwareLicensingProducts {
     /// Represents data stored in a Windows SoftwareLicensingProducts
@@ -22,7 +22,7 @@ pub struct SoftwareLicensingProducts {
 
 update!(SoftwareLicensingProducts, software_licensing_products);
 
-/// Represents the state of Windows SoftwareLicensingServices
+/// Represents the state of Windows `SoftwareLicensingServices`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct SoftwareLicensingServices {
     /// Represents data stored in a Windows SoftwareLicensingServices
@@ -33,7 +33,7 @@ pub struct SoftwareLicensingServices {
 
 update!(SoftwareLicensingServices, software_licensing_services);
 
-/// Represents the state of Windows SoftwareLicensingTokenActivationLicenses
+/// Represents the state of Windows `SoftwareLicensingTokenActivationLicenses`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct SoftwareLicensingTokenActivationLicenses {
     /// Represents data stored in a Windows SoftwareLicensingTokenActivationLicenses

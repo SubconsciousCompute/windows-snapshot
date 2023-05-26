@@ -22,7 +22,7 @@ use serde::{Deserialize, Serialize};
 use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection};
 
-/// Represents the state of Windows LUIDs
+/// Represents the state of Windows `LUIDs`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct LUIDs {
     /// Represents sequence of Windows `LUIDs`
@@ -33,10 +33,10 @@ pub struct LUIDs {
 
 update!(LUIDs, luids);
 
-/// Represents the state of Windows LUIDandAttributes
+/// Represents the state of Windows `LUIDandAttributes`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct LUIDandAttributes {
-    /// Represents sequence of Windows `LUIDs`
+    /// Represents sequence of Windows `LUIDandAttributes`
     pub luid_and_attributes: Vec<Win32_LUIDandAttributes>,
     /// When was the record last updated
     pub last_updated: SystemTime,
@@ -44,7 +44,7 @@ pub struct LUIDandAttributes {
 
 update!(LUIDandAttributes, luid_and_attributes);
 
-/// Represents the state of Windows NamedJobObjects
+/// Represents the state of Windows `NamedJobObjects`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct NamedJobObjects {
     /// Represents sequence of Windows `NamedJobObjects`
@@ -55,7 +55,7 @@ pub struct NamedJobObjects {
 
 update!(NamedJobObjects, named_job_objects);
 
-/// Represents the state of Windows NamedJobObjectActgInfos
+/// Represents the state of Windows `NamedJobObjectActgInfos`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct NamedJobObjectActgInfos {
     /// Represents sequence of Windows `NamedJobObjectActgInfos`
@@ -66,7 +66,7 @@ pub struct NamedJobObjectActgInfos {
 
 update!(NamedJobObjectActgInfos, named_job_object_actg_infos);
 
-/// Represents the state of Windows NamedJobObjectLimitSettings
+/// Represents the state of Windows `NamedJobObjectLimitSettings`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct NamedJobObjectLimitSettings {
     /// Represents sequence of Windows `NamedJobObjectLimitSettings`
@@ -204,7 +204,7 @@ pub struct Win32_NamedJobObjectActgInfo {
     pub WriteTransferCount: Option<u64>,
 }
 
-/// The Win32_NamedJobObjectLimitSetting WMI class represents the limit settings for a job object.
+/// The `Win32_NamedJobObjectLimitSetting` WMI class represents the limit settings for a job object.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmipjobobjprov/win32-namedjobobjectlimitsetting>
 #[derive(Default, Deserialize, Serialize, Debug, Clone)]

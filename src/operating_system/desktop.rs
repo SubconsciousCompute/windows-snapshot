@@ -35,7 +35,7 @@ pub struct Environments {
 
 update!(Environments, environments);
 
-/// Represents the state of Windows TimeZone
+/// Represents the state of Windows `TimeZone`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct TimeZones {
     /// Sequence of windows TimeZone states

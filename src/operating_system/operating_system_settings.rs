@@ -35,7 +35,7 @@ use serde::{Deserialize, Serialize};
 use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
-/// Represents the state of Windows BootConfigurations
+/// Represents the state of Windows `BootConfigurations`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct BootConfigurations {
     /// Represents sequence of Windows `BootConfigurations`
@@ -46,7 +46,7 @@ pub struct BootConfigurations {
 
 update!(BootConfigurations, boot_configurations);
 
-/// Represents the state of Windows ComputerSystems
+/// Represents the state of Windows `ComputerSystems`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct ComputerSystems {
     /// Represents sequence of Windows `ComputerSystems`
@@ -57,7 +57,7 @@ pub struct ComputerSystems {
 
 update!(ComputerSystems, computer_systems);
 
-/// Represents the state of Windows ComputerSystemProducts
+/// Represents the state of Windows `ComputerSystemProducts`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct ComputerSystemProducts {
     /// Represents sequence of Windows `ComputerSystemProducts`
@@ -68,7 +68,7 @@ pub struct ComputerSystemProducts {
 
 update!(ComputerSystemProducts, computer_system_products);
 
-/// Represents the state of Windows LoadOrderGroups
+/// Represents the state of Windows `LoadOrderGroups`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct LoadOrderGroups {
     /// Represents sequence of Windows `LoadOrderGroups`
@@ -79,7 +79,7 @@ pub struct LoadOrderGroups {
 
 update!(LoadOrderGroups, load_order_groups);
 
-/// Represents the state of Windows OperatingSystems
+/// Represents the state of Windows `OperatingSystems`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct OperatingSystems {
     /// Represents sequence of Windows `OperatingSystems`
@@ -90,7 +90,7 @@ pub struct OperatingSystems {
 
 update!(OperatingSystems, operating_systems);
 
-/// Represents the state of Windows OSRecoveryConfigurations
+/// Represents the state of Windows `OSRecoveryConfigurations`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct OSRecoveryConfigurations {
     /// Represents sequence of Windows `OSRecoveryConfigurations`
@@ -101,7 +101,7 @@ pub struct OSRecoveryConfigurations {
 
 update!(OSRecoveryConfigurations, os_recovery_configurations);
 
-/// Represents the state of Windows QuickFixEngineerings
+/// Represents the state of Windows `QuickFixEngineerings`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct QuickFixEngineerings {
     /// Represents sequence of Windows `QuickFixEngineerings`
@@ -112,7 +112,7 @@ pub struct QuickFixEngineerings {
 
 update!(QuickFixEngineerings, quick_fix_engineerings);
 
-/// Represents the state of Windows StartupCommands
+/// Represents the state of Windows `StartupCommands`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct StartupCommands {
     /// Represents sequence of Windows `StartupCommands`

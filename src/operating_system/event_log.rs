@@ -13,7 +13,7 @@ use serde::{Deserialize, Serialize};
 use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
-/// Represents the state of Windows NTEventlogFiles
+/// Represents the state of Windows `NTEventlogFiles`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct NTEventlogFiles {
     /// Represents data stored in a Windows Event log file
@@ -24,7 +24,7 @@ pub struct NTEventlogFiles {
 
 update!(NTEventlogFiles, nt_event_log_files);
 
-/// Represents the state of Windows NTLogEvents
+/// Represents the state of Windows `NTLogEvents`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct NTLogEvents {
     /// Represents sequence of Windows `NTLogEvents`

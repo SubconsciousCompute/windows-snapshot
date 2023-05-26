@@ -24,7 +24,7 @@ pub struct Proxys {
 
 update!(Proxys, proxys);
 
-/// Represents the state of Windows WindowsProductActivations
+/// Represents the state of Windows `WindowsProductActivations`
 /// 
 /// Note: this class doesn't exist anymore
 #[derive(Deserialize, Serialize, Debug, Clone)]

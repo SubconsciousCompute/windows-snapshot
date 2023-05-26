@@ -14,7 +14,7 @@ use serde::{Deserialize, Serialize};
 use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
-/// Represents the state of Windows LogicalProgramGroups
+/// Represents the state of Windows `LogicalProgramGroups`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct LogicalProgramGroups {
     /// Represents sequence of Windows `LogicalProgramGroups`
@@ -25,7 +25,7 @@ pub struct LogicalProgramGroups {
 
 update!(LogicalProgramGroups, logical_program_groups);
 
-/// Represents the state of Windows LogicalProgramGroupItems
+/// Represents the state of Windows `LogicalProgramGroupItems`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct LogicalProgramGroupItems {
     /// Represents sequence of Windows `LogicalProgramGroupItems`
@@ -36,7 +36,7 @@ pub struct LogicalProgramGroupItems {
 
 update!(LogicalProgramGroupItems, logical_program_group_items);
 
-/// Represents the state of Windows ProgramGroupOrItems
+/// Represents the state of Windows `ProgramGroupOrItems`
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct ProgramGroupOrItems {
     /// Represents sequence of Windows `ProgramGroupOrItems`
