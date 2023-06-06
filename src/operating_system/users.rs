@@ -25,6 +25,11 @@ pub struct UserAccounts {
     pub user_accounts: Vec<Win32_UserAccount>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(UserAccounts, user_accounts);
@@ -36,6 +41,11 @@ pub struct Accounts {
     pub accounts: Vec<Win32_Account>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(Accounts, accounts);
@@ -47,6 +57,11 @@ pub struct Groups {
     pub groups: Vec<Win32_Group>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(Groups, groups);
@@ -58,6 +73,11 @@ pub struct LogonSessions {
     pub logon_sessions: Vec<Win32_LogonSession>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(LogonSessions, logon_sessions);
@@ -69,6 +89,11 @@ pub struct NetworkLoginProfiles {
     pub network_login_profiles: Vec<Win32_NetworkLoginProfile>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(NetworkLoginProfiles, network_login_profiles);
@@ -80,6 +105,11 @@ pub struct SystemAccounts {
     pub system_accounts: Vec<Win32_SystemAccount>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(SystemAccounts, system_accounts);

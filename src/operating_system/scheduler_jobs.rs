@@ -17,6 +17,11 @@ pub struct ScheduledJobs {
     pub scheduled_jobs: Vec<Win32_ScheduledJob>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(ScheduledJobs, scheduled_jobs);
@@ -28,6 +33,11 @@ pub struct LocalTimes {
     pub local_times: Vec<Win32_LocalTime>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(LocalTimes, local_times);
@@ -39,6 +49,11 @@ pub struct UTCTimes {
     pub utc_times: Vec<Win32_UTCTime>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(UTCTimes, utc_times);

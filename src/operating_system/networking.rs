@@ -25,6 +25,11 @@ pub struct IP4PersistedRouteTables {
     pub ip4_persisted_route_tables: Vec<Win32_IP4PersistedRouteTable>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(IP4PersistedRouteTables, ip4_persisted_route_tables);
@@ -36,6 +41,11 @@ pub struct IP4RouteTables {
     pub ip4_route_tables: Vec<Win32_IP4RouteTable>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(IP4RouteTables, ip4_route_tables);
@@ -47,6 +57,11 @@ pub struct NetworkClients {
     pub nework_clients: Vec<Win32_NetworkClient>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(NetworkClients, nework_clients);
@@ -58,6 +73,11 @@ pub struct NetworkConnections {
     pub nework_connections: Vec<Win32_NetworkConnection>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(NetworkConnections, nework_connections);
@@ -69,6 +89,11 @@ pub struct NetworkProtocols {
     pub nework_protocols: Vec<Win32_NetworkProtocol>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(NetworkProtocols, nework_protocols);
@@ -80,6 +105,11 @@ pub struct NTDomains {
     pub nt_domains: Vec<Win32_NTDomain>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(NTDomains, nt_domains);
@@ -91,6 +121,11 @@ pub struct IP4RouteTableEvents {
     pub ip4_route_table_events: Vec<Win32_IP4RouteTableEvent>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(IP4RouteTableEvents, ip4_route_table_events);

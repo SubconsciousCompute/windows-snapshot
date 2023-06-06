@@ -20,6 +20,11 @@ pub struct NTEventlogFiles {
     pub nt_event_log_files: Vec<Win32_NTEventlogFile>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(NTEventlogFiles, nt_event_log_files);
@@ -31,6 +36,11 @@ pub struct NTLogEvents {
     pub nt_log_events: Vec<Win32_NTLogEvent>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(NTLogEvents, nt_log_events);

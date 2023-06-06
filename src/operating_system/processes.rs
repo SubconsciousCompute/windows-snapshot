@@ -17,6 +17,11 @@ pub struct Processes {
     pub processes: Vec<Win32_Process>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(Processes, processes);
@@ -28,6 +33,11 @@ pub struct Threads {
     pub threads: Vec<Win32_Thread>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(Threads, threads);

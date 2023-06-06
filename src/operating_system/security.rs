@@ -37,6 +37,11 @@ pub struct ACEs {
     pub aces: Vec<Win32_ACE>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(ACEs, aces);
@@ -48,6 +53,11 @@ pub struct LogicalFileSecuritySettings {
     pub logical_file_security_settings: Vec<Win32_LogicalFileSecuritySetting>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(LogicalFileSecuritySettings, logical_file_security_settings);
@@ -59,6 +69,11 @@ pub struct LogicalShareSecuritySettings {
     pub logical_share_security_settings: Vec<Win32_LogicalShareSecuritySetting>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(LogicalShareSecuritySettings, logical_share_security_settings);
@@ -70,6 +85,11 @@ pub struct PrivilegesStatuses {
     pub privileges_statuses: Vec<Win32_PrivilegesStatus>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(PrivilegesStatuses, privileges_statuses);
@@ -81,6 +101,11 @@ pub struct SecurityDescriptors {
     pub security_descriptors: Vec<Win32_SecurityDescriptor>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(SecurityDescriptors, security_descriptors);
@@ -92,6 +117,11 @@ pub struct SecuritySettings {
     pub security_settings: Vec<Win32_SecuritySetting>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(SecuritySettings, security_settings);
@@ -103,6 +133,11 @@ pub struct Trustees {
     pub trustees: Vec<Win32_Trustee>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(Trustees, trustees);

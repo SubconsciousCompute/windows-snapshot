@@ -40,7 +40,15 @@ macro_rules! update {
                 let wmi_con = WMIConnection::new(com_con).unwrap();
 
                 self.last_updated = SystemTime::now();
+                
+                let old_vec = self.$struct_field.clone();
                 self.$struct_field = wmi_con.query().unwrap();
+
+                if(self.$struct_field.len() != old_vec.len()) {
+                    self.state_change = true;
+                } else {
+                    self.state_change = false;
+                }
             }
 
             /// Update fields asynchronously
@@ -50,7 +58,15 @@ macro_rules! update {
                 let wmi_con = WMIConnection::new(com_con).unwrap();
 
                 self.last_updated = SystemTime::now();
+
+                let old_vec = self.$struct_field.clone();
                 self.$struct_field = wmi_con.async_query().await.unwrap();
+
+                if(self.$struct_field.len() != old_vec.len()) {
+                    self.state_change = true;
+                } else {
+                    self.state_change = false;
+                }
             }
         }
 
@@ -60,6 +76,7 @@ macro_rules! update {
                 $struct_name {
                     $struct_field: Default::default(),
                     last_updated: SystemTime::now(),
+                    state_change: false,
                 }
             }
         }

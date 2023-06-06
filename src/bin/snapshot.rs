@@ -12,7 +12,8 @@ async fn main() {
     //k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.startup_commands.update();
+    k.async_update().await;
+    // k.startup_commands.update();
 
-    println!("{:#?}", k.startup_commands);
+    // println!("{:#?}", k);
 }

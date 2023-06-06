@@ -19,6 +19,11 @@ pub struct PageFiles {
     pub pagefiles: Vec<Win32_PageFile>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(PageFiles, pagefiles);
@@ -30,6 +35,11 @@ pub struct PageFileSettings {
     pub pagefile_settings: Vec<Win32_PageFileSetting>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(PageFileSettings, pagefile_settings);
@@ -41,6 +51,11 @@ pub struct PageFileUsages {
     pub pagefile_usage: Vec<Win32_PageFileUsage>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(PageFileUsages, pagefile_usage);

@@ -18,6 +18,11 @@ pub struct SoftwareLicensingProducts {
     pub software_licensing_products: Vec<SoftwareLicensingProduct>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(SoftwareLicensingProducts, software_licensing_products);
@@ -29,6 +34,11 @@ pub struct SoftwareLicensingServices {
     pub software_licensing_services: Vec<SoftwareLicensingService>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(SoftwareLicensingServices, software_licensing_services);
@@ -40,6 +50,11 @@ pub struct SoftwareLicensingTokenActivationLicenses {
     pub software_licensing_token_activation_licenses: Vec<SoftwareLicensingTokenActivationLicense>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(SoftwareLicensingTokenActivationLicenses, software_licensing_token_activation_licenses);

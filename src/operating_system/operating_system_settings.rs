@@ -42,6 +42,11 @@ pub struct BootConfigurations {
     pub boot_configurations: Vec<Win32_BootConfiguration>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(BootConfigurations, boot_configurations);
@@ -53,6 +58,11 @@ pub struct ComputerSystems {
     pub computer_systems: Vec<Win32_ComputerSystem>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(ComputerSystems, computer_systems);
@@ -64,6 +74,11 @@ pub struct ComputerSystemProducts {
     pub computer_system_products: Vec<Win32_ComputerSystemProduct>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(ComputerSystemProducts, computer_system_products);
@@ -75,6 +90,11 @@ pub struct LoadOrderGroups {
     pub load_order_groups: Vec<Win32_LoadOrderGroup>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(LoadOrderGroups, load_order_groups);
@@ -86,6 +106,11 @@ pub struct OperatingSystems {
     pub operating_systems: Vec<Win32_OperatingSystem>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(OperatingSystems, operating_systems);
@@ -97,6 +122,11 @@ pub struct OSRecoveryConfigurations {
     pub os_recovery_configurations: Vec<Win32_OSRecoveryConfiguration>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(OSRecoveryConfigurations, os_recovery_configurations);
@@ -108,6 +138,11 @@ pub struct QuickFixEngineerings {
     pub quick_fix_engineerings: Vec<Win32_QuickFixEngineering>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(QuickFixEngineerings, quick_fix_engineerings);
@@ -119,6 +154,11 @@ pub struct StartupCommands {
     pub startup_commands: Vec<Win32_StartupCommand>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(StartupCommands, startup_commands);

@@ -29,6 +29,11 @@ pub struct LUIDs {
     pub luids: Vec<Win32_LUID>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(LUIDs, luids);
@@ -40,6 +45,11 @@ pub struct LUIDandAttributes {
     pub luid_and_attributes: Vec<Win32_LUIDandAttributes>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(LUIDandAttributes, luid_and_attributes);
@@ -51,6 +61,11 @@ pub struct NamedJobObjects {
     pub named_job_objects: Vec<Win32_NamedJobObject>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(NamedJobObjects, named_job_objects);
@@ -62,6 +77,11 @@ pub struct NamedJobObjectActgInfos {
     pub named_job_object_actg_infos: Vec<Win32_NamedJobObjectActgInfo>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(NamedJobObjectActgInfos, named_job_object_actg_infos);
@@ -73,6 +93,11 @@ pub struct NamedJobObjectLimitSettings {
     pub named_job_object_limit_settings: Vec<Win32_NamedJobObjectLimitSetting>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(NamedJobObjectLimitSettings, named_job_object_limit_settings);

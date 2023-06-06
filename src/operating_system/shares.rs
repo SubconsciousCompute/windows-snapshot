@@ -26,6 +26,11 @@ pub struct ServerConnections {
     pub server_connections: Vec<Win32_ServerConnection>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(ServerConnections, server_connections);
@@ -37,6 +42,11 @@ pub struct ServerSessions {
     pub server_sessions: Vec<Win32_ServerSession>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(ServerSessions, server_sessions);
@@ -48,6 +58,11 @@ pub struct Shares {
     pub shares: Vec<Win32_Share>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(Shares, shares);

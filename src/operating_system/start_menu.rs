@@ -21,6 +21,11 @@ pub struct LogicalProgramGroups {
     pub logical_program_groups: Vec<Win32_LogicalProgramGroup>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(LogicalProgramGroups, logical_program_groups);
@@ -32,6 +37,11 @@ pub struct LogicalProgramGroupItems {
     pub logical_program_group_items: Vec<Win32_LogicalProgramGroupItem>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(LogicalProgramGroupItems, logical_program_group_items);
@@ -43,6 +53,11 @@ pub struct ProgramGroupOrItems {
     pub program_group_or_items: Vec<Win32_ProgramGroupOrItem>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(ProgramGroupOrItems, program_group_or_items);

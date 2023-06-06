@@ -38,6 +38,11 @@ pub struct Directories {
     pub directories: Vec<Win32_Directory>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(Directories, directories);
@@ -49,6 +54,11 @@ pub struct DirectorySpecifications {
     pub directory_specifications: Vec<Win32_DirectorySpecification>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(DirectorySpecifications, directory_specifications);
@@ -60,6 +70,11 @@ pub struct DiskPartitions {
     pub disk_partitions: Vec<Win32_DiskPartition>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(DiskPartitions, disk_partitions);
@@ -71,6 +86,11 @@ pub struct LogicalDisks {
     pub logical_disks: Vec<Win32_LogicalDisk>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(LogicalDisks, logical_disks);
@@ -82,6 +102,11 @@ pub struct MappedLogicalDisks {
     pub mapped_logical_disks: Vec<Win32_MappedLogicalDisk>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(MappedLogicalDisks, mapped_logical_disks);
@@ -93,6 +118,11 @@ pub struct QuotaSettings {
     pub quota_settings: Vec<Win32_QuotaSetting>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(QuotaSettings, quota_settings);
@@ -104,6 +134,11 @@ pub struct ShortcutFiles {
     pub shortcut_files: Vec<Win32_ShortcutFile>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(ShortcutFiles, shortcut_files);
@@ -115,6 +150,11 @@ pub struct Volumes {
     pub volumes: Vec<Win32_Volume>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(Volumes, volumes);

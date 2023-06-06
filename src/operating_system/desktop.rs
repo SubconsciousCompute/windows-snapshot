@@ -20,6 +20,11 @@ pub struct Desktops {
     pub desktops: Vec<Win32_Desktop>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(Desktops, desktops);
@@ -31,6 +36,11 @@ pub struct Environments {
     pub environments: Vec<Win32_Environment>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(Environments, environments);
@@ -42,6 +52,11 @@ pub struct TimeZones {
     pub timezones: Vec<Win32_TimeZone>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(TimeZones, timezones);
@@ -53,6 +68,11 @@ pub struct UserDesktops {
     pub user_desktops: Vec<Win32_UserDesktop>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(UserDesktops, user_desktops);

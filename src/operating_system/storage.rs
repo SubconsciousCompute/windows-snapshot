@@ -26,6 +26,11 @@ pub struct ShadowCopys {
     pub shadow_copys: Vec<Win32_ShadowCopy>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(ShadowCopys, shadow_copys);
@@ -37,6 +42,11 @@ pub struct Volumes {
     pub volumes: Vec<Win32_Volume>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(Volumes, volumes);
@@ -48,6 +58,11 @@ pub struct ShadowContexts {
     pub shadow_contexts: Vec<Win32_ShadowContext>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(ShadowContexts, shadow_contexts);
@@ -59,6 +74,11 @@ pub struct ShadowProviders {
     pub shadow_providers: Vec<Win32_ShadowProvider>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(ShadowProviders, shadow_providers);

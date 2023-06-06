@@ -20,6 +20,11 @@ pub struct Proxys {
     pub proxys: Vec<Win32_Proxy>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(Proxys, proxys);
@@ -33,6 +38,11 @@ pub struct WindowsProductActivations {
     pub windows_product_activations: Vec<Win32_WindowsProductActivation>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(WindowsProductActivations, windows_product_activations);
