@@ -165,7 +165,7 @@ update!(Volumes, volumes);
 /// drives.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-directory>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_Directory {
@@ -332,7 +332,7 @@ pub struct Win32_Directory {
 /// Again, the `DefaultDir` value defines the name of the subdirectory.
 ///
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/msiprov/win32-directoryspecification>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_DirectorySpecification {
@@ -458,7 +458,7 @@ pub struct Win32_DirectorySpecification {
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-diskpartition>
 // Some struct fields no longer exist
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_DiskPartition {
@@ -772,7 +772,7 @@ pub struct Win32_DiskPartition {
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-logicaldisk>
 // Some struct fields no longer exist
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_LogicalDisk {
@@ -1101,7 +1101,7 @@ pub struct Win32_LogicalDisk {
 /// that are mapped as logical disks on the computer system.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-mappedlogicaldisk>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_MappedLogicalDisk {
@@ -1326,7 +1326,7 @@ pub struct Win32_MappedLogicalDisk {
 /// The `Win32_QuotaSetting` WMI class contains setting information for disk quotas on a volume.
 ///
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmipdskq/win32-quotasetting>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_QuotaSetting {
@@ -1368,7 +1368,7 @@ pub struct Win32_QuotaSetting {
 /// directories, and commands.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-shortcutfile>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_ShortcutFile {
@@ -1522,7 +1522,7 @@ pub struct Win32_ShortcutFile {
 /// Note: This class has been repeated in Storage as well. 
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa394515(v=vs.85)>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_Volume {

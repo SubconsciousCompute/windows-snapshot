@@ -81,7 +81,7 @@ update!(UserDesktops, user_desktops);
 /// properties of this class can be modified by the user to customize the desktop.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-desktop>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_Desktop {
@@ -161,7 +161,7 @@ pub struct Win32_Desktop {
 /// `HKEY_USERS\<user>\Environment`
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_Environment {
@@ -228,7 +228,7 @@ pub struct Win32_Environment {
 /// which includes the changes required for transitioning to daylight saving time transition.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-timezone>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_TimeZone {
@@ -386,7 +386,7 @@ pub struct Win32_TimeZone {
 /// are specific to it.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-userdesktop>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_UserDesktop {

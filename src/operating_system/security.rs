@@ -147,7 +147,7 @@ update!(Trustees, trustees);
 /// is specific to WMI allows logon, remote access, method execution, and writing to the WMI repository.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/secrcw32prov/win32-ace>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_ACE {
@@ -198,7 +198,7 @@ pub struct Win32_ACE {
 /// You cannot enumerate instances of this class.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/secrcw32prov/win32-logicalfilesecuritysetting>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_LogicalFileSecuritySetting {
@@ -234,7 +234,7 @@ pub struct Win32_LogicalFileSecuritySetting {
 /// The `Win32_LogicalShareSecuritySetting` WMI class represents security settings for a logical file.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/secrcw32prov/win32-logicalsharesecuritysetting>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_LogicalShareSecuritySetting {
@@ -271,7 +271,7 @@ pub struct Win32_LogicalShareSecuritySetting {
 /// has been returned.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-privilegesstatus>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_PrivilegesStatus {
@@ -309,7 +309,7 @@ pub struct Win32_PrivilegesStatus {
 /// that controls the logging of attempts to access the object.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/secrcw32prov/win32-securitydescriptor>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_SecurityDescriptor {
@@ -347,7 +347,7 @@ pub struct Win32_SecurityDescriptor {
 /// The `Win32_SecuritySetting` abstract WMI class represents security settings for a managed element.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/secrcw32prov/win32-securitysetting>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_SecuritySetting {
@@ -381,7 +381,7 @@ pub struct Win32_SecuritySetting {
 /// identifier (SID) byte array.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/secrcw32prov/win32-trustee>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_Trustee {
@@ -411,7 +411,7 @@ pub struct Win32_Trustee {
 /// Note: This class cannot be accessed.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/secrcw32prov/win32-sid>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 struct Win32_SID {

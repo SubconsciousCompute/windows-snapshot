@@ -87,7 +87,7 @@ update!(ShadowProviders, shadow_providers);
 /// original volume at a previous time.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa394428(v=vs.85)>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_ShadowCopy {
@@ -199,7 +199,7 @@ pub struct Win32_ShadowCopy {
 /// Note: This class has been repeated in File System as well. 
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa394515(v=vs.85)>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_Volume {
@@ -441,7 +441,7 @@ pub struct Win32_Volume {
 /// and the degree of writer involvement.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/vsswmi/win32-shadowcontext>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_ShadowContext {
@@ -483,7 +483,7 @@ pub struct Win32_ShadowContext {
 /// and kernel or firmware implementation, that creates and represents volume shadow copies.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/vsswmi/win32-shadowprovider>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_ShadowProvider {

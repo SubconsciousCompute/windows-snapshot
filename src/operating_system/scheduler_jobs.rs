@@ -64,7 +64,7 @@ update!(UTCTimes, utc_times);
 /// from the Control Panel. You cannot change a task created by WMI in the Scheduled Tasks UI. 
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-scheduledjob>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_ScheduledJob {
@@ -207,7 +207,7 @@ pub struct Win32_ScheduledJob {
 /// Note: The smallest time segment supported is 1 second.
 ///
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmitimepprov/win32-localtime>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_LocalTime {
@@ -242,7 +242,7 @@ pub struct Win32_LocalTime {
 /// Note: The smallest time segment supported is a second.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmitimepprov/win32-utctime>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_UTCTime {

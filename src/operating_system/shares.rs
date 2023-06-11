@@ -71,7 +71,7 @@ update!(Shares, shares);
 /// to a shared resource on the local computer.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmipsess/win32-serverconnection>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_ServerConnection {
@@ -129,7 +129,7 @@ pub struct Win32_ServerConnection {
 /// local computer by users on a remote computer.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmipsess/win32-serversession>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_ServerSession {
@@ -194,7 +194,7 @@ pub struct Win32_ServerSession {
 /// may be a disk drive, printer, interprocess communication, or other sharable device.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-share>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_Share {

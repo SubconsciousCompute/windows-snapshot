@@ -106,7 +106,7 @@ update!(NamedJobObjectLimitSettings, named_job_object_limit_settings);
 /// local computer that is used in security tokens.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmipjobobjprov/win32-luid>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_LUID {
@@ -120,7 +120,7 @@ pub struct Win32_LUID {
 /// Each LUID and attributes structure defines the availability of a security privilege.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmipjobobjprov/win32-luidandattributes>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_LUIDandAttributes {
@@ -136,7 +136,7 @@ pub struct Win32_LUIDandAttributes {
 /// instrumented.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmipjobobjprov/win32-namedjobobject>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_NamedJobObject {
@@ -165,7 +165,7 @@ pub struct Win32_NamedJobObject {
 /// The `Win32_NamedJobObjectActgInfo` WMI class class represents the I/O accounting information for a job object.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmipjobobjprov/win32-namedjobobjectactginfo>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_NamedJobObjectActgInfo {
@@ -232,7 +232,7 @@ pub struct Win32_NamedJobObjectActgInfo {
 /// The `Win32_NamedJobObjectLimitSetting` WMI class represents the limit settings for a job object.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmipjobobjprov/win32-namedjobobjectlimitsetting>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_NamedJobObjectLimitSetting {

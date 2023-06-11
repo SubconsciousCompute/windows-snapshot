@@ -166,7 +166,7 @@ update!(StartupCommands, startup_commands);
 /// The `Win32_BootConfiguration` WMI class represents the boot configuration of a computer system running Windows.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-bootconfiguration>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_BootConfiguration {
@@ -199,7 +199,7 @@ pub struct Win32_BootConfiguration {
 /// The `Win32_ComputerSystem` WMI class represents a computer system running Windows.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-computersystem>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_ComputerSystem {
@@ -612,7 +612,7 @@ pub struct Win32_ComputerSystem {
 /// computer system.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-computersystemproduct>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_ComputerSystemProduct {
@@ -645,7 +645,7 @@ pub struct Win32_ComputerSystemProduct {
 /// `HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\ServiceGroupOrder`
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-loadordergroup>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_LoadOrderGroup {
@@ -692,7 +692,7 @@ pub struct Win32_LoadOrderGroup {
 /// The `Win32_OperatingSystem` WMI class represents a Windows-based operating system installed on a computer.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_OperatingSystem {
@@ -1259,7 +1259,7 @@ pub struct Win32_OperatingSystem {
 /// system crashes.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-osrecoveryconfiguration>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_OSRecoveryConfiguration {
@@ -1318,7 +1318,7 @@ pub struct Win32_OSRecoveryConfiguration {
 /// supplied by Component Based Servicing (CBS). These updates are not listed in the registry. Updates supplied by 
 /// Microsoft Windows Installer (MSI) or the Windows update site (https://update.microsoft.com) are not returned by 
 /// `Win32_QuickFixEngineering`.
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_QuickFixEngineering {
@@ -1374,7 +1374,7 @@ pub struct Win32_QuickFixEngineering {
 
 /// The `Win32_StartupCommand` WMI class represents a command that runs automatically when a user logs onto the 
 /// computer system.
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_StartupCommand {

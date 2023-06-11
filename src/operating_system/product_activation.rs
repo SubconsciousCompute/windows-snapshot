@@ -51,7 +51,7 @@ update!(WindowsProductActivations, windows_product_activations);
 /// connection related to Windows Product Activation (WPA).
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa394389(v=vs.85)>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_Proxy {
@@ -75,7 +75,7 @@ pub struct Win32_Proxy {
 /// ability to activate the customer's computer online and offline.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa394520(v=vs.85)>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_WindowsProductActivation {

@@ -64,7 +64,7 @@ update!(PageFileUsages, pagefile_usage);
 /// on a Win32 system. This class has been deprecated.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-pagefile>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_PageFile {
@@ -199,7 +199,7 @@ pub struct Win32_PageFile {
 /// are different from the run-time state of a page file expressed through the associated class `Win32_PageFileUsage`.
 /// 
 /// To create an instance of this class, enable the `SeCreatePagefilePrivilege` privilege. 
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_PageFileSetting {
@@ -226,7 +226,7 @@ pub struct Win32_PageFileSetting {
 /// The `Win32_PageFileUsage` WMI class represents the file used for handling virtual memory file swapping on 
 /// a Win32 system. Information contained within objects instantiated from this class specify the run-time state 
 /// of the page file.
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_PageFileUsage {

@@ -62,7 +62,7 @@ update!(SoftwareLicensingTokenActivationLicenses, software_licensing_token_activ
 /// This class exposes the product-specific properties and methods of the Software Licensing service.
 /// 
 /// <https://learn.microsoft.com/en-gb/previous-versions/windows/desktop/sppwmi/softwarelicensingproduct>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct SoftwareLicensingProduct {
@@ -188,7 +188,7 @@ pub struct SoftwareLicensingProduct {
 /// This class exposes the product-independent properties and methods of the Software Licensing service.
 /// 
 /// <https://learn.microsoft.com/en-gb/previous-versions/windows/desktop/sppwmi/softwarelicensingservice>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct SoftwareLicensingService {
@@ -286,7 +286,7 @@ pub struct SoftwareLicensingService {
 /// This class exposes properties of installed token-based activation licenses.
 /// 
 /// <https://learn.microsoft.com/en-gb/previous-versions/windows/desktop/sppwmi/softwarelicensingtokenactivationlicense>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct SoftwareLicensingTokenActivationLicense {

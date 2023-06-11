@@ -49,7 +49,7 @@ update!(NTLogEvents, nt_log_events);
 /// events. The file is also known as the event log.
 ///
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa394225(v=vs.85)>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_NTEventlogFile {
@@ -200,7 +200,7 @@ pub struct Win32_NTEventlogFile {
 /// otherwise "Access Denied" is returned to the application.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/eventlogprov/win32-ntlogevent>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_NTLogEvent {

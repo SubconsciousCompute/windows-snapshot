@@ -122,7 +122,7 @@ update!(SystemAccounts, system_accounts);
 /// instance has less impact.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-useraccount>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_UserAccount {
@@ -225,7 +225,7 @@ pub struct Win32_UserAccount {
 /// User or group names recognized by a Windows domain are descendants (or members) of this class.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-account>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_Account {
@@ -302,7 +302,7 @@ pub struct Win32_Account {
 /// Example: Marketing2.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-group>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_Group {
@@ -380,7 +380,7 @@ pub struct Win32_Group {
 /// logged on to a computer system running Windows.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-logonsession>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_LogonSession {
@@ -451,7 +451,7 @@ pub struct Win32_LogonSession {
 /// access privileges, disk quotas, and logon directory paths.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-networkloginprofile>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_NetworkLoginProfile {
@@ -663,7 +663,7 @@ pub struct Win32_NetworkLoginProfile {
 /// that the system account has the same functional privileges as the administrator account.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-systemaccount>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_SystemAccount {

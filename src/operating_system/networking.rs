@@ -143,7 +143,7 @@ update!(IP4RouteTableEvents, ip4_route_table_events);
 /// This class is only applicable to IPv4 and does not return IPX or IPv6 data. 
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmiiprouteprov/win32-ip4persistedroutetable>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_IP4PersistedRouteTable {
@@ -195,7 +195,7 @@ pub struct Win32_IP4PersistedRouteTable {
 /// This class is only applicable to IPv4 and does not return IPX or IPv6 data. 
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmiiprouteprov/win32-ip4routetable>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_IP4RouteTable {
@@ -300,7 +300,7 @@ pub struct Win32_IP4RouteTable {
 /// with a client relationship to the system is a descendant (or member) of this class.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-networkclient>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_NetworkClient {
@@ -345,7 +345,7 @@ pub struct Win32_NetworkClient {
 /// The `Win32_NetworkConnection` WMI classrepresents an active network connection in a Windows-based environment.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-networkconnection>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_NetworkConnection {
@@ -455,7 +455,7 @@ pub struct Win32_NetworkConnection {
 /// system.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-networkprotocol>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_NetworkProtocol {
@@ -551,7 +551,7 @@ pub struct Win32_NetworkProtocol {
 /// The `Win32_NTDomain` WMI class represents a Windows domain.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/cimwin32a/win32-ntdomain>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_NTDomain {
@@ -641,7 +641,7 @@ pub struct Win32_NTDomain {
 /// Note: This class cannot be accessed.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmipicmp/win32-pingstatus> 
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 struct Win32_PingStatus {
@@ -746,7 +746,7 @@ struct Win32_PingStatus {
 /// This class is only applicable to IP4 and does not return IPX or IP6 data.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmiiprouteprov/win32-ip4routetableevent>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_IP4RouteTableEvent {

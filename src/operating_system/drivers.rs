@@ -28,7 +28,7 @@ update!(Drivers, drivers);
 /// The `Win32_SystemDriver` WMI class represents a process on an operating system.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-systemdriver>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_SystemDriver {

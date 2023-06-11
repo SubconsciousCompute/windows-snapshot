@@ -32,7 +32,7 @@ update!(CodecFiles, codec_files);
 /// format such as PCM, which most audio hardware can play directly.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-codecfile>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_CodecFile {

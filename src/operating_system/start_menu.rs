@@ -66,7 +66,7 @@ update!(ProgramGroupOrItems, program_group_or_items);
 /// Windows. For example, Accessories or Startup.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-logicalprogramgroup>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_LogicalProgramGroup {
@@ -121,7 +121,7 @@ pub struct Win32_LogicalProgramGroup {
 /// that is not also another `Win32_LogicalProgramGroup` instance.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-logicalprogramgroupitem>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_LogicalProgramGroupItem {
@@ -167,7 +167,7 @@ pub struct Win32_LogicalProgramGroupItem {
 /// user's `Start\Programs` menu. It contains program groups and program group items.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-programgrouporitem>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_ProgramGroupOrItem {
