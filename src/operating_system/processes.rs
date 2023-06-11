@@ -11,7 +11,7 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
 /// Represents the state of Windows Processes
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct Processes {
     /// Sequence of Process based on when they were launched in chronological order
     pub processes: Vec<Win32_Process>,
@@ -27,7 +27,7 @@ pub struct Processes {
 update!(Processes, processes);
 
 /// Represents the state of Windows threads
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct Threads {
     /// Sequence of Threads based on when they were launched in chronological order
     pub threads: Vec<Win32_Thread>,

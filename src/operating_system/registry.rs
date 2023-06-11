@@ -10,7 +10,7 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
 /// Represents the state of Windows Registry
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct Registry {
     /// Sequence of Registry
     pub registries: Vec<Win32_Registry>,

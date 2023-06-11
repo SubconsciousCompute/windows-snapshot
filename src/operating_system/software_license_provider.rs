@@ -12,7 +12,7 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
 /// Represents the state of Windows `SoftwareLicensingProducts`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct SoftwareLicensingProducts {
     /// Represents data stored in a Windows SoftwareLicensingProducts
     pub software_licensing_products: Vec<SoftwareLicensingProduct>,
@@ -28,7 +28,7 @@ pub struct SoftwareLicensingProducts {
 update!(SoftwareLicensingProducts, software_licensing_products);
 
 /// Represents the state of Windows `SoftwareLicensingServices`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct SoftwareLicensingServices {
     /// Represents data stored in a Windows SoftwareLicensingServices
     pub software_licensing_services: Vec<SoftwareLicensingService>,
@@ -44,7 +44,7 @@ pub struct SoftwareLicensingServices {
 update!(SoftwareLicensingServices, software_licensing_services);
 
 /// Represents the state of Windows `SoftwareLicensingTokenActivationLicenses`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct SoftwareLicensingTokenActivationLicenses {
     /// Represents data stored in a Windows SoftwareLicensingTokenActivationLicenses
     pub software_licensing_token_activation_licenses: Vec<SoftwareLicensingTokenActivationLicense>,

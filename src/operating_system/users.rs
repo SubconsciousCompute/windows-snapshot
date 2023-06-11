@@ -19,7 +19,7 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
 /// Represents the state of Windows User Accounts
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct UserAccounts {
     /// Sequence of windows User Accounts
     pub user_accounts: Vec<Win32_UserAccount>,
@@ -35,7 +35,7 @@ pub struct UserAccounts {
 update!(UserAccounts, user_accounts);
 
 /// Represents the state of Windows user accounts and group accounts
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct Accounts {
     /// Sequence of windows Accounts
     pub accounts: Vec<Win32_Account>,
@@ -51,7 +51,7 @@ pub struct Accounts {
 update!(Accounts, accounts);
 
 /// Represents the state of Windows data about a group account
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct Groups {
     /// Sequence of windows Group
     pub groups: Vec<Win32_Group>,
@@ -67,7 +67,7 @@ pub struct Groups {
 update!(Groups, groups);
 
 /// Represents the state of Windows data about logon session or sessions associated with a user logged
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct LogonSessions {
     /// Sequence of windows logon sessions
     pub logon_sessions: Vec<Win32_LogonSession>,
@@ -83,7 +83,7 @@ pub struct LogonSessions {
 update!(LogonSessions, logon_sessions);
 
 /// Represents the state of Windows data about network login information
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct NetworkLoginProfiles {
     /// Sequence of windows network login
     pub network_login_profiles: Vec<Win32_NetworkLoginProfile>,
@@ -99,7 +99,7 @@ pub struct NetworkLoginProfiles {
 update!(NetworkLoginProfiles, network_login_profiles);
 
 /// Represents the state of Windows system accounts.
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct SystemAccounts {
     /// Sequence of windows SystemAccounts
     pub system_accounts: Vec<Win32_SystemAccount>,

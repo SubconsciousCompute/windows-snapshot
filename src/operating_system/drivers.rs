@@ -10,7 +10,7 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
 /// Represents the state of Windows Drivers
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct Drivers {
     /// Sequence of Drivers based on when they were loaded in chronological order
     pub drivers: Vec<Win32_SystemDriver>,

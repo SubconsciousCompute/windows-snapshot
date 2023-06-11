@@ -20,7 +20,7 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
 /// Represents the state of Windows `ShadowCopys`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct ShadowCopys {
     /// Represents sequence of `ShadowCopys`
     pub shadow_copys: Vec<Win32_ShadowCopy>,
@@ -36,7 +36,7 @@ pub struct ShadowCopys {
 update!(ShadowCopys, shadow_copys);
 
 /// Represents the state of Windows `Volumes`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct Volumes {
     /// Represents sequence of `Volumes`
     pub volumes: Vec<Win32_Volume>,
@@ -52,7 +52,7 @@ pub struct Volumes {
 update!(Volumes, volumes);
 
 /// Represents the state of Windows `ShadowContexts`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct ShadowContexts {
     /// Represents sequence of `ShadowContexts`
     pub shadow_contexts: Vec<Win32_ShadowContext>,
@@ -68,7 +68,7 @@ pub struct ShadowContexts {
 update!(ShadowContexts, shadow_contexts);
 
 /// Represents the state of Windows `ShadowProviders`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct ShadowProviders {
     /// Represents sequence of `ShadowProviders`
     pub shadow_providers: Vec<Win32_ShadowProvider>,

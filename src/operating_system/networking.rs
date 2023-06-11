@@ -19,7 +19,7 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
 /// Represents the state of Windows `IP4PersistedRouteTables`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct IP4PersistedRouteTables {
     /// Represents sequence of Windows `IP4PersistedRouteTables`
     pub ip4_persisted_route_tables: Vec<Win32_IP4PersistedRouteTable>,
@@ -35,7 +35,7 @@ pub struct IP4PersistedRouteTables {
 update!(IP4PersistedRouteTables, ip4_persisted_route_tables);
 
 /// Represents the state of Windows `IP4RouteTables`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct IP4RouteTables {
     /// Represents sequence of Windows `IP4RouteTables`
     pub ip4_route_tables: Vec<Win32_IP4RouteTable>,
@@ -51,7 +51,7 @@ pub struct IP4RouteTables {
 update!(IP4RouteTables, ip4_route_tables);
 
 /// Represents the state of Windows `NetworkClients`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct NetworkClients {
     /// Represents sequence of Windows `NetworkClients`
     pub nework_clients: Vec<Win32_NetworkClient>,
@@ -67,7 +67,7 @@ pub struct NetworkClients {
 update!(NetworkClients, nework_clients);
 
 /// Represents the state of Windows `NetworkConnections`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct NetworkConnections {
     /// Represents sequence of Windows `NetworkConnections`
     pub nework_connections: Vec<Win32_NetworkConnection>,
@@ -83,7 +83,7 @@ pub struct NetworkConnections {
 update!(NetworkConnections, nework_connections);
 
 /// Represents the state of Windows `NetworkProtocols`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct NetworkProtocols {
     /// Represents sequence of Windows `NetworkProtocols`
     pub nework_protocols: Vec<Win32_NetworkProtocol>,
@@ -99,7 +99,7 @@ pub struct NetworkProtocols {
 update!(NetworkProtocols, nework_protocols);
 
 /// Represents the state of Windows `NTDomains`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct NTDomains {
     /// Represents sequence of Windows `NTDomains`
     pub nt_domains: Vec<Win32_NTDomain>,
@@ -115,7 +115,7 @@ pub struct NTDomains {
 update!(NTDomains, nt_domains);
 
 /// Represents the state of Windows `IP4RouteTableEvents`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct IP4RouteTableEvents {
     /// Represents sequence of Windows `IP4RouteTableEvents`
     pub ip4_route_table_events: Vec<Win32_IP4RouteTableEvent>,

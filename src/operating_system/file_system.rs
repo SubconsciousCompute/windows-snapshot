@@ -32,7 +32,7 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
 /// Represents the state of Windows Directories
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct Directories {
     /// Sequence of windows directories
     pub directories: Vec<Win32_Directory>,
@@ -48,7 +48,7 @@ pub struct Directories {
 update!(Directories, directories);
 
 /// Represents the state of Windows Directory Specification
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct DirectorySpecifications {
     /// Sequence of windows directories specifications
     pub directory_specifications: Vec<Win32_DirectorySpecification>,
@@ -64,7 +64,7 @@ pub struct DirectorySpecifications {
 update!(DirectorySpecifications, directory_specifications);
 
 /// Represents the state of Windows Disk Partitions
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct DiskPartitions {
     /// Sequence of windows disk partitions
     pub disk_partitions: Vec<Win32_DiskPartition>,
@@ -80,7 +80,7 @@ pub struct DiskPartitions {
 update!(DiskPartitions, disk_partitions);
 
 /// Represents the state of Windows Logical Disks
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct LogicalDisks {
     /// Sequence of windows logical disks
     pub logical_disks: Vec<Win32_LogicalDisk>,
@@ -96,7 +96,7 @@ pub struct LogicalDisks {
 update!(LogicalDisks, logical_disks);
 
 /// Represents the state of Windows Mapped Logical Disks
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct MappedLogicalDisks {
     /// Sequence of windows mapped logical disks
     pub mapped_logical_disks: Vec<Win32_MappedLogicalDisk>,
@@ -112,7 +112,7 @@ pub struct MappedLogicalDisks {
 update!(MappedLogicalDisks, mapped_logical_disks);
 
 /// Represents the state of Windows Quota Settings
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct QuotaSettings {
     /// Sequence of windows quota settings
     pub quota_settings: Vec<Win32_QuotaSetting>,
@@ -128,7 +128,7 @@ pub struct QuotaSettings {
 update!(QuotaSettings, quota_settings);
 
 /// Represents the state of Windows Shortcut Files
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct ShortcutFiles {
     /// Sequence of windows shortcut files
     pub shortcut_files: Vec<Win32_ShortcutFile>,
@@ -144,7 +144,7 @@ pub struct ShortcutFiles {
 update!(ShortcutFiles, shortcut_files);
 
 /// Represents the state of Windows Volumes
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct Volumes {
     /// Sequence of windows volumes
     pub volumes: Vec<Win32_Volume>,

@@ -10,7 +10,7 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
 /// Represents the state of Windows `CodecFiles`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct CodecFiles {
     /// Represents sequence of Windows `CodecFiles`
     pub codec_files: Vec<Win32_CodecFile>,

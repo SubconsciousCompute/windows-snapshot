@@ -11,7 +11,7 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
 /// Represents the state of Windows `ScheduledJobs`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct ScheduledJobs {
     /// Represents sequence of Windows `ScheduledJobs`
     pub scheduled_jobs: Vec<Win32_ScheduledJob>,
@@ -27,7 +27,7 @@ pub struct ScheduledJobs {
 update!(ScheduledJobs, scheduled_jobs);
 
 /// Represents the state of Windows `LocalTimes`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct LocalTimes {
     /// Represents sequence of Windows `LocalTimes`
     pub local_times: Vec<Win32_LocalTime>,
@@ -43,7 +43,7 @@ pub struct LocalTimes {
 update!(LocalTimes, local_times);
 
 /// Represents the state of Windows `UTCTimes`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct UTCTimes {
     /// Represents sequence of Windows `UTCTimes`
     pub utc_times: Vec<Win32_UTCTime>,

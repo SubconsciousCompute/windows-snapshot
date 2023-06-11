@@ -14,7 +14,7 @@ use wmi::{COMLibrary, WMIConnection};
 /// Represents the state of Windows Proxys 
 /// 
 /// Note: this class doesn't exist anymore
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct Proxys {
     /// Represents sequence of Windows `Proxys`
     pub proxys: Vec<Win32_Proxy>,
@@ -32,7 +32,7 @@ update!(Proxys, proxys);
 /// Represents the state of Windows `WindowsProductActivations`
 /// 
 /// Note: this class doesn't exist anymore
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct WindowsProductActivations {
     /// Represents sequence of Windows `WindowsProductActivations`
     pub windows_product_activations: Vec<Win32_WindowsProductActivation>,

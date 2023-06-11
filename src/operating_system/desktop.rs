@@ -14,7 +14,7 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
 /// Represents the state of Windows user's desktops
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct Desktops {
     /// Sequence of windows Desktop states
     pub desktops: Vec<Win32_Desktop>,
@@ -30,7 +30,7 @@ pub struct Desktops {
 update!(Desktops, desktops);
 
 /// Represents the state of Windows Environment
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct Environments {
     /// Sequence of windows Environment states
     pub environments: Vec<Win32_Environment>,
@@ -46,7 +46,7 @@ pub struct Environments {
 update!(Environments, environments);
 
 /// Represents the state of Windows `TimeZone`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct TimeZones {
     /// Sequence of windows TimeZone states
     pub timezones: Vec<Win32_TimeZone>,
@@ -62,7 +62,7 @@ pub struct TimeZones {
 update!(TimeZones, timezones);
 
 /// Represents the state of Windows User Desktops
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct UserDesktops {
     ///  user account and desktop settings that are specific to it
     pub user_desktops: Vec<Win32_UserDesktop>,

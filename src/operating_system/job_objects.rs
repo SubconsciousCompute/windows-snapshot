@@ -23,7 +23,7 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection};
 
 /// Represents the state of Windows `LUIDs`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct LUIDs {
     /// Represents sequence of Windows `LUIDs`
     pub luids: Vec<Win32_LUID>,
@@ -39,7 +39,7 @@ pub struct LUIDs {
 update!(LUIDs, luids);
 
 /// Represents the state of Windows `LUIDandAttributes`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct LUIDandAttributes {
     /// Represents sequence of Windows `LUIDandAttributes`
     pub luid_and_attributes: Vec<Win32_LUIDandAttributes>,
@@ -55,7 +55,7 @@ pub struct LUIDandAttributes {
 update!(LUIDandAttributes, luid_and_attributes);
 
 /// Represents the state of Windows `NamedJobObjects`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct NamedJobObjects {
     /// Represents sequence of Windows `NamedJobObjects`
     pub named_job_objects: Vec<Win32_NamedJobObject>,
@@ -71,7 +71,7 @@ pub struct NamedJobObjects {
 update!(NamedJobObjects, named_job_objects);
 
 /// Represents the state of Windows `NamedJobObjectActgInfos`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct NamedJobObjectActgInfos {
     /// Represents sequence of Windows `NamedJobObjectActgInfos`
     pub named_job_object_actg_infos: Vec<Win32_NamedJobObjectActgInfo>,
@@ -87,7 +87,7 @@ pub struct NamedJobObjectActgInfos {
 update!(NamedJobObjectActgInfos, named_job_object_actg_infos);
 
 /// Represents the state of Windows `NamedJobObjectLimitSettings`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct NamedJobObjectLimitSettings {
     /// Represents sequence of Windows `NamedJobObjectLimitSettings`
     pub named_job_object_limit_settings: Vec<Win32_NamedJobObjectLimitSetting>,

@@ -55,6 +55,8 @@ macro_rules! update {
 
                 if(self.$struct_field.len() != old_vec.len()) {
                     self.state_change = true;
+                } else if (crate::hash_vec(&(self.$struct_field)) != crate::hash_vec(&old_vec)) {
+                    self.state_change = true;
                 } else {
                     self.state_change = false;
                 }
@@ -71,13 +73,9 @@ macro_rules! update {
                 let old_vec = self.$struct_field.clone();
                 self.$struct_field = wmi_con.async_query().await.unwrap();
 
-                // let mut hasher = crate::DefaultHasher::new();
-                // self.$struct_field.hash(&mut hasher);
-                // let hash1 = hasher.finish();
-
                 if (self.$struct_field.len() != old_vec.len()) {
                     self.state_change = true;
-                // } else if (crate::hash_vec(&(self.$struct_field)) != crate::hash_vec(&old_vec)) {
+                } else if (crate::hash_vec(&(self.$struct_field)) != crate::hash_vec(&old_vec)) {
                     self.state_change = true;
                 } else {
                     self.state_change = false;

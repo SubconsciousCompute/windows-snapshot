@@ -31,7 +31,7 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection};
 
 /// Represents the state of Windows ACEs
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct ACEs {
     /// Represents sequence of Windows `ACEs`
     pub aces: Vec<Win32_ACE>,
@@ -47,7 +47,7 @@ pub struct ACEs {
 update!(ACEs, aces);
 
 /// Represents the state of Windows `LogicalFileSecuritySettings`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct LogicalFileSecuritySettings {
     /// Represents sequence of Windows `LogicalFileSecuritySettings`
     pub logical_file_security_settings: Vec<Win32_LogicalFileSecuritySetting>,
@@ -63,7 +63,7 @@ pub struct LogicalFileSecuritySettings {
 update!(LogicalFileSecuritySettings, logical_file_security_settings);
 
 /// Represents the state of Windows `LogicalShareSecuritySettings`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct LogicalShareSecuritySettings {
     /// Represents sequence of Windows `LogicalShareSecuritySettings`
     pub logical_share_security_settings: Vec<Win32_LogicalShareSecuritySetting>,
@@ -79,7 +79,7 @@ pub struct LogicalShareSecuritySettings {
 update!(LogicalShareSecuritySettings, logical_share_security_settings);
 
 /// Represents the state of Windows `PrivilegesStatuses`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct PrivilegesStatuses {
     /// Represents sequence of Windows `PrivilegesStatuses`
     pub privileges_statuses: Vec<Win32_PrivilegesStatus>,
@@ -95,7 +95,7 @@ pub struct PrivilegesStatuses {
 update!(PrivilegesStatuses, privileges_statuses);
 
 /// Represents the state of Windows `SecurityDescriptors`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct SecurityDescriptors {
     /// Represents sequence of Windows `SecurityDescriptors`
     pub security_descriptors: Vec<Win32_SecurityDescriptor>,
@@ -111,7 +111,7 @@ pub struct SecurityDescriptors {
 update!(SecurityDescriptors, security_descriptors);
 
 /// Represents the state of Windows `SecuritySettings`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct SecuritySettings {
     /// Represents sequence of Windows `SecuritySettings`
     pub security_settings: Vec<Win32_SecuritySetting>,
@@ -127,7 +127,7 @@ pub struct SecuritySettings {
 update!(SecuritySettings, security_settings);
 
 /// Represents the state of Windows Trustees
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct Trustees {
     /// Represents sequence of Windows `Trustees`
     pub trustees: Vec<Win32_Trustee>,

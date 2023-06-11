@@ -36,7 +36,7 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
 /// Represents the state of Windows `BootConfigurations`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct BootConfigurations {
     /// Represents sequence of Windows `BootConfigurations`
     pub boot_configurations: Vec<Win32_BootConfiguration>,
@@ -52,7 +52,7 @@ pub struct BootConfigurations {
 update!(BootConfigurations, boot_configurations);
 
 /// Represents the state of Windows `ComputerSystems`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct ComputerSystems {
     /// Represents sequence of Windows `ComputerSystems`
     pub computer_systems: Vec<Win32_ComputerSystem>,
@@ -68,7 +68,7 @@ pub struct ComputerSystems {
 update!(ComputerSystems, computer_systems);
 
 /// Represents the state of Windows `ComputerSystemProducts`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct ComputerSystemProducts {
     /// Represents sequence of Windows `ComputerSystemProducts`
     pub computer_system_products: Vec<Win32_ComputerSystemProduct>,
@@ -84,7 +84,7 @@ pub struct ComputerSystemProducts {
 update!(ComputerSystemProducts, computer_system_products);
 
 /// Represents the state of Windows `LoadOrderGroups`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct LoadOrderGroups {
     /// Represents sequence of Windows `LoadOrderGroups`
     pub load_order_groups: Vec<Win32_LoadOrderGroup>,
@@ -100,7 +100,7 @@ pub struct LoadOrderGroups {
 update!(LoadOrderGroups, load_order_groups);
 
 /// Represents the state of Windows `OperatingSystems`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct OperatingSystems {
     /// Represents sequence of Windows `OperatingSystems`
     pub operating_systems: Vec<Win32_OperatingSystem>,
@@ -116,7 +116,7 @@ pub struct OperatingSystems {
 update!(OperatingSystems, operating_systems);
 
 /// Represents the state of Windows `OSRecoveryConfigurations`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct OSRecoveryConfigurations {
     /// Represents sequence of Windows `OSRecoveryConfigurations`
     pub os_recovery_configurations: Vec<Win32_OSRecoveryConfiguration>,
@@ -132,7 +132,7 @@ pub struct OSRecoveryConfigurations {
 update!(OSRecoveryConfigurations, os_recovery_configurations);
 
 /// Represents the state of Windows `QuickFixEngineerings`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct QuickFixEngineerings {
     /// Represents sequence of Windows `QuickFixEngineerings`
     pub quick_fix_engineerings: Vec<Win32_QuickFixEngineering>,
@@ -148,7 +148,7 @@ pub struct QuickFixEngineerings {
 update!(QuickFixEngineerings, quick_fix_engineerings);
 
 /// Represents the state of Windows `StartupCommands`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct StartupCommands {
     /// Represents sequence of Windows `StartupCommands`
     pub startup_commands: Vec<Win32_StartupCommand>,
