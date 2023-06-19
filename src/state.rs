@@ -168,6 +168,8 @@ pub struct Windows {
     pub fans: cooling_device::Fans,
     /// State of Windows HeatPipes
     pub heat_pipes: cooling_device::HeatPipes,
+    /// State of Windows Refrigerations
+    pub refrigerations: cooling_device::Refrigerations,
 }
 
 impl Windows {
@@ -239,6 +241,7 @@ impl Windows {
         self.startup_commands.update();
         self.fans.update();
         self.heat_pipes.update();
+        self.refrigerations.update();
     }
 
     /// Asynchronously update all the fields
@@ -310,6 +313,7 @@ impl Windows {
             self.startup_commands.async_update(),
             self.fans.async_update(),
             self.heat_pipes.async_update(),
+            self.refrigerations.async_update(),
         );
     }
 }
