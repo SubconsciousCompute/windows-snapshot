@@ -27,6 +27,7 @@ pub use std::collections::hash_map::DefaultHasher;
 pub use std::hash::{Hash, Hasher};
 
 pub mod operating_system;
+pub mod hardware;
 pub mod state;
 
 pub use wmi::COMLibrary;

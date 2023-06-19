@@ -3,6 +3,9 @@
 use crate::operating_system::{
     desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_pagefiles, scheduler_jobs, product_activation, software_license_provider, shares, multimedia_audio_visual, storage, security, start_menu, networking, job_objects, operating_system_settings
 };
+use crate::hardware::{
+    cooling_device
+};
 use serde::{Deserialize, Serialize};
 use tokio::join;
 
@@ -161,6 +164,8 @@ pub struct Windows {
     pub quick_fix_engineerings: operating_system_settings::QuickFixEngineerings,
     /// State of Windows StartupCommands
     pub startup_commands: operating_system_settings::StartupCommands,
+    /// State of Windows Fans
+    pub fans: cooling_device::Fans,
 }
 
 impl Windows {
@@ -230,6 +235,7 @@ impl Windows {
         self.os_recovery_configurations.update();
         self.quick_fix_engineerings.update();
         self.startup_commands.update();
+        self.fans.update();
     }
 
     /// Asynchronously update all the fields
@@ -299,6 +305,7 @@ impl Windows {
             self.os_recovery_configurations.async_update(),
             self.quick_fix_engineerings.async_update(),
             self.startup_commands.async_update(),
+            self.fans.async_update(),
         );
     }
 }

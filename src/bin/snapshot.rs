@@ -8,12 +8,12 @@ async fn main() {
 
     let mut k = windows_snapshot::state::Windows::default();
 
-    //k.async_update().await;
-    //k.update(); // for synchronous update
+    // k.async_update().await;
+    // k.update(); // for synchronous update
 
     // println!("{k:#?}");
-    k.async_update().await;
-    // k.startup_commands.update();
+    // k.async_update().await;
+    k.fans.update();
 
-    println!("{:#?}", k);
+    println!("{:#?}", k.fans);
 }
