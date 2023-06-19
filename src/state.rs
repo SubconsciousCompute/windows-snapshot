@@ -166,6 +166,8 @@ pub struct Windows {
     pub startup_commands: operating_system_settings::StartupCommands,
     /// State of Windows Fans
     pub fans: cooling_device::Fans,
+    /// State of Windows HeatPipes
+    pub heat_pipes: cooling_device::HeatPipes,
 }
 
 impl Windows {
@@ -236,6 +238,7 @@ impl Windows {
         self.quick_fix_engineerings.update();
         self.startup_commands.update();
         self.fans.update();
+        self.heat_pipes.update();
     }
 
     /// Asynchronously update all the fields
@@ -306,6 +309,7 @@ impl Windows {
             self.quick_fix_engineerings.async_update(),
             self.startup_commands.async_update(),
             self.fans.async_update(),
+            self.heat_pipes.async_update(),
         );
     }
 }
