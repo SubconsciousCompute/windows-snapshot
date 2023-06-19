@@ -13,34 +13,49 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
 /// Represents the state of Windows `PageFiles`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct PageFiles {
     /// Represents sequence of Windows `PageFiles`
     pub pagefiles: Vec<Win32_PageFile>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(PageFiles, pagefiles);
 
 /// Represents the state of Windows `PageFileSettings`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct PageFileSettings {
     /// Represents the Windows `PageFileSettings`
     pub pagefile_settings: Vec<Win32_PageFileSetting>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(PageFileSettings, pagefile_settings);
 
 /// Represents the state of Windows `PageFileUsages`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct PageFileUsages {
     /// Represents the Windows `PageFileUsages` details
     pub pagefile_usage: Vec<Win32_PageFileUsage>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(PageFileUsages, pagefile_usage);
@@ -49,7 +64,7 @@ update!(PageFileUsages, pagefile_usage);
 /// on a Win32 system. This class has been deprecated.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-pagefile>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_PageFile {
@@ -184,7 +199,7 @@ pub struct Win32_PageFile {
 /// are different from the run-time state of a page file expressed through the associated class `Win32_PageFileUsage`.
 /// 
 /// To create an instance of this class, enable the `SeCreatePagefilePrivilege` privilege. 
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_PageFileSetting {
@@ -211,7 +226,7 @@ pub struct Win32_PageFileSetting {
 /// The `Win32_PageFileUsage` WMI class represents the file used for handling virtual memory file swapping on 
 /// a Win32 system. Information contained within objects instantiated from this class specify the run-time state 
 /// of the page file.
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_PageFileUsage {

@@ -19,78 +19,113 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
 /// Represents the state of Windows `IP4PersistedRouteTables`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct IP4PersistedRouteTables {
     /// Represents sequence of Windows `IP4PersistedRouteTables`
     pub ip4_persisted_route_tables: Vec<Win32_IP4PersistedRouteTable>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(IP4PersistedRouteTables, ip4_persisted_route_tables);
 
 /// Represents the state of Windows `IP4RouteTables`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct IP4RouteTables {
     /// Represents sequence of Windows `IP4RouteTables`
     pub ip4_route_tables: Vec<Win32_IP4RouteTable>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(IP4RouteTables, ip4_route_tables);
 
 /// Represents the state of Windows `NetworkClients`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct NetworkClients {
     /// Represents sequence of Windows `NetworkClients`
     pub nework_clients: Vec<Win32_NetworkClient>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(NetworkClients, nework_clients);
 
 /// Represents the state of Windows `NetworkConnections`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct NetworkConnections {
     /// Represents sequence of Windows `NetworkConnections`
     pub nework_connections: Vec<Win32_NetworkConnection>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(NetworkConnections, nework_connections);
 
 /// Represents the state of Windows `NetworkProtocols`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct NetworkProtocols {
     /// Represents sequence of Windows `NetworkProtocols`
     pub nework_protocols: Vec<Win32_NetworkProtocol>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(NetworkProtocols, nework_protocols);
 
 /// Represents the state of Windows `NTDomains`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct NTDomains {
     /// Represents sequence of Windows `NTDomains`
     pub nt_domains: Vec<Win32_NTDomain>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(NTDomains, nt_domains);
 
 /// Represents the state of Windows `IP4RouteTableEvents`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct IP4RouteTableEvents {
     /// Represents sequence of Windows `IP4RouteTableEvents`
     pub ip4_route_table_events: Vec<Win32_IP4RouteTableEvent>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(IP4RouteTableEvents, ip4_route_table_events);
@@ -108,7 +143,7 @@ update!(IP4RouteTableEvents, ip4_route_table_events);
 /// This class is only applicable to IPv4 and does not return IPX or IPv6 data. 
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmiiprouteprov/win32-ip4persistedroutetable>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_IP4PersistedRouteTable {
@@ -160,7 +195,7 @@ pub struct Win32_IP4PersistedRouteTable {
 /// This class is only applicable to IPv4 and does not return IPX or IPv6 data. 
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmiiprouteprov/win32-ip4routetable>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_IP4RouteTable {
@@ -265,7 +300,7 @@ pub struct Win32_IP4RouteTable {
 /// with a client relationship to the system is a descendant (or member) of this class.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-networkclient>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_NetworkClient {
@@ -310,7 +345,7 @@ pub struct Win32_NetworkClient {
 /// The `Win32_NetworkConnection` WMI classrepresents an active network connection in a Windows-based environment.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-networkconnection>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_NetworkConnection {
@@ -420,7 +455,7 @@ pub struct Win32_NetworkConnection {
 /// system.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-networkprotocol>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_NetworkProtocol {
@@ -516,7 +551,7 @@ pub struct Win32_NetworkProtocol {
 /// The `Win32_NTDomain` WMI class represents a Windows domain.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/cimwin32a/win32-ntdomain>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_NTDomain {
@@ -606,7 +641,7 @@ pub struct Win32_NTDomain {
 /// Note: This class cannot be accessed.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmipicmp/win32-pingstatus> 
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 struct Win32_PingStatus {
@@ -711,7 +746,7 @@ struct Win32_PingStatus {
 /// This class is only applicable to IP4 and does not return IPX or IP6 data.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmiiprouteprov/win32-ip4routetableevent>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_IP4RouteTableEvent {

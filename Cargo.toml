@@ -18,5 +18,5 @@ default-target = "x86_64-pc-windows-msvc"
 
 [target.'cfg(target_os = "windows")'.dependencies]
 serde = "1.0.159"
-wmi = "0.12.2"
+wmi = { git = "https://github.com/NidhiHemanth/wmi-rs.git", rev = "bebdc1f969974181a76d54d1486e8602bc7e9720" }
 tokio = { version = "1.28.1", features = ["full"] }

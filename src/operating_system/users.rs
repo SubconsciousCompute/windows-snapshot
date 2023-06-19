@@ -19,67 +19,97 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
 /// Represents the state of Windows User Accounts
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct UserAccounts {
     /// Sequence of windows User Accounts
     pub user_accounts: Vec<Win32_UserAccount>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(UserAccounts, user_accounts);
 
 /// Represents the state of Windows user accounts and group accounts
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct Accounts {
     /// Sequence of windows Accounts
     pub accounts: Vec<Win32_Account>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(Accounts, accounts);
 
 /// Represents the state of Windows data about a group account
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct Groups {
     /// Sequence of windows Group
     pub groups: Vec<Win32_Group>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(Groups, groups);
 
 /// Represents the state of Windows data about logon session or sessions associated with a user logged
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct LogonSessions {
     /// Sequence of windows logon sessions
     pub logon_sessions: Vec<Win32_LogonSession>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(LogonSessions, logon_sessions);
 
 /// Represents the state of Windows data about network login information
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct NetworkLoginProfiles {
     /// Sequence of windows network login
     pub network_login_profiles: Vec<Win32_NetworkLoginProfile>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(NetworkLoginProfiles, network_login_profiles);
 
 /// Represents the state of Windows system accounts.
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct SystemAccounts {
     /// Sequence of windows SystemAccounts
     pub system_accounts: Vec<Win32_SystemAccount>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(SystemAccounts, system_accounts);
@@ -92,7 +122,7 @@ update!(SystemAccounts, system_accounts);
 /// instance has less impact.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-useraccount>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_UserAccount {
@@ -195,7 +225,7 @@ pub struct Win32_UserAccount {
 /// User or group names recognized by a Windows domain are descendants (or members) of this class.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-account>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_Account {
@@ -272,7 +302,7 @@ pub struct Win32_Account {
 /// Example: Marketing2.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-group>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_Group {
@@ -350,7 +380,7 @@ pub struct Win32_Group {
 /// logged on to a computer system running Windows.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-logonsession>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_LogonSession {
@@ -421,7 +451,7 @@ pub struct Win32_LogonSession {
 /// access privileges, disk quotas, and logon directory paths.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-networkloginprofile>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_NetworkLoginProfile {
@@ -633,7 +663,7 @@ pub struct Win32_NetworkLoginProfile {
 /// that the system account has the same functional privileges as the administrator account.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-systemaccount>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_SystemAccount {

@@ -9,7 +9,7 @@ use tokio::join;
 /// Our main struct
 ///
 /// Holds the state/snapshot of Windows
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct Windows {
     /// State of Windows Processes
     pub processes: processes::Processes,

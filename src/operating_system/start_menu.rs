@@ -15,34 +15,49 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
 /// Represents the state of Windows `LogicalProgramGroups`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct LogicalProgramGroups {
     /// Represents sequence of Windows `LogicalProgramGroups`
     pub logical_program_groups: Vec<Win32_LogicalProgramGroup>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(LogicalProgramGroups, logical_program_groups);
 
 /// Represents the state of Windows `LogicalProgramGroupItems`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct LogicalProgramGroupItems {
     /// Represents sequence of Windows `LogicalProgramGroupItems`
     pub logical_program_group_items: Vec<Win32_LogicalProgramGroupItem>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(LogicalProgramGroupItems, logical_program_group_items);
 
 /// Represents the state of Windows `ProgramGroupOrItems`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct ProgramGroupOrItems {
     /// Represents sequence of Windows `ProgramGroupOrItems`
     pub program_group_or_items: Vec<Win32_ProgramGroupOrItem>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(ProgramGroupOrItems, program_group_or_items);
@@ -51,7 +66,7 @@ update!(ProgramGroupOrItems, program_group_or_items);
 /// Windows. For example, Accessories or Startup.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-logicalprogramgroup>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_LogicalProgramGroup {
@@ -106,7 +121,7 @@ pub struct Win32_LogicalProgramGroup {
 /// that is not also another `Win32_LogicalProgramGroup` instance.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-logicalprogramgroupitem>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_LogicalProgramGroupItem {
@@ -152,7 +167,7 @@ pub struct Win32_LogicalProgramGroupItem {
 /// user's `Start\Programs` menu. It contains program groups and program group items.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-programgrouporitem>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_ProgramGroupOrItem {

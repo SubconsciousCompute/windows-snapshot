@@ -14,12 +14,17 @@ use wmi::{COMLibrary, WMIConnection};
 /// Represents the state of Windows Proxys 
 /// 
 /// Note: this class doesn't exist anymore
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct Proxys {
     /// Represents sequence of Windows `Proxys`
     pub proxys: Vec<Win32_Proxy>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(Proxys, proxys);
@@ -27,12 +32,17 @@ update!(Proxys, proxys);
 /// Represents the state of Windows `WindowsProductActivations`
 /// 
 /// Note: this class doesn't exist anymore
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct WindowsProductActivations {
     /// Represents sequence of Windows `WindowsProductActivations`
     pub windows_product_activations: Vec<Win32_WindowsProductActivation>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(WindowsProductActivations, windows_product_activations);
@@ -41,7 +51,7 @@ update!(WindowsProductActivations, windows_product_activations);
 /// connection related to Windows Product Activation (WPA).
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa394389(v=vs.85)>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_Proxy {
@@ -65,7 +75,7 @@ pub struct Win32_Proxy {
 /// ability to activate the customer's computer online and offline.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa394520(v=vs.85)>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_WindowsProductActivation {

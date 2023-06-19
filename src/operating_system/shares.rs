@@ -20,34 +20,49 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
 /// Represents the state of Windows `ServerConnections`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct ServerConnections {
     /// Represents sequence of Windows `ServerConnections`
     pub server_connections: Vec<Win32_ServerConnection>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(ServerConnections, server_connections);
 
 /// Represents the state of Windows `ServerSessions`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct ServerSessions {
     /// Represents sequence of Windows `ServerSessions`
     pub server_sessions: Vec<Win32_ServerSession>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(ServerSessions, server_sessions);
 
 /// Represents the state of Windows `Shares`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct Shares {
     /// Represents sequence of Windows `Shares`
     pub shares: Vec<Win32_Share>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(Shares, shares);
@@ -56,7 +71,7 @@ update!(Shares, shares);
 /// to a shared resource on the local computer.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmipsess/win32-serverconnection>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_ServerConnection {
@@ -114,7 +129,7 @@ pub struct Win32_ServerConnection {
 /// local computer by users on a remote computer.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmipsess/win32-serversession>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_ServerSession {
@@ -179,7 +194,7 @@ pub struct Win32_ServerSession {
 /// may be a disk drive, printer, interprocess communication, or other sharable device.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-share>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_Share {

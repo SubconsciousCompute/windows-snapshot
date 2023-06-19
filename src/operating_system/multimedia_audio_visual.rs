@@ -10,12 +10,17 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
 /// Represents the state of Windows `CodecFiles`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct CodecFiles {
     /// Represents sequence of Windows `CodecFiles`
     pub codec_files: Vec<Win32_CodecFile>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(CodecFiles, codec_files);
@@ -27,7 +32,7 @@ update!(CodecFiles, codec_files);
 /// format such as PCM, which most audio hardware can play directly.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-codecfile>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_CodecFile {

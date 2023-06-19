@@ -36,89 +36,129 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
 /// Represents the state of Windows `BootConfigurations`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct BootConfigurations {
     /// Represents sequence of Windows `BootConfigurations`
     pub boot_configurations: Vec<Win32_BootConfiguration>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(BootConfigurations, boot_configurations);
 
 /// Represents the state of Windows `ComputerSystems`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct ComputerSystems {
     /// Represents sequence of Windows `ComputerSystems`
     pub computer_systems: Vec<Win32_ComputerSystem>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(ComputerSystems, computer_systems);
 
 /// Represents the state of Windows `ComputerSystemProducts`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct ComputerSystemProducts {
     /// Represents sequence of Windows `ComputerSystemProducts`
     pub computer_system_products: Vec<Win32_ComputerSystemProduct>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(ComputerSystemProducts, computer_system_products);
 
 /// Represents the state of Windows `LoadOrderGroups`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct LoadOrderGroups {
     /// Represents sequence of Windows `LoadOrderGroups`
     pub load_order_groups: Vec<Win32_LoadOrderGroup>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(LoadOrderGroups, load_order_groups);
 
 /// Represents the state of Windows `OperatingSystems`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct OperatingSystems {
     /// Represents sequence of Windows `OperatingSystems`
     pub operating_systems: Vec<Win32_OperatingSystem>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(OperatingSystems, operating_systems);
 
 /// Represents the state of Windows `OSRecoveryConfigurations`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct OSRecoveryConfigurations {
     /// Represents sequence of Windows `OSRecoveryConfigurations`
     pub os_recovery_configurations: Vec<Win32_OSRecoveryConfiguration>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(OSRecoveryConfigurations, os_recovery_configurations);
 
 /// Represents the state of Windows `QuickFixEngineerings`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct QuickFixEngineerings {
     /// Represents sequence of Windows `QuickFixEngineerings`
     pub quick_fix_engineerings: Vec<Win32_QuickFixEngineering>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(QuickFixEngineerings, quick_fix_engineerings);
 
 /// Represents the state of Windows `StartupCommands`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct StartupCommands {
     /// Represents sequence of Windows `StartupCommands`
     pub startup_commands: Vec<Win32_StartupCommand>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(StartupCommands, startup_commands);
@@ -126,7 +166,7 @@ update!(StartupCommands, startup_commands);
 /// The `Win32_BootConfiguration` WMI class represents the boot configuration of a computer system running Windows.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-bootconfiguration>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_BootConfiguration {
@@ -159,7 +199,7 @@ pub struct Win32_BootConfiguration {
 /// The `Win32_ComputerSystem` WMI class represents a computer system running Windows.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-computersystem>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_ComputerSystem {
@@ -572,7 +612,7 @@ pub struct Win32_ComputerSystem {
 /// computer system.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-computersystemproduct>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_ComputerSystemProduct {
@@ -605,7 +645,7 @@ pub struct Win32_ComputerSystemProduct {
 /// `HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\ServiceGroupOrder`
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-loadordergroup>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_LoadOrderGroup {
@@ -652,7 +692,7 @@ pub struct Win32_LoadOrderGroup {
 /// The `Win32_OperatingSystem` WMI class represents a Windows-based operating system installed on a computer.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_OperatingSystem {
@@ -1219,7 +1259,7 @@ pub struct Win32_OperatingSystem {
 /// system crashes.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-osrecoveryconfiguration>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_OSRecoveryConfiguration {
@@ -1278,7 +1318,7 @@ pub struct Win32_OSRecoveryConfiguration {
 /// supplied by Component Based Servicing (CBS). These updates are not listed in the registry. Updates supplied by 
 /// Microsoft Windows Installer (MSI) or the Windows update site (https://update.microsoft.com) are not returned by 
 /// `Win32_QuickFixEngineering`.
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_QuickFixEngineering {
@@ -1334,7 +1374,7 @@ pub struct Win32_QuickFixEngineering {
 
 /// The `Win32_StartupCommand` WMI class represents a command that runs automatically when a user logs onto the 
 /// computer system.
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_StartupCommand {

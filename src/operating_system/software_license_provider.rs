@@ -12,34 +12,49 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
 /// Represents the state of Windows `SoftwareLicensingProducts`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct SoftwareLicensingProducts {
     /// Represents data stored in a Windows SoftwareLicensingProducts
     pub software_licensing_products: Vec<SoftwareLicensingProduct>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(SoftwareLicensingProducts, software_licensing_products);
 
 /// Represents the state of Windows `SoftwareLicensingServices`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct SoftwareLicensingServices {
     /// Represents data stored in a Windows SoftwareLicensingServices
     pub software_licensing_services: Vec<SoftwareLicensingService>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(SoftwareLicensingServices, software_licensing_services);
 
 /// Represents the state of Windows `SoftwareLicensingTokenActivationLicenses`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct SoftwareLicensingTokenActivationLicenses {
     /// Represents data stored in a Windows SoftwareLicensingTokenActivationLicenses
     pub software_licensing_token_activation_licenses: Vec<SoftwareLicensingTokenActivationLicense>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(SoftwareLicensingTokenActivationLicenses, software_licensing_token_activation_licenses);
@@ -47,7 +62,7 @@ update!(SoftwareLicensingTokenActivationLicenses, software_licensing_token_activ
 /// This class exposes the product-specific properties and methods of the Software Licensing service.
 /// 
 /// <https://learn.microsoft.com/en-gb/previous-versions/windows/desktop/sppwmi/softwarelicensingproduct>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct SoftwareLicensingProduct {
@@ -173,7 +188,7 @@ pub struct SoftwareLicensingProduct {
 /// This class exposes the product-independent properties and methods of the Software Licensing service.
 /// 
 /// <https://learn.microsoft.com/en-gb/previous-versions/windows/desktop/sppwmi/softwarelicensingservice>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct SoftwareLicensingService {
@@ -271,7 +286,7 @@ pub struct SoftwareLicensingService {
 /// This class exposes properties of installed token-based activation licenses.
 /// 
 /// <https://learn.microsoft.com/en-gb/previous-versions/windows/desktop/sppwmi/softwarelicensingtokenactivationlicense>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct SoftwareLicensingTokenActivationLicense {

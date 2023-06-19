@@ -11,34 +11,49 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
 /// Represents the state of Windows `ScheduledJobs`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct ScheduledJobs {
     /// Represents sequence of Windows `ScheduledJobs`
     pub scheduled_jobs: Vec<Win32_ScheduledJob>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(ScheduledJobs, scheduled_jobs);
 
 /// Represents the state of Windows `LocalTimes`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct LocalTimes {
     /// Represents sequence of Windows `LocalTimes`
     pub local_times: Vec<Win32_LocalTime>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(LocalTimes, local_times);
 
 /// Represents the state of Windows `UTCTimes`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct UTCTimes {
     /// Represents sequence of Windows `UTCTimes`
     pub utc_times: Vec<Win32_UTCTime>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(UTCTimes, utc_times);
@@ -49,7 +64,7 @@ update!(UTCTimes, utc_times);
 /// from the Control Panel. You cannot change a task created by WMI in the Scheduled Tasks UI. 
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-scheduledjob>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_ScheduledJob {
@@ -192,7 +207,7 @@ pub struct Win32_ScheduledJob {
 /// Note: The smallest time segment supported is 1 second.
 ///
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmitimepprov/win32-localtime>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_LocalTime {
@@ -227,7 +242,7 @@ pub struct Win32_LocalTime {
 /// Note: The smallest time segment supported is a second.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmitimepprov/win32-utctime>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_UTCTime {

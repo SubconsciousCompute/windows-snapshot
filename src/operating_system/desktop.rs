@@ -14,45 +14,65 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
 /// Represents the state of Windows user's desktops
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct Desktops {
     /// Sequence of windows Desktop states
     pub desktops: Vec<Win32_Desktop>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(Desktops, desktops);
 
 /// Represents the state of Windows Environment
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct Environments {
     /// Sequence of windows Environment states
     pub environments: Vec<Win32_Environment>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(Environments, environments);
 
 /// Represents the state of Windows `TimeZone`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct TimeZones {
     /// Sequence of windows TimeZone states
     pub timezones: Vec<Win32_TimeZone>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(TimeZones, timezones);
 
 /// Represents the state of Windows User Desktops
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct UserDesktops {
     ///  user account and desktop settings that are specific to it
     pub user_desktops: Vec<Win32_UserDesktop>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(UserDesktops, user_desktops);
@@ -61,7 +81,7 @@ update!(UserDesktops, user_desktops);
 /// properties of this class can be modified by the user to customize the desktop.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-desktop>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_Desktop {
@@ -141,7 +161,7 @@ pub struct Win32_Desktop {
 /// `HKEY_USERS\<user>\Environment`
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_Environment {
@@ -208,7 +228,7 @@ pub struct Win32_Environment {
 /// which includes the changes required for transitioning to daylight saving time transition.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-timezone>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_TimeZone {
@@ -366,7 +386,7 @@ pub struct Win32_TimeZone {
 /// are specific to it.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-userdesktop>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_UserDesktop {

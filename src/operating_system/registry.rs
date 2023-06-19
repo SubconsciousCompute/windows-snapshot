@@ -10,12 +10,17 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
 /// Represents the state of Windows Registry
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct Registry {
     /// Sequence of Registry
     pub registries: Vec<Win32_Registry>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(Registry, registries);
@@ -23,7 +28,7 @@ update!(Registry, registries);
 /// The `Win32_Registry` WMI class represents a process on an operating system.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-registry>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_Registry {

@@ -14,23 +14,33 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
 /// Represents the state of Windows `NTEventlogFiles`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct NTEventlogFiles {
     /// Represents data stored in a Windows Event log file
     pub nt_event_log_files: Vec<Win32_NTEventlogFile>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(NTEventlogFiles, nt_event_log_files);
 
 /// Represents the state of Windows `NTLogEvents`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct NTLogEvents {
     /// Represents sequence of Windows `NTLogEvents`
     pub nt_log_events: Vec<Win32_NTLogEvent>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(NTLogEvents, nt_log_events);
@@ -39,7 +49,7 @@ update!(NTLogEvents, nt_log_events);
 /// events. The file is also known as the event log.
 ///
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa394225(v=vs.85)>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_NTEventlogFile {
@@ -190,7 +200,7 @@ pub struct Win32_NTEventlogFile {
 /// otherwise "Access Denied" is returned to the application.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/eventlogprov/win32-ntlogevent>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_NTLogEvent {

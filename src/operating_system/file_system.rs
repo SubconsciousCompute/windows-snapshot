@@ -32,89 +32,129 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection, WMIDateTime};
 
 /// Represents the state of Windows Directories
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct Directories {
     /// Sequence of windows directories
     pub directories: Vec<Win32_Directory>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(Directories, directories);
 
 /// Represents the state of Windows Directory Specification
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct DirectorySpecifications {
     /// Sequence of windows directories specifications
     pub directory_specifications: Vec<Win32_DirectorySpecification>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(DirectorySpecifications, directory_specifications);
 
 /// Represents the state of Windows Disk Partitions
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct DiskPartitions {
     /// Sequence of windows disk partitions
     pub disk_partitions: Vec<Win32_DiskPartition>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(DiskPartitions, disk_partitions);
 
 /// Represents the state of Windows Logical Disks
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct LogicalDisks {
     /// Sequence of windows logical disks
     pub logical_disks: Vec<Win32_LogicalDisk>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(LogicalDisks, logical_disks);
 
 /// Represents the state of Windows Mapped Logical Disks
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct MappedLogicalDisks {
     /// Sequence of windows mapped logical disks
     pub mapped_logical_disks: Vec<Win32_MappedLogicalDisk>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(MappedLogicalDisks, mapped_logical_disks);
 
 /// Represents the state of Windows Quota Settings
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct QuotaSettings {
     /// Sequence of windows quota settings
     pub quota_settings: Vec<Win32_QuotaSetting>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(QuotaSettings, quota_settings);
 
 /// Represents the state of Windows Shortcut Files
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct ShortcutFiles {
     /// Sequence of windows shortcut files
     pub shortcut_files: Vec<Win32_ShortcutFile>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(ShortcutFiles, shortcut_files);
 
 /// Represents the state of Windows Volumes
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct Volumes {
     /// Sequence of windows volumes
     pub volumes: Vec<Win32_Volume>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(Volumes, volumes);
@@ -125,7 +165,7 @@ update!(Volumes, volumes);
 /// drives.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-directory>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_Directory {
@@ -292,7 +332,7 @@ pub struct Win32_Directory {
 /// Again, the `DefaultDir` value defines the name of the subdirectory.
 ///
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/msiprov/win32-directoryspecification>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_DirectorySpecification {
@@ -418,7 +458,7 @@ pub struct Win32_DirectorySpecification {
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-diskpartition>
 // Some struct fields no longer exist
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_DiskPartition {
@@ -732,7 +772,7 @@ pub struct Win32_DiskPartition {
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-logicaldisk>
 // Some struct fields no longer exist
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_LogicalDisk {
@@ -1061,7 +1101,7 @@ pub struct Win32_LogicalDisk {
 /// that are mapped as logical disks on the computer system.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-mappedlogicaldisk>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_MappedLogicalDisk {
@@ -1286,7 +1326,7 @@ pub struct Win32_MappedLogicalDisk {
 /// The `Win32_QuotaSetting` WMI class contains setting information for disk quotas on a volume.
 ///
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmipdskq/win32-quotasetting>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_QuotaSetting {
@@ -1328,7 +1368,7 @@ pub struct Win32_QuotaSetting {
 /// directories, and commands.
 ///
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-shortcutfile>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_ShortcutFile {
@@ -1482,7 +1522,7 @@ pub struct Win32_ShortcutFile {
 /// Note: This class has been repeated in Storage as well. 
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa394515(v=vs.85)>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_Volume {

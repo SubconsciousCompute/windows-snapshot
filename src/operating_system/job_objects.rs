@@ -23,56 +23,81 @@ use std::time::SystemTime;
 use wmi::{COMLibrary, WMIConnection};
 
 /// Represents the state of Windows `LUIDs`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct LUIDs {
     /// Represents sequence of Windows `LUIDs`
     pub luids: Vec<Win32_LUID>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(LUIDs, luids);
 
 /// Represents the state of Windows `LUIDandAttributes`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct LUIDandAttributes {
     /// Represents sequence of Windows `LUIDandAttributes`
     pub luid_and_attributes: Vec<Win32_LUIDandAttributes>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(LUIDandAttributes, luid_and_attributes);
 
 /// Represents the state of Windows `NamedJobObjects`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct NamedJobObjects {
     /// Represents sequence of Windows `NamedJobObjects`
     pub named_job_objects: Vec<Win32_NamedJobObject>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(NamedJobObjects, named_job_objects);
 
 /// Represents the state of Windows `NamedJobObjectActgInfos`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct NamedJobObjectActgInfos {
     /// Represents sequence of Windows `NamedJobObjectActgInfos`
     pub named_job_object_actg_infos: Vec<Win32_NamedJobObjectActgInfo>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(NamedJobObjectActgInfos, named_job_object_actg_infos);
 
 /// Represents the state of Windows `NamedJobObjectLimitSettings`
-#[derive(Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
 pub struct NamedJobObjectLimitSettings {
     /// Represents sequence of Windows `NamedJobObjectLimitSettings`
     pub named_job_object_limit_settings: Vec<Win32_NamedJobObjectLimitSetting>,
     /// When was the record last updated
     pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
 }
 
 update!(NamedJobObjectLimitSettings, named_job_object_limit_settings);
@@ -81,7 +106,7 @@ update!(NamedJobObjectLimitSettings, named_job_object_limit_settings);
 /// local computer that is used in security tokens.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmipjobobjprov/win32-luid>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_LUID {
@@ -95,7 +120,7 @@ pub struct Win32_LUID {
 /// Each LUID and attributes structure defines the availability of a security privilege.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmipjobobjprov/win32-luidandattributes>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_LUIDandAttributes {
@@ -111,7 +136,7 @@ pub struct Win32_LUIDandAttributes {
 /// instrumented.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmipjobobjprov/win32-namedjobobject>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_NamedJobObject {
@@ -140,7 +165,7 @@ pub struct Win32_NamedJobObject {
 /// The `Win32_NamedJobObjectActgInfo` WMI class class represents the I/O accounting information for a job object.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmipjobobjprov/win32-namedjobobjectactginfo>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_NamedJobObjectActgInfo {
@@ -207,7 +232,7 @@ pub struct Win32_NamedJobObjectActgInfo {
 /// The `Win32_NamedJobObjectLimitSetting` WMI class represents the limit settings for a job object.
 /// 
 /// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmipjobobjprov/win32-namedjobobjectlimitsetting>
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 pub struct Win32_NamedJobObjectLimitSetting {
