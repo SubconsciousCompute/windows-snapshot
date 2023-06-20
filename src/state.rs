@@ -182,6 +182,8 @@ pub struct Windows {
     pub cd_rom_drives: mass_storage::CDROMDrives,
     /// State of Windows DiskDrives
     pub disk_drives: mass_storage::DiskDrives,
+    /// State of Windows PhysicalMedias
+    pub physical_medias: mass_storage::PhysicalMedias,
 }
 
 impl Windows {
@@ -260,6 +262,7 @@ impl Windows {
         self.autochk_settings.update();
         self.cd_rom_drives.update();
         self.disk_drives.update();
+        self.physical_medias.update();
     }
 
     /// Asynchronously update all the fields
@@ -338,6 +341,7 @@ impl Windows {
             self.autochk_settings.async_update(),
             self.cd_rom_drives.async_update(),
             self.disk_drives.async_update(),
+            self.physical_medias.async_update(),
         );
     }
 }

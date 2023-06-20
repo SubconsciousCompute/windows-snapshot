@@ -62,6 +62,22 @@ pub struct DiskDrives {
 
 update!(DiskDrives, disk_drives);
 
+/// Represents the state of Windows user's PhysicalMedias
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
+pub struct PhysicalMedias {
+    /// Sequence of windows PhysicalMedias states
+    pub physical_medias: Vec<Win32_PhysicalMedia>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
+}
+
+update!(PhysicalMedias, physical_medias);
+
 /// The `Win32_AutochkSetting` WMI class represents the settings for the autocheck operation of 
 /// a disk.
 /// 
@@ -672,4 +688,182 @@ pub struct Win32_DiskDrive {
     /// 
     /// Example: 64
     pub TracksPerCylinder: Option<u32>,
+}
+
+/// The `Win32_PhysicalMedia` class represents any type of documentation or storage medium, such 
+/// as tapes, CD ROMs, and so on. To obtain the characteristics of the media in a CD drive, 
+/// such as whether it is writeable, use `Win32_CDROMDrive` and the `Capabilities` property.
+/// 
+/// <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/cimwin32a/win32-physicalmedia>
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_PhysicalMedia {
+    /// Short, one-line textual description of the object.
+    pub Caption: Option<String>,
+    /// Textual description of the object.
+    pub Description: Option<String>,
+    /// When the object was installed. This property does not require a value to indicate that 
+    /// the object is installed.
+    pub InstallDate: Option<WMIDateTime>,
+    /// Label by which the object is known. When subclassed, the `Name` property can be 
+    /// overridden to be a `Key` property.
+    pub Name: Option<String>,
+    /// Current status of the object. Various operational and nonoperational statuses can be defined. 
+    /// Operational statuses include: "OK", "Degraded", and "Pred Fail" (an element, such as a 
+    /// SMART-enabled hard disk drive, may be functioning properly but predicting a failure in the 
+    /// near future). Nonoperational statuses include: "Error", "Starting", "Stopping", and "Service". 
+    /// The latter, "Service", could apply during mirror-resilvering of a disk, reload of a user 
+    /// permissions list, or other administrative work. Not all such work is online, yet the managed 
+    /// element is neither "OK" nor in one of the other states.
+    /// 
+    /// Values include the following:
+    /// - `OK` ("OK")
+    /// - `Error` ("Error")
+    /// - `Degraded` ("Degraded")
+    /// - `Unknown` ("Unknown")
+    /// - `Pred Fail` ("Pred Fail")
+    /// - `Starting` ("Starting")
+    /// - `Stopping` ("Stopping")
+    /// - `Service` ("Service")
+    /// - `Stressed` ("Stressed")
+    /// - `NonRecover` ("NonRecover")
+    /// - `No Contact` ("No Contact")
+    /// - `Lost Comm` ("Lost Comm")
+    pub Status: Option<String>,
+    /// Name of the class or subclass used in the creation of an instance. When used with other 
+    /// key properties of this class, `CreationClassName` allows all instances of this class and 
+    /// its subclasses to be uniquely identified.
+    pub CreationClassName: Option<String>,
+    /// Name of the organization responsible for producing the physical element. This can be 
+    /// the entity from whom the element is purchased, but this is not necessarily the case as 
+    /// this information is contained in the `Vendor` property.
+    pub Manufacturer: Option<String>,
+    /// Name by which the physical element is generally known.
+    pub Model: Option<String>,
+    /// Stock keeping unit number for this physical element.
+    pub SKU: Option<String>,
+    /// Manufacturer-allocated number used to identify the physical media. The default value is 
+    /// `NULL`.
+    /// 
+    /// Example: WD-WM3493798728
+    pub SerialNumber: Option<String>,
+    /// Uniquely identifies the physical media in the system.
+    /// 
+    /// Example: PHYSICALDRIVE0
+    pub Tag: Option<String>,
+    /// Version of the physical element.
+    pub Version: Option<String>,
+    /// Part number assigned by the manufacturer of the physical element.
+    pub PartNumber: Option<String>,
+    /// Additional data, beyond asset tag information, that can be used to identify a physical 
+    /// element. One example is bar code data associated with an element that also has an asset 
+    /// tag. Note that if only bar code data is available, is unique, and it can be used as an 
+    /// element key, this property is `NULL` and the bar code data used is the class key in the 
+    /// `Tag` property.
+    pub OtherIdentifyingInfo: Option<String>,
+    /// If `TRUE` the physical element is powered on.
+    pub PoweredOn: Option<bool>,
+    /// If `TRUE`, the physical component is designed to be taken in and out of the physical 
+    /// container in which it is normally found, without impairing the function of the overall 
+    /// packaging. A component can still be removable if the power must be "off" to perform 
+    /// the removal. If power can be "on" and the component removed, the element is removable 
+    /// and can be hot-swapped.
+    pub Removable: Option<bool>,
+    /// If `TRUE`, this physical media component can be replaced with a physically different 
+    /// one. For example, some computer systems allow the main processor chip to be upgraded 
+    /// to one of a higher clock rating. In this case, the processor is said to be replaceable. 
+    /// All removable components are inherently replaceable.
+    pub Replaceable: Option<bool>,
+    /// If `TRUE`, this physical media component can be replaced with a physically different but 
+    /// equivalent one while the containing package has the power applied. For example, a fan 
+    /// component may be designed to be hot-swapped. All components that can be hot-swapped are 
+    /// inherently removable and replaceable.
+    pub HotSwappable: Option<bool>,
+    /// Number of bytes that can be read from or written to this physical media component. 
+    /// This property does not apply to "Hard Copy" or cleaner media. Data compression should 
+    /// not be assumed as it would increase the value of this property. For tapes, it should 
+    /// be assumed that no filemarks or blank space areas are recorded on the media.
+    pub Capacity: Option<u64>,
+    /// The type of the media, as an enumerated integer. The `MediaDescription` property provides 
+    /// a more explicit definition of the media type.
+    /// 
+    /// The following list lists the possible values.
+    /// - `Unknown` (0)
+    /// - `Other` (1)
+    /// - `Tape Cartridge` (2)
+    /// - `QIC Cartridge` (3)
+    /// - `AIT Cartridge` (4)
+    /// - `DTF Cartridge` (5)
+    /// - `DAT Cartridge` (6)
+    /// - `8mm Tape Cartridge` (7)
+    /// - `19mm Tape Cartridge` (8)
+    /// - `DLT Cartridge` (9)
+    /// - `Half-Inch Magnetic Tape Cartridge` (10)
+    /// - `Cartridge Disk` (11)
+    /// - `JAZ Disk` (12)
+    /// - `ZIP Disk` (13)
+    /// - `SyQuest Disk` (14)
+    /// - `Winchester Removable Disk` (15)
+    /// - `CD-ROM` (16): CD ROM
+    /// - `CD-ROM/XA` (17): CD ROM/XA
+    /// - `CD-I` (18)
+    /// - `CD Recordable` (19)
+    /// - `WORM` (20)
+    /// - `Magneto-Optical` (21)
+    /// - `DVD` (22)
+    /// - `DVD+RW` (23)
+    /// - `DVD-RAM` (24)
+    /// - `DVD-ROM` (25)
+    /// - `DVD-Video` (26)
+    /// - `Divx` (27)
+    /// - `Floppy/Diskette` (28)
+    /// - `Hard Disk` (29)
+    /// - `Memory Card` (30)
+    /// - `Hard Copy` (31)
+    /// - `Clik Disk` (32)
+    /// - `CD-RW` (33)
+    /// - `CD-DA` (34)
+    /// - `CD+` (35)
+    /// - `DVD Recordable` (36)
+    /// - `DVD-RW` (37)
+    /// - `DVD-Audio` (38)
+    /// - `DVD-5` (39)
+    /// - `DVD-9` (40)
+    /// - `DVD-10` (41)
+    /// - `DVD-18` (42)
+    /// - `Magneto-Optical Rewriteable` (43)
+    /// - `Magneto-Optical Write Once` (44)
+    /// - `Magneto-Optical Rewriteable (LIMDOW)` (45)
+    /// - `Phase Change Write Once` (46)
+    /// - `Phase Change Rewriteable` (47)
+    /// - `Phase Change Dual Rewriteable` (48)
+    /// - `Ablative Write Once` (49)
+    /// - `Near Field Recording` (50)
+    /// - `MiniQic` (51)
+    /// - `Travan` (52)
+    /// - `8mm Metal Particle` (53)
+    /// - `8mm Advanced Metal Evaporate` (54)
+    /// - `NCTP` (55)
+    /// - `LTO Ultrium` (56)
+    /// - `LTO Accelis` (57)
+    /// - `9 Track Tape` (58)
+    /// - `18 Track Tape` (59)
+    /// - `36 Track Tape` (60)
+    /// - `Magstar 3590` (61)
+    /// - `Magstar MP` (62)
+    /// - `D2 Tape` (63)
+    /// - `Tape - DST Small` (64)
+    /// - `Tape - DST Medium` (65)
+    /// - `Tape - DST Large` (66)
+    pub MediaType: Option<u16>,
+    /// Additional detail related to the `MediaType` property. For example, if `MediaType` has the 
+    /// value 3 (QIC Cartridge) the `MediaDescription` property can indicate whether the tape is 
+    /// wide or quarter inch.
+    pub MediaDescription: Option<String>,
+    /// If `TRUE`, the media is currently write protected by some kind of physical mechanism, 
+    /// such as a protect tab on a floppy disk.
+    pub WriteProtectOn: Option<bool>,
+    /// If `TRUE`, the physical media is used for cleaning purposes and not data storage.
+    pub CleanerMedia: Option<bool>,
 }

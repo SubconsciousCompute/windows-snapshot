@@ -13,7 +13,7 @@ async fn main() {
 
     // println!("{k:#?}");
     // k.async_update().await;
-    k.disk_drives.update();
+    k.physical_medias.update();
 
-    println!("{:#?}", k.disk_drives);
+    println!("{:#?}", k.physical_medias);
 }
