@@ -17,3 +17,4 @@
 //! - [Video and Monitor Classes](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/computer-system-hardware-classes#video-and-monitor-classes)
 
 pub mod cooling_device;
+pub mod input_device;

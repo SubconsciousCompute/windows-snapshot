@@ -13,7 +13,7 @@ async fn main() {
 
     // println!("{k:#?}");
     // k.async_update().await;
-    k.temperature_probes.update();
+    k.keyboards.update();
 
-    println!("{:#?}", k.temperature_probes);
+    println!("{:#?}", k.keyboards);
 }

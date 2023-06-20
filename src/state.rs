@@ -4,7 +4,7 @@ use crate::operating_system::{
     desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_pagefiles, scheduler_jobs, product_activation, software_license_provider, shares, multimedia_audio_visual, storage, security, start_menu, networking, job_objects, operating_system_settings
 };
 use crate::hardware::{
-    cooling_device
+    cooling_device, input_device
 };
 use serde::{Deserialize, Serialize};
 use tokio::join;
@@ -172,6 +172,8 @@ pub struct Windows {
     pub refrigerations: cooling_device::Refrigerations,
     /// State of Windows TemperatureProbes
     pub temperature_probes: cooling_device::TemperatureProbes,
+    /// State of Windows Keyboards
+    pub keyboards: input_device::Keyboards,
 }
 
 impl Windows {
@@ -245,6 +247,7 @@ impl Windows {
         self.heat_pipes.update();
         self.refrigerations.update();
         self.temperature_probes.update();
+        self.keyboards.update();
     }
 
     /// Asynchronously update all the fields
@@ -318,6 +321,7 @@ impl Windows {
             self.heat_pipes.async_update(),
             self.refrigerations.async_update(),
             self.temperature_probes.async_update(),
+            self.keyboards.async_update(),
         );
     }
 }
