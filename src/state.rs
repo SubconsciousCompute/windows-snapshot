@@ -4,7 +4,7 @@ use crate::operating_system::{
     desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_pagefiles, scheduler_jobs, product_activation, software_license_provider, shares, multimedia_audio_visual, storage, security, start_menu, networking, job_objects, operating_system_settings
 };
 use crate::hardware::{
-    cooling_device, input_device, mass_storage
+    cooling_device, input_device, mass_storage, networking_device
 };
 use serde::{Deserialize, Serialize};
 use tokio::join;
@@ -186,6 +186,8 @@ pub struct Windows {
     pub physical_medias: mass_storage::PhysicalMedias,
     /// State of Windows TapeDrives
     pub tape_drives: mass_storage::TapeDrives,
+    /// State of Windows NetworkAdapters
+    pub network_adapters: networking_device::NetworkAdapters,
 }
 
 impl Windows {
@@ -266,6 +268,7 @@ impl Windows {
         self.disk_drives.update();
         self.physical_medias.update();
         self.tape_drives.update();
+        self.network_adapters.update();
     }
 
     /// Asynchronously update all the fields
@@ -346,6 +349,7 @@ impl Windows {
             self.disk_drives.async_update(),
             self.physical_medias.async_update(),
             self.tape_drives.async_update(),
+            self.network_adapters.async_update(),
         );
     }
 }

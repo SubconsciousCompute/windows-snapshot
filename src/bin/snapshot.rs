@@ -13,7 +13,7 @@ async fn main() {
 
     // println!("{k:#?}");
     // k.async_update().await;
-    k.tape_drives.update();
+    k.network_adapters.update();
 
-    println!("{:#?}", k.tape_drives);
+    println!("{:#?}", k.network_adapters);
 }
