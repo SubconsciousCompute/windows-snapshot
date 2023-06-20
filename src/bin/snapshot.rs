@@ -13,7 +13,7 @@ async fn main() {
 
     // println!("{k:#?}");
     // k.async_update().await;
-    k.autochk_settings.update();
+    k.cd_rom_drives.update();
 
-    println!("{:#?}", k.autochk_settings);
+    println!("{:#?}", k.cd_rom_drives);
 }

@@ -178,6 +178,8 @@ pub struct Windows {
     pub pointing_devices: input_device::PointingDevices,
     /// State of Windows AutochkSettings
     pub autochk_settings: mass_storage::AutochkSettings,
+    /// State of Windows CDROMDrives
+    pub cd_rom_drives: mass_storage::CDROMDrives,
 }
 
 impl Windows {
@@ -254,6 +256,7 @@ impl Windows {
         self.keyboards.update();
         self.pointing_devices.update();
         self.autochk_settings.update();
+        self.cd_rom_drives.update();
     }
 
     /// Asynchronously update all the fields
@@ -330,6 +333,7 @@ impl Windows {
             self.keyboards.async_update(),
             self.pointing_devices.async_update(),
             self.autochk_settings.async_update(),
+            self.cd_rom_drives.async_update(),
         );
     }
 }
