@@ -174,6 +174,8 @@ pub struct Windows {
     pub temperature_probes: cooling_device::TemperatureProbes,
     /// State of Windows Keyboards
     pub keyboards: input_device::Keyboards,
+    /// State of Windows PointingDevices
+    pub pointing_devices: input_device::PointingDevices,
 }
 
 impl Windows {
@@ -248,6 +250,7 @@ impl Windows {
         self.refrigerations.update();
         self.temperature_probes.update();
         self.keyboards.update();
+        self.pointing_devices.update();
     }
 
     /// Asynchronously update all the fields
@@ -322,6 +325,7 @@ impl Windows {
             self.refrigerations.async_update(),
             self.temperature_probes.async_update(),
             self.keyboards.async_update(),
+            self.pointing_devices.async_update(),
         );
     }
 }

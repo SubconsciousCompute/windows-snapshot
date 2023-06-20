@@ -13,7 +13,7 @@ async fn main() {
 
     // println!("{k:#?}");
     // k.async_update().await;
-    k.keyboards.update();
+    k.pointing_devices.update();
 
-    println!("{:#?}", k.keyboards);
+    println!("{:#?}", k.pointing_devices);
 }
