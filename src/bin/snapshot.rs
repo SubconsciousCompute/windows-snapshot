@@ -13,7 +13,7 @@ async fn main() {
 
     // println!("{k:#?}");
     // k.async_update().await;
-    k.physical_medias.update();
+    k.tape_drives.update();
 
-    println!("{:#?}", k.physical_medias);
+    println!("{:#?}", k.tape_drives);
 }

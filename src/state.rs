@@ -184,6 +184,8 @@ pub struct Windows {
     pub disk_drives: mass_storage::DiskDrives,
     /// State of Windows PhysicalMedias
     pub physical_medias: mass_storage::PhysicalMedias,
+    /// State of Windows TapeDrives
+    pub tape_drives: mass_storage::TapeDrives,
 }
 
 impl Windows {
@@ -263,6 +265,7 @@ impl Windows {
         self.cd_rom_drives.update();
         self.disk_drives.update();
         self.physical_medias.update();
+        self.tape_drives.update();
     }
 
     /// Asynchronously update all the fields
@@ -342,6 +345,7 @@ impl Windows {
             self.cd_rom_drives.async_update(),
             self.disk_drives.async_update(),
             self.physical_medias.async_update(),
+            self.tape_drives.async_update(),
         );
     }
 }
