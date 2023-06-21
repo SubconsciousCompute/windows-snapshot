@@ -188,6 +188,8 @@ pub struct Windows {
     pub tape_drives: mass_storage::TapeDrives,
     /// State of Windows NetworkAdapters
     pub network_adapters: networking_device::NetworkAdapters,
+    /// State of Windows NetworkAdapterConfigurations
+    pub network_adapter_configurations: networking_device::NetworkAdapterConfigurations,
 }
 
 impl Windows {
@@ -269,6 +271,7 @@ impl Windows {
         self.physical_medias.update();
         self.tape_drives.update();
         self.network_adapters.update();
+        self.network_adapter_configurations.update();
     }
 
     /// Asynchronously update all the fields
@@ -350,6 +353,7 @@ impl Windows {
             self.physical_medias.async_update(),
             self.tape_drives.async_update(),
             self.network_adapters.async_update(),
+            self.network_adapter_configurations.async_update(),
         );
     }
 }

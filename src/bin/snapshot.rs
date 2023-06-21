@@ -13,7 +13,7 @@ async fn main() {
 
     // println!("{k:#?}");
     // k.async_update().await;
-    k.network_adapters.update();
+    k.network_adapter_configurations.update();
 
-    println!("{:#?}", k.network_adapters);
+    println!("{:#?}", k.network_adapter_configurations);
 }

@@ -27,6 +27,22 @@ pub struct NetworkAdapters {
 
 update!(NetworkAdapters, network_adapters);
 
+/// Represents the state of Windows user's NetworkAdapterConfigurations
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
+pub struct NetworkAdapterConfigurations {
+    /// Sequence of windows NetworkAdapterConfigurations states
+    pub network_adapter_configurations: Vec<Win32_NetworkAdapterConfiguration>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
+}
+
+update!(NetworkAdapterConfigurations, network_adapter_configurations);
+
 /// The `Win32_NetworkAdapter` class is deprecated. Use the MSFT_NetAdapter class instead. 
 /// The Win32_NetworkAdapterWMI class represents a network adapter of a computer running a 
 /// Windows operating system.
@@ -288,4 +304,326 @@ pub struct Win32_NetworkAdapter {
     pub SystemName: Option<String>,
     /// Date and time the network adapter was last reset.
     pub TimeOfLastReset: Option<WMIDateTime>,
+}
+
+/// The `Win32_NetworkAdapterConfiguration` WMI class represents the attributes and behaviors 
+/// of a network adapter. This class includes extra properties and methods that support the 
+/// management of the TCP/IP protocol that are independent from the network adapter.
+/// 
+/// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-networkadapterconfiguration>
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_NetworkAdapterConfiguration {
+    /// Short textual description of the current object.
+    pub Caption: Option<String>,
+    /// Textual description of the current object.
+    pub Description: Option<String>,
+    /// Identifier by which the current object is known.
+    pub SettingID: Option<String>,
+    /// If `TRUE`, TCP/IP transmits Address Resolution Protocol (ARP) queries with source routing 
+    /// enabled on Token Ring networks. By default (FALSE), ARP first queries without source 
+    /// routing, and then retries with source routing enabled if no reply is received. Source 
+    /// routing allows the routing of network packets across different types of networks.
+    pub ArpAlwaysSourceRoute: Option<bool>,
+    /// If `TRUE`, Ethernet packets follow the IEEE 802.3 Sub-Network Access Protocol (SNAP) 
+    /// encoding. Setting this parameter to 1 forces TCP/IP to transmit Ethernet packets by 
+    /// using 802.3 SNAP encoding. By default (FALSE), the stack transmits packets in DIX 
+    /// Ethernet format.
+    pub ArpUseEtherSNAP: Option<bool>,
+    /// Valid Windows file path to standard Internet database files (HOSTS, LMHOSTS, NETWORKS, 
+    /// and PROTOCOLS). The file path is used by the Windows Sockets interface.
+    pub DatabasePath: Option<String>,
+    /// If `TRUE`, dead gateway detection occurs. With this feature enabled, Transmission Control 
+    /// Protocol (TCP) asks Internet Protocol (IP) to change to a backup gateway if it retransmits 
+    /// a segment several times without receiving a response.
+    pub DeadGWDetectEnabled: Option<bool>,
+    /// Array of IP addresses of default gateways that the computer system uses.
+    /// 
+    /// Example: "192.168.12.1 192.168.46.1"
+    pub DefaultIPGateway: Option<Vec<String>>,
+    /// Default Type Of Service (TOS) value set in the header of outgoing IP packets. Request 
+    /// for Comments (RFC) 791 defines the values. Default: 0 (zero), Valid Range: 0 - 255.
+    pub DefaultTOS: Option<u8>,
+    /// Default Time To Live (TTL) value set in the header of outgoing IP packets. The TTL 
+    /// specifies the number of routers an IP packet can pass through to reach its destination 
+    /// before being discarded. Each router decrements by one the TTL count of a packet as it 
+    /// passes through and discards the packets—if the TTL is 0 (zero). Default: 32, Valid 
+    /// Range: 1 - 255.
+    pub DefaultTTL: Option<u8>,
+    /// If `TRUE`, the dynamic host configuration protocol (DHCP) server automatically assigns 
+    /// an IP address to the computer system when establishing a network connection.
+    pub DHCPEnabled: Option<bool>,
+    /// Expiration date and time for a leased IP address that was assigned to the computer by 
+    /// the dynamic host configuration protocol (DHCP) server.
+    /// 
+    /// Example: 20521201000230.000000000
+    pub DHCPLeaseExpires: Option<WMIDateTime>,
+    /// Date and time the lease was obtained for the IP address assigned to the computer by the 
+    /// dynamic host configuration protocol (DHCP) server.
+    /// 
+    /// Example: 19521201000230.000000000
+    pub DHCPLeaseObtained: Option<WMIDateTime>,
+    /// IP address of the dynamic host configuration protocol (DHCP) server.
+    /// 
+    /// Example: "10.55.34.2"
+    pub DHCPServer: Option<String>,
+    /// Organization name followed by a period and an extension that indicates the type of 
+    /// organization, such as "microsoft.com". The name can be any combination of the letters 
+    /// A through Z, the numerals 0 through 9, and the hyphen (-), plus the period (.) 
+    /// character used as a separator.
+    /// 
+    /// Example: "microsoft.com"
+    pub DNSDomain: Option<String>,
+    /// Array of DNS domain suffixes to be appended to the end of host names during name 
+    /// resolution. When attempting to resolve a fully qualified domain name (FQDN) from a 
+    /// host-only name, the system will first append the local domain name. If this is not 
+    /// successful, the system will use the domain suffix list to create additional FQDNs in 
+    /// the order listed and query DNS servers for each.
+    /// 
+    /// Example: "samples.microsoft.com example.microsoft.com"
+    pub DNSDomainSuffixSearchOrder: Option<Vec<String>>,
+    /// If `TRUE`, the Domain Name System (DNS) is enabled for name resolution over Windows 
+    /// Internet Naming Service (WINS) resolution. If the name cannot be resolved using DNS, 
+    /// the name request is forwarded to WINS for resolution.
+    pub DNSEnabledForWINSResolution: Option<bool>,
+    /// Host name used to identify the local computer for authentication by some utilities. 
+    /// Other TCP/IP-based utilities can use this value to acquire the name of the local 
+    /// computer. Host names are stored on DNS servers in a table that maps names to IP 
+    /// addresses for use by DNS. The name can be any combination of the letters A through Z, 
+    /// the numerals 0 through 9, and the hyphen (-), plus the period (.) character used as a 
+    /// separator. By default, this value is the Microsoft networking computer name, but the 
+    /// network administrator can assign another host name without affecting the computer name.
+    /// 
+    /// Example: "corpdns"
+    pub DNSHostName: Option<String>,
+    /// Array of server IP addresses to be used in querying for DNS servers.
+    pub DNSServerSearchOrder: Option<Vec<String>>,
+    /// If `TRUE`, the IP addresses for this connection are registered in DNS under the domain 
+    /// name of this connection in addition to being registered under the computer's full DNS 
+    /// name. The domain name of this connection is either set using the SetDNSDomain() method 
+    /// or assigned by DSCP. The registered name is the host name of the computer with the 
+    /// domain name appended.
+    pub DomainDNSRegistrationEnabled: Option<bool>,
+    /// Memory allocated by IP to store packet data in the router packet queue. When this buffer 
+    /// space is filled, the router begins discarding packets at random from its queue. Packet 
+    /// queue data buffers are 256 bytes in length, so the value of this parameter should be a 
+    /// multiple of 256. Multiple buffers are chained together for larger packets. The IP header 
+    /// for a packet is stored separately. This parameter is ignored and no buffers are allocated 
+    /// if the IP router is not enabled. The buffer size can range from the network MTU to a value 
+    /// smaller than 0xFFFFFFFF. Default: 74240 (fifty 1480-byte packets, rounded to a multiple of 
+    /// 256).
+    pub ForwardBufferMemory: Option<u32>,
+    /// If `TRUE`, the IP addresses for this connection are registered in DNS under the computer's 
+    /// full DNS name. The full DNS name of the computer is displayed on the `Network Identification` 
+    /// tab in the System application in Control Panel.
+    pub FullDNSRegistrationEnabled: Option<bool>,
+    /// Array of integer cost metric values (ranging from 1 to 9999) to be used in calculating 
+    /// the fastest, most reliable, or least resource-intensive routes. This argument has a 
+    /// one-to-one correspondence with the `DefaultIPGateway` property.
+    pub GatewayCostMetric: Option<Vec<u16>>,
+    /// Extent to which the system supports IP multicast and participates in the Internet Group 
+    /// Management Protocol (IGMP). At level 0 (zero), the system provides no multicast support. 
+    /// At level 1, the system may only send IP multicast packets. At level 2, the system may send
+    /// IP multicast packets and fully participate in IGMP to receive multicast packets.
+    /// 
+    /// - `No Multicast` (0)
+    /// - `IP Multicast` (1)
+    /// - `IP & IGMP multicast` (2): IP and IGMP Multicast (default)
+    pub IGMPLevel: Option<u8>,
+    /// Index number of the Windows network adapter configuration. The index number is used when 
+    /// there is more than one configuration available.
+    pub Index: Option<u32>,
+    /// Index value that uniquely identifies a local network interface. The value in this property 
+    /// is the same as the value in the `InterfaceIndex` property in the instance of `Win32_IP4RouteTable` 
+    /// that represents the network interface in the route table.
+    pub InterfaceIndex: Option<u32>,
+    /// Array of all of the IP addresses associated with the current network adapter. This 
+    /// property can contain either IPv6 addresses or IPv4 addresses. For more information, 
+    /// see IPv6 and IPv4 Support in WMI.
+    /// 
+    /// Example IPv6 address: "2010:836B:4179::836B:4179"
+    pub IPAddress: Option<Vec<String>>,
+    /// Cost of using the configured routes for the IP bound adapter and is the weighted value 
+    /// for those routes in the IP routing table. If there are multiple routes to a destination 
+    /// in the IP routing table, the route with the lowest metric is used. The default value is 
+    /// 1.
+    pub IPConnectionMetric: Option<u32>,
+    /// If `TRUE`, TCP/IP is bound and enabled on this network adapter.
+    pub IPEnabled: Option<bool>,
+    /// If `TRUE`, IP port security is enabled globally across all IP-bound network adapters and 
+    /// the security values associated with individual network adapters are in effect. This 
+    /// property is used in conjunction with `IPSecPermitTCPPorts`, `IPSecPermitUDPPorts`, and 
+    /// `IPSecPermitIPProtocols`. If `FALSE`, IP filter security is disabled across all network 
+    /// adapters and allows all port and protocol traffic to flow unfiltered.
+    pub IPFilterSecurityEnabled: Option<bool>,
+    /// If `TRUE`, IP port security is enabled globally across all IP-bound network adapters. 
+    /// This property is obsolete. In place of this property, you should use `IPFilterSecurityEnabled`.
+    pub IPPortSecurityEnabled: Option<bool>,
+    /// Array of the protocols permitted to run over the IP. The list of protocols is defined 
+    /// using the `EnableIPSec` method. The list will either be empty or contain numeric values. 
+    /// A numeric value of 0 (zero) indicates access permission is granted for all protocols. 
+    /// An empty string indicates that no protocols are permitted to run when `IPFilterSecurityEnabled` 
+    /// is `TRUE`.
+    pub IPSecPermitIPProtocols: Option<Vec<String>>,
+    /// Array of the ports that will be granted access permission for TCP. The list of protocols 
+    /// is defined using the `EnableIPSec` method. The list will either be empty or contain numeric 
+    /// values. A numeric value of 0 (zero)indicates access permission is granted for all ports. 
+    /// An empty string indicates that no ports are granted access permission when `IPFilterSecurityEnabled` 
+    /// is `TRUE`.
+    pub IPSecPermitTCPPorts: Option<Vec<String>>,
+    /// Array of the ports that will be granted User Datagram Protocol (UDP) access permission. 
+    /// The list of protocols is defined using the `EnableIPSec` method. The list will either be 
+    /// empty or contain numeric values. A numeric value of 0 (zero) indicates access permission 
+    /// is granted for all ports. An empty string indicates that no ports are granted access 
+    /// permission when `IPFilterSecurityEnabled` is `TRUE`.
+    pub IPSecPermitUDPPorts: Option<Vec<String>>,
+    /// Array of all of the subnet masks associated with the current network adapter.
+    /// 
+    /// Example: "255.255.0.0"
+    pub IPSubnet: Option<Vec<String>>,
+    /// If `TRUE`, IP zeros-broadcasts are used (0.0.0.0), and the system uses ones-broadcasts 
+    /// (255.255.255.255). Computer systems generally use ones-broadcasts, but those derived 
+    /// from BSD implementations use zeros-broadcasts. Systems that do not use that same 
+    /// broadcasts will not interoperate on the same network. The default is `FALSE`.
+    pub IPUseZeroBroadcast: Option<bool>,
+    /// The Internetwork Packet Exchange (IPX) technology is no longer supported and this 
+    /// property does not contain useful data.
+    pub IPXAddress: Option<String>,
+    /// The Internetwork Packet Exchange (IPX) technology is no longer supported and this 
+    /// property does not contain useful data.
+    pub IPXEnabled: Option<bool>,
+    /// The Internetwork Packet Exchange (IPX) technology is no longer supported and this 
+    /// property does not contain useful data.
+    /// 
+    /// - `Ethernet II` (0)
+    /// - `Ethernet 802.3` (1)
+    /// - `Ethernet 802.2` (2)
+    /// - `Ethernet SNAP` (3)
+    /// - `AUTO` (255)
+    pub IPXFrameType: Option<Vec<u32>>,
+    /// The Internetwork Packet Exchange (IPX) technology is no longer supported and this 
+    /// property does not contain useful data.
+    /// 
+    /// - `Ethernet` (1)
+    /// - `Token ring` (2)
+    /// - `FDDI` (3)
+    /// - `ARCNET` (8)
+    pub IPXMediaType: Option<u32>,
+    /// The Internetwork Packet Exchange (IPX) technology is no longer supported and this 
+    /// property does not contain useful data.
+    pub IPXNetworkNumber: Option<Vec<String>>,
+    /// The Internetwork Packet Exchange (IPX) technology is no longer supported and this 
+    /// property does not contain useful data.
+    pub IPXVirtualNetNumber: Option<String>,
+    /// Interval separating Keep Alive Retransmissions until a response is received. After a 
+    /// response is received, the delay until the next Keep Alive Transmission is again 
+    /// controlled by the value of `KeepAliveTime`. The connection will be aborted after the 
+    /// number of retransmissions specified by `TcpMaxDataRetransmissions` have gone unanswered. 
+    /// Default: 1000, Valid Range: 1 - 0xFFFFFFFF.
+    pub KeepAliveInterval: Option<u32>,
+    /// The `KeepAliveTime` property indicates how often the TCP attempts to verify that an 
+    /// idle connection is still intact by sending a Keep Alive Packet. A remote system that 
+    /// is reachable will acknowledge the keep alive transmission. Keep Alive packets are not 
+    /// sent by default. This feature may be enabled in a connection by an application. 
+    /// Default: 7,200,000 (two hours).
+    pub KeepAliveTime: Option<u32>,
+    /// Media Access Control (MAC) address of the network adapter. A MAC address is assigned by 
+    /// the manufacturer to uniquely identify the network adapter.
+    /// 
+    /// Example: "00:80:C7:8F:6C:96"
+    pub MACAddress: Option<String>,
+    /// Overrides the default Maximum Transmission Unit (MTU) for a network interface. The MTU 
+    /// is the maximum packet size (including the transport header) that the transport will 
+    /// transmit over the underlying network. The IP datagram can span multiple packets. The 
+    /// range of this value spans the minimum packet size (68) to the MTU supported by the 
+    /// underlying network.
+    pub MTU: Option<u32>,
+    /// Number of IP packet headers allocated for the router packet queue. When all headers are 
+    /// in use, the router will begin to discard packets from the queue at random. This value 
+    /// should be at least as large as the `ForwardBufferMemory` value divided by the maximum IP 
+    /// data size of the networks connected to the router. It should be no larger than the 
+    /// `ForwardBufferMemory` value divided by 256, since at least 256 bytes of forward buffer 
+    /// memory are used for each packet. The optimal number of forward packets for a given 
+    /// `ForwardBufferMemory` size depends on the type of traffic on the network. It will be 
+    /// somewhere between these two values. If the router is not enabled, this parameter is 
+    /// ignored and no headers are allocated. Default: 50, Valid Range: 1 - 0xFFFFFFFE.
+    pub NumForwardPackets: Option<u32>,
+    /// If `TRUE`, detection of black hole routers occurs while TCP discovers the path of the 
+    /// Maximum Transmission Unit. A black hole router does not return ICMP Destination 
+    /// Unreachable messages when it needs to fragment an IP datagram with the Don't Fragment 
+    /// bit set. TCP depends on receiving these messages to perform Path MTU Discovery. With 
+    /// this feature enabled, TCP will try to send segments without the Don't Fragment bit set 
+    /// if several retransmissions of a segment go unacknowledged. If the segment is acknowledged 
+    /// as a result, the MSS will be decreased and the Don't Fragment bit will be set in future 
+    /// packets on the connection. Enabling black hole detection increases the maximum number of 
+    /// retransmissions performed for a given segment. The default value of this property is `FALSE`.
+    pub PMTUBHDetectEnabled: Option<bool>,
+    /// If `TRUE`, the Maximum Transmission Unit (MTU) path is discovered over the path to a 
+    /// remote host. By discovering the MTU path and limiting TCP segments to this size, TCP 
+    /// can eliminate fragmentation at routers along the path that connect networks with 
+    /// different MTUs. Fragmentation adversely affects TCP throughput and network congestion. 
+    /// Setting this parameter to FALSE causes an MTU of 576 bytes to be used for all 
+    /// connections that are not to machines on the local subnet. The default is `TRUE`.
+    pub PMTUDiscoveryEnabled: Option<bool>,
+    /// Service name of the network adapter. This name is usually shorter than the full product 
+    /// name.
+    /// 
+    /// Example: "Elnkii"
+    pub ServiceName: Option<String>,
+    /// Bitmap of the possible settings related to NetBIOS over TCP/IP. Values are identified in 
+    /// the following list.
+    /// 
+    /// - `EnableNetbiosViaDhcp` (0)
+    /// - `EnableNetbios` (1)
+    /// - `DisableNetbios` (2)
+    pub TcpipNetbiosOptions: Option<u32>,
+    /// Number of times TCP attempts to retransmit a Connect Request before terminating the 
+    /// connection. The initial retransmission timeout is 3 seconds. The retransmission timeout 
+    /// doubles for each attempt. Default: 3, Valid Range: 0 - 0xFFFFFFFF.
+    pub TcpMaxConnectRetransmissions: Option<u32>,
+    /// Number of times TCP retransmits an individual data segment (nonconnect segment) before 
+    /// terminating the connection. The retransmission timeout doubles with each successive 
+    /// retransmission on a connection. Default: 5, Valid Range: 0 - 0xFFFFFFFF.
+    pub TcpMaxDataRetransmissions: Option<u32>,
+    /// Maximum number of connections that TCP can have open simultaneously. Default: 0xFFFFFE, 
+    /// Valid Range: 0 - 0xFFFFFE.
+    pub TcpNumConnections: Option<u32>,
+    /// If `TRUE`, TCP uses the RFC 1122 specification for urgent data. If `FALSE` (default), TCP 
+    /// uses the mode used by Berkeley Software Design (BSD) derived systems. The two mechanisms 
+    /// interpret the urgent pointer differently and are not interoperable. The default value is 
+    /// `FALSE`.
+    pub TcpUseRFC1122UrgentPointer: Option<bool>,
+    /// Maximum TCP Receive Window size offered by the system. The Receive Window specifies the 
+    /// number of bytes a sender may transmit without receiving an acknowledgment. In general, 
+    /// larger receiving windows will improve performance over high-delay and high-bandwidth 
+    /// networks. For efficiency, the receiving window should be an even multiple of the TCP 
+    /// Maximum Segment Size (MSS). Default: Four times the maximum TCP data size or an even 
+    /// multiple of TCP data size rounded up to the nearest multiple of 8192. Ethernet networks 
+    /// default to 8760. Valid range: 0 - 65535.
+    /// 
+    /// Note: Windows Vista: This property accesses the "CurrentControlSet\\Services\\Tcpip\\Parameters|
+    /// TcpWindowSize" registry entry, which is not used in the current implementation of the 
+    /// operating system.
+    pub TcpWindowSize: Option<u16>,
+    /// If `TRUE`, local lookup files are used. Lookup files will contain a map of IP addresses 
+    /// to host names. If they exist on the local system, they will be found in 
+    /// %SystemRoot%\system32\drivers\etc.
+    pub WINSEnableLMHostsLookup: Option<bool>,
+    /// Path to a WINS lookup file on the local system. This file will contain a map of IP 
+    /// addresses to host names. If the file specified in this property is found, it will be 
+    /// copied to the %SystemRoot%\system32\drivers\etc folder of the local system. Valid only 
+    /// if the `WINSEnableLMHostsLookup` property is `TRUE`.
+    pub WINSHostLookupFile: Option<String>,
+    /// IP address for the primary WINS server.
+    pub WINSPrimaryServer: Option<String>,
+    /// Value appended to the end of the NetBIOS name that isolates a group of computer systems 
+    /// communicating with only each other. It is used for all NetBIOS transactions over TCP/IP 
+    /// communications from that computer system. Computers configured with identical scope 
+    /// identifiers are able to communicate with this computer. TCP/IP clients with different 
+    /// scope identifiers disregard packets from computers with this scope identifier. Valid 
+    /// only when the `EnableWINS` method executes successfully.
+    pub WINSScopeID: Option<String>,
+    /// IP address for the secondary WINS server.
+    pub WINSSecondaryServer: Option<String>,
 }
