@@ -13,7 +13,7 @@ async fn main() {
 
     // println!("{k:#?}");
     // k.async_update().await;
-    k.network_adapter_configurations.update();
+    k.pot_modems.update();
 
-    println!("{:#?}", k.network_adapter_configurations);
+    println!("{:#?}", k.pot_modems);
 }

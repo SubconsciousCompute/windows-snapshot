@@ -4,7 +4,7 @@ use crate::operating_system::{
     desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_pagefiles, scheduler_jobs, product_activation, software_license_provider, shares, multimedia_audio_visual, storage, security, start_menu, networking, job_objects, operating_system_settings
 };
 use crate::hardware::{
-    cooling_device, input_device, mass_storage, networking_device
+    cooling_device, input_device, mass_storage, networking_device, telephony
 };
 use serde::{Deserialize, Serialize};
 use tokio::join;
@@ -190,6 +190,8 @@ pub struct Windows {
     pub network_adapters: networking_device::NetworkAdapters,
     /// State of Windows NetworkAdapterConfigurations
     pub network_adapter_configurations: networking_device::NetworkAdapterConfigurations,
+    /// State of Windows POTSModems
+    pub pot_modems: telephony::POTSModems,
 }
 
 impl Windows {
@@ -272,6 +274,7 @@ impl Windows {
         self.tape_drives.update();
         self.network_adapters.update();
         self.network_adapter_configurations.update();
+        self.pot_modems.update();
     }
 
     /// Asynchronously update all the fields
@@ -354,6 +357,7 @@ impl Windows {
             self.tape_drives.async_update(),
             self.network_adapters.async_update(),
             self.network_adapter_configurations.async_update(),
+            self.pot_modems.async_update(),
         );
     }
 }
