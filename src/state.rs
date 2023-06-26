@@ -3,6 +3,9 @@
 use crate::operating_system::{
     desktop, drivers, file_system, processes, registry, services, users, event_log, memory_and_pagefiles, scheduler_jobs, product_activation, software_license_provider, shares, multimedia_audio_visual, storage, security, start_menu, networking, job_objects, operating_system_settings
 };
+use crate::hardware::{
+    cooling_device, input_device, mass_storage, networking_device, telephony, power, video_monitor
+};
 use serde::{Deserialize, Serialize};
 use tokio::join;
 
@@ -161,6 +164,50 @@ pub struct Windows {
     pub quick_fix_engineerings: operating_system_settings::QuickFixEngineerings,
     /// State of Windows StartupCommands
     pub startup_commands: operating_system_settings::StartupCommands,
+    /// State of Windows Fans
+    pub fans: cooling_device::Fans,
+    /// State of Windows HeatPipes
+    pub heat_pipes: cooling_device::HeatPipes,
+    /// State of Windows Refrigerations
+    pub refrigerations: cooling_device::Refrigerations,
+    /// State of Windows TemperatureProbes
+    pub temperature_probes: cooling_device::TemperatureProbes,
+    /// State of Windows Keyboards
+    pub keyboards: input_device::Keyboards,
+    /// State of Windows PointingDevices
+    pub pointing_devices: input_device::PointingDevices,
+    /// State of Windows AutochkSettings
+    pub autochk_settings: mass_storage::AutochkSettings,
+    /// State of Windows CDROMDrives
+    pub cd_rom_drives: mass_storage::CDROMDrives,
+    /// State of Windows DiskDrives
+    pub disk_drives: mass_storage::DiskDrives,
+    /// State of Windows PhysicalMedias
+    pub physical_medias: mass_storage::PhysicalMedias,
+    /// State of Windows TapeDrives
+    pub tape_drives: mass_storage::TapeDrives,
+    /// State of Windows NetworkAdapters
+    pub network_adapters: networking_device::NetworkAdapters,
+    /// State of Windows NetworkAdapterConfigurations
+    pub network_adapter_configurations: networking_device::NetworkAdapterConfigurations,
+    /// State of Windows POTSModems
+    pub pot_modems: telephony::POTSModems,
+    /// State of Windows Batteries
+    pub batteries: power::Batteries,
+    /// State of Windows CurrentProbes
+    pub current_probes: power::CurrentProbes,
+    /// State of Windows PortableBatteries
+    pub portable_batteries: power::PortableBatteries,
+    /// State of Windows PowerManagementEvents
+    pub power_management_events: power::PowerManagementEvents,
+    /// State of Windows VoltageProbes
+    pub voltage_probes: power::VoltageProbes,
+    /// State of Windows DesktopMonitors
+    pub desktop_monitors: video_monitor::DesktopMonitors,
+    /// State of Windows DisplayControllerConfigurations
+    pub display_controller_configurations: video_monitor::DisplayControllerConfigurations,
+    /// State of Windows VideoControllers
+    pub video_controllers: video_monitor::VideoControllers,
 }
 
 impl Windows {
@@ -230,6 +277,28 @@ impl Windows {
         self.os_recovery_configurations.update();
         self.quick_fix_engineerings.update();
         self.startup_commands.update();
+        self.fans.update();
+        self.heat_pipes.update();
+        self.refrigerations.update();
+        self.temperature_probes.update();
+        self.keyboards.update();
+        self.pointing_devices.update();
+        self.autochk_settings.update();
+        self.cd_rom_drives.update();
+        self.disk_drives.update();
+        self.physical_medias.update();
+        self.tape_drives.update();
+        self.network_adapters.update();
+        self.network_adapter_configurations.update();
+        self.pot_modems.update();
+        self.batteries.update();
+        self.current_probes.update();
+        self.portable_batteries.update();
+        self.power_management_events.update();
+        self.voltage_probes.update();
+        self.desktop_monitors.update();
+        self.display_controller_configurations.update();
+        self.video_controllers.update();
     }
 
     /// Asynchronously update all the fields
@@ -299,6 +368,28 @@ impl Windows {
             self.os_recovery_configurations.async_update(),
             self.quick_fix_engineerings.async_update(),
             self.startup_commands.async_update(),
+            self.fans.async_update(),
+            self.heat_pipes.async_update(),
+            self.refrigerations.async_update(),
+            self.temperature_probes.async_update(),
+            self.keyboards.async_update(),
+            self.pointing_devices.async_update(),
+            self.autochk_settings.async_update(),
+            self.cd_rom_drives.async_update(),
+            self.disk_drives.async_update(),
+            self.physical_medias.async_update(),
+            self.tape_drives.async_update(),
+            self.network_adapters.async_update(),
+            self.network_adapter_configurations.async_update(),
+            self.pot_modems.async_update(),
+            self.batteries.async_update(),
+            self.current_probes.async_update(),
+            self.portable_batteries.async_update(),
+            self.power_management_events.async_update(),
+            self.voltage_probes.async_update(),
+            self.desktop_monitors.async_update(),
+            self.display_controller_configurations.async_update(),
+            self.video_controllers.async_update(),
         );
     }
 }
