@@ -13,7 +13,7 @@ async fn main() {
 
     // println!("{k:#?}");
     // k.async_update().await;
-    k.power_management_events.update();
+    k.voltage_probes.update();
 
-    println!("{:#?}", k.power_management_events);
+    println!("{:#?}", k.voltage_probes);
 }
