@@ -13,7 +13,7 @@ async fn main() {
 
     // println!("{k:#?}");
     // k.async_update().await;
-    k.current_probes.update();
+    k.portable_batteries.update();
 
-    println!("{:#?}", k.current_probes);
+    println!("{:#?}", k.portable_batteries);
 }
