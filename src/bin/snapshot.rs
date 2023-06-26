@@ -13,7 +13,7 @@ async fn main() {
 
     // println!("{k:#?}");
     // k.async_update().await;
-    k.display_controller_configurations.update();
+    k.video_controllers.update();
 
-    println!("{:#?}", k.display_controller_configurations);
+    println!("{:#?}", k.video_controllers);
 }

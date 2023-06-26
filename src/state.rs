@@ -206,6 +206,8 @@ pub struct Windows {
     pub desktop_monitors: video_monitor::DesktopMonitors,
     /// State of Windows DisplayControllerConfigurations
     pub display_controller_configurations: video_monitor::DisplayControllerConfigurations,
+    /// State of Windows VideoControllers
+    pub video_controllers: video_monitor::VideoControllers,
 }
 
 impl Windows {
@@ -296,6 +298,7 @@ impl Windows {
         self.voltage_probes.update();
         self.desktop_monitors.update();
         self.display_controller_configurations.update();
+        self.video_controllers.update();
     }
 
     /// Asynchronously update all the fields
@@ -386,6 +389,7 @@ impl Windows {
             self.voltage_probes.async_update(),
             self.desktop_monitors.async_update(),
             self.display_controller_configurations.async_update(),
+            self.video_controllers.async_update(),
         );
     }
 }
