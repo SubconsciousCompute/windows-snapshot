@@ -13,7 +13,7 @@ async fn main() {
 
     // println!("{k:#?}");
     // k.async_update().await;
-    k.desktop_monitors.update();
+    k.display_controller_configurations.update();
 
-    println!("{:#?}", k.desktop_monitors);
+    println!("{:#?}", k.display_controller_configurations);
 }

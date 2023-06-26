@@ -28,6 +28,22 @@ pub struct DesktopMonitors {
 
 update!(DesktopMonitors, desktop_monitors);
 
+/// Represents the state of Windows user's DisplayControllerConfigurations
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
+pub struct DisplayControllerConfigurations {
+    /// Sequence of windows DisplayControllerConfigurations states
+    pub display_controller_configurations: Vec<Win32_DisplayControllerConfiguration>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
+}
+
+update!(DisplayControllerConfigurations, display_controller_configurations);
+
 /// The `Win32_DesktopMonitor` WMI class represents the type of monitor or display device 
 /// attached to the computer system.
 /// 
@@ -203,4 +219,76 @@ pub struct Win32_DesktopMonitor {
     pub SystemCreationClassName: Option<String>,
     /// Name of the scoping system.
     pub SystemName: Option<String>,
+}
+
+/// The `Win32_DisplayControllerConfiguration` WMI class represents the video adapter configuration 
+/// information of a computer system running Windows.
+/// 
+/// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-displaycontrollerconfiguration>
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_DisplayControllerConfiguration {
+    /// Short textual description of the current object.
+    pub Caption: Option<String>,
+    /// Textual description of the current object.
+    pub Description: Option<String>,
+    /// Identifier by which the current object is known.
+    pub SettingID: Option<String>,
+    /// Either the number of bits used to represent the color in this configuration, or the bits in 
+    /// each pixel.
+    /// 
+    /// Example: 8
+    pub BitsPerPixel: Option<u32>,
+    /// Current number of color planes used in the display configuration. A color plane is another 
+    /// way to represent pixel colors. Instead of assigning a single RGB value to each pixel, color 
+    /// planes separate the graphic into each of the primary color components (red, green, blue), and 
+    /// stores them in their own planes. This allows for greater color depths on 8-bit and 16-bit 
+    /// video systems. Present graphics systems have the bitwidth large enough to store color depth 
+    /// information, meaning only one color plane is needed.
+    /// 
+    /// Example: 1
+    pub ColorPlanes: Option<u32>,
+    /// Number of color indexes in a color table of a display device (if the device has a color depth 
+    /// of no more than 8 bits per pixel). For devices with greater color depths, -1 is returned.
+    /// 
+    /// Example: 256
+    pub DeviceEntriesInAColorTable: Option<u32>,
+    /// Current number of device-specific pens. A value of 0xFFFFFFFF means the device does not support 
+    /// pens. Pens are logical properties that can be assigned by the display controller to display devices, 
+    /// and are used to draw lines, borders of polygons, and text.
+    /// 
+    /// Example: 3
+    pub DeviceSpecificPens: Option<u32>,
+    /// Current number of pixels in the horizontal direction (x-axis) of the display.
+    /// 
+    /// Example: 1024
+    pub HorizontalResolution: Option<u32>,
+    /// Name of the adapter used in this configuration.
+    pub Name: Option<String>,
+    /// Refresh rate of the video adapter. A value of 0 (zero) or 1 (one) indicates a default rate is being 
+    /// used. A value of -1 indicates that an optimal rate is being used.
+    /// 
+    /// Example: 72
+    pub RefreshRate: Option<i32>,
+    /// Current number of color index entries reserved for system use. This value is only valid for display 
+    /// settings that use an indexed palette. Indexed palettes are not used for color depths greater than 8 
+    /// bits per pixel. If the color depth is more than 8 bits per pixel, this value is set to `NULL`.
+    /// 
+    /// Example: 20
+    pub ReservedSystemPaletteEntries: Option<u32>,
+    /// Current number of color index entries reserved for system use. This value is only valid for display 
+    /// settings that use an indexed palette. Indexed palettes are not used for color depths greater than 8 
+    /// bits per pixel. If the color depth is more than 8 bits per pixel, this value is set to `NULL`.
+    /// 
+    /// Example: 20
+    pub SystemPaletteEntries: Option<u32>,
+    /// Current number of pixels in the vertical direction (y-axis) of the display.
+    /// 
+    /// Example: 768
+    pub VerticalResolution: Option<u32>,
+    /// User-readable description of the current screen resolution and color setting of the display.
+    /// 
+    /// Example: "1024 768 with 256 colors"
+    pub VideoMode: Option<String>,
 }
