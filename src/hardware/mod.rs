@@ -18,5 +18,6 @@ pub mod cooling_device;
 pub mod input_device;
 pub mod mass_storage;
 pub mod networking_device;
-
+pub mod power;
 pub mod telephony;
+pub mod video_monitor;
