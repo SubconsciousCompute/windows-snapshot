@@ -198,6 +198,8 @@ pub struct Windows {
     pub current_probes: power::CurrentProbes,
     /// State of Windows PortableBatteries
     pub portable_batteries: power::PortableBatteries,
+    /// State of Windows PowerManagementEvents
+    pub power_management_events: power::PowerManagementEvents,
 }
 
 impl Windows {
@@ -284,6 +286,7 @@ impl Windows {
         self.batteries.update();
         self.current_probes.update();
         self.portable_batteries.update();
+        self.power_management_events.update();
     }
 
     /// Asynchronously update all the fields
@@ -370,6 +373,7 @@ impl Windows {
             self.batteries.async_update(),
             self.current_probes.async_update(),
             self.portable_batteries.async_update(),
+            self.power_management_events.async_update(),
         );
     }
 }

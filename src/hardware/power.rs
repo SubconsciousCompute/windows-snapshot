@@ -63,6 +63,22 @@ pub struct PortableBatteries {
 
 update!(PortableBatteries, portable_batteries);
 
+/// Represents the state of Windows user's PowerManagementEvents
+#[derive(Deserialize, Serialize, Debug, Clone, Hash)]
+pub struct PowerManagementEvents {
+    /// Sequence of windows PowerManagementEvents states
+    pub power_management_events: Vec<Win32_PowerManagementEvent>,
+    /// When was the record last updated
+    pub last_updated: SystemTime,
+    /// Signifies change in state
+    /// 
+    /// - TRUE : The state changed since last UPDATE
+    /// - FALSE : The state is the same as last UPDATE
+    pub state_change: bool,
+}
+
+update!(PowerManagementEvents, power_management_events);
+
 /// The `Win32_Battery` WMI class represents a battery connected to the computer system.
 /// 
 /// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-battery>
@@ -706,4 +722,34 @@ pub struct Win32_PortableBattery {
     pub TimeOnBattery: Option<u32>,
     /// Remaining time in minutes to charge the battery fully at the current charge rate and usage.
     pub TimeToFullCharge: Option<u32>,
+}
+
+/// The `Win32_PowerManagementEvent` WMI class represents power management events resulting from power 
+/// state changes. These state changes are associated with either the Advanced Power Management (APM) 
+/// or the Advanced Configuration and Power Interface (ACPI) system management protocols.
+/// 
+/// <https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-powermanagementevent>
+#[derive(Default, Deserialize, Serialize, Debug, Clone, Hash)]
+#[allow(non_snake_case)]
+#[allow(non_camel_case_types)]
+pub struct Win32_PowerManagementEvent {
+    /// Descriptor used by the event provider to determine which users can receive the event.
+    pub SECURITY_DESCRIPTOR: Option<Vec<u8>>,
+    /// Unique value that indicates the time at which the event was generated. This is a 64-bit 
+    /// value that represents the number of 100-nanosecond intervals after January 1, 1601. The 
+    /// information is in the Coordinated Universal Times (UTC) format.
+    pub TIME_CREATED: Option<u64>,
+    /// Type of change in the system power state.
+    /// 
+    /// - `Entering Suspend` (4): While suspended, the computer appears to be off; however, it can be "awakened" in response to various events, including user input (such as moving the mouse or pressing a key on the keyboard). While the computer is suspended, power consumption is reduced to one of several levels depending on how the system is to be used. The lower the level of power consumption, the more time it takes the system to return to the working state. When the computer enters the suspend state, the desktop is locked, and you must press CTRL+ALT+DELETE and provide a valid user name and password to resume operations
+    /// - `Resume from Suspend` (7): Indicates that a Resume from Suspend message has been sent, enabling the computer to return to its regular power state.
+    /// - `Power Status Change` (10): Indicates a change in the power status of the computer, such as a switch from battery power to AC, or from AC to an uninterruptible power supply. The system also broadcasts this event when remaining battery power slips below the threshold specified by the user or if the battery power changes by a specified percentage.
+    /// - `OEM Event` (11): Indicates that an Advanced Power Management (APM) BIOS has sent an OEM event. The value of the event will be captured in the OEMEventCode property. Because some APM BIOS implementations do not provide OEM event notifications, this event might never be broadcast on some computers. APM is a legacy power management scheme. Although still supported, APM has been largely superseded by ACPI (Advanced Configuration and Power Interface).
+    /// - `Resume Automatic` (18): Indicates that the computer has awakened in response to an event. If the system detects user activity (such as a mouse click), the ResumeSuspend message will be broadcast, letting applications know that they can resume full interactivity with the user.
+    pub EventType: Option<u16>,
+    /// System power state defined by the original equipment manufacturer (OEM) when the `EventType` 
+    /// property of this class is set to 11 (OEM Event); otherwise, this property is set to `NULL`. 
+    /// OEM events are generated when an APM BIOS signals an APM OEM event. OEM event codes are in 
+    /// the range 0x0200h - 0x02FFh.
+    pub OEMEventCode: Option<u16>,
 }
